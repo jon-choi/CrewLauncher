@@ -1,6 +1,5 @@
 const Express = require('express');
 const App = Express();
-const BodyParser = require('body-parser');
 const knex = require('./db/knex')
 const PORT = 8080;
 
@@ -9,10 +8,17 @@ App.use(Express.urlencoded({ extended: false }));
 App.use(Express.json());
 App.use(Express.static('public'));
 
+
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+App.get('/api/data', (req, res) => {
+  knex('crews').then((data) => {
+
+  res.json({
+    data: data,
+    message: "Seems to work!"
+  })
+  })
+});
 
 // can we use routers instead or with this
 // app.get('/tasks', (req, res) => {
