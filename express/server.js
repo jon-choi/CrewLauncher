@@ -4,6 +4,7 @@ const BodyParser = require('body-parser');
 const knex = require('./db/knex')
 const PORT = 8080;
 
+
 // Express Configuration
 App.use(Express.urlencoded({ extended: false }));
 App.use(Express.json());
