@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class App extends Component {
 
       console.log(response.data.message) // Just the message
       this.setState({
-        message: response.data.data
+        message: response.data.data[0].foreman_name
       });
     }) 
   }

@@ -11,12 +11,12 @@ App.use(Express.static('public'));
 
 // Sample GET route
 App.get('/api/data', (req, res) => {
-  knex('crews').then((data) => {
-
-  res.json({
-    data: data,
-    message: "Seems to work!"
-  })
+  knex('crews')
+  .where('id', 1)
+  .then((data) => {
+    res.json({
+      data: data
+    })
   })
 });
 
