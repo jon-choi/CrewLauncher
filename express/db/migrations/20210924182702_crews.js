@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable('crews', table => {
-    table.increments('id') // this represents the primary key.
+    table.increments('id').primary() // this represents the primary key.
     table.string('foreman_name') // this is a column.
     table.integer('crew_size')
     table.boolean('is_active').defaultTo(true)
