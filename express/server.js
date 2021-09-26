@@ -16,8 +16,10 @@ App.get('/api/data', (req, res) => {
   .select('foreman_name')
   .where('id', 1)
   .then((data) => {
-    res.json({
-    data: data
+
+  res.json({
+    data: data,
+    message: "Seems to work!"
   })
   })
 });
