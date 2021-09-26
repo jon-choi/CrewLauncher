@@ -11,7 +11,10 @@ App.use(Express.static('public'));
 
 // Sample GET route
 App.get('/api/data', (req, res) => {
-  knex('crews').then((data) => {
+  knex('crews')
+  .select('foreman_name')
+  .where('id', 1)
+  .then((data) => {
 
   res.json({
     data: data,
