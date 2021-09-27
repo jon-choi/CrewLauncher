@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Navigation from './Navigation';
 import Day from './Day';
 import Jobs from './Jobs';
-// import Quote from './Quote'
+import Quote from './Quote'
 import {} from './crewsDataHelper';
 
 const Crews = function(props) {
@@ -22,7 +22,7 @@ const Crews = function(props) {
         </Route>
       </Switch >
     </Router>
-    {/* <Quote /> */}
+    <Quote />
   </>
   );
 };

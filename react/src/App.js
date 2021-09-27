@@ -42,7 +42,7 @@ const App = function() {
     <Router >
       <div className="App"> App
         <Switch >
-          <Route path='/crews' >
+          <Route path='/crews/:id' >
             <Crews state={state}/>
           </Route>
           <Route path='/dispatch' >
