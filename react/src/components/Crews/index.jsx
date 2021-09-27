@@ -13,11 +13,11 @@ const Crews = function(props) {
     <Navigation />
     <Router >
       <Switch >
-        <Route path="/crew/:id/days/:day">
+        <Route path="/crews/:id/days/:day">
           <Day />
         </Route>
 
-        <Route path="/crew/:id/jobs">
+        <Route path="/crews/:id/jobs">
           <Jobs />
         </Route>
       </Switch >
