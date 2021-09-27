@@ -5,23 +5,25 @@ import Typography from '@mui/material/Typography';
 
 
 export default function CrewDayCard(props) {
+  const { onClick, date, jobsBooked, dayTimeEst } = props;
+
   return (
-    <Card onClick={props.onClick} >
+    <Card onClick={onClick} >
       <CardContent 
       sx="display: flex; 
       justify-content: space-between;
       align-items: center;">
        
         <Typography variant="h5" component="div">
-          {props.date}
+          {date}
         </Typography>
 
         <Typography color="text.secondary">
-          {`# of jobs booked: ${props.jobsBooked}`} 
+          {`# of jobs booked: ${jobsBooked}`} 
         </Typography>
 
         <Typography variant="body2">
-         {`Time Estimate: ${props.dayTimeEst}`} 
+         {`Time Estimate: ${dayTimeEst}`} 
         </Typography>
       </CardContent>
     </Card>

@@ -7,27 +7,29 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function MediaCard(props) {
+  const { onClick, compClass, image, header, body } = props;
+
   return (
-    <Card className={props.compClass} sx={{ maxWidth: 345 }}>
-      {props.image && 
+    <Card className={compClass} sx={{ maxWidth: 345 }}>
+      {image && 
         <CardMedia
           component="img"
           height="140"
-          image={props.image}
+          image={image}
           alt="package image"
         />
       }
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.header}
+          {header}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.body}  
+          {body}  
         </Typography>
       </CardContent>
-      {props.onClick &&
+      {onClick &&
         <CardActions>
-          <Button onClick={props.onClick} size="small">Edit</Button>
+          <Button onClick={onClick} size="small">Edit</Button>
         </CardActions>
       }
     </Card>
