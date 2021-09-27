@@ -4,7 +4,7 @@ const Jobs = () => {
   const params = useParams();
 
   return (
-    <h1>/crew/{params.id}/jobs</h1>
+    <h1>/crews/{params.id}/jobs</h1>
   );
 };
 
