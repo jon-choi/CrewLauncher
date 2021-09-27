@@ -3,10 +3,25 @@ const App = Express();
 const knex = require('./db/knex')
 const PORT = 8080;
 
+
 // Express Configuration
 App.use(Express.urlencoded({ extended: false }));
 App.use(Express.json());
 App.use(Express.static('public'));
+
+const apiRoutes = require('./routes/apiRoutes');
+const crewsRoutes = require('./crewsRoutes');
+const jobsRoutes = require('./jobsRoutes');
+const contractsRoutes = require('./contractsRoutes');
+const packagesRoutes = require('./packagesRoutes');
+const clientsRoutes = require('./clientsRoutes');
+
+App.use("/api", apiRoutes(knex));
+App.use('/crews', crewsRoutes(knex));
+App.use('/jobs', jobsRoutes(knex));
+App.use('/contracts', contractsRoutes(knex));
+App.use('/packages', packagesRoutes(knex));
+App.use('/clients', clientsRoutes(knex));
 
 
 // Sample GET route
