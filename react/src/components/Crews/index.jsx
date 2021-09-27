@@ -1,23 +1,29 @@
 
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
-// import Navigation from './Navigation'
-// import Day from './Day'
+import Navigation from './Navigation';
+import Day from './Day';
+import Jobs from './Jobs';
 // import Quote from './Quote'
 import {} from './crewsDataHelper';
 
 const Crews = function(props) {
   return (
-  <div>Crews
-    <div>Navigation</div>
+  <>
+    <Navigation />
     <Router >
       <Switch >
-        <Route path="/crews/day/:id">DayForCrew</Route>
-        <Route path="/crews/jobs">Jobs</Route>
+        <Route path="/crews/day/:id">
+          <Day />
+        </Route>
+
+        <Route path="/crews/jobs">
+          <Jobs />
+        </Route>
       </Switch >
     </Router>
     {/* <Quote /> */}
-  </div>
+  </>
   );
 }
 
