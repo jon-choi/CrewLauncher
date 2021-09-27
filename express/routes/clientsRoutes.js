@@ -20,7 +20,7 @@ module.exports = (knex) => {
     });
   });
 
-  router.patch('/:id', (req, res) => {
+  router.post('/:id', (req, res) => {
     const client = req.body.data;
 
     knex("clients")

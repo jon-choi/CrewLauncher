@@ -24,7 +24,7 @@ module.exports = (knex) => {
     });
   });
 
-  router.patch('/:id', (req, res) => {
+  router.post('/:id', (req, res) => {
     const package = req.body.data;
 
     knex("packages")
