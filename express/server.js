@@ -16,12 +16,12 @@ const contractsRoutes = require('./routes/contractsRoutes');
 const packagesRoutes = require('./routes/packagesRoutes');
 const clientsRoutes = require('./routes/clientsRoutes');
 
-App.use("/apiRoutes", apiRoutes(knex));
-App.use('/crewsRoutes', crewsRoutes(knex));
-App.use('/jobsRoutes', jobsRoutes(knex));
-App.use('/contractsRoutes', contractsRoutes(knex));
-App.use('/packagesRoutes', packagesRoutes(knex));
-App.use('/clientsRoutes', clientsRoutes(knex));
+App.use("/api", apiRoutes(knex));
+App.use('/crews', crewsRoutes(knex));
+App.use('/jobs', jobsRoutes(knex));
+App.use('/contracts', contractsRoutes(knex));
+App.use('/packages', packagesRoutes(knex));
+App.use('/clients', clientsRoutes(knex));
 
 
 // Sample GET route
