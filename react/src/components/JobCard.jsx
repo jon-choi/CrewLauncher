@@ -15,28 +15,30 @@ const fab = (<Fab variant="extended" sx={{
   );
 
 export default function JobCard(props) {
+  const { packageTitle, timeEst, clientName, address, jobNotes } = props;
+
   return (
   <Card sx={'display: flex; flex-direction: column; justify-content: space-between; align-items: center;'}>
     {fab}      
     <CardContent sx={'display: flex; '}>
       <div sx={'display: flex; justify-content: space-between; align-items: center;'}>
         <Typography variant="h2" component="div">
-          {props.packageTitle}
+          {packageTitle}
         </Typography>
         <Typography variant="h4">
-          {`Time Est: ${props.timeEst}`}
+          {`Time Est: ${timeEst}`}
         </Typography>
       </div>
     </CardContent>
     <CardContent>
       <Typography  sx={' font-size: 5000; mt: 1.5; '} color="text.secondary">
-        {props.clientName}
+        {clientName}
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        {props.address}
+        {address}
       </Typography>
       <Typography variant="body2">
-        {`Notes: ${props.jobNotes}`}
+        {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
   </Card>
