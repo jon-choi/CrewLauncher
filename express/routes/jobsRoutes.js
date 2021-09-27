@@ -23,5 +23,24 @@ module.exports = (knex) => {
       });
     });
 
+    router.patch('/:id', (req, res) => {
+      const job = req.body.data;
+  
+      knex("jobs")
+      .where("id", req.params.id)
+      .update("contract_id", job.contract_id)
+      .update("crew_id", job.crew_id)
+      .update("date", job.date)
+      .update("start_time", job.start_time)
+      .update("end_time", job.end_time)
+      .update("completed", job.completed)
+      .then(result => {
+          res.json(result);
+      })
+      .catch(err => {
+          console.log(`Error: could not post /jobs/:${job.id}`)
+      });
+    });
+
   return router;
 };

@@ -24,5 +24,26 @@ module.exports = (knex) => {
     });
   });
 
+  router.patch('/:id', (req, res) => {
+    const package = req.body.data;
+
+    knex("packages")
+    .where("id", req.params.id)
+    .update("title", package.title)
+    .update("flat_rate", package.flat_rate)
+    .update("size_range_string", package.size_range_string)
+    .update("description", package.description)
+    .update("man_hrs_per_visit", package.man_hrs_per_visit)
+    .update("contract_length_days", package.contract_length_days)
+    .update("visit_interval_days", package.visit_interval_days)
+    .update("package_image", package.image)
+    .then(result => {
+        res.json(result);
+    })
+    .catch(err => {
+        console.log(`Error: could not post /packages/:${package.id}`)
+    });
+  });
+
   return router;
 };
