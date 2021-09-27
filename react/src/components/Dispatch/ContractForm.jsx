@@ -1,5 +1,7 @@
 
+
 const ContractForm = () => {
+  
 
   return (
     <h1>/dispatch/contracts/new</h1>
