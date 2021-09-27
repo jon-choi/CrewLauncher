@@ -1,5 +1,5 @@
 const Express = require('express');
-const router = Express.router();
+const router = Express.Router();
 
 module.exports = (knex) => {
   router.post('/', (req, res) => {
