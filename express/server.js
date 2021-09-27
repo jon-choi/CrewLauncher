@@ -10,11 +10,11 @@ App.use(Express.json());
 App.use(Express.static('public'));
 
 const apiRoutes = require('./routes/apiRoutes');
-const crewsRoutes = require('./crewsRoutes');
-const jobsRoutes = require('./jobsRoutes');
-const contractsRoutes = require('./contractsRoutes');
-const packagesRoutes = require('./packagesRoutes');
-const clientsRoutes = require('./clientsRoutes');
+const crewsRoutes = require('./routes/crewsRoutes');
+const jobsRoutes = require('./routes/jobsRoutes');
+const contractsRoutes = require('./routes/contractsRoutes');
+const packagesRoutes = require('./routes/packagesRoutes');
+const clientsRoutes = require('./routes/clientsRoutes');
 
 App.use("/api", apiRoutes(knex));
 App.use('/crews', crewsRoutes(knex));
