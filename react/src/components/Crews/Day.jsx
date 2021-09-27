@@ -1,8 +1,10 @@
+import { useParams } from 'react-router-dom';
 
 const Day = () => {
+  const params = useParams();
 
   return (
-    <h1>/crew/:id/day/:day_id</h1>
+    <h1>/crew/{params.id}/day/{params.day}</h1>
   );
 };
 
