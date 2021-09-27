@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
@@ -39,14 +39,18 @@ const App = function() {
   }, []);
 
   return (
-    <div className="App">
-      {/* <Crews state={state}/> */}
-      {/* <Dispatch state={state}/> */}
-      <h1>{ "state.clients" }</h1>
-      <button onClick={"Does Nothing"} >
-        Fetch Data
-      </button>        
-    </div>
+    <Router >
+      <div className="App"> App
+        <Switch >
+          <Route path='/crews' >
+            <Crews state={state}/>
+          </Route>
+          <Route path='/dispatch' >
+            <Dispatch state={state}/> 
+          </Route> 
+        </Switch>    
+      </div>
+    </Router>
   );
 }
 
