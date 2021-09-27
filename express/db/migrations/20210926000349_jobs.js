@@ -5,8 +5,8 @@ exports.up = function(knex) {
     table.integer('crew_id').references('crews.id') // this is a foreign key.
     table.integer('contract_id').references('contracts.id')
     table.date('date') // this is a column.
-    table.time('start_time')
-    table.time('end_time')
+    table.integer('start_time')
+    table.integer('end_time')
     table.boolean('completed').defaultTo(false)
   })
 };
