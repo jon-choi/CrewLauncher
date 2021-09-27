@@ -7,6 +7,7 @@ exports.up = function(knex) {
     table.boolean('is_active').defaultTo(true)
     table.string('details')
     table.string('specialty')
+    table.string('avatar')
   }) 
 };
 

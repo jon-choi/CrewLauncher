@@ -9,6 +9,7 @@ exports.up = function(knex) {
     table.integer('man_hours_per_visit').notNullable()
     table.string('size_range_string')
     table.string('description')
+    table.string('image')
   })
 };
 
