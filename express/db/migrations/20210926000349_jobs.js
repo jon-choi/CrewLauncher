@@ -1,12 +1,12 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable('jobs', table => {
-    table.increments('id') // this represents the primary key.
-    table.foreign('id', 'crew_id').references('id').inTable('crews') // this is a column.
-    table.foreign('id', 'contract_id').references('id').inTable('contracts')
-    table.date('date')
-    table.time('start_time')
-    table.time('end_time')
+    table.increments('id').primary() // this represents the primary key.
+    table.integer('crew_id').references('crews.id') // this is a foreign key.
+    table.integer('contract_id').references('contracts.id')
+    table.date('date') // this is a column.
+    table.integer('start_time')
+    table.integer('end_time')
     table.boolean('completed').defaultTo(false)
   })
 };
