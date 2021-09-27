@@ -4,7 +4,7 @@ const Day = () => {
   const params = useParams();
 
   return (
-    <h1>/crew/{params.id}/day/{params.day}</h1>
+    <h1>/crews/{params.id}/day/{params.day}</h1>
   );
 };
 
