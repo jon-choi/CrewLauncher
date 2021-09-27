@@ -9,7 +9,6 @@ import JobForm from './JobForm';
 import PackageForm from './PackageForm';
 import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
-import CrewCard from './CrewsPage/CrewCard';
 import {} from './dispatchDataHelper';
 
 const Dispatch = function(props) {
@@ -21,7 +20,7 @@ const Dispatch = function(props) {
 
   return (
     <div>Dispatch
-      <div>Navigation</div>
+      <Navigation />
       <Router >
         <Switch >
           <Route path="/dispatch/job/:id" >
@@ -41,6 +40,10 @@ const Dispatch = function(props) {
           <Route path="/dispatch/crews" >
             <CrewsPage />
             BrowseCrews
+          </Route>
+          <Route path="/dispatch/contracts" >
+            <ContractsPage />
+            BrowseContracts
           </Route>
           <Route path="/dispatch/clients" >
             <ClientsPage />
