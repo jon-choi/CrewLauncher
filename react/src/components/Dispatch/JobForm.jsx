@@ -4,7 +4,7 @@ const JobForm = () => {
   
   return (
     <h1>/dispatch/job/:id
-      Edit Job <Form></Form>
+      Edit Job Form
     </h1>
   );
 };
