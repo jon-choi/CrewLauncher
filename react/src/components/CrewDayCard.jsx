@@ -1,0 +1,29 @@
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+
+
+export default function CrewDayCard(props) {
+  return (
+    <Card onClick={props.onClick} >
+      <CardContent 
+      sx="display: flex; 
+      justify-content: space-between;
+      align-items: center;">
+       
+        <Typography variant="h5" component="div">
+          {props.date}
+        </Typography>
+
+        <Typography color="text.secondary">
+          {`# of jobs booked: ${props.jobsBooked}`} 
+        </Typography>
+
+        <Typography variant="body2">
+         {`Time Estimate: ${props.dayTimeEst}`} 
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+}
