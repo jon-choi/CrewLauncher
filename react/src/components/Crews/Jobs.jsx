@@ -1,7 +1,10 @@
+import { useParams } from 'react-router-dom'
+
 const Jobs = () => {
+  const params = useParams();
 
   return (
-    <h1>/crew/:id/jobs</h1>
+    <h1>/crew/{params.id}/jobs</h1>
   );
 };
 
