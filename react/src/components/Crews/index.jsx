@@ -13,11 +13,11 @@ const Crews = function(props) {
     <Navigation />
     <Router >
       <Switch >
-        <Route path="/crews/day/:id">
+        <Route path="/crew/:id/days/:day">
           <Day />
         </Route>
 
-        <Route path="/crews/jobs">
+        <Route path="/crew/:id/jobs">
           <Jobs />
         </Route>
       </Switch >
@@ -25,6 +25,6 @@ const Crews = function(props) {
     {/* <Quote /> */}
   </>
   );
-}
+};
 
 export default Crews;
