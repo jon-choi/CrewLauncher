@@ -9,20 +9,19 @@ import JobForm from './JobForm';
 import PackageForm from './PackageForm';
 import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
-import { getContractInfo } from './dispatchDataHelper';
+import { getContractsInfo } from './dispatchDataHelper';
 
 const Dispatch = function(props) {
   const { state, onEdit } = props;
   const { url } = useRouteMatch();
 
   const crews = props.crews;
-  const clients = props.crews;
+  const clients = props.clients;
   const packages = props.packages;
   const contracts = props.contracts;
   const jobs = props.jobs;
 
-  const contractsInfo = getContractInfo(contracts, clients, packages, jobs)
-  console.log("contracts: ",contracts)
+  const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
 
   return (
     <div>Dispatch
@@ -45,7 +44,7 @@ const Dispatch = function(props) {
             BrowseCrews
           </Route>
           <Route path={`${url}/contracts`} >
-            <ContractsPage contractInfo={contractsInfo} onEdit={() => }/>
+            <ContractsPage contractsInfo={contractsInfo} />
           </Route>
           <Route path={`${url}/clients`} >
             <ClientsPage />

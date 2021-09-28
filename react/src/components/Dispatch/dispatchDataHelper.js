@@ -26,6 +26,7 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
           clientName: client.name,
           clientEmail: client.email
         }
+        console.log(client)
       }
     }
     for (const packageItem of packages) {
@@ -47,9 +48,8 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
       }
     }
     contractsInfo.push(contract);
-    console.log(contractsInfo)
   }
-  return contractInfo
+  return contractsInfo
 }
 const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
   let infoForJobForm = {};
@@ -87,4 +87,4 @@ const getEstTime = function(manhours, crew) {
   return (manhours / crew.crew_size)
 }
 
-export { getInfoForJobForm, getEstTime, getContractInfo };
+export { getInfoForJobForm, getEstTime, getContractsInfo };
