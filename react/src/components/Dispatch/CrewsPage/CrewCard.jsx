@@ -4,9 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
-
 const CrewCard = (props) => {
-
 
   
   return (
@@ -17,93 +15,68 @@ const CrewCard = (props) => {
 
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="div">
           Yesterday
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+        <Typography variant="h5" component="div">
+          Job Info: 
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          client name, address
         </Typography>
       </CardContent>
 
       <Card sx="display: flex; justify-content: center;">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="div">
           Today
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+        <Typography variant="h5" component="div">
+          Job Info: 
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          client name, address
         </Typography>
       </CardContent>
     </Card>
 
     <Card sx="display: flex; justify-content: center;">
-      <CardContent>
+    <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="div">
           Tomorrow
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+        <Typography variant="h5" component="div">
+          Job Info: 
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          client name, address
         </Typography>
       </CardContent>
     </Card>
 
     <Card sx="display: flex; justify-content: center;">
-      <CardContent>
+    <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="div">
           The day after tomorrow
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+        <Typography variant="h5" component="div">
+          Job Info: 
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          client name, address
         </Typography>
       </CardContent>
     </Card>
     
     <Card sx="display: flex; justify-content: center;">
-      <CardContent>
+    <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="div">
           Two days after tomorrow
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+        <Typography variant="h5" component="div">
+          Job Info: 
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          client name, address
         </Typography>
       </CardContent>
     </Card>

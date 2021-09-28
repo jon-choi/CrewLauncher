@@ -16,8 +16,40 @@ const getJobsByDay = function() {
 const getClientInfo = function() {
 
 }
-const getContractInfo = function() {
-
+const getContractsInfo = function(contracts, clients, packages, jobs) {
+  const contractsInfo = [];
+  for (const contract of contracts) {
+    for (const client of clients) {
+      if (contract.client_id === client.id) {
+        contract = {
+          ...contract,
+          clientName: client.name,
+          clientEmail: client.email
+        }
+        console.log(client)
+      }
+    }
+    for (const packageItem of packages) {
+      if (contract.package_id === packageItem.id) {
+        contract = {
+          ...contract,
+          packageTitle: packageItem.title,
+          packageLength: packageItem.contract_length_days
+        }
+      }
+    }
+    for (const job of jobs) {
+      if (contract.id === job.contract_id) {
+        contract = {
+          ...contract,
+          crewId: job.crew_id,
+          jobDate: job.date
+        }
+      }
+    }
+    contractsInfo.push(contract);
+  }
+  return contractsInfo
 }
 const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
   let infoForJobForm = {};
@@ -54,4 +86,4 @@ const getEstTime = function(manhours, crew) {
   return (manhours / crew.crew_size)
 }
 
-export { getInfoForJobForm, getEstTime };
+export { getInfoForJobForm, getEstTime, getContractsInfo };
