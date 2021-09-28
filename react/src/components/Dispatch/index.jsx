@@ -23,7 +23,6 @@ const Dispatch = function(props) {
   return (
     <div>Dispatch
       <Navigation />
-      <Router >
         <Switch >
           <Route path={`${url}/jobs/:id`} >
             <JobForm />
@@ -55,7 +54,6 @@ const Dispatch = function(props) {
             Dashboard
           </Route>
         </Switch>
-      </Router>
       {/* <Quote /> */}
     </div>
     );
