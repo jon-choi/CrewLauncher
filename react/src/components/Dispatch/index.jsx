@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import ClientsPage from './ClientsPage';
@@ -32,7 +32,6 @@ const Dispatch = function(props) {
           </Route>
           <Route path={`${url}/contracts/:id`} >
             <ContractForm />
-            EditContractForm
           </Route>
           <Route path={`${url}/packages/new`} >
             <PackageForm />
