@@ -3,13 +3,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import { getJobsByCrew } from '../../Crews/crewsDataHelper';
-import { useParams } from 'react-router-dom';
 
 const CrewCard = (props) => {
-  // const params = useParams(props);
-  // const { jobs, crews } = props;
-  // const info = getJobsByCrew(jobs, crews);
 
   
   return (
