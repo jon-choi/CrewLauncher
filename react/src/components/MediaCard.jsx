@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function MediaCard(props) {
-  const { onClick, compClass, image, header, body } = props;
+  const { link, compClass, image, header, body } = props;
 
   return (
     <Card className={compClass} sx={{ maxWidth: 345 }}>
@@ -27,9 +27,9 @@ export default function MediaCard(props) {
           {body}  
         </Typography>
       </CardContent>
-      {onClick &&
+      {link &&
         <CardActions>
-          <Button onClick={onClick} size="small">Edit</Button>
+          <Button href={link} size="small">Edit</Button>
         </CardActions>
       }
     </Card>

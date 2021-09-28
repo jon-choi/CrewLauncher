@@ -22,7 +22,6 @@ const Dispatch = function(props) {
   const jobs = props.jobs;
 
   const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
-
   return (
     <div>Dispatch
       <Navigation />

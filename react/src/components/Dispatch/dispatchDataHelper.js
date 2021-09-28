@@ -26,7 +26,6 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
           clientName: client.name,
           clientEmail: client.email
         }
-        console.log(client)
       }
     }
     for (const packageItem of packages) {
@@ -40,10 +39,12 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
     }
     for (const job of jobs) {
       if (contract.id === job.contract_id) {
-        contract = {
-          ...contract,
-          crewId: job.crew_id,
-          jobDate: job.date
+        if (!job.completed && !contract.jobDate) {
+          contract = {
+            ...contract,
+            crewId: job.crew_id,
+            jobDate: job.date
+          }
         }
       }
     }
@@ -53,6 +54,7 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
 }
 const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
   let infoForJobForm = {};
+
   for (const job of jobs) {
     if (job.id === jobId) {
       infoForJobForm = {
