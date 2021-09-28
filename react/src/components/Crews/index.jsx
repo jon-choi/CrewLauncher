@@ -22,7 +22,6 @@ const Crews = function(props) {
         </Route>
       </Switch >
     </Router>
-    <Quote />
   </>
   );
 };
