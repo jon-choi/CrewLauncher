@@ -83,8 +83,7 @@ const App = function() {
     };
     const updatedPackages = [...state.packages, pkg];
     return axios.post('/packages', pkg)
-    .then(res => {
-      console.log("RES: ", res.data);
+    .then(response => {
       setState(prev => {
         return {...prev, packages: updatedPackages};
       });
@@ -92,7 +91,7 @@ const App = function() {
     .catch(error => console.log(error));
   };
 
-  const doesClientExist = (client, clientList) => {
+  const getClientId = (client, clientList) => {
     const { email } = client;
     const existingClient = clientList.filter(c => c.email === email);
     if (existingClient) {
@@ -102,10 +101,39 @@ const App = function() {
     }
   };
 
-  const createNewContract = (newContract) => {
-    const { packageId } = newContract;
-    const contract = {
+  const createNewClient = (client) => {
+    const updatedClients = [...state.clients, client]; 
 
+    return axios.post('/clients', client)
+    .then(response => {
+      setState(prev => {
+        return {...prev, clients: updatedClients};
+      });
+    })
+    .catch(error => console.log(error));
+
+  };
+
+  const createNewContract = (newContract) => {
+    const { packageId, clientId, clientName, clientPhone, clientEmail, startDate, address, jobNotes } = newContract;
+
+    const client = {
+      id: clientId,
+      name: clientName,
+      email: clientEmail,
+      phone: clientPhone
+    };
+
+    if (getClientId(client, state.clients)) {
+
+    }
+
+    const contract = {
+      package_id: packageId,
+      client_id: clientId,
+      start_date: startDate,
+      address: address,
+      job_notes: jobNotes
     };
     return axios.post('/contracts', contract)
   };
