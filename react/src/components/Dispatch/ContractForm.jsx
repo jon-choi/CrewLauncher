@@ -10,6 +10,11 @@ import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Drawer from '../Drawer';
 import addDays from 'date-fns/addDays';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
 
 const ContractForm = (props) => {
   const { packages } = props;
@@ -17,7 +22,7 @@ const ContractForm = (props) => {
 
 
   const [error, setError] = useState([]);
-  const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage);
+  const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage || null);
   const [clientName, setClientName] = useState(props.clientName || "");
   const [clientPhone, setClientPhone] = useState(props.clientPhone || null);
   const [clientEmail, setClientEmail] = useState(props.clientEmail || "");
@@ -36,6 +41,25 @@ const ContractForm = (props) => {
     setEndDate(addDays(start, selectedPackage.contract_length_days));
     
   };
+
+  const packageCards = packages.map(p => {
+    const packageBody = (`$${p.flat_rate} --
+                    ${p.size_range_string} --
+                    ${p.description} --
+                    Service Interval: ${p.visit_interval_days}-days`)
+    
+    return (
+      <Stack spacing={1}>
+        <div onClick={() => {setSelectedPackage(p)}} >
+          <MediaCard 
+            image={p.package_image}
+            header={p.title} 
+            body={packageBody}
+          />
+        </div>
+      </Stack>
+    )
+  });
   console.log("Selected Package: ", selectedPackage);
     // const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(addDays(startDate, packageLength - 1));
@@ -59,7 +83,7 @@ const ContractForm = (props) => {
             onChange={event => setSelectedPackage(event.target.value)}
             label="Please Select a Package"
           /> */}
-          <Drawer buttonText={'Select a Package'} items={packages} />
+          <Drawer buttonText={'Select a Package'} items={packageCards} />
 
         <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
