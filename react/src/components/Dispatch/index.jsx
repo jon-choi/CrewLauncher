@@ -1,5 +1,6 @@
 
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import ClientsPage from './ClientsPage';
@@ -9,14 +10,15 @@ import JobForm from './JobForm';
 import PackageForm from './PackageForm';
 import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
-import {} from './dispatchDataHelper';
+import { getInfoForJobForm } from './dispatchDataHelper';
 
 const Dispatch = function(props) {
-  const crews = props.crews;
-  const clients = props.crews;
-  const packages = props.packages;
-  const contracts = props.contracts;
-  const jobs = props.jobs;
+  const { state, onEditJobs } = props;
+  const crews = state.crews;
+  const clients = state.clients;
+  const packages = state.packages;
+  const contracts = state.contracts;
+  const jobs = state.jobs;
 
   return (
     <div>Dispatch
@@ -24,7 +26,7 @@ const Dispatch = function(props) {
       <Router >
         <Switch >
           <Route path="/dispatch/job/:id" >
-            <JobForm />
+            <JobForm crews={crews} jobs={jobs} contracts={contracts} packages={packages} onSave={onEditJobs}/>
           </Route>
           <Route path="/dispatch/contract/:id" >
             <ContractForm />

@@ -38,6 +38,10 @@ const App = function() {
     })
   }, []);
 
+  const saveJobEdit = function(crewId, time) {
+    console.log("crew Id: ", crewId, "time: ", time)
+  }
+
   return (
     <Router >
       <div className="App"> App
