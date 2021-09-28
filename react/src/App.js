@@ -73,6 +73,7 @@ const App = function() {
     const pkg = {
       title,
       description,
+      id: state.packages.length + 1,
       flat_rate: flatRate,
       size_range_string: sizeRange,
       man_hours_per_visit: manHrsPerVisit,
@@ -85,14 +86,13 @@ const App = function() {
     const updatedPackages = [...state.packages, pkg];
     console.log("Updated Packages: ", updatedPackages);
 
-    axios.post('/packages', pkg)
+    return axios.post('/packages', pkg)
     .then(res => {
       console.log("RES: ", res.data);
       
       setState(prev => {
         return {...prev, packages: updatedPackages};
       });
-      <Redirect to='/'></Redirect>
     })
     .catch(error => console.log(error));
   };
