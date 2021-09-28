@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 
 const PackageForm = (props) => {
+  const { onSubmit } = props;
 
   // const params = useParams();
   const [error, setError] = useState([]);
@@ -22,13 +23,14 @@ const PackageForm = (props) => {
   const [packageImage, setPackageImage] = useState("");
   
   // Validates form, sets error message and prevents submission if mandatory fields are blank
+  // Passes new Package object to props.onSubmit if validation is successful
   const validate = () => {
     const errorMessage = [];
 
     if (title && flatRate && manHrsPerVisit && contractLength && visitInterval) {
       // Successful package creation
       setError([]);
-      return console.log({title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage});
+      return onSubmit({title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage});
     }
     if (!title) {
       errorMessage.push('Title');
