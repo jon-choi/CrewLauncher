@@ -32,7 +32,7 @@ const JobForm = (props) => {
         <TimePicker startDate={time} onChange={setTime}/>
       </div>
       <SpeedDial crews={crews} onChange={setSelectedCrew} selectedCrew={selectedCrew}/>
-      <Button variant="contained" onClick={onSave}>Contained</Button>
+      <Button variant="contained" onClick={onSave}>Save Changes</Button>
     </>
   );
 };
