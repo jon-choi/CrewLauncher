@@ -58,7 +58,7 @@ const ContractForm = (props) => {
   };
 
   const changeDate = (dates) => {
-      const [start, end] = dates;
+      const [start] = dates;
       setStartDate(start);
       if (selectedPackage) {
         setEndDate(addDays(start, selectedPackage.contract_length_days));
