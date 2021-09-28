@@ -26,7 +26,6 @@ export default function NewDrawer(props) {
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
-      onKeyDown={toggleDrawer(anchor, false)}
     >
       <Button onClick={toggleDrawer(anchor, false)} variant="contained">Close Quote</Button>
       {items}

@@ -16,7 +16,7 @@ import { format, addDays, getDate } from 'date-fns';
 
 const Quote = (props) => {
   const { packages } = props;
-  const submit = props.onSubmit;
+  const submit = props.onSubmitQuote;
 
   const [error, setError] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -33,7 +33,14 @@ const Quote = (props) => {
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      return submit(selectedPackage.id, startDate, address);
+      const quote = {
+        package_id: selectedPackage.id,
+        start_date: startDate,
+        address,
+        clientEmail,
+        clientName
+      }
+      return submit(quote);
     }
     if (!selectedPackage) {
       errorMessage.push('Package');
