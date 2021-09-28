@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { useParams } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
@@ -7,11 +6,13 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 const PackageForm = (props) => {
   const { onSubmit } = props;
 
   // const params = useParams();
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState([]);
   const [title, setTitle] = useState("");
   const [flatRate, setFlatRate] = useState("");
@@ -30,30 +31,39 @@ const PackageForm = (props) => {
     if (title && flatRate && manHrsPerVisit && contractLength && visitInterval) {
       // Successful package creation
       setError([]);
-      return onSubmit({title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage});
-    }
-    if (!title) {
-      errorMessage.push('Title');
-    }
-    if (!flatRate) {
-      errorMessage.push('Flat Rate');
-    }
-    if (!manHrsPerVisit) {
-      errorMessage.push('Man Hrs per Visit');
-    }
-    if (!contractLength) {
-      errorMessage.push('Contract Length');
-    }
-    if (!visitInterval) {
-      errorMessage.push('Visit Interval');
-    }
-      
-    setError(errorMessage);
+      onSubmit({title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage})
+      .then(() => setSuccess(true));
+
+    } else {
+      if (!title) {
+        errorMessage.push('Title');
+      }
+      if (!flatRate) {
+        errorMessage.push('Flat Rate');
+      }
+      if (!manHrsPerVisit) {
+        errorMessage.push('Man Hrs per Visit');
+      }
+      if (!contractLength) {
+        errorMessage.push('Contract Length');
+      }
+      if (!visitInterval) {
+        errorMessage.push('Visit Interval');
+      }
+        
+      setError(errorMessage);
+    } 
   };
 
   return (
     <>
       <h1>Create New Package</h1>
+      <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(true)}>
+        <Alert onClose={() => setSuccess(false)}
+         severity="success" sx={{ width: '100%' }}>
+          Package created successfully!
+        </Alert>
+      </Snackbar>
       <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
       
       {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
