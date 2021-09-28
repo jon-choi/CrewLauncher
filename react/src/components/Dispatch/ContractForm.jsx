@@ -31,8 +31,33 @@ const ContractForm = (props) => {
   const [address, setAddress] = useState(props.address || "");
   const [jobNotes, setJobNotes] = useState(props.jobNotes || "");
 
+  console.log("Selected Package:", props.selectedPackage)
   const validate = () => {
+    const errorMessage = [];
 
+    if (selectedPackage && startDate && address && clientName && clientEmail) {
+      // Successful package creation
+      setError([]);
+      return submit(selectedPackage.id, startDate, address, jobNotes);
+    }
+    if (!selectedPackage) {
+      errorMessage.push('Package');
+    }
+    if (!address) {
+      errorMessage.push('Address');
+    }
+    if (!startDate) {
+      errorMessage.push('Start Date');
+    }
+    if (!clientName) {
+      errorMessage.push('Client Name');
+    }
+    if (!clientEmail) {
+      errorMessage.push('Client Email');
+    }
+      
+    setError(errorMessage);
+    
   };
 
   const changeDate = (dates) => {
@@ -85,10 +110,10 @@ const ContractForm = (props) => {
         
         {selectedPackage &&
           <>
-            <TextField required disabled label={'Package'} value={selectedPackage ? selectedPackage.title : 'Please Select a Package'} />
+            <TextField required disabled label={'Package'} value={(selectedPackage && selectedPackage.title || props.selectedPackage.title) || 'Please Select a Package'} />
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
-            <Box sx={{display: 'flex', 'flex-direction': 'row'}}>
+            <Box sx={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'center'}}>
               <TextField disabled label={'Contract Start'} value={format(startDate, 'MMMM dd, yyyy')} />
               <TextField disabled label={'Contract End'} value={format(endDate, 'MMMM dd, yyyy')} />
             </Box>

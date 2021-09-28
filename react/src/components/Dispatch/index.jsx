@@ -29,10 +29,10 @@ const Dispatch = function(props) {
             <JobForm onEdit={onEdit} crews={crews} packages={packages} contracts={contracts} jobs={jobs} />
           </Route>
           <Route path={`${url}/contracts/new`} >
-            <ContractForm packages={packages} selectedPackage={packages[0]} />
+            <ContractForm packages={packages} />
           </Route>
           <Route path={`${url}/contracts/:id`} >
-            <ContractForm packages={packages} selectedPackage={packages[0]} />
+            <ContractForm packages={packages} />
           </Route>
           <Route path={`${url}/packages/new`} >
             <PackageForm />
