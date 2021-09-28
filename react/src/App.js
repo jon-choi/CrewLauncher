@@ -43,14 +43,15 @@ const App = function() {
       ...state.jobs,
       job
     ]
-    console.log(job)
-    axios.put(`/jobs/${job.id}`, job)
+    console.log(jobs)
+    axios.post(`/jobs/${job.id}`, job)
       .then(res => {
         setState(prev => {
           return {...prev, jobs}
         })
         console.log(state.jobs)
       })
+      .catch(error => console.log(error))
   }
 
   const saveJobEdit = function(crewId, time, endTime, jobInfo, jobId) {

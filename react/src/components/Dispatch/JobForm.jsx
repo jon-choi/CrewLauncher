@@ -3,7 +3,7 @@ import SpeedDial from '../SpeedDial';
 import { TextField, Button } from '@mui/material/';
 import { useState } from 'react';
 import { getInfoForJobForm, getEstTime } from './dispatchDataHelper';
-import { add, toDate, format } from 'date-fns'
+import { addHours, toDate, format } from 'date-fns'
 import TimePicker from '../Timepicker';
 
 const JobForm = (props) => {
@@ -14,10 +14,12 @@ const JobForm = (props) => {
   const info = getInfoForJobForm(jobs, contracts, packages, parseInt(params.id));
   const estTime = getEstTime(info.packageManHours, (selectedCrew ? crews[selectedCrew - 1] : {crew_size: 1}))
   const date = format(new Date(), 'EEE MMM dd yyyy')
- console.log(info)
+ 
   const onSave = function() {
-    const endTime = add(time, {hours: estTime})
-    onEdit(selectedCrew, time, endTime, info, parseInt(params.id))
+    const endTimeString = addHours(time, estTime)
+    const endTime = format(endTimeString, 'hhh')
+    const startTime = format(time, 'HH')
+    onEdit(selectedCrew, startTime, endTime, info, parseInt(params.id))
   }
 
   return (
