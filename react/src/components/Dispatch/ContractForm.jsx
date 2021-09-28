@@ -11,11 +11,7 @@ import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Drawer from '../Drawer';
 import { format, addDays, getDate } from 'date-fns';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
+
 
 const ContractForm = (props) => {
   const { packages } = props;
@@ -55,9 +51,7 @@ const ContractForm = (props) => {
     if (!clientEmail) {
       errorMessage.push('Client Email');
     }
-      
     setError(errorMessage);
-    
   };
 
   const changeDate = (dates) => {
@@ -92,14 +86,7 @@ const ContractForm = (props) => {
       </Stack>
     )
   });
-    // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(addDays(startDate, packageLength - 1));
-  
-  // const onChange = (dates) => {
-  //   const [start, end] = dates;
-  //   setInternalEndDate(addDays(start, packageLength));
-  //   onChange(start, end);
-  // };
+
   return (
     <>
       <h1>New Contract</h1>
