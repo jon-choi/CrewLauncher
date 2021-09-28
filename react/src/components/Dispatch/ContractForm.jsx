@@ -8,6 +8,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import Drawer from '../Drawer';
 
 const ContractForm = (props) => {
   const submit = props.onSubmit;
@@ -32,15 +33,15 @@ const ContractForm = (props) => {
         
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
         
-        <FormControl>
-          <InputLabel htmlFor="package">Package</InputLabel>
-          <OutlinedInput
+        {/* <FormControl> */}
+          {/* <OutlinedInput
             id="package"
             value={selectedPackage}
             onChange={event => setSelectedPackage(event.target.value)}
             label="Please Select a Package"
-          />
-        </FormControl>
+          /> */}
+          <Drawer buttonText={'Select a Package'} items={['Package 1', 'Package 2', 'Package 3']} />
+        {/* </FormControl> */}
         <FormControl>
           <InputLabel htmlFor="clientName">Client Name</InputLabel>
           <OutlinedInput
