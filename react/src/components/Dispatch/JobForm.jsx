@@ -16,7 +16,7 @@ const JobForm = (props) => {
   const date = format(new Date(), 'EEE MMM dd yyyy')
 
   const onSave = function() {
-    onEdit(selectedCrew, time)
+    onEdit(selectedCrew, time, estTime, info, params.id)
   }
 
   return (

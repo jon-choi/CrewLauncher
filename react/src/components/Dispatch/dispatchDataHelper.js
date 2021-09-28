@@ -23,8 +23,11 @@ const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
   let infoForJobForm = {};
 
   for (const job of jobs) {
-    if (job.id = jobId) {
-      infoForJobForm = {date: job.date}
+    if (job.id === jobId) {
+      infoForJobForm = {
+        date: job.date,
+        contractId: job.contract_id
+      }
       for (const contract of contracts) {
         if (job.contract_id === contract.id) {
           infoForJobForm = {

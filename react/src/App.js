@@ -38,8 +38,9 @@ const App = function() {
     })
   }, []);
 
-  const saveJobEdit = function(crewId, time) {
-    console.log("crew Id: ", crewId, "time: ", time)
+  const saveJobEdit = function(crewId, time, timeLength, job) {
+    console.log("crew Id: ", crewId, "time: ", time, "time length: ", timeLength);
+
   }
 
   return (
