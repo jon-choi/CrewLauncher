@@ -38,9 +38,34 @@ const App = function() {
     })
   }, []);
 
-  const saveJobEdit = function(crewId, time, timeLength, job) {
-    console.log("crew Id: ", crewId, "time: ", time, "time length: ", timeLength);
+  const editJob = function(job) {
+    const jobs = [
+      ...state.jobs,
+      job
+    ]
+    console.log(jobs)
+    axios.post(`/jobs/${job.id}`, job)
+      .then(res => {
+        setState(prev => {
+          return {...prev, jobs}
+        })
+        console.log(state.jobs)
+      })
+      .catch(error => console.log(error))
+  }
 
+  const saveJobEdit = function(crewId, time, endTime, jobInfo, jobId) {
+    
+    const job = {
+      id: jobId,
+      contract_id: jobInfo.contractId,
+      crew_id: crewId,
+      date: jobInfo.date,
+      start_time: time,
+      end_time: endTime,
+      completed: false
+    }
+    editJob(job)
   }
 
   return (
