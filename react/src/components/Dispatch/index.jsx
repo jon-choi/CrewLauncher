@@ -32,7 +32,7 @@ const Dispatch = function(props) {
             <ContractForm />
           </Route>
           <Route path={`${url}/contracts/:id`} >
-            <ContractForm />
+            <ContractForm packages={packages} />
           </Route>
           <Route path={`${url}/packages/new`} >
             <PackageForm />
