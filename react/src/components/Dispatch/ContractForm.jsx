@@ -10,13 +10,14 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Drawer from '../Drawer';
-import { format, addDays, getDate } from 'date-fns';
+import Snackbar from '@mui/material/Snackbar';
+import { format, addDays } from 'date-fns';
 
 
 const ContractForm = (props) => {
-  const { packages } = props;
-  const submit = props.onSubmit;
-
+  const { packages, onSubmit } = props;
+  
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage || null);
   const [clientName, setClientName] = useState(props.clientName || "");
@@ -34,7 +35,8 @@ const ContractForm = (props) => {
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      return submit(selectedPackage.id, startDate, address, jobNotes);
+      onSubmit(selectedPackage.id, startDate, address, jobNotes)
+      .then(() => setSuccess(true));
     }
     if (!selectedPackage) {
       errorMessage.push('Package');
@@ -64,11 +66,11 @@ const ContractForm = (props) => {
       }
   };
 
-  
+  // Map through all packages in database
   const packageCards = packages.map(p => {
     const packageBody = (`
       $${p.flat_rate} --
-      ${p.contract_length_days} days
+      ${p.contract_length_days} days --
       ${p.size_range_string || ''} --
       ${p.description} --
       Service Interval: ${p.visit_interval_days}-days`);
@@ -91,7 +93,12 @@ const ContractForm = (props) => {
     <>
       <h1>New Contract</h1>
       <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
-        
+        <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(true)}>
+          <Alert onClose={() => setSuccess(false)}
+          severity="success" sx={{ width: '100%' }}>
+            Package created successfully!
+          </Alert>
+        </Snackbar>
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
         
         <Drawer buttonText={'Select a Package'} items={packageCards} />
