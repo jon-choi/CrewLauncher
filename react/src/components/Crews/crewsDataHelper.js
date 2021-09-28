@@ -28,7 +28,7 @@ export function getJobsByCrew(jobs, crews, crewId) {
 
   for (const job of jobs) {
     if (job.id === crewId) {
-      jobsByCrew = {date: job.date}
+      jobsByCrew = {crew_id: job.crew_id}
       for (const crew of crews) {
         if (job.crew_id === crew.id) {
           jobsByCrew = {
