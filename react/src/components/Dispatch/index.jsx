@@ -30,7 +30,6 @@ const Dispatch = function(props) {
           </Route>
           <Route path={`${url}/contracts/new`} >
             <ContractForm />
-            NewContractForm
           </Route>
           <Route path={`${url}/contracts/:id`} >
             <ContractForm />
