@@ -9,16 +9,20 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Drawer from '../Drawer';
+import addDays from 'date-fns/addDays';
 
 const ContractForm = (props) => {
+  const { packages } = props;
   const submit = props.onSubmit;
 
+
   const [error, setError] = useState([]);
-  const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage || {});
+  const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage);
   const [clientName, setClientName] = useState(props.clientName || "");
   const [clientPhone, setClientPhone] = useState(props.clientPhone || null);
   const [clientEmail, setClientEmail] = useState(props.clientEmail || "");
   const [startDate, setStartDate] = useState(props.startDate || new Date());
+  const [endDate, setEndDate] = useState(addDays(props.startDate, selectedPackage.contract_length_days) || new Date());
   const [address, setAddress] = useState(props.address || "");
   const [jobNotes, setJobNotes] = useState(props.jobNotes || "");
 
@@ -26,6 +30,21 @@ const ContractForm = (props) => {
 
   };
 
+  const changeDate = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(addDays(start, selectedPackage.contract_length_days));
+    
+  };
+  console.log("Selected Package: ", selectedPackage);
+    // const [startDate, setStartDate] = useState(new Date());
+  // const [endDate, setEndDate] = useState(addDays(startDate, packageLength - 1));
+  
+  // const onChange = (dates) => {
+  //   const [start, end] = dates;
+  //   setInternalEndDate(addDays(start, packageLength));
+  //   onChange(start, end);
+  // };
   return (
     <>
       <h1>New Contract</h1>
@@ -33,15 +52,17 @@ const ContractForm = (props) => {
         
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
         
-        {/* <FormControl> */}
+
           {/* <OutlinedInput
             id="package"
             value={selectedPackage}
             onChange={event => setSelectedPackage(event.target.value)}
             label="Please Select a Package"
           /> */}
-          <Drawer buttonText={'Select a Package'} items={['Package 1', 'Package 2', 'Package 3']} />
-        {/* </FormControl> */}
+          <Drawer buttonText={'Select a Package'} items={packages} />
+
+        <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
+
         <FormControl>
           <InputLabel htmlFor="clientName">Client Name</InputLabel>
           <OutlinedInput
@@ -51,6 +72,7 @@ const ContractForm = (props) => {
             label="Client Name"
           />
         </FormControl>
+        
         <FormControl>
           <InputLabel htmlFor="clientPhone">Client Phone Number</InputLabel>
           <OutlinedInput
@@ -60,6 +82,7 @@ const ContractForm = (props) => {
             label="Client Phone Number"
           />
         </FormControl>
+        
         <FormControl>
           <InputLabel htmlFor="clientEmail">Client Email</InputLabel>
           <OutlinedInput
@@ -69,6 +92,7 @@ const ContractForm = (props) => {
             label="Client Email"
           />
         </FormControl>
+        
         <FormControl>
           <InputLabel htmlFor="address">Address</InputLabel>
           <OutlinedInput
@@ -78,6 +102,7 @@ const ContractForm = (props) => {
             label="Address"
           />
         </FormControl>          
+
         <TextField
           id="jobNotes"
           label="Job Notes"
@@ -86,6 +111,7 @@ const ContractForm = (props) => {
           value={jobNotes}
           onChange={event => setJobNotes(event.target.value)}
         />
+        
         <Button onClick={validate} variant="contained">Create New Package</Button>
       </Stack>
     </>
