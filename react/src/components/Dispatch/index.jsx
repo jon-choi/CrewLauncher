@@ -12,13 +12,14 @@ import CrewsPage from './CrewsPage/CrewsPage';
 import { } from './dispatchDataHelper';
 
 const Dispatch = function(props) {
-  const { url } = useRouteMatch();
   const { state, onEditJobs } = props;
-  const crews = state.crews;
-  const clients = state.clients;
-  const packages = state.packages;
-  const contracts = state.contracts;
-  const jobs = state.jobs;
+  const { url } = useRouteMatch();
+
+  const crews = props.crews;
+  const clients = props.crews;
+  const packages = props.packages;
+  const contracts = props.contracts;
+  const jobs = props.jobs;
 
   return (
     <div>Dispatch
