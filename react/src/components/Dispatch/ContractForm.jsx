@@ -35,7 +35,7 @@ const ContractForm = (props) => {
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      onSubmit(selectedPackage.id, startDate, address, jobNotes)
+      onSubmit({clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
       .then(() => setSuccess(true));
     }
     if (!selectedPackage) {
