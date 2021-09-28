@@ -81,20 +81,33 @@ const App = function() {
       visit_interval_days: visitInterval,
       image: packageImage
     };
-
-    console.log("PKG: ", pkg);
     const updatedPackages = [...state.packages, pkg];
-    console.log("Updated Packages: ", updatedPackages);
-
     return axios.post('/packages', pkg)
     .then(res => {
       console.log("RES: ", res.data);
-      
       setState(prev => {
         return {...prev, packages: updatedPackages};
       });
     })
     .catch(error => console.log(error));
+  };
+
+  const doesClientExist = (client, clientList) => {
+    const { email } = client;
+    const existingClient = clientList.filter(c => c.email === email);
+    if (existingClient) {
+      return existingClient.id;
+    } else {
+      return false;
+    }
+  };
+
+  const createNewContract = (newContract) => {
+    const { packageId } = newContract;
+    const contract = {
+
+    };
+    return axios.post('/contracts', contract)
   };
 
   return (
@@ -105,7 +118,7 @@ const App = function() {
             <Crews { ...state }/>
           </Route>
           <Route path='/dispatch' >
-            <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} /> 
+            <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={createNewContract} /> 
           </Route> 
           <Route path='/'>
             <div><Link to='/dispatch'>Dispatch</Link></div>
