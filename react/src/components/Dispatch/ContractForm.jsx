@@ -15,10 +15,15 @@ import Snackbar from '@mui/material/Snackbar';
 import { format, addDays } from 'date-fns';
 
 
+// const getContractFormData = (contractId, clients, contracts) => {
+//   const contract = contracts.filter(c => c.id === contractId)[0];
+
+// };
+
 const ContractForm = (props) => {
   const id = useParams();
   const { packages, onSubmit } = props;
-  
+  // const [editMode, setEditMode] = useState(id ? true : false)
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage || null);
