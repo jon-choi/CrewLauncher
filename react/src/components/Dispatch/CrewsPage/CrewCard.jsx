@@ -6,16 +6,16 @@ import Typography from '@mui/material/Typography';
 
 const CrewCard = (props) => {
 
-  const { onClick, date, jobsBooked } = props;
+
   
   return (
-    <Card sx="display: flex; justify-content: center;">
+    <Card sx="display: flex; justify-content: center; align-items: flex-start;">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Word of the Day
         </Typography>
         <Typography variant="h5" component="div">
-          something
+          Yesterday
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           adjective
@@ -33,7 +33,7 @@ const CrewCard = (props) => {
           Word of the Day
         </Typography>
         <Typography variant="h5" component="div">
-          something
+          Today
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           adjective
@@ -52,7 +52,7 @@ const CrewCard = (props) => {
           Word of the Day
         </Typography>
         <Typography variant="h5" component="div">
-          something
+          Tomorrow
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           adjective
@@ -71,7 +71,7 @@ const CrewCard = (props) => {
           Word of the Day
         </Typography>
         <Typography variant="h5" component="div">
-          something
+          The day after tomorrow
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           adjective
@@ -90,7 +90,7 @@ const CrewCard = (props) => {
           Word of the Day
         </Typography>
         <Typography variant="h5" component="div">
-          something
+          Two days after tomorrow
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           adjective
