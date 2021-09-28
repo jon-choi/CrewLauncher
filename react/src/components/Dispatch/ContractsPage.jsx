@@ -1,11 +1,9 @@
 import MediaCard from "../MediaCard";
-import {  Link, BrowserRouter as Router, useRouteMatch } from 'react-router-dom';
-import { format, parse } from 'date-fns'
+import { format } from 'date-fns'
 
 const ContractsPage = (props) => {
-  const { contractsInfo, onEdit } = props
-  const { url } = useRouteMatch;
-  const linkToEdit = <Link to={`${url}/contracts/:id`}></Link>
+  const { contractsInfo} = props
+  
  
   const contractCards = contractsInfo.map(contract => {
     const nextVisit = format(new Date(contract.jobDate), 'EEE MMM d yyyy')
@@ -16,10 +14,12 @@ const ContractsPage = (props) => {
     \nPackage length: ${contract.packageLength}
     \nJob Notes: ${contract.job_notes}
     \nNext Visit: ${nextVisit}`
+    const linkToEdit = `/dispatch/contracts/${contract.id}`;
+
     return <MediaCard
     key={contract.id}
     compClass="contract-card"
-    onClick={linkToEdit}
+    link={linkToEdit}
     header={header}
     body={body}
     />
