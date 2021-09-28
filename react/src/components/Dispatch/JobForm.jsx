@@ -8,12 +8,16 @@ import TimePicker from '../Timepicker';
 
 const JobForm = (props) => {
   const params = useParams(props);
-  const { onSave, crews, packages, contracts, jobs } = props
+  const { onEdit, crews, packages, contracts, jobs } = props
   const [selectedCrew, setSelectedCrew] = useState(0)
   const [time, setTime] = useState(new Date())
   const info = getInfoForJobForm(jobs, contracts, packages, params.id);
   const estTime = getEstTime(info.packageManHours, (selectedCrew ? crews[selectedCrew - 1] : {crew_size: 1}))
   const date = format(new Date(), 'EEE MMM dd yyyy')
+
+  const onSave = function() {
+    onEdit(selectedCrew, time)
+  }
 
   return (
     <>
