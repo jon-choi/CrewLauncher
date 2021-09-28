@@ -9,9 +9,10 @@ import JobForm from './JobForm';
 import PackageForm from './PackageForm';
 import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
-import {} from './dispatchDataHelper';
+import { } from './dispatchDataHelper';
 
 const Dispatch = function(props) {
+  const { state, onEdit } = props;
   const { url } = useRouteMatch();
 
   const crews = props.crews;
@@ -25,7 +26,7 @@ const Dispatch = function(props) {
       <Navigation />
         <Switch >
           <Route path={`${url}/jobs/:id`} >
-            <JobForm />
+            <JobForm onEdit={onEdit} crews={crews} packages={packages} contracts={contracts} jobs={jobs} />
           </Route>
           <Route path={`${url}/contracts/new`} >
             <ContractForm />

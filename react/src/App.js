@@ -17,15 +17,6 @@ const App = function() {
     jobs: [{date: null}]
   })
 
-  const links = [
-  <div><Link to={`/dispatch/jobs/:id`}>Job Edit Form</Link></div>,
-  <div><Link to={`/dispatch/contracts`}>Contracts</Link></div>,
-  <div><Link to={`/dispatch/contracts/:id`}>Contract Edit Form</Link></div>,
-  <div><Link to={`/dispatch/contracts/new`}>New Contract Form</Link></div>,
-  <div><Link to={`/dispatch/crews`}>Crews</Link></div>,
-  <div><Link to={`/dispatch/clients`}>Clients</Link></div>,
-  <div><Link to={`/dispatch/packages/new`}>New Package Form</Link></div>]
-
   useEffect(() => {
     Promise.all([
       axios.get("/api/crews"),
@@ -47,6 +38,10 @@ const App = function() {
     })
   }, []);
 
+  const saveJobEdit = function(crewId, time) {
+    console.log("crew Id: ", crewId, "time: ", time)
+  }
+
   return (
     <Router >
       <div className="App"> App
@@ -55,7 +50,7 @@ const App = function() {
             <Crews { ...state }/>
           </Route>
           <Route path='/dispatch' >
-            <Dispatch { ...state }/> 
+            <Dispatch { ...state } onEdit={saveJobEdit}/> 
           </Route> 
           <Route path='/'>
             <div><Link to='/dispatch'>Dispatch</Link></div>
