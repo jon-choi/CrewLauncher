@@ -12,7 +12,7 @@ import CrewsPage from './CrewsPage/CrewsPage';
 import { getContractsInfo } from './dispatchDataHelper';
 
 const Dispatch = function(props) {
-  const { onEdit } = props;
+  const { onEdit, createPackage } = props;
   const { url } = useRouteMatch();
 
   const crews = props.crews;
@@ -36,7 +36,7 @@ const Dispatch = function(props) {
             <ContractForm packages={packages} />
           </Route>
           <Route path={`${url}/packages/new`} >
-            <PackageForm />
+            <PackageForm onSubmit={createPackage}/>
           </Route>
           <Route path={`${url}/crews`} >
             <CrewsPage />

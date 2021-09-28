@@ -10,8 +10,8 @@ const ClientCard = (props) => {
 
   
   return (
-    <Card sx="display: flex; justify-content: center; align-items: flex-start;">
-      <Avatar alt="clientName" src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+    <Card sx="display: flex; justify-content: flex-start; align-items: flex-start;">
+      <Avatar alt="clientName" src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 3 }} />
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Client info

@@ -83,6 +83,7 @@ const ContractForm = (props) => {
       <Stack spacing={1}>
         <div onClick={() => {setSelectedPackage(p)}} >
           <MediaCard 
+            key={p.id}
             image={p.package_image}
             header={p.title} 
             body={packageBody}
