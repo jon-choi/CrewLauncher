@@ -39,14 +39,30 @@ const App = function() {
   }, []);
 
   const editJob = function(job) {
+    const jobs = [
+      ...state.jobs,
+      job
+    ]
+    console.log(job)
     axios.put(`/jobs/${job.id}`, job)
+      .then(res => {
+        setState(prev => {
+          return {...prev, jobs}
+        })
+        console.log(state.jobs)
+      })
   }
 
-  const saveJobEdit = function(crewId, time, timeLength, jobInfo, jobId) {
+  const saveJobEdit = function(crewId, time, endTime, jobInfo, jobId) {
+    
     const job = {
       id: jobId,
       contract_id: jobInfo.contractId,
-      
+      crew_id: crewId,
+      date: jobInfo.date,
+      start_time: time,
+      end_time: endTime,
+      completed: false
     }
     editJob(job)
   }
