@@ -23,17 +23,15 @@ export function getJobsByCrewByDay(jobs, jobId, crews, days) {
   return jobsByCrewByDay;
 };
 
-export function getJobsByCrew(jobs, crews, crewId) {
+export function getJobsByCrew(jobs, crews) {
   let jobsByCrew = {};
 
   for (const job of jobs) {
-    if (job.id === crewId) {
-      jobsByCrew = {crew_id: job.crew_id}
-      for (const crew of crews) {
-        if (job.crew_id === crew.id) {
-          jobsByCrew = {
-            ...jobsByCrew
-          }
+    for (const crew of crews) {
+      if (job.crew_id === crew.id) {
+        jobsByCrew = {
+          ...jobsByCrew,
+          crewName: crew.foreman_name
         }
       }
     }
