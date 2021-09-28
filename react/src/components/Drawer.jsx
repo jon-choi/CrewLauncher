@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 export default function NewDrawer(props) {
   // pass in anchor as props 'left', 'right', 'top', 'bottom'
   const anchor = props.anchor || 'right';
-  const { items } = props;
+  const { items, buttonText } = props;
   const [drawerOpen, setDrawerOpen] = useState(false);
 
 
@@ -56,7 +56,7 @@ export default function NewDrawer(props) {
 
   return (
     <Fragment key={anchor}>
-      <Button onClick={toggleDrawer(anchor, true)}>{}</Button>
+      <Button onClick={toggleDrawer(anchor, true)}>{buttonText}</Button>
       <Drawer
         anchor={anchor}
         open={drawerOpen}
