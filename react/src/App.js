@@ -116,8 +116,8 @@ const App = function() {
   };
 
   const processContract = (contractDetails) => {
-    const { id, packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes } = contractDetails;
-    
+    const { packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes } = contractDetails;
+    const id = parseInt(contractDetails.id) || null;
     const client = {
       name: clientName,
       email: clientEmail,
@@ -147,13 +147,14 @@ const App = function() {
     };
     
     const updatedContracts = [...state.contracts, contract];
-
-    return axios.post('/contracts', contract)
-      .then(response => {
-        setState(prev => {
-          return {...prev, contracts: updatedContracts}})
-      })
-      .catch(error => console.log(error));
+    console.log(` ${id}`)
+      return axios.post(`/contracts${id && `/${id}`}`, contract)
+        .then(response => {
+          setState(prev => {
+            return {...prev, contracts: updatedContracts}})
+        })
+        .catch(error => console.log(error));
+    
   };
 
   return (

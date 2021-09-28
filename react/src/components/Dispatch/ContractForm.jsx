@@ -115,7 +115,6 @@ const ContractForm = (props) => {
             </Box>
           </>
         }
-
         <FormControl required>
           <InputLabel htmlFor="clientName">Client Name</InputLabel>
           <OutlinedInput 
