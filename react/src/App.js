@@ -43,13 +43,11 @@ const App = function() {
       ...state.jobs,
       job
     ]
-    console.log(jobs)
     axios.post(`/jobs/${job.id}`, job)
       .then(res => {
         setState(prev => {
           return {...prev, jobs}
         })
-        console.log(state.jobs)
       })
       .catch(error => console.log(error))
   }
@@ -97,12 +95,24 @@ const App = function() {
     .catch(error => console.log(error));
   };
 
+  const submitQuote = function(quote) {
+    for (const client of clients) {
+      if (client.email === quote.clientEmail && client.phone === quote.clientPhone) {
+
+      } else {
+        createClient
+      }
+    }
+    const contract = {
+
+    }
+  }
   return (
     <Router >
       <div className="App"> App
         <Switch >
           <Route path='/crews/:id' >
-            <Crews { ...state }/>
+            <Crews { ...state } onSubmitQuote={submitQuote} />
           </Route>
           <Route path='/dispatch' >
             <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} /> 

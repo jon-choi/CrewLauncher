@@ -8,9 +8,10 @@ import Quote from './Quote'
 import {} from './crewsDataHelper';
 
 const Crews = function(props) {
+  const { onSubmitQuote } = props;
   return (
   <>
-    <Navigation packages={props.packages}/>
+    <Navigation packages={props.packages} onSubmitQuote={onSubmitQuote}/>
     <Router >
       <Switch >
         <Route path="/crews/:id/days/:day">

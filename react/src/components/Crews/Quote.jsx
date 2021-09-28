@@ -21,6 +21,7 @@ const Quote = (props) => {
   const [error, setError] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [clientName, setClientName] = useState("");
+  const [clientPhone, setClientPhone] = useState(null);
   const [clientEmail, setClientEmail] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -30,15 +31,16 @@ const Quote = (props) => {
   const validate = () => {
     const errorMessage = [];
 
-    if (selectedPackage && startDate && address && clientName && clientEmail) {
-      // Successful package creation
+    if (selectedPackage && startDate && address && clientName && clientEmail && clientPhone) {
+      
       setError([]);
       const quote = {
         package_id: selectedPackage.id,
         start_date: startDate,
         address,
         clientEmail,
-        clientName
+        clientName,
+        clientPhone
       }
       return submit(quote);
     }
@@ -56,6 +58,9 @@ const Quote = (props) => {
     }
     if (!clientEmail) {
       errorMessage.push('Client Email');
+    }
+    if (!clientPhone) {
+      errorMessage.push('Client Phone');
     }
       
     setError(errorMessage);
@@ -110,7 +115,15 @@ const Quote = (props) => {
           />
         </FormControl>          
 
-        
+        <FormControl>
+          <InputLabel htmlFor="clientPhone">Phone Number</InputLabel>
+          <OutlinedInput
+            id="clientPhone"
+            value={clientPhone}
+            onChange={event => setClientPhone(event.target.value)}
+            label="Phone Number"
+          />
+        </FormControl>
         
         {selectedPackage &&
           <>
