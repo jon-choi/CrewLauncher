@@ -1,3 +1,0 @@
-const prepareEditJobData = function() {
-  
-}
