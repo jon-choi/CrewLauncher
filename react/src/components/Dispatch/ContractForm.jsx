@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
 import Stack from '@mui/material/Stack';
@@ -15,6 +16,7 @@ import { format, addDays } from 'date-fns';
 
 
 const ContractForm = (props) => {
+  const id = useParams();
   const { packages, onSubmit } = props;
   
   const [success, setSuccess] = useState(false);
@@ -28,14 +30,13 @@ const ContractForm = (props) => {
   const [address, setAddress] = useState(props.address || "");
   const [jobNotes, setJobNotes] = useState(props.jobNotes || "");
 
-  console.log("Selected Package:", props.selectedPackage)
   const validate = () => {
     const errorMessage = [];
 
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      onSubmit({clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
+      onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
       .then(() => setSuccess(true));
     }
     if (!selectedPackage) {
@@ -76,7 +77,7 @@ const ContractForm = (props) => {
       Service Interval: ${p.visit_interval_days}-days`);
     
     return (
-      <Stack spacing={1}>
+      <Stack key={p.id} spacing={1}>
         <div onClick={() => {setSelectedPackage(p)}} >
           <MediaCard 
             key={p.id}
@@ -105,7 +106,7 @@ const ContractForm = (props) => {
         
         {selectedPackage &&
           <>
-            <TextField required disabled label={'Package'} value={(selectedPackage && selectedPackage.title || props.selectedPackage.title) || 'Please Select a Package'} />
+            <TextField required disabled label={'Package'} value={((selectedPackage && selectedPackage.title) || props.selectedPackage.title) || 'Please Select a Package'} />
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
             <Box sx={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'center'}}>
