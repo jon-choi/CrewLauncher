@@ -16,7 +16,7 @@ const Dispatch = function(props) {
   const { url } = useRouteMatch();
 
   const crews = props.crews;
-  const clients = props.crews;
+  const clients = props.clients;
   const packages = props.packages;
   const contracts = props.contracts;
   const jobs = props.jobs;
