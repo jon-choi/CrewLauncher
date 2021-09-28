@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
 
 import Crews from './components/Crews/index';
 import Dispatch from './components/Dispatch/index'
@@ -68,6 +68,35 @@ const App = function() {
     editJob(job)
   }
 
+  const createNewPackage = (newPackage) => {
+    const {title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage} = newPackage;
+    const pkg = {
+      title,
+      description,
+      flat_rate: flatRate,
+      size_range_string: sizeRange,
+      man_hours_per_visit: manHrsPerVisit,
+      contract_length_days: contractLength,
+      visit_interval_days: visitInterval,
+      image: packageImage
+    };
+
+    console.log("PKG: ", pkg);
+    const updatedPackages = [...state.packages, pkg];
+    console.log("Updated Packages: ", updatedPackages);
+
+    axios.post('/packages', pkg)
+    .then(res => {
+      console.log("RES: ", res.data);
+      
+      setState(prev => {
+        return {...prev, packages: updatedPackages};
+      });
+      <Redirect to='/'></Redirect>
+    })
+    .catch(error => console.log(error));
+  };
+
   return (
     <Router >
       <div className="App"> App
@@ -76,7 +105,7 @@ const App = function() {
             <Crews { ...state }/>
           </Route>
           <Route path='/dispatch' >
-            <Dispatch { ...state } onEdit={saveJobEdit}/> 
+            <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} /> 
           </Route> 
           <Route path='/'>
             <div><Link to='/dispatch'>Dispatch</Link></div>
