@@ -1,8 +1,21 @@
+import MediaCard from "../MediaCard";
+import {  Link, BrowserRouter as Router, useRouteMatch } from 'react-router-dom';
 
-const ContractsPage = () => {
+const ContractsPage = (props) => {
+  const { contractsInfo, onEdit } = props
+  const { url } = useRouteMatch;
+  const linkToEdit = 
+
+  const contractCard = contractsInfo.map(contract => {
+    return <MediaCard
+    key={contract.id}
+    compClass="contract-card"
+    onClick={onEdit}
+    />
+  })
 
   return (
-    <h1>/dispatch/contracts</h1>
+    <h1>contractInfo: </h1>
   );
 };
 
