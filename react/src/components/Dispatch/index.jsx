@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import ClientsPage from './ClientsPage';
@@ -12,6 +12,8 @@ import CrewsPage from './CrewsPage/CrewsPage';
 import {} from './dispatchDataHelper';
 
 const Dispatch = function(props) {
+  const { url } = useRouteMatch();
+
   const crews = props.crews;
   const clients = props.crews;
   const packages = props.packages;
@@ -23,33 +25,33 @@ const Dispatch = function(props) {
       <Navigation />
       <Router >
         <Switch >
-          <Route path="/dispatch/job/:id" >
+          <Route path={`${url}/jobs/:id`} >
             <JobForm />
           </Route>
-          <Route path="/dispatch/contract/:id" >
+          <Route path={`${url}/contracts/new`} >
+            <ContractForm />
+            NewContractForm
+          </Route>
+          <Route path={`${url}/contracts/:id`} >
             <ContractForm />
             EditContractForm
           </Route>
-          <Route path="/dispatch/contract/new" >
-            <ContractForm />
-            NewContractForm
-            </Route>
-          <Route path="/dispatch/package/new" >
+          <Route path={`${url}/packages/new`} >
             <PackageForm />
           </Route>
-          <Route path="/dispatch/crews" >
+          <Route path={`${url}/crews`} >
             <CrewsPage />
             BrowseCrews
           </Route>
-          <Route path="/dispatch/contracts" >
+          <Route path={`${url}/contracts`} >
             <ContractsPage />
             BrowseContracts
           </Route>
-          <Route path="/dispatch/clients" >
+          <Route path={`${url}/clients`} >
             <ClientsPage />
             BrowseClients
           </Route>
-          <Route path="/dispatch" >
+          <Route path={`${url}`} >
             <Dashboard />
             Dashboard
           </Route>
