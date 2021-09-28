@@ -4,7 +4,6 @@ const router = Express.Router();
 module.exports = (knex) => {
   router.post('/', (req, res) => {
     const newPackage = req.body;
-    console.log("Req.params.id", req.params.id);
     console.log("PKG in router", newPackage)
     knex("packages")
     .insert({
@@ -27,23 +26,23 @@ module.exports = (knex) => {
   });
 
   router.post('/:id', (req, res) => {
-    const package = req.body;
+    const newPackage = req.body;
     
     knex("packages")
     .where("id", req.params.id)
-    .update("title", package.title)
-    .update("flat_rate", package.flat_rate)
-    .update("size_range_string", package.size_range_string)
-    .update("description", package.description)
-    .update("man_hours_per_visit", package.man_hours_per_visit)
-    .update("contract_length_days", package.contract_length_days)
-    .update("visit_interval_days", package.visit_interval_days)
-    .update("image", package.image)
+    .update("title", newPackage.title)
+    .update("flat_rate", newPackage.flat_rate)
+    .update("size_range_string", newPackage.size_range_string)
+    .update("description", newPackage.description)
+    .update("man_hours_per_visit", newPackage.man_hours_per_visit)
+    .update("contract_length_days", newPackage.contract_length_days)
+    .update("visit_interval_days", newPackage.visit_interval_days)
+    .update("image", newPackage.image)
     .then(result => {
         res.json(result);
     })
     .catch(err => {
-        console.log(`Error: could not post /packages/:${package.id}`)
+        console.log(`Error: could not post /packages/:${newPackage.id}`)
     });
   });
 
