@@ -21,7 +21,6 @@ const getContractInfo = function() {
 }
 const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
   let infoForJobForm = {};
-
   for (const job of jobs) {
     if (job.id === jobId) {
       infoForJobForm = {

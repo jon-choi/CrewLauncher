@@ -11,12 +11,12 @@ const JobForm = (props) => {
   const { onEdit, crews, packages, contracts, jobs } = props
   const [selectedCrew, setSelectedCrew] = useState(0)
   const [time, setTime] = useState(new Date())
-  const info = getInfoForJobForm(jobs, contracts, packages, params.id);
+  const info = getInfoForJobForm(jobs, contracts, packages, parseInt(params.id));
   const estTime = getEstTime(info.packageManHours, (selectedCrew ? crews[selectedCrew - 1] : {crew_size: 1}))
   const date = format(new Date(), 'EEE MMM dd yyyy')
-
+ console.log(info)
   const onSave = function() {
-    onEdit(selectedCrew, time, estTime, info, params.id)
+    onEdit(selectedCrew, time, estTime, info.contract_id, parseInt(params.id))
   }
 
   return (

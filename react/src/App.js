@@ -38,9 +38,17 @@ const App = function() {
     })
   }, []);
 
-  const saveJobEdit = function(crewId, time, timeLength, job) {
-    console.log("crew Id: ", crewId, "time: ", time, "time length: ", timeLength);
+  const editJob = function(job) {
+    axios.put(`/jobs/${job.id}`, job)
+  }
 
+  const saveJobEdit = function(crewId, time, timeLength, jobInfo, jobId) {
+    const job = {
+      id: jobId,
+      contract_id: jobInfo.contractId,
+      
+    }
+    editJob(job)
   }
 
   return (
