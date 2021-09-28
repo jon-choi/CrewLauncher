@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import ClientsPage from './ClientsPage';
@@ -9,9 +9,10 @@ import JobForm from './JobForm';
 import PackageForm from './PackageForm';
 import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
-import {} from './dispatchDataHelper';
+import { } from './dispatchDataHelper';
 
 const Dispatch = function(props) {
+  const { state, onEdit } = props;
   const { url } = useRouteMatch();
 
   const crews = props.crews;
@@ -23,17 +24,15 @@ const Dispatch = function(props) {
   return (
     <div>Dispatch
       <Navigation />
-      <Router >
         <Switch >
           <Route path={`${url}/jobs/:id`} >
-            <JobForm />
+            <JobForm onEdit={onEdit} crews={crews} packages={packages} contracts={contracts} jobs={jobs} />
           </Route>
           <Route path={`${url}/contracts/new`} >
             <ContractForm />
           </Route>
           <Route path={`${url}/contracts/:id`} >
             <ContractForm />
-            EditContractForm
           </Route>
           <Route path={`${url}/packages/new`} >
             <PackageForm />
@@ -55,7 +54,6 @@ const Dispatch = function(props) {
             Dashboard
           </Route>
         </Switch>
-      </Router>
       {/* <Quote /> */}
     </div>
     );
