@@ -1,6 +1,6 @@
 import MediaCard from "../MediaCard";
 import {  Link, BrowserRouter as Router, useRouteMatch } from 'react-router-dom';
-import { format } from 'date-fns'
+import { format, parse } from 'date-fns'
 
 const ContractsPage = (props) => {
   const { contractsInfo, onEdit } = props
@@ -8,7 +8,7 @@ const ContractsPage = (props) => {
   const linkToEdit = <Link to={`${url}/contracts/:id`}></Link>
  
   const contractCards = contractsInfo.map(contract => {
-    const nextVisit = format(new Date(), 'EEE MMM dd')
+    const nextVisit = format(new Date(contract.jobDate), 'EEE MMM d yyyy')
     const header =`${contract.clientName}\n${contract.clientEmail}`
     const body =
     `Address: ${contract.address}
