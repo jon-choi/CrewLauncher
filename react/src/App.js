@@ -47,6 +47,10 @@ const App = function() {
     })
   }, []);
 
+  const saveJobEdit = function(crewId, time) {
+    console.log("crew Id: ", crewId, "time: ", time)
+  }
+
   return (
     <Router >
       <div className="App"> App
@@ -55,7 +59,7 @@ const App = function() {
             <Crews { ...state }/>
           </Route>
           <Route path='/dispatch' >
-            <Dispatch { ...state }/> 
+            <Dispatch { ...state } onEdit={saveJobEdit}/> 
           </Route> 
           <Route path='/'>
             <div><Link to='/dispatch'>Dispatch</Link></div>
