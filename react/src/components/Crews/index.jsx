@@ -10,7 +10,7 @@ import {} from './crewsDataHelper';
 const Crews = function(props) {
   return (
   <>
-    <Navigation />
+    <Navigation packages={props.packages}/>
     <Router >
       <Switch >
         <Route path="/crews/:id/days/:day">
