@@ -4,7 +4,7 @@ const router = Express.Router();
 module.exports = (knex) => {
 
   router.post('/', (req, res) => {
-    const contract = req.body.data;
+    const contract = req.body;
 
     knex("contracts")
     .insert({
@@ -23,7 +23,7 @@ module.exports = (knex) => {
   });
 
   router.post('/:id', (req, res) => {
-    const contract = req.body.data;
+    const contract = req.body;
 
     knex("contracts")
     .where("id", req.params.id)
