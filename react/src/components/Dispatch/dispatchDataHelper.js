@@ -17,10 +17,10 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients) {
       return crew.id === job.crew_id
     })[0];
     const packageOfJob = packages.filter(packageItem => {
-      return packageItem.id === job.package_id
+      return packageItem.id === contractOfJob.package_id
     })[0];
     const clientOfJob = clients.filter(client => {
-      return client.id === job.client_id
+      return client.id === contractOfJob.client_id
     })[0];
     const day = {job, contractOfJob, crewOfJob, packageOfJob, clientOfJob }
 
