@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom';
+import CrewDayCard from '../CrewDayCard';
 
-const Day = () => {
+const Day = (props) => {
   const params = useParams();
-
+  const { onClick, date, jobsBooked, dayTimeEst } = props;
 
   return (
     
-    <h1>/crews/{params.id}/day/{params.day}</h1>
-
+    <CrewDayCard onClick={onClick} date={date} jobsBooked={jobsBooked} dayTimeEst={dayTimeEst} >
+      <h1>/crews/{params.id}/day/{params.day}</h1>
+    </CrewDayCard>
 
   );
 };
