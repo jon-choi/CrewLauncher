@@ -32,7 +32,7 @@ import { format, addDays, parseISO } from 'date-fns';
     const con = props.contracts.filter(c => c.id === id)[0];
 
 
- useEffect(() => {  
+  useEffect(() => {  
     if (con !== undefined) {
       const thisClient = props.clients.filter(c => c.id === con.client_id)[0];
       const thisPackage = props.packages.filter(p => p.id === con.package_id)[0];

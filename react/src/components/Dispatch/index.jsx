@@ -22,7 +22,7 @@ const Dispatch = function(props) {
   const jobs = props.jobs;
 
   const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
-  const dayInfo = getDayInfo(jobs, crews, contracts)
+  const days = getDayInfo(jobs, crews, contracts, packages, clients)
   return (
     <div>Dispatch
       <Navigation />
@@ -51,8 +51,7 @@ const Dispatch = function(props) {
             BrowseClients
           </Route>
           <Route path={`${url}`} >
-            <Dashboard dayInfo={dayInfo}/>
-            Dashboard
+            <Dashboard days={days}/>
           </Route>
         </Switch>
       {/* <Quote /> */}

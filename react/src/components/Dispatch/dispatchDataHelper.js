@@ -1,16 +1,40 @@
-const { addDays, subDays } = require('date-fns')
+const { addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
 
-const getDayInfo = function(jobs, crews, contracts) {
-  const days = [{}, {}, {}, {}, {}, {}]; // shows 5 days
+const getDayInfo = function(jobs, crews, contracts, packages, clients) {
+  const days = [[], [], [], [], [], []]; // shows 5 days
 
   for (const job of jobs) {
-    if (new Date(job.date) === new Date(subDays(new Date(), 1))) {
-      days[0].push(job)
+    const contractOfJob = contracts.filter(contract => {
+      return contract.id === job.contract_id
+    })[0];
+    const crewOfJob = crews.filter(crew => {
+      return crew.id === job.crew_id
+    })[0];
+    const packageOfJob = packages.filter(packageItem => {
+      return packageItem.id === job.package_id
+    })[0];
+    const clientOfJob = clients.filter(client => {
+      return client.id === job.client_id
+    })[0];
+    const day = {job, contractOfJob, crewOfJob, packageOfJob, clientOfJob }
+
+    if (isYesterday(new Date(day.job.date))) {
+      days[0].push(day)
     }
-    if (new Date(job.date) === new Date()) {
-      days[0].push(job)
+    if (isToday(new Date(day.job.date))) {
+      days[1].push(day)
+    }
+    if (isTomorrow(new Date(day.job.date))) {
+      days[2].push(day)
+    }
+    if (isSameDay(new Date(day.job.date), addDays(new Date(), 2))) {
+      days[3].push(day)
+    }
+    if (isSameDay(new Date(day.job.date), addDays(new Date(), 3))) {
+      days[4].push(day)
     }
   }
+  return days;
 }
 // const con = props.contracts.filter(c => c.id === id)[0];
 const getCrewInfo = function() {
