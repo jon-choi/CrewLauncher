@@ -25,7 +25,7 @@ const Crews = function(props) {
         </Route>
 
         <Route path={`${url}/:id/jobs`}>
-          <Jobs jobsByCrew={jobsByCrew}/>
+          <Jobs jobs={jobs}/>
         </Route>
         </Switch>
 
