@@ -1,15 +1,18 @@
+const { addDays, subDays } = require('date-fns')
+
 const getDayInfo = function(jobs, crews, contracts) {
-  const days = [];
+  const days = [{}, {}, {}, {}, {}, {}]; // shows 5 days
+
   for (const job of jobs) {
-    [job.date] = {
-      date: job.date,
-      [job.id]: {
-        completed: job.completed,
-        
-      }
+    if (new Date(job.date) === new Date(subDays(new Date(), 1))) {
+      days[0].push(job)
+    }
+    if (new Date(job.date) === new Date()) {
+      days[0].push(job)
     }
   }
 }
+// const con = props.contracts.filter(c => c.id === id)[0];
 const getCrewInfo = function() {
 
 }
@@ -48,7 +51,7 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
     }
     for (const job of jobs) {
       if (contract.id === job.contract_id) {
-        if (!job.completed && !contract.jobDate) {
+        if (!job.completed && (!contract.jobDate || job.date < contract.jobDate)) {
           contract = {
             ...contract,
             crewId: job.crew_id,

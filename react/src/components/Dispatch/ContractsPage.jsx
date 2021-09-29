@@ -2,9 +2,10 @@ import MediaCard from "../MediaCard";
 import { format } from 'date-fns'
 
 const ContractsPage = (props) => {
-  const { contractsInfo} = props
+  const { contractsInfo } = props
   
- 
+ console.log(contractsInfo[0].jobDate)
+
   const contractCards = contractsInfo.map(contract => {
     const nextVisit = format(new Date(contract.jobDate), 'EEE MMM d yyyy')
     const header =`${contract.clientName}\n${contract.clientEmail}`
