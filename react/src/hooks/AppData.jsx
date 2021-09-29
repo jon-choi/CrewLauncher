@@ -116,7 +116,8 @@ const useAppData = function() {
 
   const processContract = (contractDetails) => {
     const { packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes } = contractDetails;
-    const id = parseInt(contractDetails.id) || state.contracts.length + 1;
+    const existing = isNaN(parseInt(contractDetails.id)) ? false : true;
+    const id = existing === true ? parseInt(contractDetails.id) : state.contracts.length + 1;
     const client = {
       name: clientName,
       email: clientEmail,
@@ -147,13 +148,29 @@ const useAppData = function() {
     };
     
     const updatedContracts = [...state.contracts, contract];
-    console.log(` ${id}`)
-      return axios.post(`/contracts${id ? `/${contract.id}` : ''}`, contract)
-        .then(response => {
-          setState(prev => {
-            return {...prev, contracts: updatedContracts}})
-        })
-        .catch(error => console.log(error));
+    console.log(`Contract to be posted:`, contract)
+    if (existing) {
+      console.log(`POSTING TO: /contracts/${contract.id}`)
+      return axios.post(`/contracts${contract.id}`, contract)
+      .then(response => {
+        setState(prev => {
+          return {...prev, contracts: updatedContracts}})
+      })
+      .catch(error => {
+        console.log('Could not submit contract: ', error);
+      });
+    } else {
+      console.log(`POSTING TO: /contracts`)
+      return axios.post(`/contracts`, contract)
+      .then(response => {
+        setState(prev => {
+          return {...prev, contracts: updatedContracts}})
+      })
+      .catch(error => {
+        console.log('Could not submit contract: ', error);
+      });
+    }
+        
     
   };
 
