@@ -4,7 +4,6 @@ const router = Express.Router();
 module.exports = (knex) => {
   router.post('/', (req, res) => {
     const newPackage = req.body;
-    console.log("PKG in router", newPackage)
     knex("packages")
     .insert({
       title: newPackage.title,
@@ -21,13 +20,12 @@ module.exports = (knex) => {
       res.json(result);
     })
     .catch(err => {
-        console.log(`Error: could not POST /packages ${err.data}`);
+      console.log(`Error: could not POST to /packages ${err.data}`);
     });
   });
 
   router.post('/:id', (req, res) => {
     const newPackage = req.body;
-    
     knex("packages")
     .where("id", req.params.id)
     .update("title", newPackage.title)
@@ -39,10 +37,11 @@ module.exports = (knex) => {
     .update("visit_interval_days", newPackage.visit_interval_days)
     .update("image", newPackage.image)
     .then(result => {
-        res.json(result);
+      console.log(`Successful POST to /packages/${req.params.id}`);
+      res.json(result);
     })
     .catch(err => {
-        console.log(`Error: could not post /packages/:${newPackage.id}`)
+      console.log(`Error: could not POST to /packages/:${req.params.id} ${err.data}`)
     });
   });
 

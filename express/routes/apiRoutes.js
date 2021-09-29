@@ -9,7 +9,7 @@ module.exports = (knex) => {
       res.json({ result });
     })
     .catch(err => {
-      console.log(`Error: Could not GET /crews ${err}`);
+      console.log(`Error: Could not GET /crews ${err.data}`);
     });
   });
 
@@ -19,7 +19,7 @@ module.exports = (knex) => {
       res.json({ result });
     })
     .catch(err => {
-      console.log(`Error: Could not GET /contracts ${err}`);
+      console.log(`Error: Could not GET /contracts ${err.data}`);
     });
   });
 
@@ -29,7 +29,7 @@ module.exports = (knex) => {
       res.json({ result });
     })
     .catch(err => {
-      console.log(`Error: Could not GET /clients ${err}`);
+      console.log(`Error: Could not GET /clients ${err.data}`);
     });
   });
 
@@ -39,7 +39,7 @@ module.exports = (knex) => {
       res.json({ result });
     })
     .catch(err => {
-      console.log(`Error: Could not GET /packages ${err}`);
+      console.log(`Error: Could not GET /packages ${err.data}`);
     });
   });
 
@@ -49,8 +49,9 @@ module.exports = (knex) => {
       res.json({ result });
     })
     .catch(err => {
-      console.log(`Error: Could not GET /jobs ${err}`);
+      console.log(`Error: Could not GET /jobs ${err.data}`);
     });
   });
+  
   return router;
 };
