@@ -24,7 +24,7 @@ const Dispatch = function(props) {
   const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
   const days = getDayInfo(jobs, crews, contracts, packages, clients)
   return (
-    <div>Dispatch
+    <>
       <Navigation />
         <Switch >
           <Route path={`${url}/jobs/:id`} >
@@ -55,7 +55,7 @@ const Dispatch = function(props) {
           </Route>
         </Switch>
       {/* <Quote /> */}
-    </div>
+    </>
     );
 }
 

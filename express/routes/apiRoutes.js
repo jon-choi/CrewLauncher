@@ -52,5 +52,6 @@ module.exports = (knex) => {
       console.log(`Error: Could not GET /jobs ${err}`);
     });
   });
+  
   return router;
 };

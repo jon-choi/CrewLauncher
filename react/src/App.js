@@ -12,7 +12,7 @@ const App = function() {
 
   return (
     <Router >
-      <div className="App"> App
+      <div className="App">
         <Switch >
           <Route path='/crews/:id' >
             <Crews { ...state } onSubmitQuote={processContract} />
