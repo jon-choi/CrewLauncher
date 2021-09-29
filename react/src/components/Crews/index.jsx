@@ -17,28 +17,28 @@ const Crews = function(props) {
   const quotes = props.quotes;
 
   const jobsByCrew = getJobsByCrew(jobs, crews)
-  const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews, days)
+  const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews)
 
-  console.log("jobsbyCrew: ", jobsByCrew)
-  console.log("jobsbyCrewByDay: ", jobsByCrewByDay)
+  // console.log("jobsbyCrew: ", jobsByCrew)
+  // console.log("jobsbyCrewByDay: ", jobsByCrewByDay)
 
   return (
   <div>
 
     <Navigation packages={props.packages} onSubmitQuote={onSubmitQuote}/>
       <Switch >
-        <Route path={`${url}:id/days/:day`}>
+        <Route path="/crews/:id/days/:day">
           <Day jobsByCrewByDay={jobsByCrewByDay} />
         </Route>
 
-        <Route path={`${url}/:id/jobs`}>
+        <Route path="/crews/:id/jobs">
           <Jobs jobsByCrew={jobsByCrew} />
         </Route>
 
-        <Route path={`${url}crews/:id/quote`}>
+        <Route path="/crews/:id/quote">
           <Quote />
         </Route>
-        <Route path={`${url}/:id`}>
+        <Route path="crews/:id">
         </Route>
         </Switch>
 
