@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { getClientId } from '../helpers/AppHelpers'
@@ -94,7 +94,24 @@ const useAppData = function() {
       });
     })
     .catch(error => console.log(error));
+  };
 
+  const updateClient = (client) => {
+    const updatedClients = state.clients.map(c => {
+      if (c.id === client.id) {
+        return client;
+      } else {
+        return c;
+      }
+    });
+
+    return axios.post(`/clients/${client.id}`, client)
+    .then(response => {
+      setState(prev => {
+        return {...prev, updatedClients};
+      });
+    })
+    .catch(error => error.message)
   };
 
   const processContract = (contractDetails) => {
@@ -109,12 +126,12 @@ const useAppData = function() {
     const existingClient = getClientId(client, state.clients);
     
     if (existingClient) {
-
       client.id = existingClient;
+      updateClient(client);
     } else {
       client.id = state.clients.length + 1;
     }
-    console.log(client)
+
     // If client doesn't exist then create it
     if (!existingClient) {
       createNewClient(client);
