@@ -11,7 +11,7 @@ const Day = (props) => {
 
 
     return <JobCard
-    key={jobs.id}
+      key={jobs.id}
       packageTitle={packageTitle}
       timeEst={timeEst}
       clientName={clientName}
@@ -20,11 +20,7 @@ const Day = (props) => {
       />
   })
 
-  
-
-  
-
-    return (
+  return (
     <>
       <h1>Job: </h1>
       {jobCard}

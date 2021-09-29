@@ -19,16 +19,15 @@ const Crews = function(props) {
   const jobsByCrew = getJobsByCrew(jobs, crews)
   // const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews, days)
 
-  // console.log("jobs: ", jobs)
-  // console.log("crews: ", crews)
-  // console.log("days: ", days)
+  console.log("jobs: ", jobs)
+
   return (
   <div>
 
     <Navigation packages={props.packages} onSubmitQuote={onSubmitQuote}/>
       <Switch >
         <Route path={`${url}:id/days/:day`}>
-          <Day crews={crews} days={days} jobs={jobs} />
+          <Day />
         </Route>
 
         <Route path={`${url}/:id/jobs`}>
