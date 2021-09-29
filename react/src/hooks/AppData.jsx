@@ -99,7 +99,7 @@ const useAppData = function() {
 
   const processContract = (contractDetails) => {
     const { packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes } = contractDetails;
-    const id = parseInt(contractDetails.id) || null;
+    const id = parseInt(contractDetails.id) || state.contracts.length + 1;
     const client = {
       name: clientName,
       email: clientEmail,
@@ -113,14 +113,14 @@ const useAppData = function() {
     } else {
       client.id = state.clients.length + 1;
     }
-
+    console.log(client)
     // If client doesn't exist then create it
     if (!existingClient) {
       createNewClient(client);
     }
     
     const contract = {
-      id: id ? id : state.contracts.length + 1,
+      id,
       client_id: client.id,
       package_id: packageId,
       start_date: startDate,
