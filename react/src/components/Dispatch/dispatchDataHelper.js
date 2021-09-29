@@ -1,7 +1,13 @@
-const { addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
+const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
 
 const getDayInfo = function(jobs, crews, contracts, packages, clients) {
-  const days = [[], [], [], [], [], []]; // shows 5 days
+  const days = [ // shows 5 days
+    [format(subDays(new Date(), 1),'EEEE, MMM dd')],
+    [format(new Date(),'EEEE, MMM dd')],
+    [format(addDays(new Date(), 1),'EEEE, MMM dd')],
+    [format(addDays(new Date(), 2),'EEEE, MMM dd')],
+    [format(addDays(new Date(), 3),'EEEE, MMM dd')]
+  ];
 
   for (const job of jobs) {
     const contractOfJob = contracts.filter(contract => {

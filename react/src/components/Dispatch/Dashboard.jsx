@@ -5,9 +5,9 @@ const Dashboard = function(props) {
   const { days } = props;
   const [selectedDay, setSelectedDay] = useState(null);
   if (days) {
-    const [yesterday, today, tomorrow, fourthDay, last] = days;
+    const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
-    console.log(selectedDay)
+    console.log(yesterday)
     if (selectedDay) {
       const dayCard = selectedDay.map(day => {
       
@@ -18,9 +18,11 @@ const Dashboard = function(props) {
     <>
     <h1>Dashboard</h1>
     <div >
-      <div>Yesterday</div>
-      <div>Today</div>
-      <div>Tomorrow</div>
+      <div>{yesterday[0]}</div>
+      <div>{today[0]}</div>
+      <div>{tomorrow[0]}</div>
+      <div>{fourthDay[0]}</div>
+      <div>{lastDay[0]}</div>
     </div>
     </>
     )
