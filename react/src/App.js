@@ -43,13 +43,11 @@ const App = function() {
       ...state.jobs,
       job
     ]
-    console.log(jobs)
     axios.post(`/jobs/${job.id}`, job)
       .then(res => {
         setState(prev => {
           return {...prev, jobs}
         })
-        console.log(state.jobs)
       })
       .catch(error => console.log(error))
   }
@@ -162,7 +160,7 @@ const App = function() {
       <div className="App"> App
         <Switch >
           <Route path='/crews/:id' >
-            <Crews { ...state }/>
+            <Crews { ...state } onSubmitQuote={processContract} />
           </Route>
           <Route path='/dispatch' >
             <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} /> 
