@@ -35,8 +35,9 @@ const Quote = (props) => {
       
       setError([]);
       const quote = {
-        package_id: selectedPackage.id,
-        start_date: startDate,
+        packageId: selectedPackage.id,
+        startDate: startDate,
+        jobNotes: "",
         address,
         clientEmail,
         clientName,

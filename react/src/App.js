@@ -89,27 +89,6 @@ const App = function() {
     .catch(error => console.log(error));
   };
 
-<<<<<<< HEAD
-  const submitQuote = function(quote) {
-    const contract = {...quote};
-    for (const client of clients) {
-      if (client.email === quote.clientEmail && client.phone === quote.clientPhone) {
-        const contract = {
-          ...contract,
-          client_id: client.id,
-          job_notes: ""
-        }
-        return;
-      }
-    }
-    if (!contract.client_id) {
-      
-    }
-    const contract = {
-
-    }
-  }
-=======
   const getClientId = (client, clientList) => {
     const { email } = client;
     const existingClient = clientList.filter(c => c.email === email);
@@ -176,13 +155,12 @@ const App = function() {
     
   };
 
->>>>>>> master
   return (
     <Router >
       <div className="App"> App
         <Switch >
           <Route path='/crews/:id' >
-            <Crews { ...state } onSubmitQuote={submitQuote} />
+            <Crews { ...state } onSubmitQuote={processContract} />
           </Route>
           <Route path='/dispatch' >
             <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} /> 
