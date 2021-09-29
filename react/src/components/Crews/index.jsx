@@ -17,7 +17,7 @@ const Crews = function(props) {
   const quotes = props.quotes;
 
   const jobsByCrew = getJobsByCrew(jobs, crews)
-  // const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews, days)
+  const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews, days)
 
   console.log("jobs: ", jobs)
 
@@ -27,7 +27,7 @@ const Crews = function(props) {
     <Navigation packages={props.packages} onSubmitQuote={onSubmitQuote}/>
       <Switch >
         <Route path={`${url}:id/days/:day`}>
-          <Day />
+          <Day jobsByCrewByDay={jobsByCrewByDay} />
         </Route>
 
         <Route path={`${url}/:id/jobs`}>
@@ -37,7 +37,7 @@ const Crews = function(props) {
         <Route path={`${url}crews/:id/quote`}>
           <Quote />
         </Route>
-        <Route path={`${url}`}>
+        <Route path={`${url}/:id`}>
         </Route>
         </Switch>
 
