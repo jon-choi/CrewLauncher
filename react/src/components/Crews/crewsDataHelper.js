@@ -7,14 +7,17 @@ export function getJobsByCrewByDay(jobs, jobId, crews, days) {
       for (const crew of crews) {
         if (job.crew_id === crew.id) {
           jobsByCrewByDay = {
-            ...jobsByCrewByDay
+            ...jobsByCrewByDay,
+            crewName: crew.id,
+            jobName: job.id,
           }
         }
       }
       for (const day of days) {
         if (day === job.crew_id) {
           jobsByCrewByDay = {
-            ...jobsByCrewByDay
+            ...jobsByCrewByDay,
+            jobDate: job.date
           }
         }
       }
@@ -28,10 +31,17 @@ export function getJobsByCrew(jobs, crews) {
 
   for (const job of jobs) {
     for (const crew of crews) {
-      if (job.crew_id === crew.id) {
+      if (job.id === crew.id) {
         jobsByCrew = {
           ...jobsByCrew,
+          jobId: job.id,
+          crew: job.crew_id,
+          contract: job.contract_id,
+          crewId: crew.id,
           crewName: crew.foreman_name
+
+
+
         }
       }
     }
