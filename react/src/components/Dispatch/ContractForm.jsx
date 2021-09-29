@@ -2,16 +2,8 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Stack';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
 import Drawer from '../Drawer';
-import Snackbar from '@mui/material/Snackbar';
+import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
 import { format, addDays, parseISO } from 'date-fns';
 
 
