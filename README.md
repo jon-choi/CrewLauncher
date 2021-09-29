@@ -1,4 +1,4 @@
-## Crew Launcher (https://icons.iconarchive.com/icons/goodstuff-no-nonsense/free-space/1024/rocket-launch-icon.png)
+## Crew Launcher 🚀
 
 A boilerplate project for anyone interested in making a project that uses React and Express.
 
