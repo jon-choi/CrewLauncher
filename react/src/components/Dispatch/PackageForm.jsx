@@ -7,9 +7,11 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import { useHistory } from 'react-router-dom';
 
 const PackageForm = (props) => {
   const { onSubmit } = props;
+  const browserHistory = useHistory();
 
   // const params = useParams();
   const [status, setStatus] = useState({error: false, success: false, message:""});
@@ -36,6 +38,7 @@ const PackageForm = (props) => {
       onSubmit({title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage})
       .then((response) => {
         setStatus({error: false, success: true, message: "Package created successfully!"})
+        browserHistory.push('/dispatch')
       })
       .catch((err) => { 
           setStatus({ success: false, error: true, message: "Package creation error!"});
