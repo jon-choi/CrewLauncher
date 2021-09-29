@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
 import Stack from '@mui/material/Stack';
@@ -10,17 +11,20 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Drawer from '../Drawer';
-import { format, addDays, getDate } from 'date-fns';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
+import Snackbar from '@mui/material/Snackbar';
+import { format, addDays } from 'date-fns';
+
+
+// const getContractFormData = (contractId, clients, contracts) => {
+//   const contract = contracts.filter(c => c.id === contractId)[0];
+
+// };
 
 const ContractForm = (props) => {
-  const { packages } = props;
-  const submit = props.onSubmit;
-
+  const id = useParams();
+  const { packages, onSubmit } = props;
+  // const [editMode, setEditMode] = useState(id ? true : false)
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage || null);
   const [clientName, setClientName] = useState(props.clientName || "");
@@ -31,14 +35,14 @@ const ContractForm = (props) => {
   const [address, setAddress] = useState(props.address || "");
   const [jobNotes, setJobNotes] = useState(props.jobNotes || "");
 
-  console.log("Selected Package:", props.selectedPackage)
   const validate = () => {
     const errorMessage = [];
 
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      return submit(selectedPackage.id, startDate, address, jobNotes);
+      onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
+      .then(() => setSuccess(true));
     }
     if (!selectedPackage) {
       errorMessage.push('Package');
@@ -55,13 +59,11 @@ const ContractForm = (props) => {
     if (!clientEmail) {
       errorMessage.push('Client Email');
     }
-      
     setError(errorMessage);
-    
   };
 
   const changeDate = (dates) => {
-      const [start, end] = dates;
+      const [start] = dates;
       setStartDate(start);
       if (selectedPackage) {
         setEndDate(addDays(start, selectedPackage.contract_length_days));
@@ -70,17 +72,17 @@ const ContractForm = (props) => {
       }
   };
 
-  
+  // Map through all packages in database
   const packageCards = packages.map(p => {
     const packageBody = (`
       $${p.flat_rate} --
-      ${p.contract_length_days} days
+      ${p.contract_length_days} days --
       ${p.size_range_string || ''} --
       ${p.description} --
       Service Interval: ${p.visit_interval_days}-days`);
     
     return (
-      <Stack spacing={1}>
+      <Stack key={p.id} spacing={1}>
         <div onClick={() => {setSelectedPackage(p)}} >
           <MediaCard 
             key={p.id}
@@ -92,26 +94,24 @@ const ContractForm = (props) => {
       </Stack>
     )
   });
-    // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(addDays(startDate, packageLength - 1));
-  
-  // const onChange = (dates) => {
-  //   const [start, end] = dates;
-  //   setInternalEndDate(addDays(start, packageLength));
-  //   onChange(start, end);
-  // };
+
   return (
     <>
       <h1>New Contract</h1>
       <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
-        
+        <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(true)}>
+          <Alert onClose={() => setSuccess(false)}
+          severity="success" sx={{ width: '100%' }}>
+            Package created successfully!
+          </Alert>
+        </Snackbar>
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
         
         <Drawer buttonText={'Select a Package'} items={packageCards} />
         
         {selectedPackage &&
           <>
-            <TextField required disabled label={'Package'} value={(selectedPackage && selectedPackage.title || props.selectedPackage.title) || 'Please Select a Package'} />
+            <TextField required disabled label={'Package'} value={((selectedPackage && selectedPackage.title) || props.selectedPackage.title) || 'Please Select a Package'} />
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
             <Box sx={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'center'}}>
@@ -120,7 +120,6 @@ const ContractForm = (props) => {
             </Box>
           </>
         }
-
         <FormControl required>
           <InputLabel htmlFor="clientName">Client Name</InputLabel>
           <OutlinedInput 
