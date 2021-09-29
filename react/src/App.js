@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 import Crews from './components/Crews/index';
 import Dispatch from './components/Dispatch/index'
@@ -81,20 +81,80 @@ const App = function() {
       visit_interval_days: visitInterval,
       image: packageImage
     };
-
-    console.log("PKG: ", pkg);
     const updatedPackages = [...state.packages, pkg];
-    console.log("Updated Packages: ", updatedPackages);
-
     return axios.post('/packages', pkg)
-    .then(res => {
-      console.log("RES: ", res.data);
-      
+    .then(response => {
       setState(prev => {
         return {...prev, packages: updatedPackages};
       });
     })
     .catch(error => console.log(error));
+  };
+
+  const getClientId = (client, clientList) => {
+    const { email } = client;
+    const existingClient = clientList.filter(c => c.email === email);
+    console.log("getClientId returns: ", existingClient.length > 0 ? existingClient[0].id : false );
+    if (existingClient.length > 0) {
+      return existingClient[0].id;
+    } else {
+      return false;
+    }
+  };
+
+  const createNewClient = (client) => {
+    const updatedClients = [...state.clients, client]; 
+
+    return axios.post('/clients', client)
+    .then(response => {
+      setState(prev => {
+        return {...prev, clients: updatedClients};
+      });
+    })
+    .catch(error => console.log(error));
+
+  };
+
+  const processContract = (contractDetails) => {
+    const { packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes } = contractDetails;
+    const id = parseInt(contractDetails.id) || null;
+    const client = {
+      name: clientName,
+      email: clientEmail,
+      phone: clientPhone
+    };
+    
+    const existingClient = getClientId(client, state.clients);
+    
+    if (existingClient) {
+      client.id = existingClient;
+    } else {
+      client.id = state.clients.length + 1;
+    }
+
+    // If client doesn't exist then create it
+    if (!existingClient) {
+      createNewClient(client);
+    }
+    
+    const contract = {
+      id: id ? id : state.contracts.length + 1,
+      client_id: client.id,
+      package_id: packageId,
+      start_date: startDate,
+      address: address,
+      job_notes: jobNotes
+    };
+    
+    const updatedContracts = [...state.contracts, contract];
+    console.log(` ${id}`)
+      return axios.post(`/contracts${id && `/${id}`}`, contract)
+        .then(response => {
+          setState(prev => {
+            return {...prev, contracts: updatedContracts}})
+        })
+        .catch(error => console.log(error));
+    
   };
 
   return (
@@ -105,7 +165,7 @@ const App = function() {
             <Crews { ...state }/>
           </Route>
           <Route path='/dispatch' >
-            <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} /> 
+            <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} /> 
           </Route> 
           <Route path='/'>
             <div><Link to='/dispatch'>Dispatch</Link></div>

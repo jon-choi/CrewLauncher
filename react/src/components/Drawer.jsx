@@ -54,7 +54,7 @@ export default function NewDrawer(props) {
   );
 
   return (
-    <Fragment key={anchor}>
+    <>
       <Button onClick={toggleDrawer(anchor, true)}>{buttonText}</Button>
       <Drawer
         anchor={anchor}
@@ -63,6 +63,6 @@ export default function NewDrawer(props) {
       >
         {list(anchor)}
       </Drawer>
-    </Fragment>
+    </>
   );
 }
