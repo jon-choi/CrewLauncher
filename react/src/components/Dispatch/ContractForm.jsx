@@ -21,7 +21,8 @@ import { format, addDays } from 'date-fns';
 // };
 
 const ContractForm = (props) => {
-  const id = useParams();
+  const id = useParams().id;
+
   const { packages, onSubmit } = props;
   // const [editMode, setEditMode] = useState(id ? true : false)
   const [success, setSuccess] = useState(false);
@@ -114,7 +115,7 @@ const ContractForm = (props) => {
             <TextField required disabled label={'Package'} value={((selectedPackage && selectedPackage.title) || props.selectedPackage.title) || 'Please Select a Package'} />
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
-            <Box sx={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'center'}}>
+            <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
               <TextField disabled label={'Contract Start'} value={format(startDate, 'MMMM dd, yyyy')} />
               <TextField disabled label={'Contract End'} value={format(endDate, 'MMMM dd, yyyy')} />
             </Box>
