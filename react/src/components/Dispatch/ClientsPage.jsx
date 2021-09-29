@@ -8,13 +8,13 @@ const ClientsPage = () => {
     <Card >
       
 
-    <ClientCard sx={{ top: 100, position: 'absolute', minWidth: 245, mb: 5 }}>
+    <ClientCard >
     </ClientCard>
 
-    <ClientCard sx={{ top: 100, position: 'absolute', minWidth: 245, mb: 5 }}>
+    <ClientCard >
     </ClientCard>
 
-    <ClientCard sx={{ top: 100, position: 'absolute', minWidth: 245 }}>
+    <ClientCard >
     </ClientCard>
 </Card>
   );
