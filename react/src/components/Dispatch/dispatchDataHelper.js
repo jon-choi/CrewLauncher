@@ -1,6 +1,42 @@
-const getDayInfo = function() {
+const { addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
 
+const getDayInfo = function(jobs, crews, contracts, packages, clients) {
+  const days = [[], [], [], [], [], []]; // shows 5 days
+
+  for (const job of jobs) {
+    const contractOfJob = contracts.filter(contract => {
+      return contract.id === job.contract_id
+    })[0];
+    const crewOfJob = crews.filter(crew => {
+      return crew.id === job.crew_id
+    })[0];
+    const packageOfJob = packages.filter(packageItem => {
+      return packageItem.id === job.package_id
+    })[0];
+    const clientOfJob = clients.filter(client => {
+      return client.id === job.client_id
+    })[0];
+    const day = {job, contractOfJob, crewOfJob, packageOfJob, clientOfJob }
+
+    if (isYesterday(new Date(day.job.date))) {
+      days[0].push(day)
+    }
+    if (isToday(new Date(day.job.date))) {
+      days[1].push(day)
+    }
+    if (isTomorrow(new Date(day.job.date))) {
+      days[2].push(day)
+    }
+    if (isSameDay(new Date(day.job.date), addDays(new Date(), 2))) {
+      days[3].push(day)
+    }
+    if (isSameDay(new Date(day.job.date), addDays(new Date(), 3))) {
+      days[4].push(day)
+    }
+  }
+  return days;
 }
+// const con = props.contracts.filter(c => c.id === id)[0];
 const getCrewInfo = function() {
 
 }
@@ -39,7 +75,7 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
     }
     for (const job of jobs) {
       if (contract.id === job.contract_id) {
-        if (!job.completed && !contract.jobDate) {
+        if (!job.completed && (!contract.jobDate || job.date < contract.jobDate)) {
           contract = {
             ...contract,
             crewId: job.crew_id,
@@ -88,4 +124,4 @@ const getEstTime = function(manhours, crew) {
   return (manhours / crew.crew_size)
 }
 
-export { getInfoForJobForm, getEstTime, getContractsInfo };
+export { getDayInfo, getInfoForJobForm, getEstTime, getContractsInfo };

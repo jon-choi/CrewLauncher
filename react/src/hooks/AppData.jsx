@@ -153,7 +153,7 @@ const useAppData = function() {
           setState(prev => {
             return {...prev, contracts: updatedContracts}})
         })
-        .catch(error => ({error}));
+        .catch(error => console.log(error));
     
   };
 
