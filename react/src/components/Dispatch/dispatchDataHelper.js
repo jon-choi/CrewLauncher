@@ -49,9 +49,37 @@ const getJobsByCrew = function() {
 const getJobsByDay = function() {
 
 }
-const getClientInfo = function() {
-
+const getClientsInfo = function(clients, contracts, packages) {
+  // map through clients
+  const clientsPageInfo = clients.map(client => {
+    // get contracts related to this client
+    const clientContracts = contracts.filter(contract => contract.client_id === client.id)
+    // if there are any contracts related to this client
+    if (clientContracts.length > 0) {
+      
+      const clientContractsWithPackageInfo = clientContracts.map(c => {
+        const packageInfo = packages.filter(pack => c.package_id === pack.id)[0];
+        return {
+          ...c,
+          packageInfo
+        }
+      })
+      // if client has any contracts, attach array of contracts with package info to each client 
+      return {
+        client,
+        contracts: clientContractsWithPackageInfo
+      }
+    } else {
+      // if client has no contracts, return client info and an empty array
+      return {
+        client,
+        contracts: []
+      }
+    }
+  })
+  return clientsPageInfo;
 }
+
 const getContractsInfo = function(contracts, clients, packages, jobs) {
   const contractsInfo = [];
   for (const contract of contracts) {
@@ -124,4 +152,6 @@ const getEstTime = function(manhours, crew) {
   return (manhours / crew.crew_size)
 }
 
-export { getDayInfo, getInfoForJobForm, getEstTime, getContractsInfo };
+
+
+export { getDayInfo, getInfoForJobForm, getEstTime, getContractsInfo, getClientsInfo };
