@@ -53,30 +53,28 @@ const Dashboard = function(props) {
 
     return ( 
     <>
-    <h1>Dashboard</h1>
-    <div >
+      <h1>Dashboard</h1>
 
-      <Box className="day-yesterday" sx={{ width: '90%', maxWidth: 500, height: '100%', maxHeight: 300, minHeight: 190 }}>
-        {yesterday === selectedDay ? jobCard : mapDayToCard(yesterday)}
-      </Box>
+        <Box className="day-yesterday" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }} onClick={() => setSelectedDay(yesterday)}>
+          {yesterday === selectedDay ? jobCard : mapDayToCard(yesterday)}
+        </Box>
 
-      <Box className="day" sx={{ width: '90%', maxWidth: 500, height: '100%', maxHeight: 300, minHeight: 190 }}>
-        {today === selectedDay ? jobCard : mapDayToCard(today)}
-      </Box>
+        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}>
+          {today === selectedDay ? jobCard : mapDayToCard(today)}
+        </Box>
 
-      <Box className="day" sx={{ width: '90%', maxWidth: 500, height: '100%', maxHeight: 300, minHeight: 190 }}>
-        {tomorrow === selectedDay ? jobCard : mapDayToCard(tomorrow)}
-      </Box>
+        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}>
+          {tomorrow === selectedDay ? jobCard : mapDayToCard(tomorrow)}
+        </Box>
 
-      <Box className="day" sx={{ width: '90%', maxWidth: 500, height: '100%', maxHeight: 300, minHeight: 190 }}>
-        {fourthDay === selectedDay ? jobCard : mapDayToCard(fourthDay)}
-      </Box>
+        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}>
+          {fourthDay === selectedDay ? jobCard : mapDayToCard(fourthDay)}
+        </Box>
 
-      <Box className="day" sx={{ width: '90%', maxWidth: 500, height: '100%', maxHeight: 300, minHeight: 190 }}>
-        {lastDay === selectedDay ? jobCard : mapDayToCard(lastDay)}
-      </Box>
-      
-    </div>
+        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}>
+          {lastDay === selectedDay ? jobCard : mapDayToCard(lastDay)}
+        </Box>
+
     </>
     )
   }
