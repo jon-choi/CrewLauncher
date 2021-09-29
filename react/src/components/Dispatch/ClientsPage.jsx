@@ -1,9 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
 import ClientCard from './ClientCard';
 
-const ClientsPage = () => {
-  
+const ClientsPage = (props) => {
+    console.log(props.clientsInfo)
+
   return (
     <Card >
       
