@@ -16,29 +16,6 @@ export function getJobsByCrewByDay(jobs, crews) {
       }
     }
   }
-
-  // for (const job of jobs) {
-  //   if (job.id === jobId) {
-  //     jobsByCrewByDay = {date: job.date}
-  //     for (const crew of crews) {
-  //       if (job.crew_id === crew.id) {
-  //         jobsByCrewByDay = {
-  //           ...jobsByCrewByDay,
-  //           crewName: crew.id,
-  //           jobName: job.id,
-  //         }
-  //       }
-  //     }
-  //     for (const day of date) {
-  //       if (day === job.crew_id) {
-  //         jobsByCrewByDay = {
-  //           ...jobsByCrewByDay,
-  //           jobDate: job.date
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
   return jobsByCrewByDay;
 };
 
