@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { getClientId } from '../helpers/AppHelpers'
@@ -94,12 +94,29 @@ const useAppData = function() {
       });
     })
     .catch(error => console.log(error));
+  };
 
+  const updateClient = (client) => {
+    const updatedClients = state.clients.map(c => {
+      if (c.id === client.id) {
+        return client;
+      } else {
+        return c;
+      }
+    });
+
+    return axios.post(`/clients/${client.id}`, client)
+    .then(response => {
+      setState(prev => {
+        return {...prev, updatedClients};
+      });
+    })
+    .catch(error => error.message)
   };
 
   const processContract = (contractDetails) => {
     const { packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes } = contractDetails;
-    const id = parseInt(contractDetails.id) || null;
+    const id = parseInt(contractDetails.id) || state.contracts.length + 1;
     const client = {
       name: clientName,
       email: clientEmail,
@@ -110,6 +127,7 @@ const useAppData = function() {
     
     if (existingClient) {
       client.id = existingClient;
+      updateClient(client);
     } else {
       client.id = state.clients.length + 1;
     }
@@ -120,7 +138,7 @@ const useAppData = function() {
     }
     
     const contract = {
-      id: id ? id : state.contracts.length + 1,
+      id,
       client_id: client.id,
       package_id: packageId,
       start_date: startDate,
@@ -130,12 +148,12 @@ const useAppData = function() {
     
     const updatedContracts = [...state.contracts, contract];
     console.log(` ${id}`)
-      return axios.post(`/contracts${id && `/${id}`}`, contract)
+      return axios.post(`/contracts${id ? `/${contract.id}` : ''}`, contract)
         .then(response => {
           setState(prev => {
             return {...prev, contracts: updatedContracts}})
         })
-        .catch(error => console.log(error));
+        .catch(error => ({error}));
     
   };
 
