@@ -46,18 +46,17 @@ import { format, addDays } from 'date-fns';
   }, [url, con, props.clients, props.packages])
  
 
-  console.log(`START DATE: ${startDate} --- END DATE: ${endDate}`)
-
   const validate = () => {
     const errorMessage = [];
 
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
+      console.log("ON SUBMIT: ", id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, selectedPackage.id )
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
       .then(() => { 
       setStatus({success: true, error: false, message: "Contract created successfully!"})
-      browserHistory.push(`/dispatch/contracts`)
+      // browserHistory.push(`/dispatch/contracts`)
     })
       .catch(() => setStatus({success: false, error: true, message: "Error creating contract!"}));
     }
