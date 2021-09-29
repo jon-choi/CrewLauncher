@@ -6,7 +6,6 @@ import Avatar from '@mui/material/Avatar';
 
 export default function BasicSpeedDial(props) {
   const { onChange, packages, selectedPackage } = props;
-  console.log(packages)
 
   return (
     <Box sx={{ height: 30, transform: 'translateZ(0px)', flexGrow: 1 }}>

@@ -3,13 +3,12 @@ import CrewDayCard from '../CrewDayCard';
 
 const Day = (props) => {
   const params = useParams();
-  console.log(params);
+
 
   return (
+    
+    <h1>/crews/{params.id}/day</h1>
 
-    <CrewDayCard>
-      CrewDayCard
-    </CrewDayCard>
 
   );
 };
