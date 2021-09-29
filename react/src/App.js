@@ -96,12 +96,19 @@ const App = function() {
   };
 
   const submitQuote = function(quote) {
+    const contract = {...quote};
     for (const client of clients) {
       if (client.email === quote.clientEmail && client.phone === quote.clientPhone) {
-
-      } else {
-        createClient
+        const contract = {
+          ...contract,
+          client_id: client.id,
+          job_notes: ""
+        }
+        return;
       }
+    }
+    if (!contract.client_id) {
+      
     }
     const contract = {
 
