@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useRouteMatch } from 'react-router-dom';
+import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
 import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
 import Drawer from '../Drawer';
 import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
-import { format, addDays, parseISO } from 'date-fns';
+import { format, addDays } from 'date-fns';
 
-// addDays(parseISO(thisContract.start_date), parseInt(thisContract.selectedPackage.contract_length_days))
-// const getContractFormData = (contractId, clients, contracts) => {
-  //   const contract = contracts.filter(c => c.id === contractId)[0];
-  
-  // };
   
   const ContractForm = (props) => {
     const id = parseInt(useParams().id);
     const { url } = useRouteMatch();
+    const browserHistory = useHistory();
 
     const { packages, onSubmit } = props;
     // const [editMode, setEditMode] = useState(id ? true : false)
-    const [alert, setAlert] = useState(false);
+    const [status, setStatus] = useState({success: false, error: false, message: ""});
     const [error, setError] = useState([]);
     const [selectedPackage, setSelectedPackage] = useState(null);
     const [clientName, setClientName] = useState("");
@@ -32,7 +28,7 @@ import { format, addDays, parseISO } from 'date-fns';
     const con = props.contracts.filter(c => c.id === id)[0];
 
 
- useEffect(() => {  
+  useEffect(() => {  
     if (con !== undefined) {
       const thisClient = props.clients.filter(c => c.id === con.client_id)[0];
       const thisPackage = props.packages.filter(p => p.id === con.package_id)[0];
@@ -59,7 +55,11 @@ import { format, addDays, parseISO } from 'date-fns';
       // Successful package creation
       setError([]);
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
-      .then((response) => setAlert(response));
+      .then(() => { 
+      setStatus({success: true, error: false, message: "Contract created successfully!"})
+      browserHistory.push(`/dispatch/contracts`)
+    })
+      .catch(() => setStatus({success: false, error: true, message: "Error creating contract!"}));
     }
     if (!selectedPackage) {
       errorMessage.push('Package');
@@ -116,10 +116,10 @@ import { format, addDays, parseISO } from 'date-fns';
     <>
       <h1>New Contract</h1>
       <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
-        <Snackbar open={alert} autoHideDuration={6000} onClose={() => setAlert(true)}>
-          <Alert onClose={() => setAlert(false)}
-          severity="success" sx={{ width: '100%' }}>
-            Package created successfully!
+        <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
+          <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
+          severity={status.success ? 'success' : 'error'} sx={{ width: '100%' }}>
+            {status.message}
           </Alert>
         </Snackbar>
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
