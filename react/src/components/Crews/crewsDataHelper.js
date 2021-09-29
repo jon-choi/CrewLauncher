@@ -1,4 +1,4 @@
-export function getJobsByCrewByDay(jobs, crews, date) {
+export function getJobsByCrewByDay(jobs, crews) {
   let jobsByCrewByDay = {};
 
 
