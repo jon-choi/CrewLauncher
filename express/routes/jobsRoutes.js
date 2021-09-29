@@ -18,7 +18,7 @@ module.exports = (knex) => {
         res.json(result);
       })
       .catch(err => {
-        console.log(`Error: could not POST to /jobs ${err.data}`);
+        console.log(`Error: could not POST to /jobs ${err}`);
       });
     });
 
@@ -37,7 +37,7 @@ module.exports = (knex) => {
         res.json(result);
       })
       .catch(err => {
-        console.log(`Error: could not POST to /jobs/${req.params.id} ${err.data}`)
+        console.log(`Error: could not POST to /jobs/${req.params.id} ${err}`)
       });
     });
 

@@ -20,7 +20,7 @@ module.exports = (knex) => {
       res.json(result);
     })
     .catch(err => {
-      console.log(`Error: could not POST to /packages ${err.data}`);
+      console.log(`Error: could not POST to /packages ${err}`);
     });
   });
 
@@ -41,7 +41,7 @@ module.exports = (knex) => {
       res.json(result);
     })
     .catch(err => {
-      console.log(`Error: could not POST to /packages/:${req.params.id} ${err.data}`)
+      console.log(`Error: could not POST to /packages/:${req.params.id} ${err}`)
     });
   });
 
