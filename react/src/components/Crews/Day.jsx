@@ -3,16 +3,32 @@ import JobCard from '../JobCard';
 
 const Day = (props) => {
   const params = useParams();
-  const { JobCard } = props;
+  const { packageTitle, timeEst, clientName, address, jobNotes, jobsByCrew } = props;
+
+  const jobCards = jobsByCrew.map((jobs, client) => {
+
+    let clients = `${client.clientName}`
+    const body = 
+    `Name: ${client.name}
+    \nPhone: ${client.phone}
+    \nEmail: ${client.email}`
+
+    return <JobCard 
+      key={client.id}
+      clients={clients.clientName}
+      body={body}
+      timeEst={timeEst}
+    />
+  })
 
   return (
     <>
       <JobCard 
-        key={props.packageTitle}
-        timeEst={props.timeEst}
-        clientName={props.clientName}
-        address={props.address}
-        jobNotes={props.jobNotes}
+        packageTitle={packageTitle}
+        timeEst={timeEst}
+        clientName={clientName}
+        address={address}
+        jobNotes={jobNotes}
       />
     </>
   );

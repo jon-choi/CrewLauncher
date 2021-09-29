@@ -20,7 +20,7 @@ const Crews = function(props) {
   const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews, days)
 
   console.log("jobsbyCrew: ", jobsByCrew)
-  console.log("jobsbyCrewByDay: ", jobsByCrewByDay)
+  // console.log("jobsbyCrewByDay: ", jobsByCrewByDay)
 
   return (
   <div>

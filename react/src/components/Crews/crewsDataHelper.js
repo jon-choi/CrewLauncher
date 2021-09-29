@@ -49,7 +49,7 @@ export function getJobsByCrew(jobs, crews) {
   return jobsByCrew;
 };
 
-export function getJobAndClientByCrewByDay(jobs, clients, crews, day) {
+export function getJobAndClientByCrewByDay(jobs, clients, crews, days) {
 
 
 };
