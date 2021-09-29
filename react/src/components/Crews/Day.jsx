@@ -1,15 +1,34 @@
 import { useParams } from 'react-router-dom';
-import CrewDayCard from '../CrewDayCard';
+import JobCard from '../JobCard';
 
 const Day = (props) => {
   const params = useParams();
-  const { onClick, date, jobsBooked, dayTimeEst } = props;
+  const { packageTitle, timeEst, clientName, address, jobNotes, jobsByCrewByDay } = props;
 
-  return (
+  const jobCard = jobsByCrewByDay.map(jobs => {
+
     
-    <CrewDayCard onClick={onClick} date={date} jobsBooked={jobsBooked} dayTimeEst={dayTimeEst} >
-      <h1>/crews/{params.id}/day/{params.day}</h1>
-    </CrewDayCard>
+
+
+    return <JobCard
+    key={jobs.id}
+      packageTitle={packageTitle}
+      timeEst={timeEst}
+      clientName={clientName}
+      address={address}
+      jobNotes={jobNotes}
+      />
+  })
+
+  
+
+  
+
+    return (
+    <>
+      <h1>Job: </h1>
+      {jobCard}
+    </>
 
   );
 };

@@ -5,7 +5,7 @@ import Navigation from './Navigation';
 import Day from './Day';
 import Jobs from './Jobs';
 import Quote from './Quote';
-import { getJobsByCrew } from './crewsDataHelper';
+import { getJobsByCrew, getJobsByCrewByDay } from './crewsDataHelper';
 
 const Crews = function(props) {
   const { onSubmitQuote } = props;
@@ -17,14 +17,18 @@ const Crews = function(props) {
   const quotes = props.quotes;
 
   const jobsByCrew = getJobsByCrew(jobs, crews)
-  console.log("jobs: ", jobs)
+  // const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews, days)
+
+  // console.log("jobs: ", jobs)
+  // console.log("crews: ", crews)
+  // console.log("days: ", days)
   return (
   <div>
 
     <Navigation packages={props.packages} onSubmitQuote={onSubmitQuote}/>
       <Switch >
         <Route path={`${url}:id/days/:day`}>
-          <Day />
+          <Day crews={crews} days={days} jobs={jobs} />
         </Route>
 
         <Route path={`${url}/:id/jobs`}>
