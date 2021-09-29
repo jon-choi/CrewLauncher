@@ -4,17 +4,15 @@ import { List, ListItem, Toolbar, Drawer, Button } from '@mui/material';
 
 const Navigation = () => {
   const { url } = useRouteMatch();
+
   const [open, setOpen] = useState(false);
-
-
-
   const handleClose = () => {
     setOpen(false);
   };
 
   return (<>
     <Button onClick={() => setOpen(!open)}>Menu</Button>
-    <Drawer open={open} variant='temporary' position='absolute' anchor='left'>
+    <Drawer open={open} variant='persistent' position='static' anchor='left'>
       <Toolbar>
         <List>
           <ListItem><h1>Crew🚀Launcher</h1></ListItem>
@@ -26,7 +24,6 @@ const Navigation = () => {
           <ListItem component={Link} to={`${url}/contracts/1`} onClick={handleClose}>Edit Contract 1</ListItem>
           <ListItem component={Link} to={`${url}/contracts/new`} onClick={handleClose}>Create New Contract</ListItem>
           <ListItem component={Link} to={`${url}/packages/new`} onClick={handleClose}>Create New Package</ListItem>
-
         </List>
       </Toolbar>
     </Drawer>
