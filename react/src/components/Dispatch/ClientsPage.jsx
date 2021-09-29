@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '@mui/material';
+import { Stack, Box } from '@mui/material';
 import ClientCard from './ClientCard';
 
 const ClientsPage = (props) => {
@@ -10,9 +10,12 @@ const ClientsPage = (props) => {
   });
 
   return (
+    <>
+    <div>Total Clients: {props.clientsInfo.length}</div>
     <Stack spacing={1} >
-      {clientCards}
+        {clientCards}
     </Stack>
+    </>
   );
 };
 
