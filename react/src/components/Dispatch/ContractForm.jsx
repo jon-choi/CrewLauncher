@@ -12,7 +12,7 @@ import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Drawer from '../Drawer';
 import Snackbar from '@mui/material/Snackbar';
-import { format, addDays } from 'date-fns';
+import { format, addDays, parseISO } from 'date-fns';
 
 
 // const getContractFormData = (contractId, clients, contracts) => {
@@ -21,20 +21,37 @@ import { format, addDays } from 'date-fns';
 // };
 
 const ContractForm = (props) => {
-  const id = useParams().id;
-
+  const id = parseInt(useParams().id);
+  const con = props.contracts.filter(c => c.id === id);
+  let thisContract;
+  console.log("conn is undefined ? ", con === undefined)
+  if (con !== undefined) {
+    const thisClient = props.clients.filter(c => c.id === con.client_id)[0];
+    const thisPackage = props.packages.filter(p => p.id === con.package_id)[0];
+    thisContract = {
+      ...props.contracts[id],
+      clientName: thisClient.name,
+      clientEmail: thisClient.email,
+      clientPhone: thisClient.phone,
+      selectedPackage: thisPackage,
+      
+    }
+    console.log("THIS CLIENT", thisClient);
+    console.log("THIS CONTRACT", thisContract);
+    console.log("thisContract.selectedPackage: ", thisContract.selectedPackage);
+  }
   const { packages, onSubmit } = props;
   // const [editMode, setEditMode] = useState(id ? true : false)
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState([]);
-  const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage || null);
-  const [clientName, setClientName] = useState(props.clientName || "");
-  const [clientPhone, setClientPhone] = useState(props.clientPhone || null);
-  const [clientEmail, setClientEmail] = useState(props.clientEmail || "");
-  const [startDate, setStartDate] = useState(props.startDate || new Date());
-  const [endDate, setEndDate] = useState(props.startDate ? addDays(props.startDate, selectedPackage.contract_length_days) : new Date());
-  const [address, setAddress] = useState(props.address || "");
-  const [jobNotes, setJobNotes] = useState(props.jobNotes || "");
+  const [selectedPackage, setSelectedPackage] = useState( thisContract.selectedPackage || null);
+  const [clientName, setClientName] = useState( thisContract.clientName || "");
+  const [clientPhone, setClientPhone] = useState( thisContract.clientPhone || null);
+  const [clientEmail, setClientEmail] = useState( thisContract.clientEmail || "");
+  const [startDate, setStartDate] = useState( thisContract.startDate || new Date());
+  const [endDate, setEndDate] = useState( addDays(parseISO(thisContract.start_date), parseInt(thisContract.selectedPackage.contract_length_days)) || new Date());
+  const [address, setAddress] = useState( thisContract.address || "");
+  const [jobNotes, setJobNotes] = useState( thisContract.job_notes || "");
 
   const validate = () => {
     const errorMessage = [];
