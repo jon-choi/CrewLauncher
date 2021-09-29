@@ -1,8 +1,19 @@
 
-const Navigation = () => {
+import Drawer from '../Drawer'
+import Quote from './Quote'
 
+const Navigation = (props) => {
+
+  const { packages, onSubmitQuote } = props
   return (
-    <h1>Crew Navigation</h1>
+    <div>
+      <div>
+        <img />
+      </div>
+      <h1>
+          <Drawer buttonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
+      </h1>
+    </div>
   );
 };
 

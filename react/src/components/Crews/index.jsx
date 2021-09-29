@@ -4,29 +4,31 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Navigation from './Navigation';
 import Day from './Day';
 import Jobs from './Jobs';
-import Quote from './Quote'
-import {} from './crewsDataHelper';
+import { getJobsByCrew } from './crewsDataHelper';
 
 const Crews = function(props) {
-  // const { url } = useRouteMatch();
+  const { url } = useRouteMatch();
 
   const days = props.days;
   const jobs = props.jobs;
-  const quotes = props.quotes;
+  const crews = props.crews;
+
+  const jobsByCrew = getJobsByCrew(jobs, crews)
 
   return (
-  <div>Crews
-    <Navigation />
+  <div>
+    <Navigation packages={props.packages}/>
+
       <Switch >
-        <Route path="/crews/:id/days/:day">
+        <Route path={`${url}/:id/days/:day`}>
           <Day days={days}/>
         </Route>
 
-        <Route path="/crews/:id/jobs">
-          <Jobs jobs={jobs}/>
+        <Route path={`${url}/:id/jobs`}>
+          <Jobs jobsByCrew={jobsByCrew}/>
         </Route>
-      </Switch >
-    <Quote />
+        </Switch>
+
   </div>
   );
 };
