@@ -14,7 +14,8 @@ const Dashboard = function(props) {
 
     console.log(yesterday)
     if (selectedDay) {
-      jobCard = selectedDay.map(day => {
+      jobCard = selectedDay.map(jobOfDay => {
+        const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob } = jobOfDay;
        return null
       })
     }
@@ -59,19 +60,19 @@ const Dashboard = function(props) {
           {yesterday === selectedDay ? jobCard : mapDayToCard(yesterday)}
         </Box>
 
-        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}>
+        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }} onClick={() => setSelectedDay(today)}>
           {today === selectedDay ? jobCard : mapDayToCard(today)}
         </Box>
 
-        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}>
+        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }} onClick={() => setSelectedDay(tomorrow)}>
           {tomorrow === selectedDay ? jobCard : mapDayToCard(tomorrow)}
         </Box>
 
-        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}>
+        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }} onClick={() => setSelectedDay(fourthDay)}>
           {fourthDay === selectedDay ? jobCard : mapDayToCard(fourthDay)}
         </Box>
 
-        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}>
+        <Box className="day" sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }} onClick={() => setSelectedDay(lastDay)}>
           {lastDay === selectedDay ? jobCard : mapDayToCard(lastDay)}
         </Box>
 
