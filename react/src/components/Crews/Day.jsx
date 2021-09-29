@@ -1,19 +1,19 @@
 import React from 'react';
 import JobCard from '../JobCard';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 
 const Day = (props) => {
-  const params = useParams();
-  const { jobsByCrewByDay } = props;
+  // const params = useParams();
+      console.log("jobsByCrewByDay: ", props.jobsByCrewByDay);
 
-    console.log(props.jobsByCrewByDay)
-    console.log('this log is working')
+      
+
+    
 
   return (
     <h1> Job: 
       <JobCard 
-      {...jobsByCrewByDay}
       packageTitle={props.packageTitle}
       timeEst={props.timeEst}
       clientName={props.clientName}
