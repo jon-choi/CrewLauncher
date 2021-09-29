@@ -1,5 +1,14 @@
-const getDayInfo = function() {
-
+const getDayInfo = function(jobs, crews, contracts) {
+  const days = [];
+  for (const job of jobs) {
+    [job.date] = {
+      date: job.date,
+      [job.id]: {
+        completed: job.completed,
+        
+      }
+    }
+  }
 }
 const getCrewInfo = function() {
 
@@ -88,4 +97,4 @@ const getEstTime = function(manhours, crew) {
   return (manhours / crew.crew_size)
 }
 
-export { getInfoForJobForm, getEstTime, getContractsInfo };
+export { getDayInfo, getInfoForJobForm, getEstTime, getContractsInfo };
