@@ -56,7 +56,7 @@ import { format, addDays } from 'date-fns';
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
       .then(() => { 
       setStatus({success: true, error: false, message: "Contract created successfully!"})
-      // browserHistory.push(`/dispatch/contracts`)
+      setTimeout(() => browserHistory.push(`/dispatch/contracts`), 1000);
     })
       .catch(() => setStatus({success: false, error: true, message: "Error creating contract!"}));
     }
