@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useRouteMatch } from 'react-router-dom';
+import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
 import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
 import Drawer from '../Drawer';
@@ -10,6 +10,7 @@ import { format, addDays } from 'date-fns';
   const ContractForm = (props) => {
     const id = parseInt(useParams().id);
     const { url } = useRouteMatch();
+    const browserHistory = useHistory();
 
     const { packages, onSubmit } = props;
     // const [editMode, setEditMode] = useState(id ? true : false)
@@ -54,7 +55,10 @@ import { format, addDays } from 'date-fns';
       // Successful package creation
       setError([]);
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
-      .then(() => setStatus({success: true, error: false, message: "Contract created successfully!"}))
+      .then(() => { 
+      setStatus({success: true, error: false, message: "Contract created successfully!"})
+      browserHistory.push(`/dispatch/contracts`)
+    })
       .catch(() => setStatus({success: false, error: true, message: "Error creating contract!"}));
     }
     if (!selectedPackage) {
