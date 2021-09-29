@@ -1,4 +1,4 @@
-# React + Express No-Fluff Boilerplate
+<i class="fas fa-rocket"></i> Crew Launger <i class="fas fa-rocket"></i>
 
 A boilerplate project for anyone interested in making a project that uses React and Express.
 
