@@ -1,49 +1,56 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useRouteMatch } from 'react-router-dom';
 import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
 import Drawer from '../Drawer';
 import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
 import { format, addDays, parseISO } from 'date-fns';
 
-
+// addDays(parseISO(thisContract.start_date), parseInt(thisContract.selectedPackage.contract_length_days))
 // const getContractFormData = (contractId, clients, contracts) => {
-//   const contract = contracts.filter(c => c.id === contractId)[0];
+  //   const contract = contracts.filter(c => c.id === contractId)[0];
+  
+  // };
+  
+  const ContractForm = (props) => {
+    const id = parseInt(useParams().id);
+    const { url } = useRouteMatch();
 
-// };
+    const { packages, onSubmit } = props;
+    // const [editMode, setEditMode] = useState(id ? true : false)
+    const [alert, setAlert] = useState(false);
+    const [error, setError] = useState([]);
+    const [selectedPackage, setSelectedPackage] = useState(null);
+    const [clientName, setClientName] = useState("");
+    const [clientPhone, setClientPhone] = useState("");
+    const [clientEmail, setClientEmail] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [address, setAddress] = useState("");
+    const [jobNotes, setJobNotes] = useState("");
+    
+    const con = props.contracts.filter(c => c.id === id)[0];
 
-const ContractForm = (props) => {
-  const id = parseInt(useParams().id);
-  const con = props.contracts.filter(c => c.id === id);
-  let thisContract;
-  console.log("conn is undefined ? ", con === undefined)
-  if (con !== undefined) {
-    const thisClient = props.clients.filter(c => c.id === con.client_id)[0];
-    const thisPackage = props.packages.filter(p => p.id === con.package_id)[0];
-    thisContract = {
-      ...props.contracts[id],
-      clientName: thisClient.name,
-      clientEmail: thisClient.email,
-      clientPhone: thisClient.phone,
-      selectedPackage: thisPackage,
-      
+
+ useEffect(() => {  
+    if (con !== undefined) {
+      const thisClient = props.clients.filter(c => c.id === con.client_id)[0];
+      const thisPackage = props.packages.filter(p => p.id === con.package_id)[0];
+
+      setClientName(thisClient.name);
+      setClientPhone(thisClient.phone);
+      setClientEmail(thisClient.email);
+      setStartDate(new Date(con.start_date));
+      setEndDate(addDays(new Date(con.start_date), thisPackage.contract_length_days));
+      setSelectedPackage(thisPackage);
+      setAddress(con.address);
+      setJobNotes(con.job_notes);
+
     }
-    console.log("THIS CLIENT", thisClient);
-    console.log("THIS CONTRACT", thisContract);
-    console.log("thisContract.selectedPackage: ", thisContract.selectedPackage);
-  }
-  const { packages, onSubmit } = props;
-  // const [editMode, setEditMode] = useState(id ? true : false)
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState([]);
-  const [selectedPackage, setSelectedPackage] = useState( thisContract.selectedPackage || null);
-  const [clientName, setClientName] = useState( thisContract.clientName || "");
-  const [clientPhone, setClientPhone] = useState( thisContract.clientPhone || null);
-  const [clientEmail, setClientEmail] = useState( thisContract.clientEmail || "");
-  const [startDate, setStartDate] = useState( thisContract.startDate || new Date());
-  const [endDate, setEndDate] = useState( addDays(parseISO(thisContract.start_date), parseInt(thisContract.selectedPackage.contract_length_days)) || new Date());
-  const [address, setAddress] = useState( thisContract.address || "");
-  const [jobNotes, setJobNotes] = useState( thisContract.job_notes || "");
+  }, [url, con, props.clients, props.packages])
+ 
+
+  console.log(`START DATE: ${startDate} --- END DATE: ${endDate}`)
 
   const validate = () => {
     const errorMessage = [];
@@ -52,7 +59,7 @@ const ContractForm = (props) => {
       // Successful package creation
       setError([]);
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
-      .then(() => setSuccess(true));
+      .then((response) => setAlert(response));
     }
     if (!selectedPackage) {
       errorMessage.push('Package');
@@ -74,11 +81,11 @@ const ContractForm = (props) => {
 
   const changeDate = (dates) => {
       const [start] = dates;
-      setStartDate(start);
+      setStartDate(new Date(start));
       if (selectedPackage) {
-        setEndDate(addDays(start, selectedPackage.contract_length_days));
+        setEndDate(addDays(new Date(start), selectedPackage.contract_length_days));
       } else {
-        setEndDate(start);
+        setEndDate(new Date(start));
       }
   };
 
@@ -109,8 +116,8 @@ const ContractForm = (props) => {
     <>
       <h1>New Contract</h1>
       <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
-        <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(true)}>
-          <Alert onClose={() => setSuccess(false)}
+        <Snackbar open={alert} autoHideDuration={6000} onClose={() => setAlert(true)}>
+          <Alert onClose={() => setAlert(false)}
           severity="success" sx={{ width: '100%' }}>
             Package created successfully!
           </Alert>
@@ -121,12 +128,12 @@ const ContractForm = (props) => {
         
         {selectedPackage &&
           <>
-            <TextField required disabled label={'Package'} value={((selectedPackage && selectedPackage.title) || props.selectedPackage.title) || 'Please Select a Package'} />
+            <TextField required disabled label={'Package'} value={((selectedPackage && selectedPackage.title) || selectedPackage.title) || 'Please Select a Package'} />
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
             <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-              <TextField disabled label={'Contract Start'} value={format(startDate, 'MMMM dd, yyyy')} />
-              <TextField disabled label={'Contract End'} value={format(endDate, 'MMMM dd, yyyy')} />
+              <TextField disabled label={'Contract Start'} value={format(new Date(startDate), 'MMMM dd, yyyy')} />
+              <TextField disabled label={'Contract End'} value={format(new Date(endDate), 'MMMM dd, yyyy')} />
             </Box>
           </>
         }
@@ -154,7 +161,7 @@ const ContractForm = (props) => {
           <InputLabel htmlFor="clientPhone">Client Phone Number</InputLabel>
           <OutlinedInput
             id="clientPhone"
-            value={clientPhone}
+            value={`${clientPhone}`}
             onChange={event => setClientPhone(event.target.value)}
             label="Client Phone Number"
           />
@@ -179,7 +186,7 @@ const ContractForm = (props) => {
           onChange={event => setJobNotes(event.target.value)}
         />
         
-        <Button onClick={validate} variant="contained">Create New Contract</Button>
+        <Button onClick={validate} variant="contained">Submit Contract</Button>
       </Stack>
     </>
   );

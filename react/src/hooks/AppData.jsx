@@ -109,6 +109,7 @@ const useAppData = function() {
     const existingClient = getClientId(client, state.clients);
     
     if (existingClient) {
+
       client.id = existingClient;
     } else {
       client.id = state.clients.length + 1;
