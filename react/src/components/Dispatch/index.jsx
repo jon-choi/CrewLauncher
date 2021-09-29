@@ -42,14 +42,12 @@ const Dispatch = function(props) {
           </Route>
           <Route path={`${url}/crews`} >
             <CrewsPage />
-            BrowseCrews
           </Route>
           <Route path={`${url}/contracts`} >
             <ContractsPage contractsInfo={contractsInfo} />
           </Route>
           <Route path={`${url}/clients`} >
             <ClientsPage clientsInfo={clientsInfo}/>
-            BrowseClients
           </Route>
           <Route path={`${url}`} >
             <Dashboard days={days}/>
