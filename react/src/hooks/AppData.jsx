@@ -130,12 +130,12 @@ const useAppData = function() {
     
     const updatedContracts = [...state.contracts, contract];
     console.log(` ${id}`)
-      return axios.post(`/contracts${id && `/${contract.id}`}`, contract)
+      return axios.post(`/contracts${id ? `/${contract.id}` : ''}`, contract)
         .then(response => {
           setState(prev => {
             return {...prev, contracts: updatedContracts}})
         })
-        .catch(error => console.log(error));
+        .catch(error => ({error}));
     
   };
 
