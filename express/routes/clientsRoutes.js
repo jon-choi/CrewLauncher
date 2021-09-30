@@ -16,6 +16,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
         console.log(`Error: could not POST to /clients ${err}`);
+        res.error(err);
     });
   });
 
@@ -30,7 +31,8 @@ module.exports = (knex) => {
       res.json(result);
     })
     .catch(err => {
-      console.log(`Error: could not POST to /clients/${req.params.id} ${err}`)
+      console.log(`Error: could not POST to /clients/${req.params.id} ${err}`);
+      res.error(err);
     });
   });
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { getClientId } from '../helpers/AppHelpers'
+import { getClientId, generateJobDates } from '../helpers/AppHelpers'
 
 const useAppData = function() {
 
@@ -164,16 +164,54 @@ const useAppData = function() {
       return axios.post(`/contracts`, contract)
       .then(response => {
         setState(prev => {
-          return {...prev, contracts: updatedContracts}})
+          return {...prev, contracts: updatedContracts}
+        });
+        const thisPackage = state.packages.filter(p => p.id === contract.package_id);
+        
+        generateJobsFromContract(contract, thisPackage);
       })
       .catch(error => {
         console.log('Could not submit contract: ', error);
       });
-    }
-        
-    
+    }    
   };
 
+  const generateJobsFromContract = (contract, packageInfo) => {
+    // generates an array of job objects with correct date values
+    const jobs = generateJobDates(new Date(contract.start_date), parseInt(packageInfo.contract_length_days), parseInt(packageInfo.visit_interval_days));
+    console.log("JOBS IN function: ", jobs)
+    const jobsArray = jobs.map(job => {
+      const start = 7;
+      // const startTime = setHours(setMinutes(job.date, 0), start);
+      // const endTime = setHours(setMinutes(job.date, 0), packageInfo.man_hours_per_visit + start);
+      
+      return {
+        ...job,
+        contract_id: contract.id,
+        // crew_id: 0,
+        start_time: start,
+        end_time: (start + packageInfo.man_hours_per_visit),
+        completed: false 
+      };
+      
+    });
+    
+    Promise.all(jobsArray.map(job => {
+      return axios.post('/jobs', job)
+    }))
+    .then(() => {
+      console.log("Jobs created successfully!");
+    })
+    .catch(err => {
+      console.log(`Error creating jobs -- ${err}`);
+    });
+  };
+  
+  // Lines below are for testing output of generateJobsFromContracts
+  // const thisContract = {id: 6, package_id: 1, client_id: 1, start_date: new Date(), address: '45 Jimperson St', job_notes: 'Here are some notes'}
+  // const thisPackage = {id: 1, title:'Basic Lawn Care Package', flat_rate: 600, size_range_string: 'Med-MedLarge', description: 'Mow lawn and edge trim. No leaf removal.',
+  // man_hours_per_visit: 2, contract_length_days: 28, visit_interval_days: 7, package_image: 'package image :)'}
+  // console.log("generateJobsFromContract returns: ", generateJobsFromContract(thisContract, thisPackage));
 
   return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit }
 }
