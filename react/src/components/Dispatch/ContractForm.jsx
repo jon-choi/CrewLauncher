@@ -123,7 +123,7 @@ import { format, addDays } from 'date-fns';
         </Snackbar>
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
         
-        <Drawer buttonText={'Select a Package'} items={packageCards} />
+        <Drawer closeButtonText={'close'} openButtonText={'Select a Package'} items={packageCards} />
         
         {selectedPackage &&
           <>

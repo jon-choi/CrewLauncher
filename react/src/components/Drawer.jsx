@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 export default function NewDrawer(props) {
   // pass in anchor as props 'left', 'right', 'top', 'bottom'
   const anchor = props.anchor || 'right';
-  const { items, buttonText } = props;
+  const { items, openButtonText, closeButtonText } = props;
   const [drawerOpen, setDrawerOpen] = useState(false);
 
 
@@ -27,7 +27,7 @@ export default function NewDrawer(props) {
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
     >
-      <Button onClick={toggleDrawer(anchor, false)} variant="contained">Close Quote</Button>
+      <Button onClick={toggleDrawer(anchor, false)} variant="contained">{closeButtonText}</Button>
       {items}
       {/* <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -55,7 +55,7 @@ export default function NewDrawer(props) {
 
   return (
     <>
-      <Button onClick={toggleDrawer(anchor, true)}>{buttonText}</Button>
+      <Button onClick={toggleDrawer(anchor, true)}>{openButtonText}</Button>
       <Drawer
         anchor={anchor}
         open={drawerOpen}
