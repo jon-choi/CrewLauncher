@@ -18,34 +18,57 @@ const Item = styled(Paper)(({ theme }) => ({
 const CrewCard = (props) => {
   const { days } = props;
   const { selectedDay, setSelectedDay, createCrewCards } = useCrewsPageDayState()
+ 
   if (days) {
-    let count = 0;
-    const cards = days.map (day => {
+
+    const createBodyItems = function([...day]) {
+      const date = day.splice(0,1)
+      if (day[0]) {
+        return (<>
+          <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+            Job Info: 
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            client name, address
+          </Typography>
+        </>)
+      }
+      return(<>
+        <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+          No Jobs!
+        </Typography>
+      </>)
+    }
+    const createSelectedDayCard = function([...day]) {
+      return null
+    }
+    const createCards = function(days) {
+
+      let count = 0;
       const countListen = count;
-
-
-      return (
-      
-        <Card
-        sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}
-        className={`day-${countListen}`}
-        onClick={(event) => setSelectedDay(countListen)}
-        >
-          <Item>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-              AAA
-            </Typography>
-            <Typography variant="h5" component="div">
-              Job Info: 
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              client name, address
-            </Typography>
-          </CardContent>
-          </Item>
-        </Card>)
-    })
+      if (!selectedDay) {
+        return days.map (day => {
+          return (
+            <Card
+            sx={{display: 'flex', justifyContent: 'center', minHeight: 175, minWidth: 40}}
+            className={`day-${countListen}`}
+            onClick={(event) => setSelectedDay(countListen)}
+            >
+              <Item>
+              <CardContent onClick={(event) => setSelectedDay(countListen)}>
+                <Typography onClick={(event) => setSelectedDay(countListen)} sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+                  {day[0]}
+                </Typography>
+                {createBodyItems(day)}
+              </CardContent>
+              </Item>
+            </Card>
+          )
+        })
+      }
+      return createSelectedDayCard(days[selectedDay])
+    }
+    const cards = createCards(days)
 
     return ( <Card sx="display: flex; justify-content: center; align-items: flex-start;">{cards}</Card>)
   }
