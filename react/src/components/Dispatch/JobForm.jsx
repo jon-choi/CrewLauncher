@@ -32,31 +32,31 @@ const JobForm = (props) => {
     }));
     return (
       <>
-        <Stack spacing={2} sx={{maxHeight: 800,minHeight: 550, maxWidth: 900, alignItems: 'center', alignContent: 'center', margin: 'auto'}}>
+        <Stack spacing={5} sx={{maxHeight: 800,minHeight: 550, maxWidth: 900, alignItems: 'center', alignContent: 'center', margin: 'auto'}}>
           <Item>
             <Typography variant="h2">
             🚀 Edit Crew For The Job 🚀
             </Typography>
           </Item>
-          <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
             <Grid item xs={3}>
-              <Item>  Date: {date}  </Item>
+              <Item sx={{ fontSize: 21}}>  Date: {date}  </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item>  Package: {info.packageTitle}  </Item>
+              <Item sx={{ fontSize: 21}}>  Package: {info.packageTitle}  </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item>  Address: {info.contractAddress}  </Item>
+              <Item sx={{ fontSize: 21}}>  Address: {info.contractAddress}  </Item>
             </Grid>
             <Grid item xs={11}>
-              <Item>  Job Notes: {info.contractJobNotes}  </Item>
+              <Item sx={{ fontSize: 21}}>  Job Notes: {info.contractJobNotes}  </Item>
             </Grid>
             <Grid item xs={5.5}>
-              <Item>  Estimated Time Before Crew Assigned: {info.packageManHours} Hours  </Item>
+              <Item sx={{ fontSize: 21}}>  Estimated Time Before Crew Assigned: {info.packageManHours} Hours  </Item>
             </Grid>
             <Grid item xs={5.5}>
-              {estTime > 1 ? <Item> Estimated Time After Crew Assigned: {estTime} Hours </Item> : estTime <= 1 && <Item> Estimated Time After Crew Assigned: {estTime} Hour </Item>}
+              {estTime > 1 ? <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned: {estTime} Hours </Item> : estTime <= 1 && <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned: {estTime} Hour </Item>}
             </Grid>
         
           </Grid>
