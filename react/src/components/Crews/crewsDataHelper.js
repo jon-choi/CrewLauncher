@@ -1,10 +1,23 @@
-export function getJobsByCrewByDay(jobs, crews) {
-  let jobsByCrewByDay = {};
+import { subDays, addDays } from 'date-fns';
 
+export function getJobsByCrewByDay(jobs, crews, crewId = 0) {
+  let jobsByCrewByDay = [[],[],[]];
+  const days = [subDays(new Date(), 1)];
+  for (let d = 0; d < 5; d++ ) {
+    days.push(addDays(new Date(), d))
+  }
+  console.log("DAYS ARRAY: ", days);
   for (const job of jobs) {
-      for (const crew of crews) {
-        
-      }
+      
+    const crewOfJob = crews.filter(crew => {
+      return crew.id === job.crew_id
+    })[0];
+
+    const day = {job, crewOfJob }
+
+  //   if ((!crewId || crewId === day.crewOfJob.id)) {
+  //     jobsByCrewByDay[0].push(day);
+  //   }
   }
   // for (const job of jobs) {
   //   for (const crew of crews) {
