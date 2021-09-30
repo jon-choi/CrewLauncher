@@ -11,6 +11,7 @@ const Dashboard = function(props) {
   const { days } = props;
   const [selectedDay, setSelectedDay] = useState(null);
   if (days) {
+
     
     // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
@@ -91,7 +92,40 @@ const Dashboard = function(props) {
         );
         count++;
         return dayCard;
+
       })
+    }
+    const mapDayToCard = function([...day]) {
+      const date = day.splice(0,1)
+      if(day[0]) {
+        const jobs = day.filter(jobOfDay => {
+          const { job } = jobOfDay;
+          return !job.completed
+        })
+        return (
+        <Box>
+          <Typography variant="h4" component="h4">
+            {date}
+          </Typography>
+          <Typography variant="h5" component="h5">
+            Jobs Today: {day.length}
+          </Typography>
+          <Typography variant="h5" component="h6">
+            Incomplete: {jobs.length}
+          </Typography>
+        </Box>
+          )
+      }
+      return (
+      <Box>
+        <Typography variant="h4" component="h4">
+          {date}
+        </Typography>
+        <Typography variant="h5" component="h5">
+          No Jobs Today!
+        </Typography>
+        
+      </Box>)
     }
 
     const dayCards = createDayCards(days);
@@ -101,6 +135,7 @@ const Dashboard = function(props) {
       <Stack sx={{margin: 'auto', width: '100%'}} >
         {dayCards}
       </Stack>
+
     )
 
     // return ( 
