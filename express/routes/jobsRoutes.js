@@ -20,7 +20,7 @@ module.exports = (knex) => {
       })
       .catch(err => {
         console.log(`Error: could not POST to /jobs ${err}`);
-        res.error(err);
+        res.send(err);
       });
     });
 
@@ -40,7 +40,7 @@ module.exports = (knex) => {
       })
       .catch(err => {
         console.log(`Error: could not POST to /jobs/${req.params.id} ${err}`)
-        res.error(err);
+        res.send(err);
       });
     });
 

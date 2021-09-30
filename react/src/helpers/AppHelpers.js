@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow, setMinutes, setHours } = require('date-fns')
+const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
 
 const getClientId = (client, clientList) => {
   const { email } = client;
@@ -56,16 +56,15 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
 
 const generateJobDates = (startDate, contractLength, visitInterval) => {
   const jobs = [];
-  const jobCount = Math.round(contractLength / visitInterval);
+  const jobCount = Math.round(parseInt(contractLength) / parseInt(visitInterval));
 
-  for (let x = 0; x <= jobCount; x++) {
+  for (let x = 0; x < jobCount; x++) {
     jobs.push({
       date: addDays(new Date(startDate), x * visitInterval)
     });
   }
   return jobs;
 };
-
 
 
 export { getClientId, getDayInfo, generateJobDates }

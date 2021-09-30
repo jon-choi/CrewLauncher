@@ -45,7 +45,7 @@ const getClientsInfo = function(clients, contracts, packages) {
 
 const getContractsInfo = function(contracts, clients, packages, jobs) {
   const contractsInfo = [];
-  for (const contract of contracts) {
+  for (let contract of contracts) {
     for (const client of clients) {
       if (contract.client_id === client.id) {
         contract = {
@@ -69,7 +69,6 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
         if (!job.completed && (!contract.jobDate || job.date < contract.jobDate)) {
           contract = {
             ...contract,
-            crewId: job.crew_id,
             jobDate: job.date
           }
         }
