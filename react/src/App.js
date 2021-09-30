@@ -29,7 +29,7 @@ const App = function() {
             <p><b>Welcome to Crew Launcher 🚀</b></p>
             <body>
               <img alt="rocket launch" src="https://woodofmouth.files.wordpress.com/2012/03/space-travel.gif"></img>
-            </body>
+
           </Route>
         </Switch>    
       </div>
