@@ -9,6 +9,7 @@ import { format, addDays } from 'date-fns';
   
   const ContractForm = (props) => {
     const id = parseInt(useParams().id);
+    const clientId = parseInt(useParams().client_id); 
     const { url } = useRouteMatch();
     const browserHistory = useHistory();
 
@@ -25,8 +26,8 @@ import { format, addDays } from 'date-fns';
     const [address, setAddress] = useState("");
     const [jobNotes, setJobNotes] = useState("");
     
-    const con = props.contracts.filter(c => c.id === id)[0];
-
+    const con = props.contracts ? props.contracts.filter(c => c.id === id)[0] : undefined;
+    const cli = props.clients ? props.clients.filter(client => client.id === clientId)[0] : undefined;
 
   useEffect(() => {  
     if (con !== undefined) {
@@ -41,9 +42,13 @@ import { format, addDays } from 'date-fns';
       setSelectedPackage(thisPackage);
       setAddress(con.address);
       setJobNotes(con.job_notes);
-
     }
-  }, [url, con, props.clients, props.packages])
+    if (cli !== undefined) {
+      setClientName(cli.name);
+      setClientPhone(cli.phone);
+      setClientEmail(cli.email);
+    }
+  }, [url, con, cli, props.clients, props.packages])
  
 
   const validate = () => {
