@@ -1,6 +1,4 @@
-
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-
 import Dashboard from './Dashboard';
 import ClientsPage from './ClientsPage';
 import ContractsPage from './ContractsPage';
@@ -11,6 +9,7 @@ import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
 import { getContractsInfo, getClientsInfo } from './dispatchDataHelper';
 import { getDayInfo } from '../../helpers/AppHelpers';
+import { Box } from '@mui/material';
 
 const Dispatch = function(props) {
   const { onEdit, createPackage, createContract } = props;
@@ -28,8 +27,9 @@ const Dispatch = function(props) {
   const days = getDayInfo(jobs, crews, contracts, packages, clients)
 
   return (
-    <>
+    <Box sx={{display: 'flex'}}>
       <Navigation />
+        <Box width={'100%'} mt={10}>
         <Switch >
           <Route path={`${url}/jobs/:id`} >
             <JobForm onEdit={onEdit} crews={crews} packages={packages} contracts={contracts} jobs={jobs} />
@@ -60,7 +60,8 @@ const Dispatch = function(props) {
           </Route>
         </Switch>
       {/* <Quote /> */}
-    </>
+      </Box>
+    </Box>
     );
 }
 
