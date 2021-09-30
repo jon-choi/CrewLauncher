@@ -18,6 +18,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
       console.log(`Error: could not POST to /contracts ${err}`);
+      res.send(err);
     });
   });
 
@@ -34,7 +35,8 @@ module.exports = (knex) => {
       res.json(result);
     })
     .catch(err => {
-      console.log(`Error: could not POST to /contracts/${req.body.id} ${err}`)
+      console.log(`Error: could not POST to /contracts/${req.body.id} ${err}`);
+      res.send(err);
     });
   });
 
