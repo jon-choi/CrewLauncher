@@ -16,15 +16,11 @@ const CrewPage = (props) => {
       }));
 
     const { days } = props;
-    const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
-    const [selectedDay, setSelectedDay] = React.useState(null)
 
-
-
-    
 
     if (days) {
-
+        const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
+        
 
 
         return(
@@ -38,24 +34,30 @@ const CrewPage = (props) => {
 
     return (
 
-    <Card >
+        <>
+        <Card sx={{mb: 10}}>
+            <Typography variant="h3" sx={{mb: 5}}>
+                Crews to Launch:
+            </Typography>
+        </Card>
+
+<Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }}>
     
-{/* CARD ONE */}
+    <Grid item container>
+        <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+        <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 200, mb: 5 }}></CrewCard>
+    </Grid>
+    <Grid item container>
+        <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+        <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 200, mb: 5 }}></CrewCard>
+    </Grid>
+    <Grid item container>
+        <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+        <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 500 }}></CrewCard>
+    </Grid> 
+</Grid>
 
-    <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
-    <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 200, mb: 5 }}>
-    </CrewCard>
-
-    <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 200, mb: 5 }}>
-    </CrewCard>
-
-    <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 200 }}>
-    </CrewCard>
-</Card>
-
-    // <h1>/dispatch/crews
-    //   Page Hello
-    // </h1>
+  </>
 );
 };
 

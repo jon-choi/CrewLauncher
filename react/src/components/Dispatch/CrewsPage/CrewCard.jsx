@@ -11,7 +11,7 @@ const CrewCard = (props) => {
     <Card sx="display: flex; justify-content: center; align-items: flex-start;">
     {/* <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" sx={{ width: 100, height: 100, mb: 4, ml: 20, mt: 10 }} />
     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" sx={{ width: 100, height: 100, mb: 4, ml: 20, mt: 10 }} /> */}
-
+      <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Yesterday
@@ -23,8 +23,9 @@ const CrewCard = (props) => {
           client name, address
         </Typography>
       </CardContent>
+      </Card>
 
-      <Card sx="display: flex; justify-content: center;">
+      <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Today
@@ -38,7 +39,7 @@ const CrewCard = (props) => {
       </CardContent>
     </Card>
 
-    <Card sx="display: flex; justify-content: center;">
+    <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
     <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Tomorrow
@@ -52,7 +53,7 @@ const CrewCard = (props) => {
       </CardContent>
     </Card>
 
-    <Card sx="display: flex; justify-content: center;">
+    <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
     <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           The day after tomorrow
@@ -66,7 +67,7 @@ const CrewCard = (props) => {
       </CardContent>
     </Card>
     
-    <Card sx="display: flex; justify-content: center;">
+    <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
     <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Two days after tomorrow
