@@ -22,25 +22,25 @@ const CrewCard = (props) => {
   if (days) {
 
     const createBodyItems = function([...day], value) {
+      console.log(value)
       const date = day.splice(0,1)
       if (day[0]) {
         return day.map(job => {
-          console.log(job)
-          return (<>
-          <Typography variant="h6" color="text.primary" gutterBottom onClick={(event) => setSelectedDay(value)}>
+          return (<div key={value}>
+          <Typography variant="h6" color="text.primary" gutterBottom >
             Job Info: 
 
           </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom >
             {job.clientOfJob.name}
           </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom >
             {job.contractOfJob.address}
           </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom >
             {job.job.completed ? "Complete!" : "Not Complete"}
           </Typography>
-        </>)
+        </div>)
         });
       }
       return(<>
@@ -50,16 +50,18 @@ const CrewCard = (props) => {
       </>)
     }
     const createSelectedDayCard = function([...day]) {
-      console.log("click", selectedDay)
+      console.log("click", day)
       return null
     }
     const createCards = function(days) {
 
-      let count = 0;
-        const dayCardMap = days.map (day => {
+      let count = -1;
+
+        const dayCardMap = days.map(day => {
+          count++;
           const countListen = count;
-          return (<>
-            {!selectedDay &&
+          return (<div key={countListen}>
+            {selectedDay === null &&
             <Card
             sx={{display: 'flex', justifyContent: 'center', minHeight: 175, minWidth: 40}}
             className={`day-${countListen}`}
@@ -74,12 +76,11 @@ const CrewCard = (props) => {
               </CardContent>
               </Item>
             </Card>}
-            {selectedDay && createSelectedDayCard(day)}
-            </>
+            {selectedDay && createSelectedDayCard(days[selectedDay])}
+            </div>
           )
-          countListen++;
-          return dayCardMap
         })
+        return dayCardMap
     }
     const cards = createCards(days)
 

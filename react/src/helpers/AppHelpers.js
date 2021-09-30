@@ -33,7 +33,7 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
       return client.id === contractOfJob.client_id
     })[0];
     const day = {/* date */job, contractOfJob, crewOfJob, packageOfJob, clientOfJob }
-    console.log(crewId)
+    
     if ((!crewId || crewId === day.crewOfJob.id) && isYesterday(new Date(day.job.date))) {
       days[0].push(day)
     }
