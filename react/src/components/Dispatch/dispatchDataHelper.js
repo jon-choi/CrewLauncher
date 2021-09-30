@@ -69,7 +69,6 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
         if (!job.completed && (!contract.jobDate || job.date < contract.jobDate)) {
           contract = {
             ...contract,
-            crewId: job.crew_id,
             jobDate: job.date
           }
         }
