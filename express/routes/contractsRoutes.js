@@ -14,6 +14,7 @@ module.exports = (knex) => {
       start_date: contract.start_date
     })
     .then(result => {
+      console.log(`Successful POST to /packages`);
       res.json(result);
     })
     .catch(err => {
@@ -32,10 +33,11 @@ module.exports = (knex) => {
     .update("job_notes", contract.job_notes)
     .update("start_date", contract.start_date)
     .then(result => {
+      console.log(`Successful POST to /contracts/${req.params.id}`);
       res.json(result);
     })
     .catch(err => {
-      console.log(`Error: could not POST to /contracts/${req.body.id} ${err}`);
+      console.log(`Error: could not POST to /contracts/${req.params.id} ${err}`);
       res.send(err);
     });
   });
