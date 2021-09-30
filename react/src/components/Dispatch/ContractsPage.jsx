@@ -5,7 +5,7 @@ const ContractsPage = (props) => {
   const { contractsInfo } = props
 
   const contractCards = contractsInfo.map(contract => {
-    const nextVisit = format(new Date(contract.jobDate), 'EEE MMM d yyyy')
+    const nextVisit = contract.jobDate ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None'
     const header =`${contract.clientName}\n${contract.clientEmail}`
     const body =
     `Address: ${contract.address}
@@ -13,6 +13,7 @@ const ContractsPage = (props) => {
     \nPackage length: ${contract.packageLength}
     \nJob Notes: ${contract.job_notes}
     \nNext Visit: ${nextVisit}`
+
     const linkToEdit = `/dispatch/contracts/${contract.id}`;
 
     return <MediaCard

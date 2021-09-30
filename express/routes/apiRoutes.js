@@ -10,6 +10,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
       console.log(`Error: Could not GET /crews ${err}`);
+      res.error(err);
     });
   });
 
@@ -20,6 +21,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
       console.log(`Error: Could not GET /contracts ${err}`);
+      res.error(err);
     });
   });
 
@@ -30,6 +32,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
       console.log(`Error: Could not GET /clients ${err}`);
+      res.error(err);
     });
   });
 
@@ -40,6 +43,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
       console.log(`Error: Could not GET /packages ${err}`);
+      res.error(err);
     });
   });
 
@@ -50,6 +54,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
       console.log(`Error: Could not GET /jobs ${err}`);
+      res.error(err);
     });
   });
   

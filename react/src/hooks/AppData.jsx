@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { getClientId } from '../helpers/AppHelpers'
+import { getClientId, generateJobDates } from '../helpers/AppHelpers'
 
 const useAppData = function() {
 
@@ -89,6 +89,7 @@ const useAppData = function() {
 
     return axios.post('/clients', client)
     .then(response => {
+      console.log("Successfully created client!")
       setState(prev => {
         return {...prev, clients: updatedClients};
       });
@@ -117,7 +118,8 @@ const useAppData = function() {
   const processContract = (contractDetails) => {
     const { packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes } = contractDetails;
     const existing = isNaN(parseInt(contractDetails.id)) ? false : true;
-    const id = existing === true ? parseInt(contractDetails.id) : state.contracts.length + 1;
+    const id = (existing === true) ? parseInt(contractDetails.id) : state.contracts.length + 1;
+
     const client = {
       name: clientName,
       email: clientEmail,
@@ -151,8 +153,9 @@ const useAppData = function() {
     console.log(`Contract to be posted:`, contract)
     if (existing) {
       console.log(`POSTING TO: /contracts/${contract.id}`)
-      return axios.post(`/contracts${contract.id}`, contract)
+      return axios.post(`/contracts/${contract.id}`, contract)
       .then(response => {
+        console.log("Updating state.contracts to :", updatedContracts)
         setState(prev => {
           return {...prev, contracts: updatedContracts}})
       })
@@ -163,17 +166,65 @@ const useAppData = function() {
       console.log(`POSTING TO: /contracts`)
       return axios.post(`/contracts`, contract)
       .then(response => {
+        console.log("Updating state.contracts to :", updatedContracts)
         setState(prev => {
-          return {...prev, contracts: updatedContracts}})
+          return {...prev, contracts: updatedContracts}
+        });
+        const thisPackage = state.packages.filter(p => p.id === contract.package_id)[0];
+        return generateJobsFromContract(contract, thisPackage);
       })
       .catch(error => {
         console.log('Could not submit contract: ', error);
       });
-    }
-        
-    
+    }    
   };
 
-  return {state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit}
+  const generateJobsFromContract = (contract, packageInfo) => {
+    // generates an array of job objects with correct date values
+    const jobs = generateJobDates(new Date(contract.start_date), parseInt(packageInfo.contract_length_days), parseInt(packageInfo.visit_interval_days));
+
+    let id = state.jobs.length;
+    const jobsArray = jobs.map(job => {
+      const start = 7;
+      // const startTime = setHours(setMinutes(job.date, 0), start);
+      // const endTime = setHours(setMinutes(job.date, 0), packageInfo.man_hours_per_visit + start);
+      id++;
+      return {
+        id,
+        ...job,
+        contract_id: contract.id,
+        start_time: start,
+        end_time: (start + packageInfo.man_hours_per_visit),
+        completed: false 
+      };
+      
+    });
+    
+    const jobPostPromises = jobsArray.map(job => {
+      return axios.post('/jobs', job)
+    });
+
+    Promise.all(jobPostPromises)
+    .then((response) => {
+      const updatedJobs = [...state.jobs, jobsArray];
+      setState(prev => {
+        return {...prev, jobs: updatedJobs};
+      });
+      console.log("Jobs created successfully!", response);
+      return {success: true, error: false};
+    })
+    .catch(err => {
+      console.log(`Error creating jobs -- ${err}`);
+      return {error: true, success: false};
+    });
+  };
+  
+  // Lines below are for testing output of generateJobsFromContracts
+  // const thisContract = {id: 6, package_id: 1, client_id: 1, start_date: new Date(), address: '45 Jimperson St', job_notes: 'Here are some notes'}
+  // const thisPackage = {id: 1, title:'Basic Lawn Care Package', flat_rate: 600, size_range_string: 'Med-MedLarge', description: 'Mow lawn and edge trim. No leaf removal.',
+  // man_hours_per_visit: 2, contract_length_days: 28, visit_interval_days: 7, package_image: 'package image :)'}
+  // console.log("generateJobsFromContract returns: ", generateJobsFromContract(thisContract, thisPackage));
+
+  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit }
 }
 export default useAppData;
