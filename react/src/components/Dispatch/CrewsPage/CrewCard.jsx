@@ -50,8 +50,16 @@ const CrewCard = (props) => {
       </>)
     }
     const createSelectedDayCard = function([...day]) {
-      console.log("click", day)
-      return null
+      console.log("click", day[1])
+      const date = day.splice(0,1)
+      if (day[0]) {
+
+      }
+      return (<>
+      <Box>
+      <Item>{date}</Item>
+      </Box>
+      </>)
     }
     const createCards = function(days) {
 
@@ -65,18 +73,27 @@ const CrewCard = (props) => {
             <Card
             sx={{display: 'flex', justifyContent: 'center', minHeight: 175, minWidth: 40}}
             className={`day-${countListen}`}
-            onClick={(event) => setSelectedDay(countListen)}
             >
-              <Item>
-              <CardContent onClick={(event) => setSelectedDay(countListen)}>
-                <Typography onClick={(event) => setSelectedDay(countListen)} sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+              {day[1] ?
+              <Item onClick={(event) => setSelectedDay(countListen)}>
+              <CardContent>
+                <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
                   {day[0]}
                 </Typography>
                 {createBodyItems(day, countListen)}
               </CardContent>
               </Item>
+              :
+              <Item >
+              <CardContent>
+                <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+                  {day[0]}
+                </Typography>
+                {createBodyItems(day, countListen)}
+              </CardContent>
+              </Item>}
             </Card>}
-            {selectedDay && createSelectedDayCard(days[selectedDay])}
+            {selectedDay === countListen && createSelectedDayCard(days[selectedDay])}
             </div>
           )
         })
@@ -84,7 +101,7 @@ const CrewCard = (props) => {
     }
     const cards = createCards(days)
 
-    return ( <Card sx="display: flex; justify-content: center; align-items: flex-start;">{cards}</Card>)
+    return ( <Card sx={{display: "flex", justifyContent: "center", alignItems: "flexStart", minWidth: 1000}}>{cards}</Card>)
   }
   return (
     <Card sx="display: flex; justify-content: center; align-items: flex-start;">
