@@ -5,6 +5,7 @@ import JobCard from '../../JobCard'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import Card from '@mui/material/Card';
 
 const useDayInfo = function() {
   const [ selectedDay, setSelectedDay ] = useState([{}]);
@@ -37,7 +38,7 @@ const useDayInfo = function() {
           {date}
         </Typography>
         <Typography variant="h5" component="h5">
-          No Jobs Today!
+          Rocket Jobs all day 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
         </Typography>
         
       </Box>)
@@ -51,9 +52,9 @@ const useDayInfo = function() {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob } = jobOfDay;
 
         return (
-          <Stack>
+          <Card>
             <Typography variant="h6">{clientOfJob.name}</Typography>
-            <Box sx={{ width: '80%', maxWidth: 250, maxHeight: 100, display: 'flex' }}>
+            <Box sx={{ width: '95%', maxWidth: 500, maxHeight: 300, display: 'flex-start' }}>
               <JobCard
               key={job.id}
               packageTitle={packageOfJob.title}
@@ -64,7 +65,7 @@ const useDayInfo = function() {
               compClass="crew-day"
               />
             </Box>
-          </Stack>
+          </Card>
         )
       })
       const jobsForDay = 
