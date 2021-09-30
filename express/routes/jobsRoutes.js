@@ -5,6 +5,7 @@ module.exports = (knex) => {
   
   router.post('/', (req, res) => {
     const job = req.body;
+    console.log("JOB in jobsRoutes.js :", job);
       knex("jobs")
       .insert({
         contract_id: job.contract_id,

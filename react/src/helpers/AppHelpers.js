@@ -1,4 +1,4 @@
-
+const axios = require('axios');
 const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow, setMinutes, setHours } = require('date-fns')
 
 const getClientId = (client, clientList) => {
@@ -68,24 +68,33 @@ const generateJobDates = (startDate, contractLength, visitInterval) => {
 
 const generateJobsFromContract = (contract, packageInfo) => {
   // generates an array of job objects with correct date values
-  console.log("start date: ", contract.start_date)
-  console.log("contract length: ", packageInfo.contract_length_days)
-  console.log("interval: ", packageInfo.visit_interval_days)
   const jobs = generateJobDates(new Date(contract.start_date), parseInt(packageInfo.contract_length_days), parseInt(packageInfo.visit_interval_days));
   console.log("JOBS IN function: ", jobs)
-  const array = jobs.map(job => {
+  const jobsArray = jobs.map(job => {
     const start = 7;
-    const startTime = setHours(setMinutes(job.date, 0), start);
-    const endTime = setHours(setMinutes(job.date, 0), packageInfo.man_hours_per_visit + start);
+    // const startTime = setHours(setMinutes(job.date, 0), start);
+    // const endTime = setHours(setMinutes(job.date, 0), packageInfo.man_hours_per_visit + start);
+    
     return {
       ...job,
       contract_id: contract.id,
       crew_id: 0,
-      start_time: startTime,
-      end_time: endTime
+      start_time: start,
+      end_time: (start + packageInfo.man_hours_per_visit) 
     };
+    
   });
-  return array;
+  
+  Promise.all(jobsArray.map(job => {
+    return axios.post('/jobs', job)
+
+  }))
+  .then(() => {
+    console.log("Jobs created successfully!");
+  })
+  .catch(err => {
+    console.log(`Error creating jobs -- ${err}`);
+  });
 };
 
 // Lines below are for testing output of generateJobsFromContracts
@@ -94,4 +103,4 @@ const generateJobsFromContract = (contract, packageInfo) => {
 // man_hours_per_visit: 2, contract_length_days: 28, visit_interval_days: 7, package_image: 'package image :)'}
 // console.log("generateJobsFromContract returns: ", generateJobsFromContract(thisContract, thisPackage));
 
-export { getClientId, getDayInfo }
+export { getClientId, getDayInfo, generateJobsFromContract }
