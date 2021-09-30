@@ -1,15 +1,15 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-
-
+import { Card, CardContent, Typography, Avatar, AppBar, Toolbar } from '@mui/material';
 const ClientCard = (props) => {
 
 
   
-  return (
+  return (<>
+    <AppBar position="absolute" pb={5}>
+      <Toolbar>
+
+      </Toolbar>
+    </AppBar>
     <Card sx="display: flex; justify-content: flex-start; align-items: flex-start;">
       <Avatar alt="clientName" src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 3 }} />
       <CardContent>
@@ -24,13 +24,7 @@ const ClientCard = (props) => {
         </Typography>
       </CardContent>
     </Card>
-
-    
-
-    // <h1>/dispatch/crews
-    //   Card
-    // </h1>
-  );
+  </>);
 };
 
 export default ClientCard;

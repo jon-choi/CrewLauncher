@@ -47,7 +47,6 @@ const Dispatch = function(props) {
           </Route>
           <Route path={`${url}/clients`} >
             <ClientsPage />
-            BrowseClients
           </Route>
           <Route path={`${url}`} >
             <Dashboard />
