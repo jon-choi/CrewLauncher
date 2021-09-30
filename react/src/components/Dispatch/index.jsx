@@ -42,7 +42,7 @@ const Dispatch = function(props) {
             <PackageForm onSubmit={createPackage}/>
           </Route>
           <Route path={`${url}/crews`} >
-            <CrewsPage />
+            <CrewsPage days={days}/>
           </Route>
           <Route path={`${url}/contracts`} >
             <ContractsPage contractsInfo={contractsInfo} />
