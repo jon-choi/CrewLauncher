@@ -1,21 +1,25 @@
 export function getJobsByCrewByDay(jobs, crews) {
   let jobsByCrewByDay = {};
 
-
   for (const job of jobs) {
-    for (const crew of crews) {
-      if (job.id === crew.id) {
-        jobsByCrewByDay = {
-          crewId: job.crew_id,
-          date: job.date,
-          jobNum: job.id
+      for (const crew of crews) {
+        
+      }
+  }
+  // for (const job of jobs) {
+  //   for (const crew of crews) {
+  //     if (job.id === crew.id) {
+  //       jobsByCrewByDay = {
+  //         crewId: job.crew_id,
+  //         date: job.date,
+  //         jobNum: job.id
 
           
 
-        }
-      }
-    }
-  }
+  //       }
+  //     }
+  //   }
+  // }
   return jobsByCrewByDay;
 };
 

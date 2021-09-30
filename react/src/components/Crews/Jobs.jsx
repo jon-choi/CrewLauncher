@@ -13,8 +13,8 @@ const Jobs = (props) => {
       <CrewDayCard 
         onClick={props.onClick}
         date={props.date}
-        jobsBooked={`Way too many to count. OMG`}
-        dayTimeEst={`1000 hrs`}
+        jobsBooked={`Way too many to count. OMG 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀`}
+        dayTimeEst={`1000 hrs🚀🚀🚀🚀🚀🚀🚀🚀🚀`}
         />
     </h1>
 
