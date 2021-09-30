@@ -16,6 +16,7 @@ module.exports = (knex) => {
         completed: job.completed    
       })
       .then(result => {
+        console.log(`Successful POST to /jobs`);
         res.json(result);
       })
       .catch(err => {
@@ -35,7 +36,7 @@ module.exports = (knex) => {
       .update("end_time", job.end_time)
       .update("completed", job.completed)
       .then(result => {
-        console.log("success")
+        console.log(`Successful POST to /jobs/${req.params.id}`);
         res.json(result);
       })
       .catch(err => {
