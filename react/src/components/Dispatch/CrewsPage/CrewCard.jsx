@@ -21,34 +21,45 @@ const CrewCard = (props) => {
  
   if (days) {
 
-    const createBodyItems = function([...day]) {
+    const createBodyItems = function([...day], value) {
       const date = day.splice(0,1)
       if (day[0]) {
-        return (<>
-          <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+        return day.map(job => {
+          console.log(job)
+          return (<>
+          <Typography variant="h6" color="text.primary" gutterBottom onClick={(event) => setSelectedDay(value)}>
             Job Info: 
+
           </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            client name, address
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
+            {job.clientOfJob.name}
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
+            {job.contractOfJob.address}
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
+            {job.job.completed ? "Complete!" : "Not Complete"}
           </Typography>
         </>)
+        });
       }
       return(<>
-        <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+        <Typography variant="h6" color="text.primary" gutterBottom>
           No Jobs!
         </Typography>
       </>)
     }
     const createSelectedDayCard = function([...day]) {
+      console.log("click", selectedDay)
       return null
     }
     const createCards = function(days) {
 
       let count = 0;
-      const countListen = count;
-      if (!selectedDay) {
-        return days.map (day => {
-          return (
+        const dayCardMap = days.map (day => {
+          const countListen = count;
+          return (<>
+            {!selectedDay &&
             <Card
             sx={{display: 'flex', justifyContent: 'center', minHeight: 175, minWidth: 40}}
             className={`day-${countListen}`}
@@ -59,14 +70,16 @@ const CrewCard = (props) => {
                 <Typography onClick={(event) => setSelectedDay(countListen)} sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
                   {day[0]}
                 </Typography>
-                {createBodyItems(day)}
+                {createBodyItems(day, countListen)}
               </CardContent>
               </Item>
-            </Card>
+            </Card>}
+            {selectedDay && createSelectedDayCard(day)}
+            </>
           )
+          countListen++;
+          return dayCardMap
         })
-      }
-      return createSelectedDayCard(days[selectedDay])
     }
     const cards = createCards(days)
 
