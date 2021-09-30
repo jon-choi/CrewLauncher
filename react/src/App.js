@@ -14,7 +14,7 @@ const App = function() {
     <Router >
       <div className="App">
         <Switch >
-          <Route path='/crews' >
+          <Route path='/crews/:id' >
             <Crews { ...state } onSubmitQuote={processContract} />
           </Route>
           <Route path='/dispatch' >
@@ -22,10 +22,7 @@ const App = function() {
           </Route> 
           <Route path='/'>
             <div><Link to='/dispatch'>Dispatch</Link></div>
-            <div><Link to='/crews'>Crews</Link></div>
-            <div><Link to='/crews/1'>Crew #1</Link></div>
-            <div><Link to='/crews/2'>Crew #2</Link></div>
-            <div><Link to='/crews/3'>Crew #3</Link></div>
+            <div><Link to='/crews/'>Crews</Link></div>
           </Route>
         </Switch>    
       </div>
