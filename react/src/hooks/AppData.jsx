@@ -197,6 +197,7 @@ const useAppData = function() {
         end_time: (start + packageInfo.man_hours_per_visit),
         completed: false 
       };
+      
     });
     
     const jobPostPromises = jobsArray.map(job => {

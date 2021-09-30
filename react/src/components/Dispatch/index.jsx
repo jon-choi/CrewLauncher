@@ -10,7 +10,7 @@ import PackageForm from './PackageForm';
 import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
 import { getContractsInfo, getClientsInfo } from './dispatchDataHelper';
-import { getDayInfo } from '../../helpers/AppHelpers'
+import { getDayInfo } from '../../helpers/AppHelpers';
 
 const Dispatch = function(props) {
   const { onEdit, createPackage, createContract } = props;

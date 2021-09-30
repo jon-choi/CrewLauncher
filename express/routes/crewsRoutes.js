@@ -20,6 +20,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
       console.log(`Error: could not POST to /crews ${err}`);
+      res.error(err);
     });
   });
 
@@ -38,6 +39,7 @@ module.exports = (knex) => {
     })
     .catch(err => {
       console.log(`Error: could not post to /crews/${req.params.id} ${err}`)
+      res.error(err);
     });
   });
 
