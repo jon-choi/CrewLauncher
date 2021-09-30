@@ -2,9 +2,9 @@ import { useParams } from 'react-router-dom';
 import SpeedDial from '../SpeedDial';
 import { useState } from 'react';
 import { getInfoForJobForm, getEstTime } from './dispatchDataHelper';
-import { addHours, toDate, format } from 'date-fns'
+import { addHours, format } from 'date-fns'
 import TimePicker from '../Timepicker';
-import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography } from '@mui/material';
+import { Stack, Box, Button, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -31,7 +31,7 @@ const JobForm = (props) => {
       textAlign: 'center'
     }));
     return (
-      <>
+      <Box width={'100%'}>
         <Stack spacing={5} sx={{maxHeight: 800,minHeight: 550, maxWidth: 900, alignItems: 'center', alignContent: 'center', margin: 'auto'}}>
           <Item>
             <Typography variant="h2">
@@ -72,7 +72,7 @@ const JobForm = (props) => {
             <SpeedDial crews={crews} onChange={setSelectedCrew} selectedCrew={selectedCrew}/>
             </div>
         </Item>
-      </>
+      </Box>
     );
   }
   return null;

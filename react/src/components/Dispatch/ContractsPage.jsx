@@ -1,6 +1,6 @@
 import MediaCard from "../MediaCard";
 import { format } from 'date-fns'
-import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography } from '@mui/material';
+import { Stack, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -41,10 +41,10 @@ const ContractsPage = (props) => {
   })
 
   return (
-    <>
+    <Box width={'100%'}>
     <h1>🚀 Contracts: 🚀</h1>
     {contractCards}
-    </>
+    </Box>
   );
 };
 
