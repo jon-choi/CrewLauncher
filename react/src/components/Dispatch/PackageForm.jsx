@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import Stack from '@mui/material/Stack';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import { Box, Button, FormControl, Stack, InputLabel, OutlinedInput, TextField, Alert, Snackbar } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 const PackageForm = (props) => {
@@ -66,7 +59,7 @@ const PackageForm = (props) => {
   };
 
   return (
-    <>
+    <Box width={'100%'} >
       <h1>Create New Package</h1>
       <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
         <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
@@ -74,7 +67,7 @@ const PackageForm = (props) => {
           {status.message}
         </Alert>
       </Snackbar>
-      <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
+      <Stack component="form" spacing={2} sx={{margin: 'auto', maxWidth: 600}} >
       
       {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
       
@@ -151,7 +144,7 @@ const PackageForm = (props) => {
         </FormControl>
         <Button onClick={validate} variant="contained">Create New Package</Button>
       </Stack>
-    </>
+    </Box>
   );
 };
 

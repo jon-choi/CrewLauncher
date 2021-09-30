@@ -117,9 +117,9 @@ import { format, addDays } from 'date-fns';
   });
 
   return (
-    <>
+    <Box width={'100%'}>
       <h1>New Contract</h1>
-      <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
+      <Stack component="form" spacing={2} sx={{margin: 'auto', maxWidth: 600}} >
         <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
           <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
           severity={status.success ? 'success' : 'error'} sx={{ width: '100%' }}>
@@ -192,7 +192,7 @@ import { format, addDays } from 'date-fns';
         
         <Button onClick={validate} variant="contained">Submit Contract</Button>
       </Stack>
-    </>
+    </Box>
   );
 };
 

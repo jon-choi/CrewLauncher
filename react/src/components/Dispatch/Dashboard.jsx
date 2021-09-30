@@ -1,6 +1,6 @@
 
 
-import Stack from '@mui/material/Stack';
+import { Stack, Box } from '@mui/material';
 import useDashboardDayState from './hooks/DashboardHook'
 
 
@@ -24,9 +24,9 @@ const Dashboard = function(props) {
     )
   }
   return (
-    <>
+    <Box width={'100%'}>
       {`${days}`}
-    </>
+    </Box>
   );
 }
 
