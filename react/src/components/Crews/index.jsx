@@ -6,6 +6,7 @@ import Day from './Day';
 import Jobs from './Jobs';
 import Quote from './Quote';
 import { getJobsByCrew, getJobsByCrewByDay } from './crewsDataHelper';
+import { getDayInfo } from '../Dispatch/dispatchDataHelper';
 
 const Crews = function(props) {
   const { onSubmitQuote } = props;
