@@ -1,12 +1,54 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
+
+import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography, Avatar } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+
+import useCrewsPageDayState from './CrewsPageHook';
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center'
+}));
 
 const CrewCard = (props) => {
+  const { days } = props;
+  const { selectedDay, setSelectedDay, createCrewCards } = useCrewsPageDayState()
+  if (days) {
+    let count = 0;
+    const cards = days.map (day => {
+      const countListen = count;
 
-  
+
+      return (
+      
+        <Card
+        sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}
+        className={`day-${countListen}`}
+        onClick={(event) => setSelectedDay(countListen)}
+        >
+          <Item>
+          <CardContent>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              AAA
+            </Typography>
+            <Typography variant="h5" component="div">
+              Job Info: 
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              client name, address
+            </Typography>
+          </CardContent>
+          </Item>
+        </Card>)
+    })
+
+    return ( <Card sx="display: flex; justify-content: center; align-items: flex-start;">{cards}</Card>)
+  }
   return (
     <Card sx="display: flex; justify-content: center; align-items: flex-start;">
     {/* <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" sx={{ width: 100, height: 100, mb: 4, ml: 20, mt: 10 }} />
@@ -87,7 +129,7 @@ const CrewCard = (props) => {
     // <h1>/dispatch/crews
     //   Card
     // </h1>
-  );
+  )
 };
 
 export default CrewCard;
