@@ -1,4 +1,3 @@
-const axios = require('axios');
 const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
 
 const getClientId = (client, clientList) => {

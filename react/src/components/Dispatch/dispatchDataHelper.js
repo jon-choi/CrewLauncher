@@ -1,17 +1,3 @@
-const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
-
-const getCrewInfo = function() {
-
-}
-const getDayByCrew = function() {
-
-}
-const getJobsByCrew = function() {
-
-}
-const getJobsByDay = function() {
-
-}
 const getClientsInfo = function(clients, contracts, packages) {
   // map through clients
   const clientsPageInfo = clients.map(client => {
