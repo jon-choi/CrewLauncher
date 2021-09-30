@@ -1,11 +1,11 @@
 
 
 import Stack from '@mui/material/Stack';
-import useDayState from './hooks/DashboardHook'
+import useDashboardDayState from './hooks/DashboardHook'
 
 
 const Dashboard = function(props) {
-  const { selectedDay, createDayCards} = useDayState()
+  const { selectedDay, createDayCards} = useDashboardDayState()
   const { days } = props;
   
   if (days) {

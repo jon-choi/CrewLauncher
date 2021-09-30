@@ -1,18 +1,82 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
+
+import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography, Avatar } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+
+import useCrewsPageDayState from './CrewsPageHook';
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center'
+}));
 
 const CrewCard = (props) => {
+  const { days } = props;
+  const { selectedDay, setSelectedDay, createCrewCards } = useCrewsPageDayState()
+ 
+  if (days) {
 
-  
+    const createBodyItems = function([...day]) {
+      const date = day.splice(0,1)
+      if (day[0]) {
+        return (<>
+          <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+            Job Info: 
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            client name, address
+          </Typography>
+        </>)
+      }
+      return(<>
+        <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+          No Jobs!
+        </Typography>
+      </>)
+    }
+    const createSelectedDayCard = function([...day]) {
+      return null
+    }
+    const createCards = function(days) {
+
+      let count = 0;
+      const countListen = count;
+      if (!selectedDay) {
+        return days.map (day => {
+          return (
+            <Card
+            sx={{display: 'flex', justifyContent: 'center', minHeight: 175, minWidth: 40}}
+            className={`day-${countListen}`}
+            onClick={(event) => setSelectedDay(countListen)}
+            >
+              <Item>
+              <CardContent onClick={(event) => setSelectedDay(countListen)}>
+                <Typography onClick={(event) => setSelectedDay(countListen)} sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+                  {day[0]}
+                </Typography>
+                {createBodyItems(day)}
+              </CardContent>
+              </Item>
+            </Card>
+          )
+        })
+      }
+      return createSelectedDayCard(days[selectedDay])
+    }
+    const cards = createCards(days)
+
+    return ( <Card sx="display: flex; justify-content: center; align-items: flex-start;">{cards}</Card>)
+  }
   return (
     <Card sx="display: flex; justify-content: center; align-items: flex-start;">
-    <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
     {/* <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" sx={{ width: 100, height: 100, mb: 4, ml: 20, mt: 10 }} />
     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" sx={{ width: 100, height: 100, mb: 4, ml: 20, mt: 10 }} /> */}
-
+      <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Yesterday
@@ -24,8 +88,9 @@ const CrewCard = (props) => {
           client name, address
         </Typography>
       </CardContent>
+      </Card>
 
-      <Card sx="display: flex; justify-content: center;">
+      <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Today
@@ -39,7 +104,7 @@ const CrewCard = (props) => {
       </CardContent>
     </Card>
 
-    <Card sx="display: flex; justify-content: center;">
+    <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
     <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Tomorrow
@@ -53,7 +118,7 @@ const CrewCard = (props) => {
       </CardContent>
     </Card>
 
-    <Card sx="display: flex; justify-content: center;">
+    <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
     <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           The day after tomorrow
@@ -67,7 +132,7 @@ const CrewCard = (props) => {
       </CardContent>
     </Card>
     
-    <Card sx="display: flex; justify-content: center;">
+    <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
     <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Two days after tomorrow
@@ -87,7 +152,7 @@ const CrewCard = (props) => {
     // <h1>/dispatch/crews
     //   Card
     // </h1>
-  );
+  )
 };
 
 export default CrewCard;
