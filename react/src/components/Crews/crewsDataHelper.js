@@ -49,9 +49,6 @@ export function getJobsByCrew(jobs, crews) {
           contract: job.contract_id,
           crewId: crew.id,
           crewName: crew.foreman_name
-
-
-
         }
       }
     }

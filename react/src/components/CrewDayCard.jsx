@@ -10,9 +10,7 @@ export default function CrewDayCard(props) {
   return (
     <Card onClick={onClick} >
       <CardContent 
-      sx="display: flex; 
-      justify-content: space-between;
-      align-items: center;">
+      sx={{ display: 'flex', justifyContent: 'center', minHeight: 175, midWidth: 40 }}>
        
         <Typography variant="h5" component="div">
           {date}
