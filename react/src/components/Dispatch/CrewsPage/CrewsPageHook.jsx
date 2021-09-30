@@ -3,11 +3,21 @@ import { useState } from "react";
 
 import JobCard from '../../JobCard'
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
+import CrewCard from './CrewCard';
 
-const useDashboardDayState = function() {
+import Card from '@mui/material/Card';
+import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography, Avatar } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center'
+}));
+
+const useCrewsPageDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
   const mapDayToCard = function([...day], value) {
     const date = day.splice(0,1)
@@ -72,24 +82,39 @@ const useDashboardDayState = function() {
     return mapDayToCard([date])
   }
 
-  const createDayCards = function(days) {
+  const createCrewCards = function(days) {
     let count = 0;
     return days.map(day => {
       const countListen = count;
-      const dayCard = (<Box
+      const dayCard = (<Grid item container
         className={`day-${countListen}`}
         sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
         onClick={(event) => setSelectedDay(countListen)}
       >
         {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], countListen) : mapDayToCard(days[countListen], countListen)}
-      </Box>
+      </Grid>
       );
       count++;
       return dayCard;
 
     })
   }
-  return { selectedDay, createDayCards}
+  return { selectedDay, setSelectedDay, createCrewCards}
 }
 
-export default useDashboardDayState;
+export default useCrewsPageDayState;
+
+{/* <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }}>
+                <Grid item container>
+                    <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+                    <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 200, mb: 5 }}></CrewCard>
+                 </Grid>
+                <Grid item container>
+                    <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+                    <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 200, mb: 5 }}></CrewCard>
+                </Grid>
+                <Grid item container>
+                    <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+                    <CrewCard sx={{ top: 100, position: 'absolute', maxWidth: 500 }}></CrewCard>
+                </Grid> 
+            </Grid> */}

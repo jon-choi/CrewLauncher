@@ -21,6 +21,7 @@ const Dispatch = function(props) {
   const packages = props.packages;
   const contracts = props.contracts;
   const jobs = props.jobs;
+  const state = {crews, clients, packages, contracts, jobs}
 
   const clientsInfo = getClientsInfo(clients, contracts, packages);
   const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
@@ -46,7 +47,7 @@ const Dispatch = function(props) {
             <PackageForm onSubmit={createPackage}/>
           </Route>
           <Route path={`${url}/crews`} >
-            <CrewsPage />
+            <CrewsPage state={state}/>
           </Route>
           <Route path={`${url}/contracts`} >
             <ContractsPage contractsInfo={contractsInfo} />
