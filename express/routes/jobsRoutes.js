@@ -5,6 +5,7 @@ module.exports = (knex) => {
   
   router.post('/', (req, res) => {
     const job = req.body;
+    console.log("JOB in jobsRoutes.js :", job);
       knex("jobs")
       .insert({
         contract_id: job.contract_id,
@@ -15,10 +16,12 @@ module.exports = (knex) => {
         completed: job.completed    
       })
       .then(result => {
+        console.log(`Successful POST to /jobs`);
         res.json(result);
       })
       .catch(err => {
         console.log(`Error: could not POST to /jobs ${err}`);
+        res.send(err);
       });
     });
 
@@ -33,11 +36,12 @@ module.exports = (knex) => {
       .update("end_time", job.end_time)
       .update("completed", job.completed)
       .then(result => {
-        console.log("success")
+        console.log(`Successful POST to /jobs/${req.params.id}`);
         res.json(result);
       })
       .catch(err => {
         console.log(`Error: could not POST to /jobs/${req.params.id} ${err}`)
+        res.send(err);
       });
     });
 

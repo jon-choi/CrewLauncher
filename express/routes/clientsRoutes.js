@@ -12,10 +12,12 @@ module.exports = (knex) => {
       email: client.email
     })
     .then(result => {
-        res.json(result);
+      console.log(`Successful POST to /packages/${req.params.id}`);
+      res.json(result);
     })
     .catch(err => {
         console.log(`Error: could not POST to /clients ${err}`);
+        res.send(err);
     });
   });
 
@@ -27,10 +29,12 @@ module.exports = (knex) => {
     .update("phone", client.phone)
     .update("email", client.email)
     .then(result => {
+      console.log(`Successful POST to /clients/${req.params.id}`);
       res.json(result);
     })
     .catch(err => {
-      console.log(`Error: could not POST to /clients/${req.params.id} ${err}`)
+      console.log(`Error: could not POST to /clients/${req.params.id} ${err}`);
+      res.send(err);
     });
   });
 

@@ -16,10 +16,12 @@ module.exports = (knex) => {
       avatar: crew.avatar
     })
     .then(result => {
+      console.log(`Successful POST to /crews`);
       res.json(result);
     })
     .catch(err => {
       console.log(`Error: could not POST to /crews ${err}`);
+      res.send(err);
     });
   });
 
@@ -34,10 +36,12 @@ module.exports = (knex) => {
     .update("is_active", crew.is_active)
     .update("avatar", crew.avatar)
     .then(result => {
+      console.log(`Successful POST to /crews/${req.params.id}`);
       res.json(result);
     })
     .catch(err => {
       console.log(`Error: could not post to /crews/${req.params.id} ${err}`)
+      res.send(err);
     });
   });
 

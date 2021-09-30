@@ -1,19 +1,23 @@
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Card, CardContent, Typography, Avatar, Stack } from '@mui/material';
+import { useHistory, Link } from 'react-router-dom';
+import { Card, CardContent, CardActions, Typography, Avatar, Stack, Button } from '@mui/material';
 import MediaCard from '../MediaCard';
+import { format, addDays } from 'date-fns';
 
 const ClientCard = (props) => {
   const browserHistory = useHistory();
   const client = props.client;
   let contracts;
-
-  if (client.contracts.length > 0) {
+  if (client.contracts.length > 0 && client.contracts[0].id) {
     contracts = client.contracts.map(contract => {
       return (
-        <div onClick={() => browserHistory.push(`/dispatch/contracts/${contract.id}`)}>
-          <MediaCard key={contract.id} header={contract.address} body={contract.packageInfo.title} />
-          
+        <div key={contract.id} onClick={() => browserHistory.push(`/dispatch/contracts/${contract.id}`)}>
+          <MediaCard header={contract.address} 
+          body={`${contract.packageInfo.title} 🚀 
+                ( ${format(new Date(contract.start_date), 'MMMM dd, yyyy')} - 
+                ${format(new Date(addDays(new Date(contract.start_date), contract.packageInfo.contract_length_days)), 'MMMM dd, yyyy')}
+                )`} 
+          />
         </div>
       )    
     });
@@ -35,16 +39,15 @@ const ClientCard = (props) => {
           {client.contracts.length > 0 && `Active contracts: ${contracts.length}`}
         </Typography>
       </Stack>
+        <CardActions>
+          <Button component={Link} to={`/dispatch/clients/${client.client.id}/contracts/new`} >Create Contract</Button>
+        </CardActions>
       {/* <CardContent> */}
         <CardContent>
           <Stack spacing={5} direction='row'>
             {contracts}
           </Stack>
         </CardContent>
-        {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          details, address, package
-        </Typography> */}
-      {/* </CardContent> */}
     </Card>
   );
 };

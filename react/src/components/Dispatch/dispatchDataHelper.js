@@ -1,17 +1,3 @@
-const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
-
-const getCrewInfo = function() {
-
-}
-const getDayByCrew = function() {
-
-}
-const getJobsByCrew = function() {
-
-}
-const getJobsByDay = function() {
-
-}
 const getClientsInfo = function(clients, contracts, packages) {
   // map through clients
   const clientsPageInfo = clients.map(client => {
@@ -45,7 +31,7 @@ const getClientsInfo = function(clients, contracts, packages) {
 
 const getContractsInfo = function(contracts, clients, packages, jobs) {
   const contractsInfo = [];
-  for (const contract of contracts) {
+  for (let contract of contracts) {
     for (const client of clients) {
       if (contract.client_id === client.id) {
         contract = {
@@ -69,7 +55,6 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
         if (!job.completed && (!contract.jobDate || job.date < contract.jobDate)) {
           contract = {
             ...contract,
-            crewId: job.crew_id,
             jobDate: job.date
           }
         }

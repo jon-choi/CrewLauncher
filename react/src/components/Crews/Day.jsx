@@ -5,7 +5,7 @@ import JobCard from '../JobCard';
 
 const Day = (props) => {
   // const params = useParams();
-      console.log("jobsByCrewByDay: ", props.jobsByCrewByDay);
+      
 
   return (
     <h1> Job: 

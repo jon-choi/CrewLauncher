@@ -1,4 +1,3 @@
-
 const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
 
 const getClientId = (client, clientList) => {
@@ -19,7 +18,7 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
     [format(addDays(new Date(), 2),'EEEE, MMM dd')],
     [format(addDays(new Date(), 3),'EEEE, MMM dd')]
   ];
-
+  // const [ [yesterday], [today], [tomorrow], [fourthDay], [fifthDay], [lastDay] ] = days
   for (const job of jobs) {
     const contractOfJob = contracts.filter(contract => {
       return contract.id === job.contract_id
@@ -33,7 +32,7 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
     const clientOfJob = clients.filter(client => {
       return client.id === contractOfJob.client_id
     })[0];
-    const day = {job, contractOfJob, crewOfJob, packageOfJob, clientOfJob }
+    const day = {/* date */job, contractOfJob, crewOfJob, packageOfJob, clientOfJob }
 
     if ((!crewId || crewId === day.crewOfJob.id) && isYesterday(new Date(day.job.date))) {
       days[0].push(day)
@@ -54,4 +53,17 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
   return days;
 };
 
-export { getClientId, getDayInfo }
+const generateJobDates = (startDate, contractLength, visitInterval) => {
+  const jobs = [];
+  const jobCount = Math.round(parseInt(contractLength) / parseInt(visitInterval));
+
+  for (let x = 0; x < jobCount; x++) {
+    jobs.push({
+      date: addDays(new Date(startDate), x * visitInterval)
+    });
+  }
+  return jobs;
+};
+
+
+export { getClientId, getDayInfo, generateJobDates }
