@@ -41,7 +41,7 @@ const JobForm = (props) => {
           <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
             <Grid item xs={3}>
-              <Item sx={{ fontSize: 21}}>  Date: {date}  </Item>
+              <Item sx={{ fontSize: 21}}> Date: {date} </Item>
             </Grid>
             <Grid item xs={4}>
               <Item sx={{ fontSize: 21}}>  Package: {info.packageTitle}  </Item>
@@ -53,10 +53,10 @@ const JobForm = (props) => {
               <Item sx={{ fontSize: 21}}>  Job Notes: {info.contractJobNotes}  </Item>
             </Grid>
             <Grid item xs={5.5}>
-              <Item sx={{ fontSize: 21}}>  Estimated Time Before Crew Assigned: {info.packageManHours} Hours  </Item>
+              <Item sx={{ fontSize: 21}}>  Estimated Time Before Crew Assigned :  {info.packageManHours} Hours   </Item>
             </Grid>
             <Grid item xs={5.5}>
-              {estTime > 1 ? <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned: {estTime} Hours </Item> : estTime <= 1 && <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned: {estTime} Hour </Item>}
+              {estTime > 1 ? <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned : 🚀{estTime} Hours🚀 </Item> : estTime <= 1 && <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned : 🚀 {estTime} Hour 🚀</Item>}
             </Grid>
         
           </Grid>
