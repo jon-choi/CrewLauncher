@@ -111,6 +111,7 @@ const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
   }
   return infoForJobForm;
 }
+
 const getEstTime = function(manhours, crew) {
   return (manhours / crew.crew_size)
 }
