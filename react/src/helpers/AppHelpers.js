@@ -78,16 +78,16 @@ const generateJobsFromContract = (contract, packageInfo) => {
     return {
       ...job,
       contract_id: contract.id,
-      crew_id: 0,
+      // crew_id: 0,
       start_time: start,
-      end_time: (start + packageInfo.man_hours_per_visit) 
+      end_time: (start + packageInfo.man_hours_per_visit),
+      completed: false 
     };
     
   });
   
   Promise.all(jobsArray.map(job => {
     return axios.post('/jobs', job)
-
   }))
   .then(() => {
     console.log("Jobs created successfully!");
