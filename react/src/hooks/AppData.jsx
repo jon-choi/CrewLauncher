@@ -174,6 +174,7 @@ const useAppData = function() {
     
   };
 
-  return {state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit}
+
+  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit }
 }
 export default useAppData;

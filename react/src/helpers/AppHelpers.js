@@ -1,5 +1,5 @@
 
-const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow } = require('date-fns')
+const { format, addDays, subDays, isSameDay, isYesterday, isToday, isTomorrow, setMinutes, setHours } = require('date-fns')
 
 const getClientId = (client, clientList) => {
   const { email } = client;
@@ -53,5 +53,45 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
   }
   return days;
 };
+
+const generateJobDates = (startDate, contractLength, visitInterval) => {
+  const jobs = [];
+  const jobCount = Math.round(contractLength / visitInterval);
+
+  for (let x = 0; x <= jobCount; x++) {
+    jobs.push({
+      date: addDays(new Date(startDate), x * visitInterval)
+    });
+  }
+  return jobs;
+};
+
+const generateJobsFromContract = (contract, packageInfo) => {
+  // generates an array of job objects with correct date values
+  console.log("start date: ", contract.start_date)
+  console.log("contract length: ", packageInfo.contract_length_days)
+  console.log("interval: ", packageInfo.visit_interval_days)
+  const jobs = generateJobDates(new Date(contract.start_date), parseInt(packageInfo.contract_length_days), parseInt(packageInfo.visit_interval_days));
+  console.log("JOBS IN function: ", jobs)
+  const array = jobs.map(job => {
+    const start = 7;
+    const startTime = setHours(setMinutes(job.date, 0), start);
+    const endTime = setHours(setMinutes(job.date, 0), packageInfo.man_hours_per_visit + start);
+    return {
+      ...job,
+      contract_id: contract.id,
+      crew_id: 0,
+      start_time: startTime,
+      end_time: endTime
+    };
+  });
+  return array;
+};
+
+// Lines below are for testing output of generateJobsFromContracts
+// const thisContract = {id: 6, package_id: 1, client_id: 1, start_date: new Date(), address: '45 Jimperson St', job_notes: 'Here are some notes'}
+// const thisPackage = {id: 1, title:'Basic Lawn Care Package', flat_rate: 600, size_range_string: 'Med-MedLarge', description: 'Mow lawn and edge trim. No leaf removal.',
+// man_hours_per_visit: 2, contract_length_days: 28, visit_interval_days: 7, package_image: 'package image :)'}
+// console.log("generateJobsFromContract returns: ", generateJobsFromContract(thisContract, thisPackage));
 
 export { getClientId, getDayInfo }
