@@ -11,7 +11,7 @@ const Navigation = (props) => {
         <img />
       </div>
       <h1>
-          <Drawer buttonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
+          <Drawer closeButtonText={'Close'} openButtonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
       </h1>
     </div>
   );
