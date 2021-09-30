@@ -14,7 +14,7 @@ const App = function() {
     <Router >
       <div className="App">
         <Switch >
-          <Route path='/crews' >
+          <Route path='/crews/:id' >
             <Crews { ...state } onSubmitQuote={processContract} />
           </Route>
           <Route path='/dispatch' >
