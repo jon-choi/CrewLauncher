@@ -1,24 +1,37 @@
-const getDayInfo = function() {
-
+const getClientsInfo = function(clients, contracts, packages) {
+  // map through clients
+  const clientsPageInfo = clients.map(client => {
+    // get contracts related to this client
+    const clientContracts = contracts.filter(contract => contract.client_id === client.id)
+    // if there are any contracts related to this client
+    if (clientContracts.length > 0) {
+      
+      const clientContractsWithPackageInfo = clientContracts.map(c => {
+        const packageInfo = packages.filter(pack => c.package_id === pack.id)[0];
+        return {
+          ...c,
+          packageInfo
+        }
+      })
+      // if client has any contracts, attach array of contracts with package info to each client 
+      return {
+        client,
+        contracts: clientContractsWithPackageInfo
+      }
+    } else {
+      // if client has no contracts, return client info and an empty array
+      return {
+        client,
+        contracts: []
+      }
+    }
+  })
+  return clientsPageInfo;
 }
-const getCrewInfo = function() {
 
-}
-const getDayByCrew = function() {
-
-}
-const getJobsByCrew = function() {
-
-}
-const getJobsByDay = function() {
-
-}
-const getClientInfo = function() {
-
-}
 const getContractsInfo = function(contracts, clients, packages, jobs) {
   const contractsInfo = [];
-  for (const contract of contracts) {
+  for (let contract of contracts) {
     for (const client of clients) {
       if (contract.client_id === client.id) {
         contract = {
@@ -39,10 +52,9 @@ const getContractsInfo = function(contracts, clients, packages, jobs) {
     }
     for (const job of jobs) {
       if (contract.id === job.contract_id) {
-        if (!job.completed && !contract.jobDate) {
+        if (!job.completed && (!contract.jobDate || job.date < contract.jobDate)) {
           contract = {
             ...contract,
-            crewId: job.crew_id,
             jobDate: job.date
           }
         }
@@ -84,8 +96,11 @@ const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
   }
   return infoForJobForm;
 }
+
 const getEstTime = function(manhours, crew) {
   return (manhours / crew.crew_size)
 }
 
-export { getInfoForJobForm, getEstTime, getContractsInfo };
+
+
+export { getInfoForJobForm, getEstTime, getContractsInfo, getClientsInfo };

@@ -1,14 +1,22 @@
-import { useParams } from 'react-router-dom';
+import React from 'react';
+import JobCard from '../JobCard';
+// import { useParams } from 'react-router-dom';
 
-const Day = () => {
-  const params = useParams();
 
+const Day = (props) => {
+  // const params = useParams();
+      
 
   return (
-    
-    <h1>/crews/{params.id}/day/{params.day}</h1>
-
-
+    <h1> Job: 
+      <JobCard 
+      packageTitle={props.packageTitle}
+      timeEst={props.timeEst}
+      clientName={props.clientName}
+      address={props.address}
+      jobNotes={props.jobNotes}
+      />
+    </h1>
   );
 };
 

@@ -1,11 +1,9 @@
-
-
 import Stack from '@mui/material/Stack';
-import useDayState from './hooks/DashboardHook'
+import useDayInfo from '../Dispatch/hooks/CrewsIndexHook';
 
 
-const Dashboard = function(props) {
-  const { selectedDay, createDayCards} = useDayState()
+const CrewDashboard = function(props) {
+  const { selectedDay, newDayCards } = useDayInfo()
   const { days } = props;
   
   if (days) {
@@ -14,7 +12,7 @@ const Dashboard = function(props) {
     // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
     
-    const dayCards = createDayCards(days);
+    const dayCards = newDayCards(days);
 
     return (
       <Stack sx={{margin: 'auto', width: '100%'}} >
@@ -30,4 +28,4 @@ const Dashboard = function(props) {
   );
 }
 
-export default Dashboard;
+export default CrewDashboard;

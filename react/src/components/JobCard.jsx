@@ -15,7 +15,7 @@ const fab = (<Fab variant="extended" sx={{
   );
 
 export default function JobCard(props) {
-  const { packageTitle, timeEst, clientName, address, jobNotes } = props;
+  const { packageTitle, timeEst, clientName, address, jobNotes, compClass } = props;
 
   return (
   <Card sx={'display: flex; flex-direction: column; justify-content: space-between; align-items: center;'}>

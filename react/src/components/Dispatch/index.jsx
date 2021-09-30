@@ -9,7 +9,8 @@ import JobForm from './JobForm';
 import PackageForm from './PackageForm';
 import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
-import { getContractsInfo } from './dispatchDataHelper';
+import { getContractsInfo, getClientsInfo } from './dispatchDataHelper';
+import { getDayInfo } from '../../helpers/AppHelpers';
 
 const Dispatch = function(props) {
   const { onEdit, createPackage, createContract } = props;
@@ -21,7 +22,10 @@ const Dispatch = function(props) {
   const contracts = props.contracts;
   const jobs = props.jobs;
 
+  const clientsInfo = getClientsInfo(clients, contracts, packages);
   const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
+  const days = getDayInfo(jobs, crews, contracts, packages, clients)
+
   return (
     <>
       <Navigation />
@@ -29,8 +33,11 @@ const Dispatch = function(props) {
           <Route path={`${url}/jobs/:id`} >
             <JobForm onEdit={onEdit} crews={crews} packages={packages} contracts={contracts} jobs={jobs} />
           </Route>
+          <Route path={`${url}/clients/:client_id/contracts/new`}>
+            <ContractForm contracts={contracts} clients={clients} packages={packages} onSubmit={createContract} />
+          </Route>
           <Route path={`${url}/contracts/new`} >
-            <ContractForm packages={packages} onSubmit={createContract} />
+            <ContractForm contracts={contracts} packages={packages} onSubmit={createContract} />
           </Route>
           <Route path={`${url}/contracts/:id`} >
             <ContractForm clients={clients} contracts={contracts} packages={packages} onSubmit={createContract} />
@@ -40,17 +47,15 @@ const Dispatch = function(props) {
           </Route>
           <Route path={`${url}/crews`} >
             <CrewsPage />
-            BrowseCrews
           </Route>
           <Route path={`${url}/contracts`} >
             <ContractsPage contractsInfo={contractsInfo} />
           </Route>
           <Route path={`${url}/clients`} >
-            <ClientsPage />
+            <ClientsPage clientsInfo={clientsInfo}/>
           </Route>
           <Route path={`${url}`} >
-            <Dashboard />
-            Dashboard
+            <Dashboard days={days}/>
           </Route>
         </Switch>
       {/* <Quote /> */}

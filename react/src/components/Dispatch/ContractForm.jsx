@@ -1,40 +1,55 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
 import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Stack';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
 import Drawer from '../Drawer';
-import Snackbar from '@mui/material/Snackbar';
+import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
 import { format, addDays } from 'date-fns';
 
+  
+  const ContractForm = (props) => {
+    const id = parseInt(useParams().id);
+    const clientId = parseInt(useParams().client_id); 
+    const { url } = useRouteMatch();
+    const browserHistory = useHistory();
 
-// const getContractFormData = (contractId, clients, contracts) => {
-//   const contract = contracts.filter(c => c.id === contractId)[0];
+    const { packages, onSubmit } = props;
+    // const [editMode, setEditMode] = useState(id ? true : false)
+    const [status, setStatus] = useState({success: false, error: false, message: ""});
+    const [error, setError] = useState([]);
+    const [selectedPackage, setSelectedPackage] = useState(null);
+    const [clientName, setClientName] = useState("");
+    const [clientPhone, setClientPhone] = useState("");
+    const [clientEmail, setClientEmail] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [address, setAddress] = useState("");
+    const [jobNotes, setJobNotes] = useState("");
+    
+    const con = props.contracts ? props.contracts.filter(c => c.id === id)[0] : undefined;
+    const cli = props.clients ? props.clients.filter(client => client.id === clientId)[0] : undefined;
 
-// };
+  useEffect(() => {  
+    if (con !== undefined) {
+      const thisClient = props.clients.filter(c => c.id === con.client_id)[0];
+      const thisPackage = props.packages.filter(p => p.id === con.package_id)[0];
 
-const ContractForm = (props) => {
-  const id = useParams().id;
-
-  const { packages, onSubmit } = props;
-  // const [editMode, setEditMode] = useState(id ? true : false)
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState([]);
-  const [selectedPackage, setSelectedPackage] = useState(props.selectedPackage || null);
-  const [clientName, setClientName] = useState(props.clientName || "");
-  const [clientPhone, setClientPhone] = useState(props.clientPhone || null);
-  const [clientEmail, setClientEmail] = useState(props.clientEmail || "");
-  const [startDate, setStartDate] = useState(props.startDate || new Date());
-  const [endDate, setEndDate] = useState(props.startDate ? addDays(props.startDate, selectedPackage.contract_length_days) : new Date());
-  const [address, setAddress] = useState(props.address || "");
-  const [jobNotes, setJobNotes] = useState(props.jobNotes || "");
+      setClientName(thisClient.name);
+      setClientPhone(thisClient.phone);
+      setClientEmail(thisClient.email);
+      setStartDate(new Date(con.start_date));
+      setEndDate(addDays(new Date(con.start_date), thisPackage.contract_length_days));
+      setSelectedPackage(thisPackage);
+      setAddress(con.address);
+      setJobNotes(con.job_notes);
+    }
+    if (cli !== undefined) {
+      setClientName(cli.name);
+      setClientPhone(cli.phone);
+      setClientEmail(cli.email);
+    }
+  }, [url, con, cli, props.clients, props.packages])
+ 
 
   const validate = () => {
     const errorMessage = [];
@@ -42,8 +57,13 @@ const ContractForm = (props) => {
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
+      console.log("ON SUBMIT: ", id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, selectedPackage.id )
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
-      .then(() => setSuccess(true));
+      .then(() => { 
+      setStatus({success: true, error: false, message: "Contract created successfully!"})
+      setTimeout(() => browserHistory.push(`/dispatch/contracts`), 1000);
+    })
+      .catch(() => setStatus({success: false, error: true, message: "Error creating contract!"}));
     }
     if (!selectedPackage) {
       errorMessage.push('Package');
@@ -65,11 +85,11 @@ const ContractForm = (props) => {
 
   const changeDate = (dates) => {
       const [start] = dates;
-      setStartDate(start);
+      setStartDate(new Date(start));
       if (selectedPackage) {
-        setEndDate(addDays(start, selectedPackage.contract_length_days));
+        setEndDate(addDays(new Date(start), selectedPackage.contract_length_days));
       } else {
-        setEndDate(start);
+        setEndDate(new Date(start));
       }
   };
 
@@ -100,24 +120,24 @@ const ContractForm = (props) => {
     <>
       <h1>New Contract</h1>
       <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
-        <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(true)}>
-          <Alert onClose={() => setSuccess(false)}
-          severity="success" sx={{ width: '100%' }}>
-            Package created successfully!
+        <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
+          <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
+          severity={status.success ? 'success' : 'error'} sx={{ width: '100%' }}>
+            {status.message}
           </Alert>
         </Snackbar>
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
         
-        <Drawer buttonText={'Select a Package'} items={packageCards} />
+        <Drawer closeButtonText={'close'} openButtonText={'Select a Package'} items={packageCards} />
         
         {selectedPackage &&
           <>
-            <TextField required disabled label={'Package'} value={((selectedPackage && selectedPackage.title) || props.selectedPackage.title) || 'Please Select a Package'} />
+            <TextField required disabled label={'Package'} value={((selectedPackage && selectedPackage.title) || selectedPackage.title) || 'Please Select a Package'} />
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
             <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-              <TextField disabled label={'Contract Start'} value={format(startDate, 'MMMM dd, yyyy')} />
-              <TextField disabled label={'Contract End'} value={format(endDate, 'MMMM dd, yyyy')} />
+              <TextField disabled label={'Contract Start'} value={format(new Date(startDate), 'MMMM dd, yyyy')} />
+              <TextField disabled label={'Contract End'} value={format(new Date(endDate), 'MMMM dd, yyyy')} />
             </Box>
           </>
         }
@@ -145,7 +165,7 @@ const ContractForm = (props) => {
           <InputLabel htmlFor="clientPhone">Client Phone Number</InputLabel>
           <OutlinedInput
             id="clientPhone"
-            value={clientPhone}
+            value={`${clientPhone}`}
             onChange={event => setClientPhone(event.target.value)}
             label="Client Phone Number"
           />
@@ -170,7 +190,7 @@ const ContractForm = (props) => {
           onChange={event => setJobNotes(event.target.value)}
         />
         
-        <Button onClick={validate} variant="contained">Create New Contract</Button>
+        <Button onClick={validate} variant="contained">Submit Contract</Button>
       </Stack>
     </>
   );

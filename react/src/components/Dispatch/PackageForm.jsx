@@ -7,12 +7,14 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import { useHistory } from 'react-router-dom';
 
 const PackageForm = (props) => {
   const { onSubmit } = props;
+  const browserHistory = useHistory();
 
   // const params = useParams();
-  const [success, setSuccess] = useState(false);
+  const [status, setStatus] = useState({error: false, success: false, message:""});
   const [error, setError] = useState([]);
   const [title, setTitle] = useState("");
   const [flatRate, setFlatRate] = useState("");
@@ -30,9 +32,17 @@ const PackageForm = (props) => {
 
     if (title && flatRate && manHrsPerVisit && contractLength && visitInterval) {
       // Successful package creation
+      console.log(`Success: ${status.success}`);
+      console.log(`Error: ${status.error}`);
       setError([]);
       onSubmit({title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage})
-      .then(() => setSuccess(true));
+      .then((response) => {
+        setStatus({error: false, success: true, message: "Package created successfully!"})
+        setTimeout(() => browserHistory.push('/dispatch'), 1000);
+      })
+      .catch((err) => { 
+          setStatus({ success: false, error: true, message: "Package creation error!"});
+      })
 
     } else {
       if (!title) {
@@ -58,10 +68,10 @@ const PackageForm = (props) => {
   return (
     <>
       <h1>Create New Package</h1>
-      <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(true)}>
-        <Alert onClose={() => setSuccess(false)}
-         severity="success" sx={{ width: '100%' }}>
-          Package created successfully!
+      <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
+        <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
+         severity={status.error ? 'error' : 'success'} sx={{ width: '100%' }}>
+          {status.message}
         </Alert>
       </Snackbar>
       <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >

@@ -81,7 +81,7 @@ const Quote = (props) => {
   return (
     <>
       <Stack component="form" spacing={2} sx={{margin: 'auto', width: '90%'}} >
-        <h1>New Quote
+        <h1>
           <QuoteSpeedDial onChange={setSelectedPackage} packages={packages} selectedPackage={selectedPackage} />
         </h1>
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}

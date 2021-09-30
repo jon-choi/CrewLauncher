@@ -1,30 +1,55 @@
 import * as React from 'react';
-import { Card, CardContent, Typography, Avatar, AppBar, Toolbar } from '@mui/material';
+import { useHistory, Link } from 'react-router-dom';
+import { Card, CardContent, CardActions, Typography, Avatar, Stack, Button } from '@mui/material';
+import MediaCard from '../MediaCard';
+import { format, addDays } from 'date-fns';
+
 const ClientCard = (props) => {
-
-
-  
-  return (<>
-    <AppBar position="absolute" pb={5}>
-      <Toolbar>
-
-      </Toolbar>
-    </AppBar>
+  const browserHistory = useHistory();
+  const client = props.client;
+  let contracts;
+  if (client.contracts.length > 0 && client.contracts[0].id) {
+    contracts = client.contracts.map(contract => {
+      return (
+        <div key={contract.id} onClick={() => browserHistory.push(`/dispatch/contracts/${contract.id}`)}>
+          <MediaCard header={contract.address} 
+          body={`${contract.packageInfo.title} 🚀 
+                ( ${format(new Date(contract.start_date), 'MMMM dd, yyyy')} - 
+                ${format(new Date(addDays(new Date(contract.start_date), contract.packageInfo.contract_length_days)), 'MMMM dd, yyyy')}
+                )`} 
+          />
+        </div>
+      )    
+    });
+  } else {
+    contracts = (
+      <div onClick={() => browserHistory.push('/dispatch/contracts/new')}>
+        <MediaCard header={'No contracts booked'}/>
+      </div>
+    );
+  }
+  return (
     <Card sx="display: flex; justify-content: flex-start; align-items: flex-start;">
-      <Avatar alt="clientName" src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 3 }} />
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Client info
+      <Stack width={400}>
+        <Avatar alt="clientName" src={client.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 3 }} />
+        <Typography sx={{ fontSize: 14, ml: 5 }} color="text.secondary" gutterBottom>
+          {`${client.client.name} - ${client.client.phone || 'N/A'} - ${client.client.email}`}
         </Typography>
-        <Typography variant="h5" component="div">
-          Active contracts:
+        <Typography>
+          {client.contracts.length > 0 && `Active contracts: ${contracts.length}`}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          details, address, package
-        </Typography>
-      </CardContent>
+      </Stack>
+        <CardActions>
+          <Button component={Link} to={`/dispatch/clients/${client.client.id}/contracts/new`} >Create Contract</Button>
+        </CardActions>
+      {/* <CardContent> */}
+        <CardContent>
+          <Stack spacing={5} direction='row'>
+            {contracts}
+          </Stack>
+        </CardContent>
     </Card>
-  </>);
+  );
 };
 
 export default ClientCard;

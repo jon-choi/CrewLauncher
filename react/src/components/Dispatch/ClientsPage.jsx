@@ -1,22 +1,19 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
+import React from 'react';
+import { Stack } from '@mui/material';
 import ClientCard from './ClientCard';
 
-const ClientsPage = () => {
-  
+const ClientsPage = (props) => {
+  const clientCards = props.clientsInfo.map(client => {
+    return (<ClientCard key={client.id} client={client} />)
+  });
+
   return (
-    <Card >
-      
-
-    <ClientCard >
-    </ClientCard>
-
-    <ClientCard >
-    </ClientCard>
-
-    <ClientCard >
-    </ClientCard>
-</Card>
+    <>
+      <div>Total Clients: {props.clientsInfo.length}</div>
+      <Stack spacing={1} >
+        {clientCards}
+      </Stack>
+    </>
   );
 };
 
