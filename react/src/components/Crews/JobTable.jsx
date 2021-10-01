@@ -34,8 +34,8 @@ function createData(date, timeEstimate) {
 }
 
 function Row(props) {
-  const clientsInfo = getClientsInfo(clients, contracts, packages);
-  const { row, clients, contracts, packages } = props;
+  // const clientsInfo = getClientsInfo(clients, contracts, packages);
+  const { row } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
