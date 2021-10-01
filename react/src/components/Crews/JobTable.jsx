@@ -13,22 +13,28 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { getClientsInfo } from '../Dispatch/dispatchDataHelper';
 
-function createData(name, timeEstimate) {
+function createData(date, timeEstimate) {
+
+  
   return {
-    name,
+    date,
     timeEstimate,
     history: [
       {
-        address: '555 Rocket Boulevard',
+        client: 'Frank Reynolds',
+        address: '555 Rocket Man Boulevard',
         phone: '(555) 867-5309',
-        package: 'details',
+        package: 'Rocket Man Package',
+        jobNotes: 'Watch out for rockets',
       },
     ],
   };
 }
 
 function Row(props) {
+  // const clientsInfo = getClientsInfo(clients, contracts, packages);
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -45,7 +51,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.date}
         </TableCell>
         <TableCell align="right">{row.timeEstimate}</TableCell>
       </TableRow>
@@ -54,7 +60,7 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Frank Reynolds (client name)
+                Frank Reynolds
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
@@ -67,14 +73,14 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                    <TableRow key={historyRow.address}>
                       <TableCell component="th" scope="row">
-                        555 Rocket Man Boulevard
+                        {historyRow.address}
                       </TableCell>
-                      <TableCell>(555)-867-5309</TableCell>
-                      <TableCell align="right">Rocket Man Package</TableCell>
+                      <TableCell>{historyRow.phone}</TableCell>
+                      <TableCell align="right">{historyRow.package}</TableCell>
                       <TableCell align="right">
-                        Watch out for rockets!
+                        {historyRow.jobNotes}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -98,7 +104,7 @@ Row.propTypes = {
         package: PropTypes.string.isRequired,
       }),
     ).isRequired,
-    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
   }).isRequired,
 };
 
@@ -127,7 +133,7 @@ export default function CollapsibleTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.date} row={row} />
           ))}
         </TableBody>
       </Table>
