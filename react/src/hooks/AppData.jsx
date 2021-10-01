@@ -157,12 +157,10 @@ const useAppData = function() {
     };
     
     const updatedContracts = [...state.contracts, contract];
-    console.log(`Contract to be posted:`, contract)
     if (existing) {
       console.log(`POSTING TO: /contracts/${contract.id}`)
       return axios.post(`/contracts/${contract.id}`, contract)
       .then(response => {
-        console.log("Updating state.contracts to :", updatedContracts)
         setState(prev => {
           return {...prev, contracts: updatedContracts}})
       })
@@ -173,7 +171,6 @@ const useAppData = function() {
       console.log(`POSTING TO: /contracts`)
       return axios.post(`/contracts`, contract)
       .then(response => {
-        console.log("Updating state.contracts to :", updatedContracts)
         setState(prev => {
           return {...prev, contracts: updatedContracts}
         });
@@ -213,8 +210,7 @@ const useAppData = function() {
 
     Promise.all(jobPostPromises)
     .then((response) => {
-      const updatedJobs = [...state.jobs, jobsArray];
-      console.log("About to inject updatedJobs into state!")
+      const updatedJobs = [...state.jobs, ...jobsArray];
       setState(prev => {
         return {...prev, jobs: updatedJobs};
       });
