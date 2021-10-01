@@ -13,11 +13,11 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { getClientsInfo } from '../Dispatch/dispatchDataHelper';
+import { getClientsInfo, getContractsInfo } from '../Dispatch/dispatchDataHelper';
 
 function createData(date, timeEstimate) {
 
-  
+  // const { contracts, clients, packages, jobs } = props.state;
   return {
     date,
     timeEstimate,
@@ -34,7 +34,8 @@ function createData(date, timeEstimate) {
 }
 
 function Row(props) {
-  // const clientsInfo = getClientsInfo(clients, contracts, packages);
+  
+
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -99,9 +100,11 @@ Row.propTypes = {
     timeEstimate: PropTypes.string.isRequired,
     history: PropTypes.arrayOf(
       PropTypes.shape({
+        client: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
         phone: PropTypes.string.isRequired,
         package: PropTypes.string.isRequired,
+        jobNotes: PropTypes.string.isRequired
       }),
     ).isRequired,
     date: PropTypes.string.isRequired,

@@ -1,18 +1,17 @@
 import React from 'react';
 import JobTable from './JobTable';
+// import { getContractsInfo } from '../Dispatch/dispatchDataHelper';
 
 
 const Jobs = (props) => {
 
+// const { contracts, clients, packages, jobs } = props.state;
 
-
-
-  // const params = useParams();
 
 
   return (
 
-    <h1>🚀🚀 So many Jobs 🚀🚀
+    <h1>🚀🚀 Oct. 7 / 2021 🚀🚀
       <JobTable 
         
         />
