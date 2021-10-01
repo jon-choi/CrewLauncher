@@ -18,12 +18,13 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
     [format(addDays(new Date(), 2),'EEEE, MMM dd')],
     [format(addDays(new Date(), 3),'EEEE, MMM dd')]
   ];
-  console.log("JOBS IN getDayInfo:", jobs)
+  console.log("contracts: ", contracts)
   // const [ [yesterday], [today], [tomorrow], [fourthDay], [fifthDay], [lastDay] ] = days
   for (const job of jobs) {
     const contractOfJob = contracts.filter(contract => {
       return contract.id === job.contract_id
     })[0];
+    console.log("contract of job: ", contractOfJob)
     const crewOfJob = crews.filter(crew => {
       return crew.id === job.crew_id
     })[0];

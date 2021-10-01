@@ -6,7 +6,6 @@ export function getJobsByCrewByDay(jobs, crews, crewId = 0) {
   for (let d = 0; d < 5; d++ ) {
     days.push(addDays(new Date(), d))
   }
-  console.log("DAYS ARRAY: ", days);
   for (const job of jobs) {
       
     const crewOfJob = crews.filter(crew => {
