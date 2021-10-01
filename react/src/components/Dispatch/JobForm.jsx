@@ -36,7 +36,7 @@ const JobForm = (props) => {
     const date = format(new Date(job.date), 'EEE MMM dd yyyy')
 
     const validate = function(time, selectedCrew) {
-      if (isAfter(new Date(time), setHours(new Date(), 6)) && isBefore(new Date(), setHours(new Date(), 18)) && selectedCrew) {
+      if (isAfter(new Date(time), setHours(new Date(time), 6)) && isBefore(new Date(time), setHours(new Date(time), 18)) && selectedCrew) {
         return save(time, selectedCrew)
       }else if (!selectedCrew) {
         errorMessage.push('Select A Crew To Launch!');
@@ -56,7 +56,7 @@ const JobForm = (props) => {
       onEdit(selectedCrew, startTime, endTime, job, parseInt(params.id))
       .then((response) => {
         setStatus({error: false, success: true, message: "Crew Launched successfully!"})
-        setTimeout(() => browserHistory.push('/dispatch'), 500);
+        setTimeout(() => browserHistory.push('/dispatch'), 1500);
       })
       .catch((err) => { 
           setStatus({ success: false, error: true, message: "Failure To Liftoff!"});

@@ -43,7 +43,7 @@ const useAppData = function() {
       job
     ]
     console.log(jobs)
-    axios.post(`/jobs/${job.id}`, job)
+    return axios.post(`/jobs/${job.id}`, job)
       .then(res => {
         setState(prev => {
           return {...prev, jobs}
@@ -62,7 +62,7 @@ const useAppData = function() {
       end_time: endTime,
       completed: false
     }
-    editJob(job)
+    return editJob(job)
   }
 
   const createNewPackage = (newPackage) => {
