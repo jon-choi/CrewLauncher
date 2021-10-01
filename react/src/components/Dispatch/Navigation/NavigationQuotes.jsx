@@ -19,7 +19,7 @@ const NavigationQuotes = (props) => {
         {quote.clientPhone}
       </Typography>
       <Typography>
-        Requested Package: {quote.selectedPackage}
+        {quote.selectedPackage && quote.selectedPackage.title}
       </Typography>
     </Card>);
   });
