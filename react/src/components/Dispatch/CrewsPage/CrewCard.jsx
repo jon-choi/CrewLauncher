@@ -52,13 +52,30 @@ const CrewCard = (props) => {
     const createSelectedDayCard = function([...day]) {
       console.log("click", day[1])
       const date = day.splice(0,1)
-      if (day[0]) {
+      const selectedDayCard = day.map(job => {
+        return (<>
 
+          <Card >
+            <Item variant="outlined">{date}</Item>
+            <Item variant="outlined">Approximate Launch:</Item>
+            <Item variant="outlined">Contract Package:</Item>
+            <Item variant="outlined">Client:</Item>
+            <Item variant="outlined">Job Notes:</Item>
+          </Card>
+          <Box >
+            <Item variant="outlined" sx={{mr: 2, ml: 2}}>Job Details</Item>
+            <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.job.start_time}</Item>
+            <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.packageOfJob.title}</Item>
+            <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.clientOfJob.name}, {job.clientOfJob.phone}</Item>
+            <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.contractOfJob.job_notes}</Item>
+          </Box>
+        </>)
       }
+        )
       return (<>
-      <Box>
-      <Item>{date}</Item>
-      </Box>
+      <Grid container>
+          {selectedDayCard}
+      </Grid>
       </>)
     }
     const createCards = function(days) {
@@ -71,12 +88,12 @@ const CrewCard = (props) => {
           return (<div key={countListen}>
             {selectedDay === null &&
             <Card
-            sx={{display: 'flex', justifyContent: 'center', minHeight: 175, minWidth: 40}}
+            sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}
             className={`day-${countListen}`}
             >
               {day[1] ?
               <Item onClick={(event) => setSelectedDay(countListen)}>
-              <CardContent>
+              <CardContent sx={{minWidth: 200, minHeight: 150}} >
                 <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
                   {day[0]}
                 </Typography>
@@ -85,7 +102,7 @@ const CrewCard = (props) => {
               </Item>
               :
               <Item >
-              <CardContent>
+              <CardContent sx={{minWidth: 200, minHeight: 150}} >
                 <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
                   {day[0]}
                 </Typography>
@@ -101,7 +118,7 @@ const CrewCard = (props) => {
     }
     const cards = createCards(days)
 
-    return ( <Card sx={{display: "flex", justifyContent: "center", alignItems: "flexStart", minWidth: 1000}}>{cards}</Card>)
+    return ( <Card sx={{display: "flex", justifyContent: "center", alignItems: "center", minWidth: 1000}}>{cards}</Card>)
   }
   return (
     <Card sx="display: flex; justify-content: center; align-items: flex-start;">

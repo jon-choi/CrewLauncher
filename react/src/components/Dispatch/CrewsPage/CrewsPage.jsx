@@ -27,8 +27,8 @@ const CrewPage = (props) => {
             const days = getDayInfo(jobs, crews, contracts, packages, clients, crew.id);
             count++
             const key = count;
-            return (<Grid container item key={key}>
-                <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+            return (<Grid container item key={key} sx={{ display: "flex", alignContent: "center", alignItems: "center", alignSelf: "center"}}>
+                <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 200, height: 200, mb: 4, ml: 20, mr: 5, mt: 5 }} />
                 <CrewCard days={days} />
             </Grid>)
         })
