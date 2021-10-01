@@ -6,14 +6,13 @@ import MenuIcon from '@mui/icons-material/MenuOpen';
 const drawerWidth=300;
 const activeLink = {color: "red"};
 
-const Navigation = () => {
+const Navigation = (props) => {
   const [navOpen, setNavOpen] = useState(true);
   const { url } = useRouteMatch();
-
+  const { contracts } = props.contracts;
+  console.log("Contracts in nav: ", contracts)
   return (<>
-      <AppBar position="fixed"
-
-       >
+      <AppBar position="fixed">
           <Toolbar>
             <IconButton
               onClick={()=>setNavOpen(!navOpen)}
@@ -34,6 +33,11 @@ const Navigation = () => {
       '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
     }}>
           <Button><h1 onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
+          
+          <Divider />
+          <Toolbar>
+            <Button>{`Incoming Quotes: ${0}`}</Button>  
+          </Toolbar>
           <Divider />
       <Toolbar>
         <MenuList>
