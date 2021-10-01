@@ -17,7 +17,7 @@ const JobForm = (props) => {
 
   const { onEdit, crews, packages, contracts, jobs } = props
 
-  const [selectedCrew, setSelectedCrew] = useState(0)
+  const [selectedCrew, setSelectedCrew] = useState(job ? job.crewId : 0)
   const [time, setTime] = useState(new Date())
   const [status, setStatus] = useState({error: false, success: false, message:""});
   const [error, setError] = useState([]);
@@ -28,7 +28,7 @@ const JobForm = (props) => {
 
   useEffect(() => {
     setSelectedCrew(job.crewId)
-  },[])
+  },[selectedCrew])
   
   if (jobs[params.id]) {
 
