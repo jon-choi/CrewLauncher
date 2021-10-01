@@ -1,31 +1,30 @@
 import * as React from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { Card, CardContent, CardActions, Typography, Avatar, Stack, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Card, CardContent, CardActions, Typography, Avatar, Stack, Button, Box } from '@mui/material';
 import MediaCard from '../MediaCard';
 import { format, addDays } from 'date-fns';
 
 const ClientCard = (props) => {
-  const browserHistory = useHistory();
   const client = props.client;
   let contracts;
   if (client.contracts.length > 0 && client.contracts[0].id) {
     contracts = client.contracts.map(contract => {
       return (
-        <div key={contract.id} onClick={() => browserHistory.push(`/dispatch/contracts/${contract.id}`)}>
+        <Box component={Link} to={`/dispatch/contracts/${contract.id}`} key={contract.id} >
           <MediaCard header={contract.address} 
           body={`${contract.packageInfo.title} 🚀 
                 ( ${format(new Date(contract.start_date), 'MMMM dd, yyyy')} - 
                 ${format(new Date(addDays(new Date(contract.start_date), contract.packageInfo.contract_length_days)), 'MMMM dd, yyyy')}
                 )`} 
           />
-        </div>
+        </Box>
       )    
     });
   } else {
     contracts = (
-      <div onClick={() => browserHistory.push('/dispatch/contracts/new')}>
+      <Box>
         <MediaCard header={'No contracts booked'}/>
-      </div>
+      </Box>
     );
   }
   return (

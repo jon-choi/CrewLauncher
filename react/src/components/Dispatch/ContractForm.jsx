@@ -57,11 +57,10 @@ import { format, addDays } from 'date-fns';
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      console.log("ON SUBMIT: ", id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, selectedPackage.id )
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
       .then(() => { 
       setStatus({success: true, error: false, message: "Contract created successfully!"})
-      setTimeout(() => browserHistory.push(`/dispatch/contracts`), 1000);
+      setTimeout(() => browserHistory.push(`/dispatch/contracts`), 1500);
     })
       .catch(() => setStatus({success: false, error: true, message: "Error creating contract!"}));
     }

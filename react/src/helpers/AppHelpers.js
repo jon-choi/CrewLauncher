@@ -34,19 +34,19 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
     })[0];
     const day = {/* date */job, contractOfJob, crewOfJob, packageOfJob, clientOfJob }
     
-    if ((!crewId || crewId === day.crewOfJob.id) && isYesterday(new Date(day.job.date))) {
+    if (isYesterday(new Date(day.job.date)) && (!crewId || (day.crewOfJob && crewId === day.crewOfJob.id))) {
       days[0].push(day)
     }
-    if ((!crewId || crewId === day.crewOfJob.id) && isToday(new Date(day.job.date))) {
+    if ((!crewId || (day.crewOfJob && crewId === day.crewOfJob.id)) && isToday(new Date(day.job.date))) {
       days[1].push(day)
     }
-    if ((!crewId || crewId === day.crewOfJob.id) && isTomorrow(new Date(day.job.date))) {
+    if ((!crewId || (day.crewOfJob && crewId === day.crewOfJob.id)) && isTomorrow(new Date(day.job.date))) {
       days[2].push(day)
     }
-    if ((!crewId || crewId === day.crewOfJob.id) && isSameDay(new Date(day.job.date), addDays(new Date(), 2))) {
+    if ((!crewId || (day.crewOfJob && crewId === day.crewOfJob.id)) && isSameDay(new Date(day.job.date), addDays(new Date(), 2))) {
       days[3].push(day)
     }
-    if ((!crewId || crewId === day.crewOfJob.id) && isSameDay(new Date(day.job.date), addDays(new Date(), 3))) {
+    if ((!crewId || (day.crewOfJob && crewId === day.crewOfJob.id)) && isSameDay(new Date(day.job.date), addDays(new Date(), 3))) {
       days[4].push(day)
     }
   }
