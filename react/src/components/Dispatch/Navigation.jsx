@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {  Link,NavLink, useRouteMatch } from 'react-router-dom';
-import {  Toolbar, Drawer, MenuList, MenuItem, AppBar, Box, Divider, CssBaseline, IconButton, Button } from '@mui/material';
+import {  Toolbar, Drawer, MenuList, MenuItem, AppBar, Box, Divider, CssBaseline, IconButton, Button, Badge } from '@mui/material';
 import MenuIcon from '@mui/icons-material/MenuOpen';
 
 const drawerWidth=300;
@@ -36,7 +36,10 @@ const Navigation = (props) => {
           
           <Divider />
           <Toolbar>
-            <Button>{`Incoming Quotes: ${0}`}</Button>  
+            <Badge showZero badgeContent={0} color='primary'><Button>{`Incoming Quotes`}</Button></Badge>  
+          </Toolbar>
+          <Toolbar>
+            <Badge showZero badgeContent={10} color='primary'><Button>{`Unassigned Jobs`}</Button></Badge>  
           </Toolbar>
           <Divider />
       <Toolbar>
