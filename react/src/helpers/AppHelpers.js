@@ -18,13 +18,11 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
     [format(addDays(new Date(), 2),'EEEE, MMM dd')],
     [format(addDays(new Date(), 3),'EEEE, MMM dd')]
   ];
-  console.log("contracts: ", contracts)
   // const [ [yesterday], [today], [tomorrow], [fourthDay], [fifthDay], [lastDay] ] = days
   for (const job of jobs) {
     const contractOfJob = contracts.filter(contract => {
       return contract.id === job.contract_id
     })[0];
-    console.log("contract of job: ", contractOfJob)
     const crewOfJob = crews.filter(crew => {
       return crew.id === job.crew_id
     })[0];
@@ -36,19 +34,19 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
     })[0];
     const day = {/* date */job, contractOfJob, crewOfJob, packageOfJob, clientOfJob }
     
-    if ((!crewId || crewId === day.crewOfJob.id) && isYesterday(new Date(day.job.date))) {
+    if (isYesterday(new Date(day.job.date)) && (!crewId || (day.crewOfJob && crewId === day.crewOfJob.id))) {
       days[0].push(day)
     }
-    if ((!crewId || crewId === day.crewOfJob.id) && isToday(new Date(day.job.date))) {
+    if ((!crewId || (day.crewOfJob && crewId === day.crewOfJob.id)) && isToday(new Date(day.job.date))) {
       days[1].push(day)
     }
-    if ((!crewId || crewId === day.crewOfJob.id) && isTomorrow(new Date(day.job.date))) {
+    if ((!crewId || (day.crewOfJob && crewId === day.crewOfJob.id)) && isTomorrow(new Date(day.job.date))) {
       days[2].push(day)
     }
-    if ((!crewId || crewId === day.crewOfJob.id) && isSameDay(new Date(day.job.date), addDays(new Date(), 2))) {
+    if ((!crewId || (day.crewOfJob && crewId === day.crewOfJob.id)) && isSameDay(new Date(day.job.date), addDays(new Date(), 2))) {
       days[3].push(day)
     }
-    if ((!crewId || crewId === day.crewOfJob.id) && isSameDay(new Date(day.job.date), addDays(new Date(), 3))) {
+    if ((!crewId || (day.crewOfJob && crewId === day.crewOfJob.id)) && isSameDay(new Date(day.job.date), addDays(new Date(), 3))) {
       days[4].push(day)
     }
   }
