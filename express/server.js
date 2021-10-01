@@ -1,8 +1,12 @@
+const knex = require('./db/knex');
+const http = require('http');
 const Express = require('express');
-const App = Express();
-const knex = require('./db/knex')
-const PORT = 8080;
+const socket = require('./socket');
 
+const App = Express();
+
+const httpServer = http.Server(App);
+const PORT = 8080;
 
 // Express Configuration
 App.use(Express.urlencoded({ extended: false }));
@@ -43,7 +47,14 @@ App.get('/api/data', (req, res) => {
 //   // use the knex variable above to create dynamic queries
 // });
 
-App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+// Handle webSocket connections
+socket.start(httpServer);
+
+httpServer.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
+
+// App.listen(PORT, () => {
+//   // eslint-disable-next-line no-console
+//   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+// });
