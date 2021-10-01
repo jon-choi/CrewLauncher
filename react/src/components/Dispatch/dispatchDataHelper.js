@@ -70,6 +70,8 @@ const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
   for (const job of jobs) {
     if (job.id === jobId) {
       infoForJobForm = {
+        id: job.id,
+        crewId: job.crew_id,
         date: job.date,
         contractId: job.contract_id
       }

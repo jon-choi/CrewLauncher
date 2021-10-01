@@ -1,25 +1,29 @@
 import { Link } from 'react-router-dom';
 import { Drawer, Button, Divider, Stack, Card, Typography, CardActions } from '@mui/material';
-import { format } from 'date-fns';
-const NavigationEmptyJobs = (props) => {
-  const { open, setOpen, jobs, contracts } = props;
-  console.log("JOBS: ", jobs)
-  
-  const jobCards = jobs.map(job => {
-    const contract = contracts.filter(contract => contract.id === job.contract_id)[0]
+const NavigationQuotes = (props) => {
+  const { open, setOpen, quotes } = props;
+
+  const quoteCards = quotes.map(quote => {
     return (
-    <Card key={job.id}>
+    <Card key={quote.clientEmail}>
       <CardActions>
-        <Button component={Link} to={`/dispatch/jobs/${job.id}`}>Edit Job</Button>
+        <Button component={Link} to={`/dispatch/contracts/new`}>Handle Quote</Button>
       </CardActions>
       <Typography>
-        <b>{format(new Date(job.date), 'MMMM, dd, yyyy')}</b>
+        {quote.clientName}
       </Typography>
       <Typography>
-        {contract && contract.address}
+        {quote.clientEmail}
+      </Typography>
+      <Typography>
+        {quote.clientPhone}
+      </Typography>
+      <Typography>
+        Requested Package: {quote.selectedPackage}
       </Typography>
     </Card>);
   });
+
 
   return (
     <Drawer open={open} variant='persistent' position='static' anchor='left'
@@ -29,10 +33,10 @@ const NavigationEmptyJobs = (props) => {
       <Button><h1 onClick={()=> setOpen(false)}>Crew🚀Launcher</h1></Button>
       <Divider />
       <Stack>
-        {jobCards}
+        {quoteCards}
       </Stack>
     </Drawer>
   )
 }
 
-export default NavigationEmptyJobs;
+export default NavigationQuotes;
