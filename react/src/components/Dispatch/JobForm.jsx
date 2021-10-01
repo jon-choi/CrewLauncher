@@ -62,7 +62,7 @@ const JobForm = (props) => {
           })[0];
           setTime(setHours(new Date(time), 6))
           setSelectedCrew(null)
-          if (nextJob && nextJob.crewId === undefined)  {
+          if (nextJob && nextJob.crew_id === undefined)  {
             return browserHistory.push(`/dispatch/jobs/${parseInt(params.id) + 1}`)
           }
           return browserHistory.push('/dispatch')
