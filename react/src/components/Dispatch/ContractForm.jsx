@@ -57,7 +57,6 @@ import { format, addDays } from 'date-fns';
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      console.log("ON SUBMIT: ", id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, selectedPackage.id )
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
       .then(() => { 
       setStatus({success: true, error: false, message: "Contract created successfully!"})

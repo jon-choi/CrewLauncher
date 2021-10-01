@@ -7,7 +7,6 @@ import JobTable from './JobTable';
 
 const Jobs = (props) => {
   // const params = useParams();
-  console.log("jobsByCrew: ", props.jobsByCrew);
 
   return (
 
