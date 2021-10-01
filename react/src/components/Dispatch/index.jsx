@@ -24,11 +24,12 @@ const Dispatch = function(props) {
 
   const clientsInfo = getClientsInfo(clients, contracts, packages);
   const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
+
   const days = getDayInfo(jobs, crews, contracts, packages, clients)
 
   return (
     <Box sx={{display: 'flex'}}>
-      <Navigation />
+      <Navigation  jobs={jobs} contracts={contracts}/>
         <Box width={'100%'} mt={10}>
         <Switch >
           <Route path={`${url}/jobs/:id`} >

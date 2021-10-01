@@ -28,8 +28,6 @@ const days = getDayInfo(
   clients,
   parseInt(params.id)
 );
-console.log("Params" ,useParams())
-console.log("please get the day info: ", days);
 
 const [selectedDay, setSelectedDay] = useState([{}]);
     

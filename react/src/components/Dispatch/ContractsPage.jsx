@@ -2,7 +2,6 @@ import MediaCard from "../MediaCard";
 import { format } from 'date-fns'
 import { Stack, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
 const ContractsPage = (props) => {
@@ -13,31 +12,33 @@ const ContractsPage = (props) => {
     padding: theme.spacing(1),
     textAlign: 'center'
   }));
-
+  let count = -1;
   const contractCards = contractsInfo.map(contract => {
     const nextVisit = contract.jobDate ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None'
+    count++;
     const header =(<Item>
       <Typography variant="h5">
       🚀 {contract.clientName} 🚀{contract.clientEmail} 
       </Typography>
-    </Item>)
-    const body = (<Stack container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+    </Item>);
+    const startDate =  format(new Date(contract.start_date), 'EEE MMM d yyyy')
+    const body = (<Stack container>
       <Item>Address: ${contract.address}</Item>
-      <Item>Start Date:{contract.start_date}</Item>
+      <Item>Start Date:{startDate}</Item>
       <Item>Job Notes: {contract.job_notes}</Item>
       <Item>Package length: {contract.packageLength}</Item>
       <Item>Next Visit: {nextVisit}<Typography variant="h6">🚀</Typography></Item>
       </Stack>);
-    const linkToEdit = `/dispatch/contracts/${contract.id}`
+    const linkToEdit = `/dispatch/contracts/${contract.id}`;
     
 
     return <MediaCard
-    key={contract.id}
+    key={count}
     compClass="contract-card"
     link={linkToEdit}
     header={header}
     body={body}
-    />
+    />;
   })
 
   return (
