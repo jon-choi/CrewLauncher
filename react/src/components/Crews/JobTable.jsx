@@ -13,11 +13,13 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { getClientsInfo } from '../Dispatch/dispatchDataHelper';
+import { getJobsByCrew } from './crewsDataHelper';
+
 
 function createData(date, timeEstimate) {
 
   
+
   return {
     date,
     timeEstimate,
@@ -34,9 +36,14 @@ function createData(date, timeEstimate) {
 }
 
 function Row(props) {
-  // const clientsInfo = getClientsInfo(clients, contracts, packages);
+  
+
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  
+
+
+  
 
   return (
     <React.Fragment>
@@ -60,14 +67,14 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Frank Reynolds
+                {props.name ?  props.name :"Frank Reynolds"/*props.date*/ } 
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Address</TableCell>
-                    <TableCell>Phone Number</TableCell>
-                    <TableCell align="right">Package</TableCell>
+                    { props.name && <><TableCell>Address</TableCell>
+                    <TableCell>Phone Number</TableCell></> }
+                    <TableCell align="right">"Package"</TableCell>
                     <TableCell align="right">Job Notes</TableCell>
                   </TableRow>
                 </TableHead>
@@ -99,9 +106,11 @@ Row.propTypes = {
     timeEstimate: PropTypes.string.isRequired,
     history: PropTypes.arrayOf(
       PropTypes.shape({
+        client: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
         phone: PropTypes.string.isRequired,
         package: PropTypes.string.isRequired,
+        jobNotes: PropTypes.string.isRequired
       }),
     ).isRequired,
     date: PropTypes.string.isRequired,
@@ -118,6 +127,7 @@ const rows = [
 
 export default function CollapsibleTable() {
   return (
+    <h1>🚀🚀 Oct. 7 / 2021 🚀🚀
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
@@ -138,5 +148,6 @@ export default function CollapsibleTable() {
         </TableBody>
       </Table>
     </TableContainer>
+  </h1>
   );
 }

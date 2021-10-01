@@ -7,6 +7,7 @@ import Quote from './Quote';
 import CrewDashboard from './CrewDashboard';
 import { getJobsByCrew, getJobsByCrewByDay } from './crewsDataHelper';
 import { getDayInfo } from '../../helpers/AppHelpers';
+import { getContractsInfo, getClientsInfo } from '../Dispatch/dispatchDataHelper';
 
 
 
@@ -28,6 +29,7 @@ const days = getDayInfo(
   clients,
   parseInt(params.id)
 );
+const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
 
 const [selectedDay, setSelectedDay] = useState([{}]);
     
@@ -42,13 +44,10 @@ const [selectedDay, setSelectedDay] = useState([{}]);
             </Route>
     
             <Route path="/crews/:id/jobs">
-              <Jobs jobsByCrew={jobsByCrew} />
+              <Jobs contracts={contracts} jobs={jobs} clients={clients} packages={packages} crews={crews} />
             </Route>
-    
-            <Route path="/crews/:id/quote">
-              <Quote />
-            </Route>
-            <Route path="/crews">
+
+            <Route path="/crews/:id">
               <CrewDashboard days={days} />
             </Route>
             </Switch>

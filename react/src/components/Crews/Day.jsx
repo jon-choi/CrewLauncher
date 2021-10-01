@@ -1,6 +1,7 @@
 import React from 'react';
 import JobCard from '../JobCard';
 // import { useParams } from 'react-router-dom';
+import JobTable from './JobTable';
 
 
 const Day = (props) => {
