@@ -19,7 +19,6 @@ const Crews = function(props) {
  
 
 const { jobs, crews, contracts, packages, clients } = props;
-const jobsByCrew = getJobsByCrew(jobs, crews);
 
 const days = getDayInfo(
   jobs,

@@ -1,6 +1,7 @@
 import React from 'react';
 import JobTable from './JobTable';
 import { useParams } from 'react-router-dom'
+import { isAfter, isBefore } from 'date-fns'
 // import { getContractsInfo } from '../Dispatch/dispatchDataHelper';
 
 import { getJobsByCrew } from './crewsDataHelper';
@@ -8,14 +9,26 @@ import { getJobsByCrew } from './crewsDataHelper';
 
 const Jobs = (props) => {
   const params = useParams()
-  const crewId = params.id;
+  const crewId = parseInt(params.id);
+
   if (props.contracts[1]) {
-  const jobs = getJobsByCrew(props.jobs, props.clients, props.packages, props.contracts, crewId);
-  
+    const jobs = getJobsByCrew(props.jobs, props.clients, props.packages, props.contracts, crewId);
     jobs.sort(function (a, b) {
       return a.date - b.date;
     });
-    console.log(jobs)
+    
+
+
+
+    
+    return (
+      <>
+        <JobTable jobs={jobs}
+          
+          />
+      </>
+  
+    );
   }
 // const { contracts, clients, packages, jobs } = props.state;
 // [{client: 'Frank Reynolds',
@@ -24,16 +37,8 @@ const Jobs = (props) => {
 //         package: 'Rocket Man Package',
 //         jobNotes: 'Watch out for rockets']}
 
-
-  return (
-
-    <>
-      <JobTable jobs={props.jobs}
-        
-        />
-    </>
-
-  );
+  return null
+  
 };
 
 export default Jobs;
