@@ -6,23 +6,23 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
-const fab = (<Fab variant="extended" sx={{
-  position: 'sticky',
-  top: 16,
-  left: 850,
-}}>Finish</Fab>
-  );
 
 export default function JobCard(props) {
   const { packageTitle, timeEst, clientName, address, jobNotes, compClass } = props;
+  const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center'
+  }));
 
   return (
-  <Card sx="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
-    {fab}      
+  <Card sx="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">     
     <CardContent sx="display: flex; ">
       <div sx="display: flex; justify-content: space-between; align-items: center; ">
-        <Typography variant="h2" component="div">
+        <Typography variant="h4" component="div">
           {packageTitle}
         </Typography>
         <Typography variant="h4">
