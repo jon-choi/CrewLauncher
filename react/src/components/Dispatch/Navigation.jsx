@@ -1,32 +1,43 @@
+import { useState } from 'react';
 import {  Link,NavLink, useRouteMatch } from 'react-router-dom';
-import {  Toolbar, Drawer, MenuList, MenuItem, AppBar, Box, Divider, CssBaseline } from '@mui/material';
+import {  Toolbar, Drawer, MenuList, MenuItem, AppBar, Box, Divider, CssBaseline, IconButton, Button } from '@mui/material';
+import MenuIcon from '@mui/icons-material/MenuOpen';
 
 const drawerWidth=300;
 const activeLink = {color: "red"};
 
-const Navigation = () => {
+const Navigation = (props) => {
+  const [navOpen, setNavOpen] = useState(true);
   const { url } = useRouteMatch();
-
+  const { contracts } = props.contracts;
+  console.log("Contracts in nav: ", contracts)
   return (<>
-      <AppBar position="fixed"
-
-        sx={{
-          width: `calc(100% - ${drawerWidth}px)` ,
-          ml: `${drawerWidth}px`,
-        }}>
-          <Toolbar></Toolbar>
+      <AppBar position="fixed">
+          <Toolbar>
+            <IconButton
+              onClick={()=>setNavOpen(!navOpen)}
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
         </AppBar>
-        <Box
-        component="nav"
-        sx={{ width: drawerWidth }}
-        aria-label="mailbox folders"
-      ></Box>
+        
       <CssBaseline />
-    <Drawer variant='permanent' position='static' anchor='left'
+    <Drawer open={navOpen} variant='persistent' position='static' anchor='left'
       sx={{display: { xs: 'block', sm: 'block' },
       '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
     }}>
-          <h1>Crew🚀Launcher</h1>
+          <Button><h1 onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
+          
+          <Divider />
+          <Toolbar>
+            <Button>{`Incoming Quotes: ${0}`}</Button>  
+          </Toolbar>
           <Divider />
       <Toolbar>
         <MenuList>
