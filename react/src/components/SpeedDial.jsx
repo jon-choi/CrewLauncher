@@ -20,7 +20,7 @@ export default function BasicSpeedDial(props) {
       {crews && <SpeedDial
         ariaLabel="SpeedDial basic example"
         direction="left"
-        sx={{ position: 'absolute', bottom: 16, right: 16 }}
+        sx={{ position: 'absolute', bottom: 1, right: 1 }}
         icon={selectedCrew ? <Avatar alt={selectedCrew.foreman_name} src={selectedCrew.avatar} /> : <SpeedDialIcon />}
       >
         {crews.map((crew) => (

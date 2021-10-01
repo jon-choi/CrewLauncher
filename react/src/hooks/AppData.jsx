@@ -35,10 +35,14 @@ const useAppData = function() {
   }, []);
 
   const editJob = function(job) {
+    const jobsInState = state.jobs.filter(jobInState => {
+      return !(job.id === jobInState.id)
+    })
     const jobs = [
-      ...state.jobs,
+      ...jobsInState,
       job
     ]
+    console.log(jobs)
     axios.post(`/jobs/${job.id}`, job)
       .then(res => {
         setState(prev => {
