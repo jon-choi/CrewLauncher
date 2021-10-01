@@ -1,6 +1,8 @@
 // import { useParams } from 'react-router-dom'
-import CrewDayCard from '../CrewDayCard';
+// import CrewDayCard from '../CrewDayCard';
 import React from 'react';
+import { getJobsByCrew } from './crewsDataHelper';
+import JobTable from './JobTable';
 
 
 const Jobs = (props) => {
@@ -9,12 +11,9 @@ const Jobs = (props) => {
 
   return (
 
-    <h1>Day:
-      <CrewDayCard 
-        onClick={props.onClick}
-        date={props.date}
-        jobsBooked={`Way too many to count. OMG 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀`}
-        dayTimeEst={`1000 hrs🚀🚀🚀🚀🚀🚀🚀🚀🚀`}
+    <h1>So many Jobs 🚀🚀🚀🚀
+      <JobTable 
+        
         />
     </h1>
 
