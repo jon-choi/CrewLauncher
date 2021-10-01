@@ -18,6 +18,7 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
     [format(addDays(new Date(), 2),'EEEE, MMM dd')],
     [format(addDays(new Date(), 3),'EEEE, MMM dd')]
   ];
+  console.log("JOBS IN getDayInfo:", jobs)
   // const [ [yesterday], [today], [tomorrow], [fourthDay], [fifthDay], [lastDay] ] = days
   for (const job of jobs) {
     const contractOfJob = contracts.filter(contract => {

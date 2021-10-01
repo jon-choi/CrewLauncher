@@ -15,14 +15,14 @@ const ContractsPage = (props) => {
   }));
 
   const contractCards = contractsInfo.map(contract => {
-    const nextVisit = contract.jobDate ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None'
+    const nextVisit = contract.jobDate ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None';
     const header =(<Item>
       <Typography variant="h5">
       🚀 {contract.clientName} 🚀{contract.clientEmail} 
       </Typography>
     </Item>)
     const body = (<Stack container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-      <Item>Address: ${contract.address}</Item>
+      <Item>Address: {contract.address}</Item>
       <Item>Start Date:{contract.start_date}</Item>
       <Item>Job Notes: {contract.job_notes}</Item>
       <Item>Package length: {contract.packageLength}</Item>
