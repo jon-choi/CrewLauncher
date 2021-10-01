@@ -16,11 +16,10 @@ const NavigationEmptyJobs = (props) => {
         <b>{format(new Date(job.date), 'MMMM, dd, yyyy')}</b>
       </Typography>
       <Typography>
-        {contract.address}
+        {contract && contract.address}
       </Typography>
     </Card>);
   });
-
 
   return (
     <Drawer open={open} variant='persistent' position='static' anchor='left'
