@@ -81,7 +81,7 @@ const useAppData = function() {
         return {...prev, packages: updatedPackages};
       });
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log("Could not create package!", error));
   };
 
   const createNewClient = (client) => {
@@ -94,7 +94,7 @@ const useAppData = function() {
         return {...prev, clients: updatedClients};
       });
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log("Could not create client!", error));
   };
 
   const updateClient = (client) => {
@@ -108,11 +108,12 @@ const useAppData = function() {
 
     return axios.post(`/clients/${client.id}`, client)
     .then(response => {
+      console.log("Successfully updated client info!")
       setState(prev => {
         return {...prev, updatedClients};
       });
     })
-    .catch(error => error.message)
+    .catch(error => console.log("Could not update client!", error))
   };
 
   const processContract = (contractDetails) => {
@@ -130,6 +131,7 @@ const useAppData = function() {
     
     if (existingClient) {
       client.id = existingClient;
+      console.log("Client already exists :", client)
       updateClient(client);
     } else {
       client.id = state.clients.length + 1;
@@ -137,6 +139,7 @@ const useAppData = function() {
 
     // If client doesn't exist then create it
     if (!existingClient) {
+      console.log("Client is a new client, let's call createNewClient :", client)
       createNewClient(client);
     }
     
@@ -207,6 +210,7 @@ const useAppData = function() {
     Promise.all(jobPostPromises)
     .then((response) => {
       const updatedJobs = [...state.jobs, jobsArray];
+      console.log("About to inject updatedJobs into state!")
       setState(prev => {
         return {...prev, jobs: updatedJobs};
       });
@@ -218,12 +222,6 @@ const useAppData = function() {
       return {error: true, success: false};
     });
   };
-  
-  // Lines below are for testing output of generateJobsFromContracts
-  // const thisContract = {id: 6, package_id: 1, client_id: 1, start_date: new Date(), address: '45 Jimperson St', job_notes: 'Here are some notes'}
-  // const thisPackage = {id: 1, title:'Basic Lawn Care Package', flat_rate: 600, size_range_string: 'Med-MedLarge', description: 'Mow lawn and edge trim. No leaf removal.',
-  // man_hours_per_visit: 2, contract_length_days: 28, visit_interval_days: 7, package_image: 'package image :)'}
-  // console.log("generateJobsFromContract returns: ", generateJobsFromContract(thisContract, thisPackage));
 
   return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit }
 }
