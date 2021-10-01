@@ -30,7 +30,7 @@ const JobForm = (props) => {
     setSelectedCrew(job.crewId)
   },[])
   
-  if (jobs[params.id]) {
+  if (jobs[1]) {
 
     const estTime = getEstTime(job.packageManHours, (selectedCrew ? crews[selectedCrew - 1] : {crew_size: 1}))
     const date = format(new Date(job.date), 'EEE MMM dd yyyy')
@@ -45,7 +45,7 @@ const JobForm = (props) => {
       }
       setTimeout(() =>{
         setError([])
-      }, 3000)
+      }, 2000)
       setError(errorMessage);
     }
 
@@ -56,7 +56,14 @@ const JobForm = (props) => {
       onEdit(selectedCrew, startTime, endTime, job, parseInt(params.id))
       .then((response) => {
         setStatus({error: false, success: true, message: "Crew Launched successfully!"})
-        setTimeout(() => browserHistory.push('/dispatch'), 1500);
+        setTimeout(() => {
+          const nextJob = jobs.filter(job => {
+            return (job.id === parseInt(params.id) + 1)
+          })[0];
+          setTime(setHours(new Date(time), 6))
+          setSelectedCrew(null)
+          return ((nextJob && !nextJob.crewId)  ? browserHistory.push(`/dispatch/jobs/${parseInt(params.id) + 1}`) : browserHistory.push('/dispatch'))
+        }, 2000);
       })
       .catch((err) => { 
           setStatus({ success: false, error: true, message: "Failure To Liftoff!"});
@@ -69,7 +76,7 @@ const JobForm = (props) => {
     }));
     return (
       <Box width={'100%'}>
-        <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
+        <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={status.success || status.error} autoHideDuration={2000} onClose={() => setStatus({success: false, error: false, message: ""})}>
           <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
            severity={status.error ? 'error' : 'success'} sx={{ width: '100%' }}>
             {status.message}
