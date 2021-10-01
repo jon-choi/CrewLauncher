@@ -7,20 +7,21 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Grid, Stack, Card, Fab } from '@mui/material';
 
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center'
+}));
+
 
 
 const useDashboardDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
-  const fab = (<Fab variant="extended"
-    onClick={() => {
-      setSelectedDay(0)
-      console.log(selectedDay)
-    }} sx={{
-    position: 'sticky',
-    top: 16,
-    left: 850,
-  }}>Finish</Fab>
-    );
+  
 
   const mapDayToCard = function([...day], value) {
     const date = day.splice(0,1)
@@ -30,29 +31,29 @@ const useDashboardDayState = function() {
         return !job.completed
       })
       return (
-      <Box>
-        <Typography variant="h4" component="h4" onClick={(event) => setSelectedDay(value)}>
+      <Item sx={{minHeight: 185, maxWidth: 1000}} >
+        <Typography sx={{mt: 3}} variant="h4" component="h4" onClick={(event) => setSelectedDay(value)}>
           {date}
         </Typography>
         <Typography variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
           Jobs Today: {day.length}
         </Typography>
-        <Typography variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
+        <Typography sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
           Incomplete: {jobs.length}
         </Typography>
-      </Box>
+      </Item>
         )
     }
     return (
-    <Box>
-      <Typography variant="h4" component="h4">
+    <Item sx={{minHeight: 185, maxWidth: 1000}} >
+      <Typography variant="h4" component="h4" sx={{mt: 3}}>
         {date}
       </Typography>
-      <Typography variant="h5" component="h5">
+      <Typography variant="h5" component="h5" sx={{mt: 3,mb: 5}}>
         No Jobs Today!
       </Typography>
       
-    </Box>)
+    </Item>)
   }
   const jobsForSelectedDay = function([...day], value) {
     const date = day.splice(0,1)
@@ -60,9 +61,9 @@ const useDashboardDayState = function() {
       const jobCard = day.map(jobOfDay => {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob } = jobOfDay;
           return (
-          <Card>
+          <Card sx={{justifyContent: "center"}}>
             <Typography variant="h6">{crewOfJob ? crewOfJob.foreman_name : "Launch A Crew"}</Typography>
-            <Box sx={{ width: '95%', maxWidth: 200, maxHeight: 200, display: 'flex'}}>
+            <Box sx={{ width: '95%', maxWidth: 400, maxHeight: 200, display: 'flex', minHeight: 190}}>
               <JobCard
               key={job.id}
               packageTitle={packageOfJob.title}
@@ -85,18 +86,19 @@ const useDashboardDayState = function() {
     return mapDayToCard([date])
   }
 
-  const createDayCards = function(days) {
+  const createDayCards = function(days, fab) {
     let count = 0;
     return days.map(day => {
       const countListen = count;
-      const dayCard = (<Box
+      const dayCard = (<>{(selectedDay === countListen && days[countListen][1]) && fab}
+      <Box
         className={`day-${countListen}`}
         sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
         onClick={(event) => setSelectedDay(countListen)}
       >
-        {selectedDay !== null && countListen === selectedDay ? <>{jobsForSelectedDay(days[countListen], countListen)}{fab}</> : mapDayToCard(days[countListen], countListen)}
+        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], countListen) : mapDayToCard(days[countListen], countListen)}
       </Box>
-      );
+      </>);
       count++;
       return dayCard;
 
