@@ -20,7 +20,8 @@ const Dispatch = function(props) {
   const packages = props.packages;
   const contracts = props.contracts;
   const jobs = props.jobs;
-  const state = {crews, clients, packages, contracts, jobs}
+  const quotes = props.quotes;
+  const state = {crews, clients, packages, contracts, jobs, quotes};
 
   const clientsInfo = getClientsInfo(clients, contracts, packages);
   const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
@@ -29,7 +30,7 @@ const Dispatch = function(props) {
 
   return (
     <Box sx={{display: 'flex'}}>
-      <Navigation  jobs={jobs} contracts={contracts}/>
+      <Navigation  jobs={jobs} contracts={contracts} quotes={quotes}/>
         <Box width={'100%'} mt={10}>
         <Switch >
           <Route path={`${url}/jobs/:id`} >

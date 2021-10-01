@@ -55,8 +55,8 @@ const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 
 
 const generateJobDates = (startDate, contractLength, visitInterval) => {
   const jobs = [];
-  const jobCount = Math.round(parseInt(contractLength) / parseInt(visitInterval));
-
+  const jobCount = Math.ceil(parseInt(contractLength) / parseInt(visitInterval));
+  console.log("Jobcount: ", jobCount)
   for (let x = 0; x < jobCount; x++) {
     jobs.push({
       date: addDays(new Date(startDate), x * visitInterval)
