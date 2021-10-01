@@ -1,8 +1,39 @@
-import {  Link,NavLink, useRouteMatch } from 'react-router-dom';
-import {  Toolbar, Drawer, MenuList, MenuItem, AppBar, Box, Divider, CssBaseline } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Drawer, Button, Divider, Stack, Card, Typography, CardActions } from '@mui/material';
+import { format } from 'date-fns';
+const NavigationEmptyJobs = (props) => {
+  const { open, setOpen, jobs, contracts } = props;
+  console.log("JOBS: ", jobs)
+  
+  const jobCards = jobs.map(job => {
+    const contract = contracts.filter(contract => contract.id === job.contract_id)[0]
+    return (
+    <Card key={job.id}>
+      <CardActions>
+        <Button component={Link} to={`/dispatch/jobs/${job.id}`}>Edit Job</Button>
+      </CardActions>
+      <Typography>
+        <b>{format(new Date(job.date), 'MMMM, dd, yyyy')}</b>
+      </Typography>
+      <Typography>
+        {contract.address}
+      </Typography>
+    </Card>);
+  });
 
-const NavigationEmptyJob = function(props) {
 
-};
+  return (
+    <Drawer open={open} variant='persistent' position='static' anchor='left'
+      sx={{display: { xs: 'block', sm: 'block' },
+      '& .MuiDrawer-paper': { boxSizing: 'border-box', width: props.drawerWidth },
+    }}>
+      <Button><h1 onClick={()=> setOpen(false)}>Crew🚀Launcher</h1></Button>
+      <Divider />
+      <Stack>
+        {jobCards}
+      </Stack>
+    </Drawer>
+  )
+}
 
-export default NavigationEmptyJob;
+export default NavigationEmptyJobs;
