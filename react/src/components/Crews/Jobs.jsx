@@ -16,14 +16,25 @@ const Jobs = (props) => {
     jobs.sort(function (a, b) {
       return a.date - b.date;
     });
-    
-
+    let count = 1
+    let rows = []
+    for (const row of jobs) {
+      const date = row.date; 
+      const timeEstimate = row.timeEstimate;
+      rows.push({
+        count,
+        date,
+        timeEstimate,
+        rows:
+        [row]});
+      count++;
+    };
 
 
     
     return (
       <>
-        <JobTable jobs={jobs}
+        <JobTable rows={rows}
           
           />
       </>
