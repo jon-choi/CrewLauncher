@@ -58,11 +58,14 @@ const JobForm = (props) => {
         setStatus({error: false, success: true, message: "Crew Launched successfully!"})
         setTimeout(() => {
           const nextJob = jobs.filter(job => {
-            return (job.id === parseInt(params.id) + 1)
+            return (job.id === (parseInt(params.id) + 1))
           })[0];
           setTime(setHours(new Date(time), 6))
           setSelectedCrew(null)
-          return ((nextJob && !nextJob.crewId)  ? browserHistory.push(`/dispatch/jobs/${parseInt(params.id) + 1}`) : browserHistory.push('/dispatch'))
+          if (nextJob && nextJob.crewId === undefined)  {
+            return browserHistory.push(`/dispatch/jobs/${parseInt(params.id) + 1}`)
+          }
+          return browserHistory.push('/dispatch')
         }, 2000);
       })
       .catch((err) => { 
