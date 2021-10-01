@@ -27,7 +27,6 @@ const Quote = (props) => {
   const [endDate, setEndDate] = useState(new Date());
   const [address, setAddress] = useState("");
 
-  console.log("Selected Package:", props.selectedPackage)
   const validate = () => {
     const errorMessage = [];
 

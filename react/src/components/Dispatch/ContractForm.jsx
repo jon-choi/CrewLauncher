@@ -57,11 +57,10 @@ import { format, addDays } from 'date-fns';
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      console.log("ON SUBMIT: ", id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, selectedPackage.id )
       onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
       .then(() => { 
       setStatus({success: true, error: false, message: "Contract created successfully!"})
-      setTimeout(() => browserHistory.push(`/dispatch/contracts`), 1000);
+      setTimeout(() => browserHistory.push(`/dispatch/contracts`), 1500);
     })
       .catch(() => setStatus({success: false, error: true, message: "Error creating contract!"}));
     }
@@ -117,9 +116,9 @@ import { format, addDays } from 'date-fns';
   });
 
   return (
-    <>
+    <Box width={'100%'}>
       <h1>New Contract</h1>
-      <Stack component="form" spacing={2} sx={{margin: 'auto', width: '75%'}} >
+      <Stack component="form" spacing={2} sx={{margin: 'auto', maxWidth: 600}} >
         <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
           <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
           severity={status.success ? 'success' : 'error'} sx={{ width: '100%' }}>
@@ -192,7 +191,7 @@ import { format, addDays } from 'date-fns';
         
         <Button onClick={validate} variant="contained">Submit Contract</Button>
       </Stack>
-    </>
+    </Box>
   );
 };
 

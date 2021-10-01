@@ -1,6 +1,4 @@
-
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-
 import Dashboard from './Dashboard';
 import ClientsPage from './ClientsPage';
 import ContractsPage from './ContractsPage';
@@ -11,6 +9,7 @@ import Navigation from './Navigation';
 import CrewsPage from './CrewsPage/CrewsPage';
 import { getContractsInfo, getClientsInfo } from './dispatchDataHelper';
 import { getDayInfo } from '../../helpers/AppHelpers';
+import { Box } from '@mui/material';
 
 const Dispatch = function(props) {
   const { onEdit, createPackage, createContract } = props;
@@ -21,14 +20,17 @@ const Dispatch = function(props) {
   const packages = props.packages;
   const contracts = props.contracts;
   const jobs = props.jobs;
+  const state = {crews, clients, packages, contracts, jobs}
 
   const clientsInfo = getClientsInfo(clients, contracts, packages);
   const contractsInfo = getContractsInfo(contracts, clients, packages, jobs)
+
   const days = getDayInfo(jobs, crews, contracts, packages, clients)
 
   return (
-    <>
-      <Navigation />
+    <Box sx={{display: 'flex'}}>
+      <Navigation  jobs={jobs} contracts={contracts}/>
+        <Box width={'100%'} mt={10}>
         <Switch >
           <Route path={`${url}/jobs/:id`} >
             <JobForm onEdit={onEdit} crews={crews} packages={packages} contracts={contracts} jobs={jobs} />
@@ -46,7 +48,7 @@ const Dispatch = function(props) {
             <PackageForm onSubmit={createPackage}/>
           </Route>
           <Route path={`${url}/crews`} >
-            <CrewsPage />
+            <CrewsPage state={state}/>
           </Route>
           <Route path={`${url}/contracts`} >
             <ContractsPage contractsInfo={contractsInfo} />
@@ -59,7 +61,8 @@ const Dispatch = function(props) {
           </Route>
         </Switch>
       {/* <Quote /> */}
-    </>
+      </Box>
+    </Box>
     );
 }
 

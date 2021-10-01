@@ -1,36 +1,55 @@
-import {  Link, useRouteMatch } from 'react-router-dom';
-import { useState } from 'react';
-import { List, ListItem, Toolbar, Drawer, Button } from '@mui/material';
+import {  Link,NavLink, useRouteMatch } from 'react-router-dom';
+import {  Toolbar, Drawer, MenuList, MenuItem, AppBar, Box, Divider, CssBaseline } from '@mui/material';
+
+const drawerWidth=300;
+const activeLink = {color: "red"};
 
 const Navigation = () => {
   const { url } = useRouteMatch();
 
-  const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (<>
-    <Button onClick={() => setOpen(!open)}>Menu</Button>
-    <Drawer open={open} variant='persistent' position='static' anchor='left'>
-      <Toolbar>
-        <List>
-          <ListItem><h1>Crew🚀Launcher</h1></ListItem>
-          <ListItem component={Link} to='/dispatch' onClick={handleClose}> 🚀 Dashboard 🚀</ListItem>
-          <ListItem component={Link} to={`${url}/crews`} onClick={handleClose}>🚀 Crews</ListItem>
-          <ListItem component={Link} to={`${url}/clients`} onClick={handleClose}>🚀 Clients</ListItem>
-          <ListItem component={Link} to={`${url}/contracts`} onClick={handleClose}>🚀 Contracts</ListItem>
-          <List>
-            <ListItem>Create Forms</ListItem>
-            <ListItem component={Link} to={`${url}/contracts/new`} onClick={handleClose}>🚀 New Contract</ListItem>
-            <ListItem component={Link} to={`${url}/packages/new`} onClick={handleClose}>🚀 New Package</ListItem>
-          </List>
-          <ListItem component={Link} to={`${url}/contracts/1`} onClick={handleClose}>Edit Contract 1</ListItem>
-          <ListItem component={Link} to={`${url}/jobs/1`} onClick={handleClose}>Edit Job 1</ListItem>
-        </List>
-      </Toolbar>
-    </Drawer>
+      <AppBar position="fixed"
 
+        sx={{
+          width: `calc(100% - ${drawerWidth}px)` ,
+          ml: `${drawerWidth}px`,
+        }}>
+          <Toolbar></Toolbar>
+        </AppBar>
+        <Box
+        component="nav"
+        sx={{ width: drawerWidth }}
+        aria-label="mailbox folders"
+      ></Box>
+      <CssBaseline />
+    <Drawer variant='permanent' position='static' anchor='left'
+      sx={{display: { xs: 'block', sm: 'block' },
+      '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+    }}>
+          <h1>Crew🚀Launcher</h1>
+          <Divider />
+      <Toolbar>
+        <MenuList>
+          <MenuItem exact component={NavLink} to='/dispatch' activeStyle={activeLink}> 🚀 Dashboard 🚀</MenuItem>
+          <MenuItem component={NavLink} to={`${url}/crews`} activeStyle={activeLink}>🚀 Crews</MenuItem>
+          <MenuItem exact component={NavLink} to={`${url}/clients`} activeStyle={activeLink}>🚀 Clients</MenuItem>
+          <MenuItem exact component={NavLink} to={`${url}/contracts`} activeStyle={activeLink}>🚀 Contracts</MenuItem>
+          <Divider />
+          Create Forms
+          <Toolbar>
+            <MenuList>
+              <Divider />
+              <MenuItem component={NavLink} to={`${url}/contracts/new`} activeStyle={activeLink}>🚀 New Contract</MenuItem>
+              <MenuItem component={NavLink} to={`${url}/packages/new`} activeStyle={activeLink}>🚀 New Package</MenuItem>
+            </MenuList>
+          </Toolbar>
+          <Divider />
+          <MenuItem component={Link} to={`${url}/contracts/1`}>Edit Contract 1</MenuItem>
+          <MenuItem component={Link} to={`${url}/jobs/1`}>Edit Job 1</MenuItem>
+        </MenuList>
+      </Toolbar>
+      <Divider />
+    </Drawer>
   </>);
 };
 

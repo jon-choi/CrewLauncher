@@ -14,7 +14,8 @@ const App = function() {
     <Router >
       <div className="App">
         <Switch >
-          <Route path='/crews' >
+          <Route path='/crews/:id' >
+            <div><Link to='/crews/:id/jobs'>Jobs</Link></div>
             <Crews { ...state } onSubmitQuote={processContract} />
           </Route>
           <Route path='/dispatch' >
@@ -26,6 +27,10 @@ const App = function() {
             <div><Link to='/crews/1'>Crew #1</Link></div>
             <div><Link to='/crews/2'>Crew #2</Link></div>
             <div><Link to='/crews/3'>Crew #3</Link></div>
+            <p><b>Welcome to Crew Launcher 🚀</b></p>
+            <body>
+              <img alt="rocket launch" src="https://woodofmouth.files.wordpress.com/2012/03/space-travel.gif"></img>
+            </body>
           </Route>
         </Switch>    
       </div>

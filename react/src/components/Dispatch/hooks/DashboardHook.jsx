@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
- const useDayState = function() {
+const useDashboardDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
   const mapDayToCard = function([...day], value) {
     const date = day.splice(0,1)
@@ -92,4 +92,4 @@ import Stack from '@mui/material/Stack';
   return { selectedDay, createDayCards}
 }
 
-export default useDayState;
+export default useDashboardDayState;

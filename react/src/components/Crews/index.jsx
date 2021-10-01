@@ -14,7 +14,6 @@ const Crews = function(props) {
   const { onSubmitQuote } = props;
   const { url } = useRouteMatch;
   const params = useParams();
-
   // const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews);
  
 
@@ -29,8 +28,6 @@ const days = getDayInfo(
   clients,
   parseInt(params.id)
 );
-
-console.log("please get the day info: ", days);
 
 const [selectedDay, setSelectedDay] = useState([{}]);
     
