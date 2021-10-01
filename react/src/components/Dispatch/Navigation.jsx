@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import {  Link,NavLink, useRouteMatch } from 'react-router-dom';
-import {  Toolbar, Drawer, MenuList, MenuItem, AppBar, Box, Divider, CssBaseline, IconButton, Button } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Link,NavLink, useRouteMatch } from 'react-router-dom';
+import { Toolbar, Drawer, MenuList, MenuItem, AppBar, Divider, CssBaseline, IconButton, Button, Badge } from '@mui/material';
 import MenuIcon from '@mui/icons-material/MenuOpen';
 
 const drawerWidth=300;
@@ -8,6 +8,15 @@ const activeLink = {color: "red"};
 
 const Navigation = (props) => {
   const [navOpen, setNavOpen] = useState(true);
+  const [quoteState, setQuoteState] = useState([]);
+  const [unassignedJobState, setUnassignedJobState] = useState([]);
+
+  useEffect(() => {
+    setQuoteState(props.quotes);
+    const unassignedJobs = props.jobs.filter(job => !job.crew_id);
+    setUnassignedJobState(unassignedJobs);
+  }, [props.quotes, props.jobs])
+
   const { url } = useRouteMatch();
   const { contracts } = props.contracts;
   console.log("Contracts in nav: ", contracts)
@@ -33,10 +42,13 @@ const Navigation = (props) => {
       '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
     }}>
           <Button><h1 onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
-          
+
           <Divider />
           <Toolbar>
-            <Button>{`Incoming Quotes: ${0}`}</Button>  
+            <Badge showZero badgeContent={quoteState.length} color='primary'><Button>{`Incoming Quotes`}</Button></Badge>  
+          </Toolbar>
+          <Toolbar>
+            <Badge showZero badgeContent={unassignedJobState.length} color='primary'><Button>{`Unassigned Jobs`}</Button></Badge>  
           </Toolbar>
           <Divider />
       <Toolbar>
