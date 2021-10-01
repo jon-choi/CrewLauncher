@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
-import useCrewsPageDayState from './CrewsPageHook';
+import useCrewsPageDayState from './CrewsPageResources/CrewsPageHook';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -17,73 +17,13 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const CrewCard = (props) => {
   const { days } = props;
-  const { selectedDay, setSelectedDay, createCrewCards } = useCrewsPageDayState()
+  const { selectedDay, createCards } = useCrewsPageDayState()
  
   if (days) {
 
-    const createBodyItems = function([...day], value) {
-      const date = day.splice(0,1)
-      if (day[0]) {
-        return day.map(job => {
-          console.log(job)
-          return (<>
-          <Typography variant="h6" color="text.primary" gutterBottom onClick={(event) => setSelectedDay(value)}>
-            Job Info: 
-
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
-            {job.clientOfJob.name}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
-            {job.contractOfJob.address}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom onClick={(event) => setSelectedDay(value)}>
-            {job.job.completed ? "Complete!" : "Not Complete"}
-          </Typography>
-        </>)
-        });
-      }
-      return(<>
-        <Typography variant="h6" color="text.primary" gutterBottom>
-          No Jobs!
-        </Typography>
-      </>)
-    }
-    const createSelectedDayCard = function([...day]) {
-      console.log("click", selectedDay)
-      return null
-    }
-    const createCards = function(days) {
-
-      let count = 0;
-        const dayCardMap = days.map (day => {
-          const countListen = count;
-          return (<>
-            {!selectedDay &&
-            <Card
-            sx={{display: 'flex', justifyContent: 'center', minHeight: 175, minWidth: 40}}
-            className={`day-${countListen}`}
-            onClick={(event) => setSelectedDay(countListen)}
-            >
-              <Item>
-              <CardContent onClick={(event) => setSelectedDay(countListen)}>
-                <Typography onClick={(event) => setSelectedDay(countListen)} sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
-                  {day[0]}
-                </Typography>
-                {createBodyItems(day, countListen)}
-              </CardContent>
-              </Item>
-            </Card>}
-            {selectedDay && createSelectedDayCard(day)}
-            </>
-          )
-          countListen++;
-          return dayCardMap
-        })
-    }
     const cards = createCards(days)
 
-    return ( <Card sx="display: flex; justify-content: center; align-items: flex-start;">{cards}</Card>)
+    return ( <Card sx={{display: "flex", justifyContent: "center", alignItems: "center", minWidth: 1000}}>{cards}</Card>)
   }
   return (
     <Card sx="display: flex; justify-content: center; align-items: flex-start;">

@@ -21,17 +21,19 @@ const CrewPage = (props) => {
     const { jobs, crews, contracts, packages, clients } = props.state;
 
     if (jobs[1]) {
-
+        let count = 0;
         const cardsOfDaysForCrews = crews.map(crew => {
+
             const days = getDayInfo(jobs, crews, contracts, packages, clients, crew.id);
-            
-            return (<Grid container item>
-                <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+            count++
+            const key = count;
+            return (<Grid container item key={key} sx={{ alignItems: "center"}}>
+                <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 200, height: 200, mb: 4, ml: 20, mr: 5, mt: 5 }} />
                 <CrewCard days={days} />
             </Grid>)
         })
 
-        return(<>
+        return(<div>
             <Card sx={{mb: 10}}>
                 <Typography variant="h3" sx={{mb: 5}}>
                     Crews to Launch:
@@ -40,7 +42,7 @@ const CrewPage = (props) => {
         <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }}>
             {cardsOfDaysForCrews}
         </Grid>
-        </>)
+        </div>)
     }
 
     return (
