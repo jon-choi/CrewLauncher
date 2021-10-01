@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack';
-import useDayInfo from '../Dispatch/hooks/CrewsIndexHook';
+import useDayInfo from './hooks/CrewsIndexHook';
 
 
 const CrewDashboard = function(props) {
