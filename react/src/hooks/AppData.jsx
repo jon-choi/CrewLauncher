@@ -11,7 +11,7 @@ const useAppData = function() {
     packages: [{title: null}],
     contracts: [{address: null}],
     jobs: [{date: null}],
-    quotes: []
+    quotes: [{clientName: 'Joey Varoom', clientEmail: 'joey.varoom@hotmail.com', clientPhone: '587-283-2841'}]
   });
 
   useEffect(() => {
