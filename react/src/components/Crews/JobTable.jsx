@@ -20,14 +20,9 @@ function createData(name, timeEstimate) {
     timeEstimate,
     history: [
       {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
+        address: '555 Rocket Boulevard',
+        phone: '(555) 867-5309',
+        package: 'details',
       },
     ],
   };
@@ -66,7 +61,7 @@ function Row(props) {
                   <TableRow>
                     <TableCell>Address</TableCell>
                     <TableCell>Phone Number</TableCell>
-                    <TableCell align="right">Package/Contract Details</TableCell>
+                    <TableCell align="right">Package</TableCell>
                     <TableCell align="right">Job Notes</TableCell>
                   </TableRow>
                 </TableHead>
@@ -74,12 +69,12 @@ function Row(props) {
                   {row.history.map((historyRow) => (
                     <TableRow key={historyRow.date}>
                       <TableCell component="th" scope="row">
-                        555 Rocket Boulevard
+                        555 Rocket Man Boulevard
                       </TableCell>
                       <TableCell>(555)-867-5309</TableCell>
-                      <TableCell align="right">Gold Package</TableCell>
+                      <TableCell align="right">Rocket Man Package</TableCell>
                       <TableCell align="right">
-                        Watch out for dog poop!
+                        Watch out for rockets!
                       </TableCell>
                     </TableRow>
                   ))}
@@ -98,9 +93,9 @@ Row.propTypes = {
     timeEstimate: PropTypes.string.isRequired,
     history: PropTypes.arrayOf(
       PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+        package: PropTypes.string.isRequired,
       }),
     ).isRequired,
     name: PropTypes.string.isRequired,
@@ -122,7 +117,11 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Jobs for current date</TableCell>
+            <TableCell> 
+              <Typography sx={{ color: 'text.primary' }}>
+                Oct. 7/2021
+                </Typography>
+                </TableCell>
             <TableCell align="right">Time Estimate</TableCell>
           </TableRow>
         </TableHead>
