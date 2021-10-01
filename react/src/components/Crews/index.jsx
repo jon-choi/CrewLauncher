@@ -44,13 +44,10 @@ const [selectedDay, setSelectedDay] = useState([{}]);
             </Route>
     
             <Route path="/crews/:id/jobs">
-              <Jobs jobsByCrew={jobsByCrew} contractsInfo={contractsInfo} />
+              <Jobs contracts={contracts} jobs={jobs} clients={clients} packages={packages} crews={crews} />
             </Route>
-    
-            <Route path="/crews/:id/quote">
-              <Quote />
-            </Route>
-            <Route path="/crews">
+
+            <Route path="/crews/:id">
               <CrewDashboard days={days} />
             </Route>
             </Switch>

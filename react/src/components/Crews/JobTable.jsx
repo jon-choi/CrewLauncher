@@ -67,14 +67,14 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Frank Reynolds
+                {props.name ?  props.name :"Frank Reynolds"/*props.date*/ } 
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Address</TableCell>
-                    <TableCell>Phone Number</TableCell>
-                    <TableCell align="right">Package</TableCell>
+                    { props.name && <><TableCell>Address</TableCell>
+                    <TableCell>Phone Number</TableCell></> }
+                    <TableCell align="right">"Package"</TableCell>
                     <TableCell align="right">Job Notes</TableCell>
                   </TableRow>
                 </TableHead>
@@ -127,6 +127,7 @@ const rows = [
 
 export default function CollapsibleTable() {
   return (
+    <h1>🚀🚀 Oct. 7 / 2021 🚀🚀
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
@@ -147,5 +148,6 @@ export default function CollapsibleTable() {
         </TableBody>
       </Table>
     </TableContainer>
+  </h1>
   );
 }
