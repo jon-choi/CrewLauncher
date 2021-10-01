@@ -1,13 +1,14 @@
 
 
 import { Stack, Box } from '@mui/material';
+import { useEffect } from 'react';
 import useDashboardDayState from './hooks/DashboardHook'
 
 
 const Dashboard = function(props) {
-  const { selectedDay, createDayCards} = useDashboardDayState()
+  const { selectedDay, setSelectedDay, createDayCards} = useDashboardDayState()
   const { days } = props;
-  
+
   if (days) {
 
     
@@ -15,6 +16,7 @@ const Dashboard = function(props) {
 
     
     const dayCards = createDayCards(days);
+
 
     return (
       <Stack sx={{margin: 'auto', width: '100%'}} >

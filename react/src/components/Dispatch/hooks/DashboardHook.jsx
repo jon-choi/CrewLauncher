@@ -5,10 +5,23 @@ import JobCard from '../../JobCard'
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
+import { Grid, Stack, Card, Fab } from '@mui/material';
+
+
 
 const useDashboardDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
+  const fab = (<Fab variant="extended"
+    onClick={() => {
+      setSelectedDay(0)
+      console.log(selectedDay)
+    }} sx={{
+    position: 'sticky',
+    top: 16,
+    left: 850,
+  }}>Finish</Fab>
+    );
+
   const mapDayToCard = function([...day], value) {
     const date = day.splice(0,1)
     if(day[0]) {
@@ -47,9 +60,9 @@ const useDashboardDayState = function() {
       const jobCard = day.map(jobOfDay => {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob } = jobOfDay;
           return (
-          <Stack>
-            <Typography variant="h6">{crewOfJob.foreman_name}</Typography>
-            <Box sx={{ width: '95%', maxWidth: 500, maxHeight: 300, display: 'flex'}}>
+          <Card>
+            <Typography variant="h6">{crewOfJob ? crewOfJob.foreman_name : "Launch A Crew"}</Typography>
+            <Box sx={{ width: '95%', maxWidth: 200, maxHeight: 200, display: 'flex'}}>
               <JobCard
               key={job.id}
               packageTitle={packageOfJob.title}
@@ -60,13 +73,13 @@ const useDashboardDayState = function() {
               compClass="dashboard-day"
               />
             </Box>
-          </Stack>
+          </Card>
         )
       })
       const jobsForSelectedDay =
-        <Box>
+        <Grid container sx={{justifyContent: "center"}}>
            {jobCard}
-        </Box>
+        </Grid>
       return jobsForSelectedDay
     }
     return mapDayToCard([date])
@@ -81,7 +94,7 @@ const useDashboardDayState = function() {
         sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
         onClick={(event) => setSelectedDay(countListen)}
       >
-        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], countListen) : mapDayToCard(days[countListen], countListen)}
+        {selectedDay !== null && countListen === selectedDay ? <>{jobsForSelectedDay(days[countListen], countListen)}{fab}</> : mapDayToCard(days[countListen], countListen)}
       </Box>
       );
       count++;
@@ -89,7 +102,7 @@ const useDashboardDayState = function() {
 
     })
   }
-  return { selectedDay, createDayCards}
+  return { selectedDay, setSelectedDay, createDayCards}
 }
 
 export default useDashboardDayState;
