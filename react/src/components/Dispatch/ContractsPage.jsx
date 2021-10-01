@@ -21,9 +21,10 @@ const ContractsPage = (props) => {
       🚀 {contract.clientName} 🚀{contract.clientEmail} 
       </Typography>
     </Item>);
+    const startDate =  format(new Date(contract.start_date), 'EEE MMM d yyyy')
     const body = (<Stack container>
       <Item>Address: ${contract.address}</Item>
-      <Item>Start Date:{contract.start_date}</Item>
+      <Item>Start Date:{startDate}</Item>
       <Item>Job Notes: {contract.job_notes}</Item>
       <Item>Package length: {contract.packageLength}</Item>
       <Item>Next Visit: {nextVisit}<Typography variant="h6">🚀</Typography></Item>

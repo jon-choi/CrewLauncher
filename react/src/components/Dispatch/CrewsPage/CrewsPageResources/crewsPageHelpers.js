@@ -13,7 +13,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const createBodyItems = function([...day], value) {
-  console.log(value)
   const date = day.splice(0,1)
   if (day[0]) {
     return day.map(job => {
@@ -42,7 +41,6 @@ const createBodyItems = function([...day], value) {
 }
 
 const createSelectedDayCard = function([...day]) {
-  console.log("click", day[1])
   const date = day.splice(0,1)
   const selectedDayCard = day.map(job => {
     return (<>
