@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react';
 import { Link,NavLink, useRouteMatch } from 'react-router-dom';
 import { Toolbar, Drawer, MenuList, MenuItem, AppBar, Divider, CssBaseline, IconButton, Button, Badge } from '@mui/material';
 import MenuIcon from '@mui/icons-material/MenuOpen';
+import NavigationQuotes from './Navigation/NavigationQuotes';
+import NavigationEmptyJobs from './Navigation/NavigationEmptyJob';
 
 const drawerWidth=300;
 const activeLink = {color: "red"};
 
 const Navigation = (props) => {
   const [navOpen, setNavOpen] = useState(true);
+  const [quotesOpen, setQuotesOpen] = useState(false);
+  const [emptyJobsOpen, setEmptyJobsOpen] = useState(false);
   const [quoteState, setQuoteState] = useState([]);
   const [unassignedJobState, setUnassignedJobState] = useState([]);
 
@@ -37,6 +41,8 @@ const Navigation = (props) => {
         </AppBar>
         
       <CssBaseline />
+    <NavigationEmptyJobs contracts={props.contracts} jobs={unassignedJobState} open={emptyJobsOpen} setOpen={setEmptyJobsOpen}/>
+    <NavigationQuotes quotes={quoteState} open={quotesOpen} setOpen={setQuotesOpen}/>
     <Drawer open={navOpen} variant='persistent' position='static' anchor='left'
       sx={{display: { xs: 'block', sm: 'block' },
       '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
@@ -45,10 +51,14 @@ const Navigation = (props) => {
 
           <Divider />
           <Toolbar>
-            <Badge showZero badgeContent={quoteState.length} color='primary'><Button>{`Incoming Quotes`}</Button></Badge>  
+            <Badge showZero badgeContent={quoteState.length} color='primary'>
+              <Button onClick={()=>{setNavOpen(false); setQuotesOpen(true);}}>{`Incoming Quotes`}</Button>
+            </Badge>  
           </Toolbar>
           <Toolbar>
-            <Badge showZero badgeContent={unassignedJobState.length} color='primary'><Button>{`Unassigned Jobs`}</Button></Badge>  
+            <Badge showZero badgeContent={unassignedJobState.length} color='primary'>
+              <Button onClick={()=>{setNavOpen(false); setEmptyJobsOpen(true);}}>{`Unassigned Jobs`}</Button>
+            </Badge>  
           </Toolbar>
           <Divider />
       <Toolbar>
