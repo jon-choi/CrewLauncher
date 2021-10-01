@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import io from 'socket.io-client';
 import { getClientId, generateJobDates } from '../helpers/AppHelpers'
+
 
 const useAppData = function() {
 
@@ -35,6 +36,17 @@ const useAppData = function() {
     })
   }, []);
 
+
+  const onSubmitQuote = (quoteDetails) => {
+    console.log("Submitted quote: ", quoteDetails);
+    // const { selectedPackage, clientName, clientPhone, clientEmail, startDate, endDate, address } = quoteDetails;
+    const socket = io('/');
+    socket.connect()
+    console.log(socket)
+    socket.emit('quote', quoteDetails);
+    // socket.disconnect();
+    };
+
   const editJob = function(job) {
     const jobsInState = state.jobs.filter(jobInState => {
       return !(job.id === jobInState.id)
@@ -67,6 +79,7 @@ const useAppData = function() {
   }
 
   const createNewPackage = (newPackage) => {
+    
     const {title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage} = newPackage;
     const pkg = {
       title,
@@ -228,6 +241,6 @@ const useAppData = function() {
     });
   };
 
-  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit }
+  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit, onSubmitQuote }
 }
 export default useAppData;
