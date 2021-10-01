@@ -31,7 +31,7 @@ const PackageForm = (props) => {
       onSubmit({title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage})
       .then((response) => {
         setStatus({error: false, success: true, message: "Package created successfully!"})
-        setTimeout(() => browserHistory.push('/dispatch'), 1000);
+        setTimeout(() => browserHistory.push('/dispatch'), 1500);
       })
       .catch((err) => { 
           setStatus({ success: false, error: true, message: "Package creation error!"});
