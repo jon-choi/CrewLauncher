@@ -56,16 +56,17 @@ export function getJobsByCrew(jobs, clients, packages, contracts, crewId) {
     const packageOfJobs = packages.filter(packageItem => contractOfJob.package_id === packageItem.id)[0];
     const clientOfJobs = clients.filter(client => contractOfJob.client_id === client.id)[0];
     const timeEstimate = jobOfCrew.end_time - jobOfCrew.start_time;
-    const date = format(new Date(jobOfCrew.date), 'T')
+    const sortDate = format(new Date(jobOfCrew.date), 'TT')
     const job = {
         id: jobOfCrew.id,
+        date: jobOfCrew.date,
         clientName: clientOfJobs.name,
         clientPhone: clientOfJobs.phone,
         package: packageOfJobs.title,
         address: contractOfJob.address,
         jobNotes: contractOfJob.job_notes,
         timeEstimate,
-        date
+        sortDate
     };
     jobsInfo.push(job);
   }

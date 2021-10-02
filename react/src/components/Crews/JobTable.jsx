@@ -14,6 +14,7 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { getJobsByCrew } from './crewsDataHelper';
+import {format} from 'date-fns'
 
 
 // function createData(rows) {
@@ -38,11 +39,11 @@ import { getJobsByCrew } from './crewsDataHelper';
 function Row(props) {
   
 
-  const { jobs } = props;
+  const { jobs, timeEstimate, packageItem } = props;
 
   const [open, setOpen] = React.useState(false);
   
-
+  const date = format(new Date(props.date), 'EEE dd MMM, yyyy')
 // job = {
 //         id: jobOfCrew.id,
 //         clientName: clientOfJobs.name,
@@ -54,7 +55,8 @@ function Row(props) {
 //         date
 //     };
   
-  console.log(jobs)
+console.log(props.packageItem)
+  // console.log(jobs)
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -68,23 +70,23 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {jobs.date}
+          {date}
         </TableCell>
-        <TableCell align="right">{jobs.timeEstimate}</TableCell>
+        <TableCell align="right">{timeEstimate} Hours</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                {jobs.clientName ?  jobs.clientName :"Frank Reynolds"/*props.date*/ } 
+                {jobs.clientName ?  jobs.clientName : packageItem/*props.date*/ } 
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
                     { props.name && <><TableCell>Address</TableCell>
                     <TableCell>Phone Number</TableCell></> }
-                    <TableCell align="right">"Package"</TableCell>
+                    <TableCell align="right">Address</TableCell>
                     <TableCell align="right">Job Notes</TableCell>
                   </TableRow>
                 </TableHead>
@@ -92,12 +94,12 @@ function Row(props) {
                   {jobs.map((job) => (
                     <TableRow key={job.address}>
                       <TableCell component="th" scope="row">
-                        {jobs.address}
+                        {job.address}
                       </TableCell>
                       <TableCell>{jobs.phone}</TableCell>
                       <TableCell align="right">{jobs.package}</TableCell>
                       <TableCell align="right">
-                        {jobs.jobNotes}
+                        {job.jobNotes}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -138,6 +140,7 @@ Row.propTypes = {
 export default function CollapsibleTable(props) {
 
   const { rows } = props;
+
   return (
     <h1>
     <TableContainer component={Paper}>
@@ -155,7 +158,7 @@ export default function CollapsibleTable(props) {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.count} jobs={row.rows} />
+            <Row key={row.count} jobs={row.rows} date={row.date} timeEstimate={row.timeEstimate} packageItem={row.packageItem} />
           ))}
         </TableBody>
       </Table>
