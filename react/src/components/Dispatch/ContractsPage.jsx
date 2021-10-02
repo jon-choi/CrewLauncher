@@ -74,11 +74,17 @@ const ContractsPage = (props) => {
   })
 
   return (
-    <Stack ><h1>🚀 Contracts: 🚀</h1>
-    <Grid container justifyContent="center" width={'100%'} columnSpacing={3} rowSpacing={2}>
-    
+    <Stack spacing={5} >
+      <Item sx={{maxHeight: 800, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
+        <Typography variant="h3" >
+      🚀 Contracts 🚀
+        </Typography>
+      </Item>
+
+        <Grid container justifyContent="center" width={'100%'} columnSpacing={3} rowSpacing={2}>
     {contractCards}
-    </Grid>
+        </Grid>
+
     </Stack>
   );
 };
