@@ -200,11 +200,15 @@ const useAppData = function() {
               return {...prev, contracts: updatedContracts}
             });
             const thisPackage = state.packages.filter(p => p.id === contract.package_id)[0];
-
-            return generateJobsFromContract(contract, thisPackage);
+            deleteAllJobsFromContract(contract.id)
+            .then(() => {
+              console.log(`Generating jobs for contract: ${contract.id}`)
+              return generateJobsFromContract(contract, thisPackage);
+            })
           })
           .catch(error => {
             console.log('Could not submit contract: ', error);
+            return error;
           });
         }    
       })
@@ -223,7 +227,24 @@ const useAppData = function() {
   };
 
   const deleteAllJobsFromContract = (contractId) => {
-    
+    const jobsInContract = state.jobs.filter(job => job.contract_id === contractId);
+    const jobsNotInContract = state.jobs.filter(job => job.contract_id !== contractId);
+    const deleteAllJobs = jobsInContract.map(job => {
+      return axios.delete(`/jobs/${job.id}`);
+    });
+
+    return Promise.all(deleteAllJobs)
+    .then(response => {
+      console.log(`Jobs related to contract_id:${contractId} deleted successfully`);
+      setState(prev => {
+        return {...prev, jobs: jobsNotInContract };
+      });
+      return response;
+    })
+    .catch(err => {
+      console.log(`Error: could not delete jobs of contract_id:${contractId} ${err}`);
+      return err;
+    })
   };
 
   const generateJobsFromContract = (contract, packageInfo) => {
@@ -244,7 +265,6 @@ const useAppData = function() {
         end_time: (start + packageInfo.man_hours_per_visit),
         completed: false 
       };
-      
     });
     
     const jobPostPromises = jobsArray.map(job => {
