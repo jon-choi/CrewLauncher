@@ -10,10 +10,12 @@ import CrewsPage from './CrewsPage/CrewsPage';
 import { getContractsInfo, getClientsInfo } from './dispatchDataHelper';
 import { getDayInfo } from '../../helpers/AppHelpers';
 import { Box } from '@mui/material';
+import { useState } from 'react';
 
 const Dispatch = function(props) {
-  const { onEdit, createPackage, createContract } = props;
+  const { onEdit, createPackage, createContract, updateQuoteState } = props;
   const { url } = useRouteMatch();
+
 
   const crews = props.crews;
   const clients = props.clients;
@@ -30,7 +32,7 @@ const Dispatch = function(props) {
 
   return (
     <Box sx={{display: 'flex'}}>
-      <Navigation  jobs={jobs} contracts={contracts} quotes={quotes}/>
+      <Navigation  jobs={jobs} contracts={contracts} quotes={quotes} updateQuoteState={updateQuoteState} />
         <Box width={'100%'} mt={10}>
         <Switch >
           <Route path={`${url}/jobs/:id`} >
