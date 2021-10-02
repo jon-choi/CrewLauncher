@@ -5,7 +5,7 @@ import './App.css';
 import useAppData from './hooks/AppData';
 
 const App = function() {
-  const { state, createNewPackage, processContract, saveJobEdit, onSubmitQuote } = useAppData()
+  const { state, createNewPackage, processContract, saveJobEdit, onSubmitQuote, updateQuoteState } = useAppData()
 
 
 
@@ -17,7 +17,7 @@ const App = function() {
             <Crews { ...state } onSubmitQuote={onSubmitQuote} />
           </Route>
           <Route path='/dispatch' >
-            <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} /> 
+            <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} updateQuoteState={updateQuoteState}/> 
           </Route> 
           <Route path='/'>
             <div><Link to='/dispatch'>Dispatch</Link></div>
