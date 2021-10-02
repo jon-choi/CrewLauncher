@@ -32,13 +32,13 @@ const Quote = (props) => {
       
       setError([]);
       const quote = {
-        packageInfo : selectedPackage,
         packageId: selectedPackage.id,
         startDate: startDate,
         address,
         clientEmail,
         clientName,
-        clientPhone
+        clientPhone,
+        selectedPackage
       }
       return submit(quote);
     }
