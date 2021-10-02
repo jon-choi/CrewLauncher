@@ -15,7 +15,7 @@ import { format, addDays } from 'date-fns';
 const Quote = (props) => {
   const { packages } = props;
   const submit = props.onSubmitQuote;
-
+  console.log("Here")
   const [error, setError] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [clientName, setClientName] = useState("");
