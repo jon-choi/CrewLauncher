@@ -33,26 +33,28 @@ const CrewPage = (props) => {
             </Grid>)
         })
 
-        return(<box>
-            <Card sx={{mb: 10}}>
-                <Typography variant="h3" sx={{mb: 5}}>
-                    Crews to Launch:
+        return(<Stack>
+
+                <Item sx={{maxHeight: 800, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
+                <Typography variant="h3">
+                🚀  Crews to Launch: 🚀 
                 </Typography>
-            </Card>
+                </Item>
+
         <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }}>
             {cardsOfDaysForCrews}
         </Grid>
-        </box>)
+        </Stack>)
     }
 
     return (
 
         <>
-            <Card sx={{mb: 10}}>
+            {/* <Card sx={{mb: 10}}>
                 <Typography variant="h3" sx={{mb: 5}}>
                 🚀  Crews to Launch: 🚀 
                 </Typography>
-            </Card>
+            </Card> */}
             
             <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }}>
                 <Grid item container>
