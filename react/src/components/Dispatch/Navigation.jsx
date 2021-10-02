@@ -61,7 +61,7 @@ const Navigation = (props) => {
       sx={{display: { xs: 'block', sm: 'block' },
       '& .MuiDrawer-paper': { boxSizing: 'border-box', backgroundImage: "url(https://acegif.com/wp-content/gif/outerspace-6.gif)"},
     }}>
-          <Button><h1 className='App-header' onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
+          <Button><h1 className='App-header' onClick={()=> setNavOpen(!navOpen)}>Crew La🚀ncher</h1></Button>
 
           <Divider />
           <Toolbar>

@@ -9,7 +9,7 @@ const App = function() {
   const { state, createNewPackage, processContract, saveJobEdit, onSubmitQuote, updateQuoteState } = useAppData()
 
   return (
-    <Router >
+    <Router minHeight='100%' >
 
         <div className="App">
           <Switch >
