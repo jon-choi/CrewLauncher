@@ -28,7 +28,7 @@ const JobForm = (props) => {
 
   useEffect(() => {
     setSelectedCrew(job.crewId)
-  },[selectedCrew])
+  },[time])
   
   if (jobs[1]) {
 
