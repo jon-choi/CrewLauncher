@@ -30,7 +30,7 @@ const NavigationQuotes = (props) => {
   return (
     <Drawer open={open} variant='persistent' position='static' anchor='left'
       sx={{display: { xs: 'block', sm: 'block' },
-      '& .MuiDrawer-paper': { boxSizing: 'border-box', width: props.drawerWidth },
+      '& .MuiDrawer-paper': { boxSizing: 'border-box' },
     }}>
       <Button><h1 onClick={()=> setOpen(false)}>Crew🚀Launcher</h1></Button>
       <Divider />
