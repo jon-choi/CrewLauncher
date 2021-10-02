@@ -28,7 +28,7 @@ const ClientCard = (props) => {
     );
   }
   return (
-    <Card sx="display: flex; justify-content: flex-start; align-items: flex-start;">
+    <Card sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
       <Stack width={400}>
         <Avatar alt="clientName" src={client.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 3 }} />
         <Typography sx={{ fontSize: 14, ml: 5 }} color="text.secondary" gutterBottom>
