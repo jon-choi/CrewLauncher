@@ -30,7 +30,11 @@ import { format, addDays } from 'date-fns';
     const con = props.contracts ? props.contracts.filter(c => c.id === id)[0] : undefined;
     const cli = props.clients ? props.clients.filter(client => client.id === clientId)[0] : undefined;
     const quo = props.quotes ? props.quotes[quoteKey] : undefined;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
   useEffect(() => {  
     if (con !== undefined) {
       const thisClient = props.clients.filter(c => c.id === con.client_id)[0];

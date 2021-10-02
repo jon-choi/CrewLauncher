@@ -12,7 +12,7 @@ const useAppData = function() {
     packages: [{title: null}],
     contracts: [{address: null}],
     jobs: [{date: null}],
-    quotes: [{clientName: 'Joey Varoom', clientEmail: 'joey.varoom@hotmail.com', address: '74 Wanrook Cres, Beverly Yokama',clientPhone: '587-283-2841', packageId: 1, startDate: new Date(), selectedPackage: {id: 1, title: 'Small Property Lawn Care', flat_rate: 13000, size_range_string: '', description: 'A premium lawn care detailing that will please a home owner', man_hours_per_visit: 3, contract_length_days: 91, visit_interval_days: 7} }]
+    quotes: []
   });
 
   useEffect(() => {
