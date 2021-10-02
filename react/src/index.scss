@@ -3,6 +3,7 @@ $fontFamily: 'Yantramanav', 'sans-serif';
 body {
   margin: 0;
   padding: 0;
+  min-height: max-content;
   font-family: $fontFamily;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,6 +27,10 @@ body {
   }
   .MuiBadge-root {
     margin-left: 20px;
+  }
+  .css-1pqe9yl-MuiPaper-root {
+    
+    background-color: rgb(240, 231, 214);
   }
 }
 code {
