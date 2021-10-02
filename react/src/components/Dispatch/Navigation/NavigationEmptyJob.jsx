@@ -29,7 +29,7 @@ const NavigationEmptyJobs = (props) => {
       <Button><h1 onClick={()=> setOpen(false)}>Crew🚀Launcher</h1></Button>
       <Divider />
       <Stack>
-        {jobCards}
+        {jobCards.length > 0 ? jobCards : (<h3>No unassigned jobs :)</h3>)}
       </Stack>
     </Drawer>
   )

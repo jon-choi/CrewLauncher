@@ -7,8 +7,6 @@ import useAppData from './hooks/AppData';
 const App = function() {
   const { state, createNewPackage, processContract, saveJobEdit, onSubmitQuote, updateQuoteState } = useAppData()
 
-
-
   return (
     <Router >
       <div className="App">

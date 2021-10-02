@@ -35,7 +35,7 @@ const NavigationQuotes = (props) => {
       <Button><h1 onClick={()=> setOpen(false)}>Crew🚀Launcher</h1></Button>
       <Divider />
       <Stack>
-        {quoteCards}
+        {quotes.length > 0 ? quoteCards : (<h3>No quotes :)</h3>)}
       </Stack>
     </Drawer>
   )
