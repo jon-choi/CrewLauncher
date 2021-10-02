@@ -51,7 +51,7 @@ App.get('/api/data', (req, res) => {
 socket.start(httpServer);
 
 httpServer.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server ( with websockets ;) ) running at http://localhost:${PORT}`);
 });
 
 // App.listen(PORT, () => {
