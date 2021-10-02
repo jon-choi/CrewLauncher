@@ -9,7 +9,6 @@ const CrewDashboard = function(props) {
   const { days } = props;
 
   const id = useParams().id;
-  
   if (days) {
     const fab = (<Fab variant="extended"
     onClick={() => {
@@ -38,7 +37,7 @@ const CrewDashboard = function(props) {
   }
   return (
     <>
-      {`${days}`}
+      {days}
 
     </>
   );

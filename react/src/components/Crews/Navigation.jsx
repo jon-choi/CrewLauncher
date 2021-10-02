@@ -27,7 +27,7 @@ const Navigation = (props) => {
         </Button>
       
         <Item sx={{alignSelf: "center"}} >
-          <Drawer closeButtonText={'Close'} openButtonText={'Quote'} Buttons={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
+          <Drawer closeButtonText={'Close'} openButtonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
         </Item>
       </Stack>
     </div>

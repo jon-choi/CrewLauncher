@@ -10,8 +10,7 @@ import { getJobsByCrew } from './crewsDataHelper';
 const Jobs = (props) => {
   const params = useParams()
   const crewId = parseInt(params.id);
-
-  if (props.contracts[1]) {
+  if (props.jobs[1]) {
     const jobs = getJobsByCrew(props.jobs, props.clients, props.packages, props.contracts, crewId);
     jobs.sort(function (a, b) {
       return a.sortDate - b.sortDate;

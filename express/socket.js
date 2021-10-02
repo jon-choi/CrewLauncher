@@ -20,14 +20,12 @@ const start = function(httpServer) {
   const sendStatus = function() {
     const active = Object.keys(users).length;
     const status = { connected, active };
-    console.log(status);
     server.emit('status', status);
   };
 
   server.on('connection', (socket) => {
     // This socket param is the sending socket. Has a unique ID (socket.id)
     // We can use this ID and associate with a specific used
-    console.log("connected:  ", socket.id);
 
     server.to(socket.id).emit('notify', `Connected [ ${socket.id} ]`);
     connected++;
@@ -46,7 +44,6 @@ const start = function(httpServer) {
 
     // Handle an "offline" message
     socket.on('register', name => {
-      console.log("register: ", name);
 
       const user = getUser(socket.id);
       if (user) {
@@ -59,17 +56,14 @@ const start = function(httpServer) {
 
       // Add user
       users[name] = socket.id;
-      console.log(users);
       server.to(socket.id).emit('notify', `Registered as: ${name}`);
       sendStatus(server);
 
-      console.log(users);
     });
 
 
     // Handle an "offine" message (only gets socket.id)
     socket.on('offline', () => {
-      console.log("offine: ", socket.id);
 
       // Find user
       const user = getUser(socket.id);
@@ -78,7 +72,6 @@ const start = function(httpServer) {
       }
 
       delete users[user];
-      console.log(users);
       server.to(socket.id).emit('notify', `Offline ( ${user} )`);
       sendStatus(server);
     });
