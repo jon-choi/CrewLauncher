@@ -246,7 +246,7 @@ const useAppData = function() {
       return axios.post('/jobs', job)
     });
 
-    Promise.all(jobPostPromises)
+    return Promise.all(jobPostPromises)
     .then((response) => {
       const updatedJobs = [...state.jobs, ...jobsArray];
       setState(prev => {
