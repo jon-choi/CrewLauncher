@@ -30,6 +30,7 @@ import { format, addDays } from 'date-fns';
     const con = props.contracts ? props.contracts.filter(c => c.id === id)[0] : undefined;
     const cli = props.clients ? props.clients.filter(client => client.id === clientId)[0] : undefined;
     const quo = props.quotes ? props.quotes[quoteKey] : undefined;
+    
   useEffect(() => {  
     if (con !== undefined) {
       const thisClient = props.clients.filter(c => c.id === con.client_id)[0];
@@ -51,7 +52,7 @@ import { format, addDays } from 'date-fns';
       setClientName(quo.clientName);
       setClientPhone(quo.clientPhone);
       setClientEmail(quo.clientEmail);
-      setSelectedPackage(quo.selectedPackage);
+      setSelectedPackage(props.packages.filter(p => p.id === quo.packageId)[0]);
       setAddress(quo.address);
       setStartDate(new Date(quo.startDate));
     }
@@ -64,7 +65,8 @@ import { format, addDays } from 'date-fns';
     if (selectedPackage && startDate && address && clientName && clientEmail) {
       // Successful package creation
       setError([]);
-      onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id})
+      console.log("Submitting quote as a contract:", quo);
+      onSubmit({id, clientName, clientPhone, clientEmail, startDate, address, jobNotes, packageId: selectedPackage.id, quote: quo ? quo : null})
       .then(() => { 
       setStatus({success: true, error: false, message: "Contract created successfully!"})
       setTimeout(() => browserHistory.push(`/dispatch/contracts`), 1500);
