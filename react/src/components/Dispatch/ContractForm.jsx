@@ -6,10 +6,11 @@ import Drawer from '../Drawer';
 import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
 import { format, addDays } from 'date-fns';
 
-  
+
   const ContractForm = (props) => {
     const id = parseInt(useParams().id);
     const clientId = parseInt(useParams().client_id); 
+    const quoteKey = parseInt(useParams().quote_key)
     const { url } = useRouteMatch();
     const browserHistory = useHistory();
 
@@ -28,7 +29,8 @@ import { format, addDays } from 'date-fns';
     
     const con = props.contracts ? props.contracts.filter(c => c.id === id)[0] : undefined;
     const cli = props.clients ? props.clients.filter(client => client.id === clientId)[0] : undefined;
-
+    const quo = props.quotes ? props.quotes[quoteKey] : undefined;
+    console.log("Props.quotes", props.quotes[quoteKey])
   useEffect(() => {  
     if (con !== undefined) {
       const thisClient = props.clients.filter(c => c.id === con.client_id)[0];
@@ -42,13 +44,19 @@ import { format, addDays } from 'date-fns';
       setSelectedPackage(thisPackage);
       setAddress(con.address);
       setJobNotes(con.job_notes);
-    }
-    if (cli !== undefined) {
+    } else if (cli !== undefined) {
       setClientName(cli.name);
       setClientPhone(cli.phone);
       setClientEmail(cli.email);
+    } else if (quo !== undefined) {
+      setClientName(quo.clientName);
+      setClientPhone(quo.clientPhone);
+      setClientEmail(quo.clientEmail);
+      setSelectedPackage(quo.selectedPackage);
+      setAddress(quo.address);
+      setStartDate(new Date(quo.startDate));
     }
-  }, [url, con, cli, props.clients, props.packages])
+  }, [quo, url, con, cli, props.clients, props.packages])
  
 
   const validate = () => {

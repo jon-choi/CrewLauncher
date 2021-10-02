@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import io from 'socket.io-client';
 import { getClientId, generateJobDates } from '../helpers/AppHelpers'
+
 
 const useAppData = function() {
 
@@ -11,7 +12,7 @@ const useAppData = function() {
     packages: [{title: null}],
     contracts: [{address: null}],
     jobs: [{date: null}],
-    quotes: [{clientName: 'Joey Varoom', clientEmail: 'joey.varoom@hotmail.com', clientPhone: '587-283-2841'}]
+    quotes: [{clientName: 'Joey Varoom', clientEmail: 'joey.varoom@hotmail.com', address: '74 Wanrook Cres, Beverly Yokama',clientPhone: '587-283-2841', packageId: 1, startDate: new Date(), selectedPackage: {id: 1, title: 'Small Property Lawn Care', flat_rate: 13000, size_range_string: '', description: 'A premium lawn care detailing that will please a home owner', man_hours_per_visit: 3, contract_length_days: 91, visit_interval_days: 7} }]
   });
 
   useEffect(() => {
@@ -34,6 +35,17 @@ const useAppData = function() {
         })
     })
   }, []);
+
+
+  const onSubmitQuote = (quoteDetails) => {
+    console.log("Submitted quote: ", quoteDetails);
+    // const { selectedPackage, clientName, clientPhone, clientEmail, startDate, endDate, address } = quoteDetails;
+    const socket = io('/');
+    socket.connect()
+    console.log(socket)
+    socket.emit('quote', quoteDetails);
+    // socket.disconnect();
+    };
 
   const editJob = function(job) {
     const jobsInState = state.jobs.filter(jobInState => {
@@ -67,6 +79,7 @@ const useAppData = function() {
   }
 
   const createNewPackage = (newPackage) => {
+    
     const {title, flatRate, sizeRange, description, manHrsPerVisit, contractLength, visitInterval, packageImage} = newPackage;
     const pkg = {
       title,
@@ -228,6 +241,6 @@ const useAppData = function() {
     });
   };
 
-  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit }
+  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit, onSubmitQuote }
 }
 export default useAppData;

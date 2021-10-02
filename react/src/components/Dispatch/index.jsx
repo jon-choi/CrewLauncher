@@ -39,6 +39,9 @@ const Dispatch = function(props) {
           <Route path={`${url}/clients/:client_id/contracts/new`}>
             <ContractForm contracts={contracts} clients={clients} packages={packages} onSubmit={createContract} />
           </Route>
+          <Route path={`${url}/contracts/quotes/:quote_key`}>
+            <ContractForm quotes={quotes} contracts={contracts} clients={clients} packages={packages} onSubmit={createContract} />
+          </Route>
           <Route path={`${url}/contracts/new`} >
             <ContractForm contracts={contracts} packages={packages} onSubmit={createContract} />
           </Route>
