@@ -200,6 +200,7 @@ const useAppData = function() {
               return {...prev, contracts: updatedContracts}
             });
             const thisPackage = state.packages.filter(p => p.id === contract.package_id)[0];
+
             return generateJobsFromContract(contract, thisPackage);
           })
           .catch(error => {
@@ -219,6 +220,10 @@ const useAppData = function() {
         return response;
       })
       .catch((error)=>console.log('Error confirming client : ', error));
+  };
+
+  const deleteAllJobsFromContract = (contractId) => {
+    
   };
 
   const generateJobsFromContract = (contract, packageInfo) => {
