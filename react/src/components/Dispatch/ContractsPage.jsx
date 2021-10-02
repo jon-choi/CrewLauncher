@@ -32,9 +32,8 @@ const ContractsPage = (props) => {
     const body = (
     <Stack container>
       {(currentContract || completedContract) && contractProgress && 
-      
       <Box sx={{position: 'relative', display: 'inline'}}>
-        <CircularProgress variant="determinate" value={contractProgress} />
+        <CircularProgress size={'4.5em'} variant="determinate" value={contractProgress} />
         <Box
           sx={{
             top: 0,
@@ -47,16 +46,16 @@ const ContractsPage = (props) => {
             justifyContent: 'center',
           }}
         >
-          <Typography variant="caption" component="div" color="text.secondary">
+          <Typography fontSize="2em" variant="caption" component="div" color="text.secondary">
             {completedContract ? '🚀' : `${contractProgress}%`}
           </Typography>
         </Box>
       </Box>
       }
       <Item>Address: {contract.address}</Item>
-      <Item>Start Date:{startDate}</Item>
-      <Item>Job Notes: {contract.job_notes}</Item>
-      <Item>Package length: {contract.packageLength}</Item>
+      <Item>Start Date: {startDate}</Item>
+      <Item>Notes: {contract.job_notes}</Item>
+      <Item><b>Contract length:</b> {contract.packageLength}</Item>
       <Item>Next Visit: {nextVisit}<Typography variant="h6">🚀</Typography></Item>
       </Stack>);
     const linkToEdit = `/dispatch/contracts/${contract.id}`;
