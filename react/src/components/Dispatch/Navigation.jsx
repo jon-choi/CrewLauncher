@@ -4,6 +4,7 @@ import { Toolbar, Drawer, MenuList, MenuItem, AppBar, Divider, CssBaseline, Icon
 import MenuIcon from '@mui/icons-material/MenuOpen';
 import NavigationQuotes from './Navigation/NavigationQuotes';
 import NavigationEmptyJobs from './Navigation/NavigationEmptyJob';
+import io from 'socket.io-client';
 
 const drawerWidth=300;
 const activeLink = {color: "red"};
@@ -15,6 +16,17 @@ const Navigation = (props) => {
   const [quoteState, setQuoteState] = useState([]);
   const [unassignedJobState, setUnassignedJobState] = useState([]);
 
+  useEffect(()=> {
+    const socket = io('/');
+    socket.connect();
+    console.log('Connected over here');
+    socket.on('quote', (quote) => {
+      setQuoteState(prev => [...prev, quote]);
+      console.log("Incoming quote... ", quote)
+    });
+    return () => socket.disconnect();
+  }, []);
+
   useEffect(() => {
     setQuoteState(props.quotes);
     const unassignedJobs = props.jobs.filter(job => !job.crew_id);
@@ -24,7 +36,8 @@ const Navigation = (props) => {
   const { url } = useRouteMatch();
   const { contracts } = props.contracts;
   console.log("Contracts in nav: ", contracts)
-  return (<>
+  return (
+    <>
       <AppBar position="fixed">
           <Toolbar>
             <IconButton
@@ -37,6 +50,9 @@ const Navigation = (props) => {
             >
               <MenuIcon />
             </IconButton>
+              <Badge overlap='circular' showZero badgeContent={quoteState.length}><IconButton color="inherit" onClick={setQuotesOpen}>Quotes</IconButton></Badge>
+              
+              <Badge overlap='circular' badgeContent={unassignedJobState.length}><IconButton color="inherit" onClick={setEmptyJobsOpen}>Jobs</IconButton></Badge>
           </Toolbar>
         </AppBar>
         

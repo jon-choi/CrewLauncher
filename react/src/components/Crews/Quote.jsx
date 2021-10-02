@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Stack';
@@ -9,9 +8,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import Drawer from '../Drawer';
 import QuoteSpeedDial from './QuoteSpeedDial'
-import { format, addDays, getDate } from 'date-fns';
+import { format, addDays } from 'date-fns';
 
 
 const Quote = (props) => {
@@ -34,9 +32,9 @@ const Quote = (props) => {
       
       setError([]);
       const quote = {
+        packageInfo : selectedPackage,
         packageId: selectedPackage.id,
         startDate: startDate,
-        jobNotes: "",
         address,
         clientEmail,
         clientName,
