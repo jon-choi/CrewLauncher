@@ -6,7 +6,6 @@ import NavigationQuotes from './Navigation/NavigationQuotes';
 import NavigationEmptyJobs from './Navigation/NavigationEmptyJob';
 import io from 'socket.io-client';
 
-const drawerWidth=300;
 const activeLink = {color: "red"};
 
 const Navigation = (props) => {
@@ -60,20 +59,16 @@ const Navigation = (props) => {
     <NavigationQuotes quotes={props.quotes} open={quotesOpen} setOpen={setQuotesOpen}/>
     <Drawer open={navOpen} variant='persistent' position='static' anchor='left'
       sx={{display: { xs: 'block', sm: 'block' },
-      '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+      '& .MuiDrawer-paper': { boxSizing: 'border-box'},
     }}>
-          <Button><h1 onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
+          <Button><h1 className='App-header' onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
 
           <Divider />
           <Toolbar>
-            <Badge showZero badgeContent={props.quotes.length} color='primary'>
-              <Button onClick={()=>{setNavOpen(false); setQuotesOpen(true);}}>{`Incoming Quotes`}</Button>
-            </Badge>  
+              <Button onClick={()=>{setNavOpen(false); setQuotesOpen(true);}}>{`Incoming Quotes`}</Button><Badge color='primary' showZero badgeContent={props.quotes.length} />
           </Toolbar>
           <Toolbar>
-            <Badge showZero badgeContent={unassignedJobState.length} color='primary'>
-              <Button onClick={()=>{setNavOpen(false); setEmptyJobsOpen(true);}}>{`Unassigned Jobs`}</Button>
-            </Badge>  
+              <Button onClick={()=>{setNavOpen(false); setEmptyJobsOpen(true);}}>{`Unassigned Jobs`}</Button><Badge color='primary' showZero badgeContent={unassignedJobState.length} />
           </Toolbar>
           <Divider />
       <Toolbar>
