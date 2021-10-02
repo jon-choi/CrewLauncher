@@ -13,7 +13,7 @@ export default function BasicSpeedDial(props) {
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'absolute', right: 10}}
         icon={selectedPackage ? <Avatar alt={selectedPackage.title} src={selectedPackage.image} /> : <SpeedDialIcon />}
-        direction='down'
+        direction='left'
       >
         {packages.map((packageItem) => (
           <SpeedDialAction

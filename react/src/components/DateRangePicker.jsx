@@ -21,7 +21,7 @@ const DateRangePicker = (props) => {
       startDate={startDate}
       endDate={endDate}
       selectsRange
-      inline
+      withPortal
     />
   );
 };
