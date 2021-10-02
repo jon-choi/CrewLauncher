@@ -50,7 +50,7 @@ const CrewPage = (props) => {
         <>
             <Card sx={{mb: 10}}>
                 <Typography variant="h3" sx={{mb: 5}}>
-                    Crews to Launch:
+                🚀  Crews to Launch: 🚀 
                 </Typography>
             </Card>
             
