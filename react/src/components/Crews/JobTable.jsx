@@ -55,7 +55,6 @@ function Row(props) {
 //         date
 //     };
   
-console.log(props.packageItem)
   // console.log(jobs)
   return (
     <React.Fragment>
@@ -113,21 +112,21 @@ console.log(props.packageItem)
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    timeEstimate: PropTypes.string.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        client: PropTypes.string.isRequired,
-        address: PropTypes.string.isRequired,
-        phone: PropTypes.string.isRequired,
-        package: PropTypes.string.isRequired,
-        jobNotes: PropTypes.string.isRequired
-      }),
-    ).isRequired,
-    date: PropTypes.string.isRequired,
-  }).isRequired,
-};
+// Row.propTypes = {
+//   row: PropTypes.shape({
+//     timeEstimate: PropTypes.string.isRequired,
+//     history: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         client: PropTypes.string.isRequired,
+//         address: PropTypes.string.isRequired,
+//         phone: PropTypes.string.isRequired,
+//         package: PropTypes.string.isRequired,
+//         jobNotes: PropTypes.string.isRequired
+//       }),
+//     ).isRequired,
+//     date: PropTypes.string.isRequired,
+//   }).isRequired,
+// };
 
 // const rows = [
 //   createData('Job #1', '1hr'),
