@@ -6,6 +6,7 @@ body {
   font-family: $fontFamily;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: max-content;
 
   .MuiTypography-root {
     font-family: $fontFamily;
@@ -18,6 +19,10 @@ body {
     font-family: $fontFamily;
     font-weight: 900;
     font-size: 1.2em;
+  }
+  .MuiAppBar-root {
+    background-color: rgb(90, 77, 57);
+    background-image: url("https://acegif.com/wp-content/gif/outerspace-6.gif");
   }
   .MuiMenuItem-root {
     font-family: $fontFamily;
