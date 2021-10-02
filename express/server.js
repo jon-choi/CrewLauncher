@@ -27,34 +27,9 @@ App.use('/contracts', contractsRoutes(knex));
 App.use('/packages', packagesRoutes(knex));
 App.use('/clients', clientsRoutes(knex));
 
-
-// Sample GET route
-App.get('/api/data', (req, res) => {
-  knex('crews')
-  .select('foreman_name')
-  .where('id', 1)
-  .then((data) => {
-
-  res.json({
-    data: data,
-    message: "Seems to work!"
-  })
-  })
-});
-
-// can we use routers instead or with this
-// app.get('/tasks', (req, res) => {
-//   // use the knex variable above to create dynamic queries
-// });
-
 // Handle webSocket connections
 socket.start(httpServer);
 
 httpServer.listen(PORT, () => {
-  console.log(`Server ( with websockets ;) ) running at http://localhost:${PORT}`);
+  console.log(`Server ( with websockets ;) ) listening on http://localhost:${PORT}`);
 });
-
-// App.listen(PORT, () => {
-//   // eslint-disable-next-line no-console
-//   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
-// });
