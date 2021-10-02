@@ -286,6 +286,24 @@ const useAppData = function() {
     });
   };
 
-  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit, onSubmitQuote, updateQuoteState }
+  const markJobCompleted = (jobId) => {
+    const job = state.jobs.filter(j => j.id === jobId)[0];
+    return axios.post(`/jobs/${jobId}`, {
+      ...job,
+      completed: true
+    })
+    .then(response => {
+      const updatedJobs = state.jobs.filter(j => j.id !== jobId);
+      console.log(`Job ${jobId} marked completed! Updating state now!`);
+      setState(prev => ({...prev, jobs: [...updatedJobs, job]}));
+      return response;
+    })
+    .catch(err => {
+      console.log(`Error, could not mark job ${jobId} as complete. ${err}`)
+      return err;
+    });
+  };
+
+  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit, onSubmitQuote, updateQuoteState, markJobCompleted }
 }
 export default useAppData;

@@ -6,7 +6,7 @@ import { Stack, Box, Grid, Fab } from '@mui/material';
 
 const CrewDashboard = function(props) {
   const { selectedDay, setSelectedDay, newDayCards } = useDayInfo()
-  const { days } = props;
+  const { days, markJobCompleted } = props;
 
   const id = useParams().id;
   if (days) {
@@ -25,7 +25,7 @@ const CrewDashboard = function(props) {
     // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
     
-    const dayCards = newDayCards(days, fab);
+    const dayCards = newDayCards(days, fab, markJobCompleted);
 
     return (
       <Stack sx={{margin: 'auto', width: '100%'}} >

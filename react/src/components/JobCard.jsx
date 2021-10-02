@@ -1,17 +1,9 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Fab from '@mui/material/Fab';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-
+import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, styled } from '@mui/material';
 
 export default function JobCard(props) {
-  const { packageTitle, timeEst, clientName, address, jobNotes, compClass } = props;
+  console.log("props in jobcard", props)
+  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, markCompleted, compClass } = props;
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -41,6 +33,9 @@ export default function JobCard(props) {
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
+    <CardActions>
+      <Button onClick={() => markCompleted(jobId)}>Job Completed</Button>
+    </CardActions>
   </Card>
 );
 }
