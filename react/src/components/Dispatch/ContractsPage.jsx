@@ -30,7 +30,7 @@ const ContractsPage = (props) => {
     const contractProgress = completedContract ? 100 : Math.round((contract.packageLength - daysLeftInContract) / contract.packageLength * 100);
 
     const body = (
-    <Stack rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }} >
+    <Stack >
       {(currentContract || completedContract) && contractProgress && 
       
       <Box sx={{ position: 'relative', display: 'inline'}}>
@@ -61,18 +61,20 @@ const ContractsPage = (props) => {
       </Stack>);
     const linkToEdit = `/dispatch/contracts/${contract.id}`;
 
-    return <MediaCard
+    return (<Grid item >
+      <MediaCard
     key={count}
     compClass="contract-card"
     link={linkToEdit}
     header={header}
     body={body}
-    />;
+    />
+  </Grid>)
   })
 
   return (
-    <Stack><h1>🚀 Contracts: 🚀</h1>
-    <Grid  container width={'100%'}>
+    <Stack ><h1>🚀 Contracts: 🚀</h1>
+    <Grid container justifyContent="center" width={'100%'} columnSpacing={3} rowSpacing={2}>
     
     {contractCards}
     </Grid>
