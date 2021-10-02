@@ -50,6 +50,9 @@ const Navigation = (props) => {
             >
               <MenuIcon />
             </IconButton>
+              <Badge overlap='circular' showZero badgeContent={quoteState.length}><IconButton color="inherit" onClick={setQuotesOpen}>Quotes</IconButton></Badge>
+              
+              <Badge overlap='circular' badgeContent={unassignedJobState.length}><IconButton color="inherit" onClick={setEmptyJobsOpen}>Jobs</IconButton></Badge>
           </Toolbar>
         </AppBar>
         

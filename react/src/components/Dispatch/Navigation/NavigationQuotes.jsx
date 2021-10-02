@@ -3,11 +3,13 @@ import { Drawer, Button, Divider, Stack, Card, Typography, CardActions } from '@
 const NavigationQuotes = (props) => {
   const { open, setOpen, quotes } = props;
 
+  let key = -1;
   const quoteCards = quotes.map(quote => {
+    key++;
     return (
-    <Card key={quote.clientEmail}>
+    <Card key={key}>
       <CardActions>
-        <Button component={Link} to={`/dispatch/contracts/new`}>Handle Quote</Button>
+        <Button component={Link} to={`/dispatch/contracts/quotes/${key}`}>Handle Quote</Button>
       </CardActions>
       <Typography>
         {quote.clientName}
