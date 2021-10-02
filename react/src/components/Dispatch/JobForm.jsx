@@ -51,8 +51,8 @@ const JobForm = (props) => {
 
     const save = function(time, selectedCrew) {
       const endTimeString = addHours(time, estTime)
-      const endTime = format(endTimeString, 'hhh')
-      const startTime = format(time, 'HH')
+      const endTime = format(endTimeString, 'kk')
+      const startTime = format(time, 'kk')
       onEdit(selectedCrew, startTime, endTime, job, parseInt(params.id))
       .then((response) => {
         setStatus({error: false, success: true, message: "Crew Launched successfully!"})

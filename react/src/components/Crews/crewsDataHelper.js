@@ -1,4 +1,4 @@
-import { subDays, addDays } from 'date-fns';
+import { subDays, addDays, format } from 'date-fns';
 
 export function getJobsByCrewByDay(jobs, crews, crewId = 0) {
   let jobsByCrewByDay = [[],[],[]];
@@ -48,14 +48,15 @@ export function getJobsByCrewByDay(jobs, crews, crewId = 0) {
 //         jobNotes: 'Watch out for rockets']}
 
 export function getJobsByCrew(jobs, clients, packages, contracts, crewId) {
-  const jobsInfo = [];
 
+  const jobsInfo = [];
   const jobsOfCrew = jobs.filter(job => job.crew_id === crewId)
   for (const jobOfCrew of jobsOfCrew) {
     const contractOfJob = contracts.filter(contract => jobOfCrew.contract_id === contract.id)[0]
     const packageOfJobs = packages.filter(packageItem => contractOfJob.package_id === packageItem.id)[0];
     const clientOfJobs = clients.filter(client => contractOfJob.client_id === client.id)[0];
-    const timeEstimate = jobOfCrew.start_time - jobOfCrew.end_time;
+    const timeEstimate = jobOfCrew.end_time - jobOfCrew.start_time;
+    const sortDate = format(new Date(jobOfCrew.date), 'TT')
     const job = {
         id: jobOfCrew.id,
         date: jobOfCrew.date,
@@ -64,7 +65,8 @@ export function getJobsByCrew(jobs, clients, packages, contracts, crewId) {
         package: packageOfJobs.title,
         address: contractOfJob.address,
         jobNotes: contractOfJob.job_notes,
-        timeEstimate
+        timeEstimate,
+        sortDate
     };
     jobsInfo.push(job);
   }
