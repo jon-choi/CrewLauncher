@@ -40,7 +40,21 @@ module.exports = (knex) => {
         res.json(result);
       })
       .catch(err => {
-        console.log(`Error: could not POST to /jobs/${req.params.id} ${err}`)
+        console.log(`Error: could not POST to /jobs/${req.params.id} ${err}`);
+        res.send(err);
+      });
+    });
+
+    router.delete('/:id', (req, res) => {
+      knex('jobs')
+      .where('id', req.params.id)
+      .del()
+      .then(result => {
+        console.log(`Successful DELETE of /jobs/${req.params.id}`);
+        res.json(result);
+      })
+      .catch(err => {
+        console.log(`Error: could not DELETE /jobs/${req.params.id} ${err}`);
         res.send(err);
       });
     });
