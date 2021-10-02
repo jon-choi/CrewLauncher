@@ -14,16 +14,29 @@ const Jobs = (props) => {
   if (props.contracts[1]) {
     const jobs = getJobsByCrew(props.jobs, props.clients, props.packages, props.contracts, crewId);
     jobs.sort(function (a, b) {
-      return a.date - b.date;
+      return a.sortDate - b.sortDate;
     });
-    
-
+    let count = 1
+    let rows = []
+    for (const row of jobs) {
+      const date = row.date; 
+      const timeEstimate = row.timeEstimate;
+      const packageItem = row.package;
+      rows.push({
+        count,
+        date,
+        timeEstimate,
+        packageItem,
+        rows:
+        [row]});
+      count++;
+    };
 
 
     
     return (
       <>
-        <JobTable jobs={jobs}
+        <JobTable rows={rows}
           
           />
       </>
