@@ -10,7 +10,7 @@ export default function MediaCard(props) {
   const { link, compClass, image, header, body } = props;
 
   return (
-    <Card className={compClass} sx={{ maxWidth: 345 }}>
+    <Card className={compClass} sx={{ width: 345 }}>
       {image && 
         <CardMedia
           component="img"
