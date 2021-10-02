@@ -23,7 +23,7 @@ const NavigationEmptyJobs = (props) => {
   return (
     <Drawer open={open} variant='persistent' position='static' anchor='left'
       sx={{display: { xs: 'block', sm: 'block' },
-      '& .MuiDrawer-paper': { boxSizing: 'border-box'},
+      '& .MuiDrawer-paper': { boxSizing: 'border-box', backgroundImage: "url(https://acegif.com/wp-content/gif/outerspace-6.gif)"},
     }}>
       <Button><h1 onClick={()=> setOpen(false)}>Crew🚀Launcher</h1></Button>
       <Divider />

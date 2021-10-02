@@ -59,7 +59,7 @@ const Navigation = (props) => {
     <NavigationQuotes quotes={props.quotes} open={quotesOpen} setOpen={setQuotesOpen}/>
     <Drawer open={navOpen} variant='persistent' position='static' anchor='left'
       sx={{display: { xs: 'block', sm: 'block' },
-      '& .MuiDrawer-paper': { boxSizing: 'border-box', backgroundColor: "#f5f5f5", backgroundImage: "url(https://acegif.com/wp-content/gif/outerspace-6.gif)"},
+      '& .MuiDrawer-paper': { boxSizing: 'border-box', backgroundImage: "url(https://acegif.com/wp-content/gif/outerspace-6.gif)"},
     }}>
           <Button><h1 className='App-header' onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
 
