@@ -30,10 +30,12 @@ const ContractsPage = (props) => {
     const contractProgress = completedContract ? 100 : Math.round((contract.packageLength - daysLeftInContract) / contract.packageLength * 100);
 
     const body = (
-    <Stack container>
+    <Stack rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }} >
       {(currentContract || completedContract) && contractProgress && 
+
       <Box sx={{position: 'relative', display: 'inline'}}>
         <CircularProgress size={'4.5em'} variant="determinate" value={contractProgress} />
+
         <Box
           sx={{
             top: 0,
@@ -70,10 +72,12 @@ const ContractsPage = (props) => {
   })
 
   return (
-    <Grid width={'100%'}>
-    <h1>🚀 Contracts: 🚀</h1>
+    <Stack><h1>🚀 Contracts: 🚀</h1>
+    <Grid  container width={'100%'}>
+    
     {contractCards}
     </Grid>
+    </Stack>
   );
 };
 

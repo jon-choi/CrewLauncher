@@ -33,7 +33,7 @@ const CrewPage = (props) => {
             </Grid>)
         })
 
-        return(<div>
+        return(<box>
             <Card sx={{mb: 10}}>
                 <Typography variant="h3" sx={{mb: 5}}>
                     Crews to Launch:
@@ -42,7 +42,7 @@ const CrewPage = (props) => {
         <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }}>
             {cardsOfDaysForCrews}
         </Grid>
-        </div>)
+        </box>)
     }
 
     return (

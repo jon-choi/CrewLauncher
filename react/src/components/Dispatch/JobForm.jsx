@@ -87,7 +87,7 @@ const JobForm = (props) => {
         </Snackbar>
         <Stack spacing={5} sx={{maxHeight: 800,minHeight: 550, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
           <Item>
-            <Typography variant="h2">
+            <Typography variant="h3">
             🚀 Edit Crew For The Job 🚀
             </Typography>
           </Item>
