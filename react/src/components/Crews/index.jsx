@@ -38,9 +38,7 @@ const [selectedDay, setSelectedDay] = useState([{}]);
     
         <Navigation packages={props.packages} onSubmitQuote={onSubmitQuote}/>
           <Switch >
-            <Route path="/crews/:id/days/:day">
-              <Day days={getDayInfo} selectedDay={selectedDay} />
-            </Route>
+            
     
             <Route path="/crews/:id/jobs">
               <Jobs contracts={contracts} jobs={jobs} clients={clients} packages={packages} crews={crews} />

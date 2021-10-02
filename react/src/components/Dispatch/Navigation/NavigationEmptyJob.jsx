@@ -3,7 +3,6 @@ import { Drawer, Button, Divider, Stack, Card, Typography, CardActions } from '@
 import { format } from 'date-fns';
 const NavigationEmptyJobs = (props) => {
   const { open, setOpen, jobs, contracts } = props;
-  console.log("JOBS: ", jobs)
   
   const jobCards = jobs.map(job => {
     const contract = contracts.filter(contract => contract.id === job.contract_id)[0]

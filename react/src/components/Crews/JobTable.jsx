@@ -55,7 +55,6 @@ function Row(props) {
 //         date
 //     };
   
-  // console.log(jobs)
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>

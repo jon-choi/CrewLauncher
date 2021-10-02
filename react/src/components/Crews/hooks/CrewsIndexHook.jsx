@@ -81,7 +81,7 @@ const useDayInfo = function() {
     return days.map(day => {
       let counting = count;
       counting++;
-      const dayCard = (<>{selectedDay === counting && fab}
+      const dayCard = (<div key={counting}>{selectedDay === counting && fab}
         {selectedDay === null && <Box
           className={`day-${counting}`}
           sx={{ width: '90%', height: '90%', maxHeight: 200, minHeight: 90 }}
@@ -92,7 +92,7 @@ const useDayInfo = function() {
           {selectedDay === counting &&  <Stack>
              {jobsForDay(days[counting], counting)}
           </Stack>}
-        </>);
+        </div>);
         count++;
         return dayCard;
     })

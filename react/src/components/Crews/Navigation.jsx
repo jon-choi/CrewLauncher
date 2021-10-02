@@ -19,16 +19,19 @@ const Navigation = (props) => {
       textAlign: 'center'
   }));
 
-  return (<>
-    
-      
+  return (
+    <div>
+      <Stack direction="row" sx={{justifyContent: "space-around"}}>
         <Button component={Link} to={`/crews/${id}`} sx={{fontSize:100}}>
         🚀
         </Button>
-        <Drawer closeButtonText={'Close'} openButtonText={'Quote'} Buttons={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
       
-    
-  </>);
+        <Item sx={{alignSelf: "center"}} >
+          <Drawer closeButtonText={'Close'} openButtonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
+        </Item>
+      </Stack>
+    </div>
+  );
 };
 
 export default Navigation;
