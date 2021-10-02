@@ -81,7 +81,7 @@ const JobForm = (props) => {
       <Box width={'100%'}>
         <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={status.success || status.error} autoHideDuration={2000} onClose={() => setStatus({success: false, error: false, message: ""})}>
           <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
-           severity={status.error ? 'error' : 'success'} sx={{ width: '100%' }}>
+            severity={status.error ? 'error' : 'success'} sx={{ width: '100%' }}>
             {status.message}
           </Alert>
         </Snackbar>
