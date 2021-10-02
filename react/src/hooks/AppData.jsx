@@ -12,7 +12,7 @@ const useAppData = function() {
     packages: [{title: null}],
     contracts: [{address: null}],
     jobs: [{date: null}],
-    quotes: [{clientName: 'Joey Varoom', clientEmail: 'joey.varoom@hotmail.com', address: '74 Wanrook Cres, Beverly Yokama',clientPhone: '587-283-2841', packageId: 1, startDate: new Date(), selectedPackage: {id: 1, title: 'Small Property Lawn Care', flat_rate: 13000, size_range_string: '', description: 'A premium lawn care detailing that will please a home owner', man_hours_per_visit: 3, contract_length_days: 91, visit_interval_days: 7} }]
+    quotes: []
   });
 
   useEffect(() => {
@@ -37,15 +37,20 @@ const useAppData = function() {
   }, []);
 
 
+  const updateQuoteState = (newQuote) => {
+    setState(prev => {
+      console.log("Updated quote state!")
+      return {...prev, quotes: [...prev.quotes, newQuote]}
+    });
+  };
+
   const onSubmitQuote = (quoteDetails) => {
-    console.log("Submitted quote: ", quoteDetails);
-    // const { selectedPackage, clientName, clientPhone, clientEmail, startDate, endDate, address } = quoteDetails;
+    console.log("Quote submitted: ", quoteDetails);
     const socket = io('/');
     socket.connect()
     console.log(socket)
     socket.emit('quote', quoteDetails);
-    // socket.disconnect();
-    };
+  };
 
   const editJob = function(job) {
     const jobsInState = state.jobs.filter(jobInState => {
@@ -150,7 +155,7 @@ const useAppData = function() {
 
 
   const processContract = (contractDetails) => {
-    const { packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes } = contractDetails;
+    const { packageId,  clientName, clientPhone, clientEmail, startDate, address, jobNotes, quote } = contractDetails;
     const existing = isNaN(parseInt(contractDetails.id)) ? false : true;
     const id = (existing === true) ? parseInt(contractDetails.id) : state.contracts.length + 1;
 
@@ -159,7 +164,6 @@ const useAppData = function() {
       email: clientEmail,
       phone: clientPhone
     };
-    
     
     return isExistingClient(client, state.clients)
       .then(()=>{
@@ -172,21 +176,26 @@ const useAppData = function() {
           job_notes: jobNotes
         };
         
-        const updatedContracts = [...state.contracts, contract];
+        // if editing an existing contract just post to /contracts/:id using the existing client id
         if (existing) {
           console.log(`POSTING TO: /contracts/${contract.id}`)
           return axios.post(`/contracts/${contract.id}`, contract)
           .then(response => {
+            console.log('Updating contracts in state')
+            const updatedContracts = [...state.contracts].filter((c => c.id !== contract.id));
             setState(prev => {
-              return {...prev, contracts: updatedContracts}})
+              return {...prev, contracts: [...updatedContracts, contract]}})
           })
           .catch(error => {
             console.log('Could not submit contract: ', error);
           });
+        // if it's a new contract, post to /contracts
         } else {
           console.log(`POSTING TO: /contracts`)
           return axios.post(`/contracts`, contract)
           .then(response => {
+            console.log('')
+            const updatedContracts = [...state.contracts, contract];
             setState(prev => {
               return {...prev, contracts: updatedContracts}
             });
@@ -197,6 +206,17 @@ const useAppData = function() {
             console.log('Could not submit contract: ', error);
           });
         }    
+      })
+      .then((response) => {
+        console.log("Is this a quote?", quote)
+        if (quote) { 
+          const updatedQuotes = [...state.quotes].filter(q => {
+            return q.clientEmail !== quote.clientEmail || q.address !== quote.address;  
+          });
+          console.log("updatedQuotes", updatedQuotes)
+          setState(prev => ({...prev, quotes: updatedQuotes}))
+        }
+        return response;
       })
       .catch((error)=>console.log('Error confirming client : ', error));
   };
@@ -241,6 +261,6 @@ const useAppData = function() {
     });
   };
 
-  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit, onSubmitQuote }
+  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit, onSubmitQuote, updateQuoteState }
 }
 export default useAppData;
