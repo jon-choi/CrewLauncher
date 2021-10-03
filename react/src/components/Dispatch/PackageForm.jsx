@@ -72,6 +72,8 @@ const PackageForm = (props) => {
       
       {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
       
+
+
       <FormControl>
         <InputLabel htmlFor="title">Title</InputLabel>
         <OutlinedInput
@@ -143,6 +145,8 @@ const PackageForm = (props) => {
           label="Package Image (file name)"
         />
         </FormControl>
+
+
         <Button onClick={validate} variant="contained">Launch</Button>
       </Stack>
     </Box>
