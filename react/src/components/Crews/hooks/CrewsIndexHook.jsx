@@ -52,7 +52,6 @@ const useDayInfo = function() {
 
         return (
           <Card>
-            <Typography variant="h6">{clientOfJob.name}</Typography>
             <Box sx={{ width: '95%', maxWidth: 500, maxHeight: 300, display: 'flex-start' }}>
               <JobCard
               key={job.id}
