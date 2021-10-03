@@ -37,15 +37,15 @@ const ClientCard = (props) => {
   }
   return (<Grid container item sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <Card sx={{ width: 300, height: 180, mb: 1, ml: 25, mr: 2, mt: 1 }}>
-        <Avatar alt="clientName" src={client.avatar} sx={{ maxWidth: 400, maxHeight: 100, mb: 1, ml: 2, mr: 10, mt: 1 }} />
+        <Avatar alt="clientName" src={client.avatar} sx={{ maxWidth: 400, maxHeight: 100, mb: 1, ml: 2, mr: 2, mt: 1 }} />
         <Typography sx={{ fontSize: 14, ml: 3 }} color="text.secondary" gutterBottom>
           {`${client.client.name} - ${client.client.phone || 'N/A'} - ${client.client.email}`}
         </Typography>
-        <Typography sx={{ mr: 17 }}>
+        <Typography>
           {client.contracts.length > 0 && `Active contracts: ${contracts.length}`}
         </Typography>
         <CardActions>
-          <Button component={Link} to={`/dispatch/clients/${client.client.id}/contracts/new`} >New Contract</Button>
+          <Button sx={{ ml: 8 }} component={Link} to={`/dispatch/clients/${client.client.id}/contracts/new`} >New Contract</Button>
         </CardActions>
         </Card>
       {/* <CardContent> */}
