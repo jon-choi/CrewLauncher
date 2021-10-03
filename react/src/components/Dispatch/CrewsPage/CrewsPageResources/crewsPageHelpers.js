@@ -44,28 +44,25 @@ const createSelectedDayCard = function([...day]) {
   const date = day.splice(0,1)
   const selectedDayCard = day.map(job => {
     return (<>
-
-      <Card >
-        <Item variant="outlined">{date}</Item>
-        <Item variant="outlined">Approximate Launch:</Item>
-        <Item variant="outlined">Contract Package:</Item>
-        <Item variant="outlined">Client:</Item>
-        <Item variant="outlined">Job Notes:</Item>
-      </Card>
-      <Box >
-        <Item variant="outlined" sx={{mr: 2, ml: 2}}>Job Details</Item>
+      <Stack justifyContent="center">
+        <Item variant="outlined" sx={{mr: 2, ml: 2}}>{date}</Item>
         <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.job.start_time}</Item>
         <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.packageOfJob.title}</Item>
         <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.clientOfJob.name}, {job.clientOfJob.phone}</Item>
-        <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.contractOfJob.job_notes}</Item>
-      </Box>
+      </Stack>
     </>)
   }
     )
   return (<>
-  <Grid container>
+  <Stack direction="row">
+      <Card >
+        <Item variant="outlined">Job Date</Item>
+        <Item variant="outlined">Approximate Launch:</Item>
+        <Item variant="outlined">Contract Package:</Item>
+        <Item variant="outlined">Client:</Item>
+      </Card>
       {selectedDayCard}
-  </Grid>
+  </Stack>
   </>)
 }
 
