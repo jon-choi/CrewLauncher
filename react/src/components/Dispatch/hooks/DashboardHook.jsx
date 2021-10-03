@@ -32,25 +32,25 @@ const useDashboardDayState = function() {
         return !job.completed
       })
       return (
-      <Item sx={{minHeight: 185, maxWidth: 1000}} >
-        <Typography color="#DBEAF3" sx={{mt: 3}} variant="h4" component="h4" onClick={(event) => setSelectedDay(value)}>
+      <Item className="font-color" sx={{minHeight: 185, maxWidth: 1000}} >
+        <Typography csx={{mt: 3}} variant="h4" component="h4" onClick={(event) => setSelectedDay(value)}>
           {date}
         </Typography>
-        <Typography color="#DBEAF3" variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
+        <Typography variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
           Jobs Today: {day.length}
         </Typography>
-        <Typography color="#DBEAF3" sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
+        <Typography sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
           Incomplete: {jobs.length}
         </Typography>
       </Item>
         )
     }
     return (
-    <Item sx={{minHeight: 185, maxWidth: 1000}} >
-      <Typography color="#DBEAF3" variant="h4" component="h4" sx={{mt: 3}}>
+    <Item className="font-color" sx={{minHeight: 185, maxWidth: 1000}} >
+      <Typography variant="h4" component="h4" sx={{mt: 3}}>
         {date}
       </Typography>
-      <Typography color="#DBEAF3" variant="h5" component="h5" sx={{mt: 3,mb: 5}}>
+      <Typography variant="h5" component="h5" sx={{mt: 3,mb: 5}}>
         No Jobs Today!
       </Typography>
       
