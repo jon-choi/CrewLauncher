@@ -29,7 +29,7 @@ const Dashboard = function(props) {
 
 
     return (
-      <Stack sx={{ mb: 2, mt: 2, width: '100%', justifyContent: "center"}} >
+      <Stack sx={{ mb: 2, mt: 2, width: '100%', justifyContent: 'center', ml: 56}} >
         {dayCards}
       </Stack>
 
