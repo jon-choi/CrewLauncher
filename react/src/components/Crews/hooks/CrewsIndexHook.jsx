@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import JobCard from '../../JobCard'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -6,21 +6,29 @@ import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import { getThemeProps } from "@mui/system";
 
+
 const useDayInfo = function() {
   const [ selectedDay, setSelectedDay ] = useState(null);
-  const [ complete, setComplete ] = useState({'0':true})
+  const [ completeState, setCompleteState ] = useState({'0':true})
+
+  let completedInfo = {};
+  useEffect(() => {
+    setCompleteState(prev => {
+      return { ...prev, ...completedInfo  }
+    });
+  },[selectedDay])
 
   const dayToCard = function([...day], value) {
     const date = day.splice(0, 1);
-
     if (day[0]) {
-      const jobs = day.filter(jobOfDay => {
-        const { job } = jobOfDay;
-        setComplete(prev => {
-          return {...prev, [job]: job.completed }
-        })
+      const jobs = day.filter(dayInfo => {
+        const { job } = dayInfo;
+        
         return !job.completed;
       })
+
+      
+
       return (
         <Box>
           <Typography variant="h5" component="h5">
@@ -53,7 +61,15 @@ const useDayInfo = function() {
     if (day[0]) {
       const jobCard = day.map(jobOfDay => {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob} = jobOfDay;
-
+        const onMarkJobCompleted = function() {
+          markJobCompleted(job.job.id)
+          .then(res => {
+            console.log(res)
+            return setCompleteState(prev => {
+              return {...prev, [job.id]: true}
+            })
+          })
+        }
         return (
           <Card>
             <Box sx={{ width: '95%', maxWidth: 500, maxHeight: 300, display: 'flex-start' }}>
@@ -68,22 +84,33 @@ const useDayInfo = function() {
               compClass="crew-day"
               completed={job.completed}
               jobId={job.id}
-              markCompleted={markJobCompleted}
+              onMarkCompleted={onMarkJobCompleted}
+
               />
             </Box>
           </Card>
         )
       })
-      const jobsForDay = 
-      <Box>
-        {jobCard}
-      </Box>
-      return jobsForDay
+      return (<Box>{jobCard}</Box>)
     }
     return dayToCard([date])
   }
   const newDayCards = function(days, fab, markJobCompleted) {
     let count = -1;
+    
+    for (const day of days) {
+      const dayItem = [...day]
+      dayItem.splice(0, 1);
+      
+      if (dayItem[0])
+      for (const dayInfo of dayItem) {
+        completedInfo = {[dayInfo.job.id]: dayInfo.job.completed}
+      }
+    }
+    
+    
+    
+    
     return days.map(day => {
       let counting = count;
       counting++;
@@ -106,6 +133,6 @@ const useDayInfo = function() {
       return dayCard;
     })
   }
-  return { selectedDay, setSelectedDay, newDayCards }
+  return { selectedDay, setSelectedDay, completeState, setCompleteState, newDayCards }
 }
 export default useDayInfo;
