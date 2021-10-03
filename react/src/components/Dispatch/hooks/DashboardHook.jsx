@@ -62,7 +62,7 @@ const useDashboardDayState = function() {
       const jobCard = day.map(jobOfDay => {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob } = jobOfDay;
           return (
-          <Card  sx={{justifyContent: "center"}}>
+          <Card sx={{justifyContent: "center"}}>
             <Typography className="page-header" color="#DBEAF3" variant="h6">{crewOfJob ? crewOfJob.foreman_name : "Launch A Crew"}</Typography>
             <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190}}>
               <JobCard
