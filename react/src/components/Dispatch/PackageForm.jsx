@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Box, Button, FormControl, Stack, InputLabel, OutlinedInput, TextField, Alert, Snackbar, Card, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
+
+
+
 const PackageForm = (props) => {
   const { onSubmit } = props;
   const browserHistory = useHistory();
@@ -60,8 +63,8 @@ const PackageForm = (props) => {
 
   return (
     <Box width={'100%'} >
-      <Card sx={{maxHeight: 800, maxWidth: 600, alignItems: 'center',  margin: 'auto', mb: 5, backgroundImage: "url(https://acegif.com/wp-content/gif/outerspace-58.gif)" }}>
-        <Typography variant="h3" color="white" >
+      <Card className="page-header" sx={{ maxHeight: 800, maxWidth: 600, alignItems: 'center', margin: 'auto', mb: 5 }}>
+        <Typography variant="h3" color="#DBEAF3" >
       Launch New Package
       </Typography>
       </Card>

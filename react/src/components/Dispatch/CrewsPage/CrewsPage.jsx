@@ -38,8 +38,8 @@ const CrewPage = (props) => {
 
         return(
         <Stack>
-            <Item sx={{maxHeight: 800, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
-                <Typography variant="h3">
+            <Item className="page-header" sx={{maxHeight: 800, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
+                <Typography variant="h3" color="#DBEAF3" >
                     🚀  Crews to Launch: {crews.length} 🚀 
                 </Typography>
             </Item>
