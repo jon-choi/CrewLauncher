@@ -66,10 +66,10 @@ const useDashboardDayState = function() {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob } = jobOfDay;
 
           return (
-          <Card  sx={{justifyContent: "center"}}>
+          <Card sx={{justifyContent: "center"}}>
             <Typography className="page-header" color="#DBEAF3" variant="h6">{crewOfJob ? crewOfJob.foreman_name : "Launch A Crew"}</Typography>
             <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190}}>
-              <JobCard className="card-bg"
+              <JobCard
               key={job.id}
               packageTitle={packageOfJob.title}
               timeEst={packageOfJob.man_hours_per_visit}

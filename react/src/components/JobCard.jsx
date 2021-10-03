@@ -33,7 +33,7 @@ export default function JobCard(props) {
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
-    {completeState[jobId] && <Typography>Completed!</Typography>}
+    {(!completed || completeState[jobId]) && <Typography>Completed!</Typography>}
     {props.onMarkCompleted && (!completeState[jobId] && !completed) &&
     <CardActions>
       <Button onClick={() => onMarkCompleted(jobId)}>Job Completed</Button>

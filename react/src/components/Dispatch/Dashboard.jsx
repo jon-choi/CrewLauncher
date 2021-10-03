@@ -18,9 +18,9 @@ const Dashboard = function(props) {
       setSelectedDay(null)
 
       }} sx={{
-        position: 'sticky',
-        top: 150,
-        left: 500,
+        position: 'absolute',
+        top: 100,
+        right: 450,
       }}>Finish</Fab>
     );
     
