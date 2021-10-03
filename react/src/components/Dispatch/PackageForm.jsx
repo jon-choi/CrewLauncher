@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, Stack, InputLabel, OutlinedInput, TextField, Alert, Snackbar } from '@mui/material';
+import { Box, Container, Button, FormControl, Stack, InputLabel, OutlinedInput, TextField, Alert, Snackbar } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 const PackageForm = (props) => {
@@ -60,7 +61,7 @@ const PackageForm = (props) => {
 
   return (
     <Box width={'100%'} >
-      <h1>Create New Package</h1>
+      <h1>Launch New Package</h1>
       <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
         <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
          severity={status.error ? 'error' : 'success'} sx={{ width: '100%' }}>
@@ -142,7 +143,7 @@ const PackageForm = (props) => {
           label="Package Image (file name)"
         />
         </FormControl>
-        <Button onClick={validate} variant="contained">Create New Package</Button>
+        <Button onClick={validate} variant="contained">Launch</Button>
       </Stack>
     </Box>
   );
