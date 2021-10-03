@@ -126,7 +126,7 @@ import { format, addDays } from 'date-fns';
   return (
     <Box width={'100%'}>
       <Card className="page-header" sx={{ maxHeight: 800, maxWidth: 600, alignItems: 'center',  margin: 'auto', mb: 5 }}>
-        <Typography variant="h3" sx={{ color: "#DBEAF3", textShadow: 'black' }} >
+        <Typography variant="h3" color="#DBEAF3" >
       Launch New Contract
       </Typography>
       </Card>

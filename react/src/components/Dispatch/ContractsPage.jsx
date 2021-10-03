@@ -78,7 +78,7 @@ const ContractsPage = (props) => {
   return (
     <Stack spacing={5} >
       <Item className="page-header" sx={{maxHeight: 800, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
-        <Typography variant="h3" color="white" >
+        <Typography variant="h3" color="#DBEAF3" >
       🚀 Contracts 🚀
         </Typography>
       </Item>

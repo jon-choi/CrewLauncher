@@ -86,8 +86,8 @@ const JobForm = (props) => {
           </Alert>
         </Snackbar>
         <Stack spacing={5} sx={{maxHeight: 800,minHeight: 550, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
-          <Item>
-            <Typography variant="h3">
+          <Item className="page-header" >
+            <Typography variant="h3" color="#DBEAF3" >
             🚀 Edit Crew For The Job 🚀
             </Typography>
           </Item>

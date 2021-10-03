@@ -64,7 +64,7 @@ const PackageForm = (props) => {
   return (
     <Box width={'100%'} >
       <Card className="page-header" sx={{ maxHeight: 800, maxWidth: 600, alignItems: 'center', margin: 'auto', mb: 5 }}>
-        <Typography variant="h3" color="white" >
+        <Typography variant="h3" color="#DBEAF3" >
       Launch New Package
       </Typography>
       </Card>
