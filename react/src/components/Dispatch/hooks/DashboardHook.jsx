@@ -32,13 +32,13 @@ const useDashboardDayState = function() {
       })
       return (
       <Item sx={{minHeight: 185, maxWidth: 1000}} >
-        <Typography sx={{mt: 3}} variant="h4" component="h4" onClick={(event) => setSelectedDay(value)}>
+        <Typography color="#DBEAF3" sx={{mt: 3}} variant="h4" component="h4" onClick={(event) => setSelectedDay(value)}>
           {date}
         </Typography>
-        <Typography variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
+        <Typography color="#DBEAF3" variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
           Jobs Today: {day.length}
         </Typography>
-        <Typography sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
+        <Typography color="#DBEAF3" sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
           Incomplete: {jobs.length}
         </Typography>
       </Item>
@@ -46,10 +46,10 @@ const useDashboardDayState = function() {
     }
     return (
     <Item sx={{minHeight: 185, maxWidth: 1000}} >
-      <Typography variant="h4" component="h4" sx={{mt: 3}}>
+      <Typography color="#DBEAF3" variant="h4" component="h4" sx={{mt: 3}}>
         {date}
       </Typography>
-      <Typography variant="h5" component="h5" sx={{mt: 3,mb: 5}}>
+      <Typography color="#DBEAF3" variant="h5" component="h5" sx={{mt: 3,mb: 5}}>
         No Jobs Today!
       </Typography>
       
@@ -63,7 +63,7 @@ const useDashboardDayState = function() {
           return (
           <Card sx={{justifyContent: "center"}}>
             <Typography variant="h6">{crewOfJob ? crewOfJob.foreman_name : "Launch A Crew"}</Typography>
-            <Box sx={{ width: '95%', maxWidth: 400, maxHeight: 200, display: 'flex', minHeight: 190}}>
+            <Box sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190}}>
               <JobCard
               key={job.id}
               packageTitle={packageOfJob.title}
@@ -79,7 +79,7 @@ const useDashboardDayState = function() {
         )
       })
       const jobsForSelectedDay =
-        <Card sx={{width: '95%', maxWidth: 400, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1}}>
+        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1}}>
            {jobCard}
         </Card>
       return jobsForSelectedDay
