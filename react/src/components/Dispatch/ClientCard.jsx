@@ -45,7 +45,7 @@ const ClientCard = (props) => {
           {client.contracts.length > 0 && `Active contracts: ${contracts.length}`}
         </Typography>
         <CardActions>
-          <Button component={Link} to={`/dispatch/clients/${client.client.id}/contracts/new`} >Create Contract</Button>
+          <Button component={Link} to={`/dispatch/clients/${client.client.id}/contracts/new`} >New Contract</Button>
         </CardActions>
         </Card>
       {/* <CardContent> */}
