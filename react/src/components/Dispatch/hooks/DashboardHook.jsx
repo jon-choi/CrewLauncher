@@ -79,9 +79,9 @@ const useDashboardDayState = function() {
         )
       })
       const jobsForSelectedDay =
-        <Grid container sx={{justifyContent: "center"}}>
+        <Card sx={{width: '95%', maxWidth: 400, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1}}>
            {jobCard}
-        </Grid>
+        </Card>
       return jobsForSelectedDay
     }
     return mapDayToCard([date])

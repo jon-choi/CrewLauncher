@@ -17,8 +17,8 @@ const Dashboard = function(props) {
 
       }} sx={{
         position: 'sticky',
-        top: 16,
-        left: 850,
+        top: 150,
+        left: 500,
       }}>Finish</Fab>
     );
     
@@ -29,7 +29,7 @@ const Dashboard = function(props) {
 
 
     return (
-      <Stack sx={{ mb: 2, mt: 2, width: '100%', justifyContent: 'center', ml: 56}} >
+      <Stack sx={{ mb: 2, mt: 2, width: '100%', justifyContent: 'center', ml: 58}} >
         {dayCards}
       </Stack>
 
