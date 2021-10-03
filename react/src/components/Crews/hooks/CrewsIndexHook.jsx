@@ -8,6 +8,7 @@ import { getThemeProps } from "@mui/system";
 
 const useDayInfo = function() {
   const [ selectedDay, setSelectedDay ] = useState(null);
+  const [ complete, setComplete ] = useState({'0':true})
 
   const dayToCard = function([...day], value) {
     const date = day.splice(0, 1);
@@ -15,6 +16,9 @@ const useDayInfo = function() {
     if (day[0]) {
       const jobs = day.filter(jobOfDay => {
         const { job } = jobOfDay;
+        setComplete(prev => {
+          return {...prev, [job]: job.completed }
+        })
         return !job.completed;
       })
       return (
