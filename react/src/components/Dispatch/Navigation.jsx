@@ -72,7 +72,7 @@ const Navigation = (props) => {
           </Toolbar>
           <Divider />
       <Toolbar>
-        <MenuList>
+        <MenuList className="font-color">
           <MenuItem exact component={NavLink} to='/dispatch' activeStyle={activeLink}> 🚀 Dashboard 🚀</MenuItem>
           <MenuItem component={NavLink} to={`${url}/crews`} activeStyle={activeLink}>🚀 Crews</MenuItem>
           <MenuItem exact component={NavLink} to={`${url}/clients`} activeStyle={activeLink}>🚀 Clients</MenuItem>
