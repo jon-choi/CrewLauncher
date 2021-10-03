@@ -12,12 +12,12 @@ import SpeedDial from '../SpeedDial';
 import TimePicker from '../Timepicker';
 
 const JobForm = (props) => {
-  const params = useParams(props);
+  const params = useParams();
   const browserHistory = useHistory();
-
+  console.log('params in jobform', params)
   const { onEdit, crews, packages, contracts, jobs } = props
-
-  const [selectedCrew, setSelectedCrew] = useState(job ? job.crewId : 0)
+  const thisJob = params.id ? jobs.filter(j => j.id === params.id) : null;
+  const [selectedCrew, setSelectedCrew] = useState(thisJob ? thisJob.crewId : 0)
   const [time, setTime] = useState(new Date())
   const [status, setStatus] = useState({error: false, success: false, message:""});
   const [error, setError] = useState([]);
@@ -28,7 +28,7 @@ const JobForm = (props) => {
 
   useEffect(() => {
     setSelectedCrew(job.crewId)
-  },[time])
+  },[job.crewId])
   
   if (jobs[1]) {
 
