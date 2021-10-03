@@ -1,11 +1,10 @@
 import { useState } from "react";
-
 import JobCard from '../../JobCard'
-
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
+import { getThemeProps } from "@mui/system";
 
 const useDayInfo = function() {
   const [ selectedDay, setSelectedDay ] = useState(null);
@@ -44,13 +43,12 @@ const useDayInfo = function() {
       </Box>)
   }
   
-  const jobsForDay = function([...day], value) {
+  const jobsForDay = function([...day], value, markJobCompleted) {
     const date = day.splice(0, 1);
 
     if (day[0]) {
       const jobCard = day.map(jobOfDay => {
-        const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob } = jobOfDay;
-
+        const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob} = jobOfDay;
         return (
           <Card>
             <Typography variant="h6">{clientOfJob.name}</Typography>
@@ -63,6 +61,9 @@ const useDayInfo = function() {
               address={contractOfJob.address}
               jobNotes={contractOfJob.job_notes}
               compClass="crew-day"
+              completed={job.completed}
+              jobId={job.id}
+              markCompleted={markJobCompleted}
               />
             </Box>
           </Card>
@@ -76,25 +77,28 @@ const useDayInfo = function() {
     }
     return dayToCard([date])
   }
-  const newDayCards = function(days, fab) {
+  const newDayCards = function(days, fab, markJobCompleted) {
     let count = -1;
     return days.map(day => {
       let counting = count;
       counting++;
-      const dayCard = (<div key={counting}>{selectedDay === counting && fab}
-        {selectedDay === null && <Box
+      const dayCard = (
+      <div key={counting}>{selectedDay === counting && fab}
+        {selectedDay === null && 
+        <Box
           className={`day-${counting}`}
           sx={{ width: '90%', height: '90%', maxHeight: 200, minHeight: 90 }}
           onClick={(event) => setSelectedDay(counting)}
-          >
-            {dayToCard(days[counting], counting)}
-          </Box>}
-          {selectedDay === counting &&  <Stack>
-             {jobsForDay(days[counting], counting)}
-          </Stack>}
-        </div>);
-        count++;
-        return dayCard;
+        >
+          {dayToCard(days[counting], counting)}
+        </Box>}
+        {selectedDay === counting &&  
+        <Stack>
+          {jobsForDay(days[counting], counting, markJobCompleted)}
+        </Stack>}
+      </div>);
+      count++;
+      return dayCard;
     })
   }
   return { selectedDay, setSelectedDay, newDayCards }

@@ -18,7 +18,7 @@ const Crews = function(props) {
   // const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews);
  
 
-const { jobs, crews, contracts, packages, clients } = props;
+const { jobs, crews, contracts, packages, clients, markJobCompleted } = props;
 
 const days = getDayInfo(
   jobs,
@@ -45,7 +45,7 @@ const [selectedDay, setSelectedDay] = useState([{}]);
             </Route>
 
             <Route path="/crews/:id">
-              <CrewDashboard days={days} />
+              <CrewDashboard days={days} markJobCompleted={markJobCompleted} />
             </Route>
             </Switch>
         </div>
