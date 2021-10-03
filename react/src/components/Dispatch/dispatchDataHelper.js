@@ -103,6 +103,14 @@ const getEstTime = function(manhours, crew) {
   return (manhours / crew.crew_size)
 }
 
+const getCrewNames = function(crews) {
+  let crewNames = {};
+  for (const crew of crews) {
+    crewNames = {...crewNames, [crew.foreman_name]: null}
+  }
+  return crewNames;
+}
 
 
-export { getInfoForJobForm, getEstTime, getContractsInfo, getClientsInfo };
+
+export { getInfoForJobForm, getEstTime, getContractsInfo, getClientsInfo, getCrewNames };
