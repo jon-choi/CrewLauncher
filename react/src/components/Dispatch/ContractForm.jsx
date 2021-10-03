@@ -125,8 +125,8 @@ import { format, addDays } from 'date-fns';
 
   return (
     <Box width={'100%'}>
-      <Card sx={{maxHeight: 800, maxWidth: 400, alignItems: 'center',  margin: 'auto', mb: 5, backgroundImage: "url(https://i.pinimg.com/originals/6c/a7/64/6ca764a1d75a5b4be3e84fe17a102208.gif)" }}>
-        <Typography variant="h4" color="white" >
+      <Card sx={{maxHeight: 800, maxWidth: 600, alignItems: 'center',  margin: 'auto', mb: 5, backgroundImage: "url(https://i.pinimg.com/originals/6c/a7/64/6ca764a1d75a5b4be3e84fe17a102208.gif)" }}>
+        <Typography variant="h3" sx={{ color: "#DBEAF3", textShadow: 'black' }} >
       Launch New Contract
       </Typography>
       </Card>
