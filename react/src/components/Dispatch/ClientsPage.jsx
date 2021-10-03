@@ -17,8 +17,7 @@ const ClientsPage = (props) => {
 
   return (
       <Box width={"100%"}>
-        <Stack spacing={1} sx={{maxHeight: 800, minHeight: 550, alignItems: 'center',  margin: 'auto'}}>
-    
+        <Stack spacing={1} sx={{maxHeight: 800, minHeight: 550, alignItems: 'center',  margin: 'auto'}}> 
         <Item>
           <Typography variant="h3">
             🚀 Total Clients: {props.clientsInfo.length} 🚀
