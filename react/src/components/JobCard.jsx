@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, styled } from '@mui/material';
-import classNames from 'classnames';
+
 export default function JobCard(props) {
-  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completed, markCompleted, crewSize, compClass } = props;
-  const cardClassNames = classNames(compClass, {'completed-jobcard': completed});
+  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completeState, completed, onMarkCompleted, crewSize, compClass } = props;
+  
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -11,7 +11,7 @@ export default function JobCard(props) {
   }));
   const crewTimeEst = crewSize ? Math.round(timeEst / crewSize) : timeEst; 
   return (
-  <Card className={cardClassNames} sx={{display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>     
+  <Card className={compClass} sx={{display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>     
     <CardContent sx={{display: 'flex'}}>
       <div sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} >
         <Typography variant="h4" component="div">
@@ -33,10 +33,10 @@ export default function JobCard(props) {
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
-    {completed && <Typography>Completed!</Typography>}
-    {props.markCompleted && !completed &&
+    {completeState[jobId] && <Typography>Completed!</Typography>}
+    {props.onMarkCompleted && (!completeState[jobId] && !completed) &&
     <CardActions>
-      <Button onClick={() => markCompleted(jobId)}>Job Completed</Button>
+      <Button onClick={() => onMarkCompleted(jobId)}>Job Completed</Button>
     </CardActions>}
   </Card>
 );

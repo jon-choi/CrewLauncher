@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import classNames from 'classnames';
 import JobCard from '../../JobCard'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -18,15 +19,11 @@ const useDayInfo = function() {
     });
   },[selectedDay])
 
-  const dayToCard = function([...day], value) {
+  const dayToCard = function([...day], incompleteJobs) {
     const date = day.splice(0, 1);
     if (day[0]) {
-      const jobs = day.filter(dayInfo => {
-        const { job } = dayInfo;
-        
-        return !job.completed;
-      })
-
+    
+      
       
 
       return (
@@ -38,7 +35,7 @@ const useDayInfo = function() {
           Jobs Today: {day.length}
         </Typography>
         <Typography variant="h5" component="h6">
-          Incomplete: {jobs.length}
+          Incomplete: {incompleteJobs}
         </Typography>
         </Box>
       )
@@ -55,21 +52,22 @@ const useDayInfo = function() {
       </Box>)
   }
   
-  const jobsForDay = function([...day], value, markJobCompleted) {
+  const jobsForDay = function([...day], markJobCompleted) {
     const date = day.splice(0, 1);
 
     if (day[0]) {
       const jobCard = day.map(jobOfDay => {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob} = jobOfDay;
-        const onMarkJobCompleted = function() {
-          markJobCompleted(job.job.id)
+        const onMarkJobCompleted = function(jobId) {
+          markJobCompleted(jobId)
           .then(res => {
             console.log(res)
             return setCompleteState(prev => {
-              return {...prev, [job.id]: true}
+              return {...prev, [jobId]: true}
             })
           })
         }
+        const cardClassNames = classNames("crew-day", {'completed-jobcard': job.completed || completeState[job.id]});
         return (
           <Card>
             <Box sx={{ width: '95%', maxWidth: 500, maxHeight: 300, display: 'flex-start' }}>
@@ -81,8 +79,9 @@ const useDayInfo = function() {
               clientName={clientOfJob.name}
               address={contractOfJob.address}
               jobNotes={contractOfJob.job_notes}
-              compClass="crew-day"
+              compClass={cardClassNames}
               completed={job.completed}
+              completeState={completeState}
               jobId={job.id}
               onMarkCompleted={onMarkJobCompleted}
 
@@ -108,7 +107,7 @@ const useDayInfo = function() {
       }
     }
     
-    
+    const incompleteJobs = Object.values(completeState).reduce((prev, current) => prev += !current,0);
     
     
     return days.map(day => {
@@ -122,11 +121,11 @@ const useDayInfo = function() {
           sx={{ width: '90%', height: '90%', maxHeight: 200, minHeight: 90 }}
           onClick={(event) => setSelectedDay(counting)}
         >
-          {dayToCard(days[counting], counting)}
+          {dayToCard(days[counting], incompleteJobs)}
         </Box>}
         {selectedDay === counting &&  
         <Stack>
-          {jobsForDay(days[counting], counting, markJobCompleted)}
+          {jobsForDay(days[counting], markJobCompleted)}
         </Stack>}
       </div>);
       count++;
