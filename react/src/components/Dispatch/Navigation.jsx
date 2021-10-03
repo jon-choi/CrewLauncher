@@ -78,14 +78,12 @@ const Navigation = (props) => {
           <MenuItem exact component={NavLink} to={`${url}/clients`} activeStyle={activeLink}>🚀 Clients</MenuItem>
           <MenuItem exact component={NavLink} to={`${url}/contracts`} activeStyle={activeLink}>🚀 Contracts</MenuItem>
           <Divider />
-          Create Forms
-          <Toolbar>
+          <b>Create Forms</b>
             <MenuList>
               <Divider />
               <MenuItem component={NavLink} to={`${url}/contracts/new`} activeStyle={activeLink}>🚀 New Contract</MenuItem>
               <MenuItem component={NavLink} to={`${url}/packages/new`} activeStyle={activeLink}>🚀 New Package</MenuItem>
-            </MenuList>
-          </Toolbar>
+            </MenuList>          
           <Divider />
           <MenuItem component={Link} to={`${url}/contracts/1`}>Edit Contract 1</MenuItem>
           <MenuItem component={Link} to={`${url}/jobs/1`}>Edit Job 1</MenuItem>
