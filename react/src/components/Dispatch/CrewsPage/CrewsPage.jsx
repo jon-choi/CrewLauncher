@@ -38,7 +38,7 @@ const CrewPage = (props) => {
 
                 <Item sx={{maxHeight: 800, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
                 <Typography variant="h3">
-                🚀  Crews to Launch: 🚀 
+                🚀  Crews to Launch: {crews.length} 🚀 
                 </Typography>
                 </Item>
 
