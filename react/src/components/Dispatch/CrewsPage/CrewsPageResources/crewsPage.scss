@@ -1,4 +1,4 @@
-
+$cardHeight: 15em;
 
 .crewsPage {
   justify-items: center;
@@ -13,7 +13,7 @@
       align-items: "center";
       margin-top: auto;
       margin-bottom: auto;
-      min-height: 15em;
+      min-height: $cardHeight;
       
       & .--day {
         min-height: 100%;
@@ -26,17 +26,18 @@
           font-size: 2em;
           
         }
+        & .--summary {
+          min-height: $cardHeight;
+          justify-content: space-evenly;
+        }
+        & .--list {
+          font-size: 1em;
+          margin-right: 2em;
+          margin-left: 2em;
+          align-items: center;
+        }
       }
-      & .--summary {
-        min-height: 15em;
-        justify-content: space-evenly;
-      }
-      & .--list {
-        font-size: 1em;
-        margin-right: 2em;
-        margin-left: 2em;
-        align-items: center;
-      }
+      
     }
   }
 }
