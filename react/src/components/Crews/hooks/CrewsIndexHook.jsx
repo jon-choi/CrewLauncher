@@ -49,6 +49,7 @@ const useDayInfo = function() {
     if (day[0]) {
       const jobCard = day.map(jobOfDay => {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob} = jobOfDay;
+
         return (
           <Card>
             <Typography variant="h6">{clientOfJob.name}</Typography>
@@ -57,6 +58,7 @@ const useDayInfo = function() {
               key={job.id}
               packageTitle={packageOfJob.title}
               timeEst={packageOfJob.man_hours_per_visit}
+              crewSize={crewOfJob.crew_size}
               clientName={clientOfJob.name}
               address={contractOfJob.address}
               jobNotes={contractOfJob.job_notes}

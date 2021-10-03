@@ -2,14 +2,14 @@ import * as React from 'react';
 import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, styled } from '@mui/material';
 
 export default function JobCard(props) {
-  console.log("props in jobcard", props)
-  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completed, markCompleted, compClass } = props;
+
+  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completed, markCompleted, crewSize, compClass } = props;
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center'
   }));
-
+  const crewTimeEst = crewSize ? Math.round(timeEst / crewSize) : timeEst; 
   return (
   <Card sx={{display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>     
     <CardContent sx={{display: 'flex'}}>
@@ -18,7 +18,7 @@ export default function JobCard(props) {
           {packageTitle}
         </Typography>
         <Typography variant="h4">
-          {`Time Est: ${timeEst}`}
+          {`Time Est: ${crewTimeEst}`}
         </Typography>
       </div>
     </CardContent>
@@ -33,6 +33,7 @@ export default function JobCard(props) {
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
+    {completed && <Typography>Completed!</Typography>}
     {props.markCompleted && !completed &&
     <CardActions>
       <Button onClick={() => markCompleted(jobId)}>Job Completed</Button>
