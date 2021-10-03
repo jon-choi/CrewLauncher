@@ -45,6 +45,15 @@ body {
   .page-header {
     background-image: url("https://acegif.com/wp-content/gif/outerspace-58.gif)");
   }
+
+  .card-bg {
+    background-image: url("https://www.transparenttextures.com/patterns/grey-sandbag.png");;
+    background-color: rgb(66, 72, 167);
+  }
+  
+  .font-color {
+    color: #DBEAF3;
+  }
 }
 code {
   font-family: $fontFamily;
