@@ -61,7 +61,8 @@ const useDayInfo = function() {
               address={contractOfJob.address}
               jobNotes={contractOfJob.job_notes}
               compClass="crew-day"
-              jobId={jobOfDay.job.id}
+              completed={job.completed}
+              jobId={job.id}
               markCompleted={markJobCompleted}
               />
             </Box>
