@@ -17,8 +17,8 @@ const Dashboard = function(props) {
 
       }} sx={{
         position: 'absolute',
-        top: 150,
-        right: 500,
+        top: 100,
+        right: 450,
       }}>Finish</Fab>
     );
     
