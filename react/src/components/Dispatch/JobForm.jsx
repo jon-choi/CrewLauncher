@@ -27,8 +27,8 @@ const JobForm = (props) => {
   const job = getInfoForJobForm(jobs, contracts, packages, parseInt(params.id));
 
   useEffect(() => {
-    setSelectedCrew(job.crewId)
-  },[job.crewId])
+    setSelectedCrew(thisJob.crewId)
+  },[thisJob.crewId])
   
   if (jobs[1]) {
 

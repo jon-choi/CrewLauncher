@@ -48,7 +48,6 @@ const useAppData = function() {
     console.log("Quote submitted: ", quoteDetails);
     const socket = io('/');
     socket.connect()
-    console.log(socket)
     socket.emit('quote', quoteDetails);
   };
 
@@ -60,14 +59,13 @@ const useAppData = function() {
       ...jobsInState,
       job
     ]
-    console.log(jobs)
     return axios.post(`/jobs/${job.id}`, job)
       .then(res => {
         setState(prev => {
           return {...prev, jobs}
         })
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(`Could not edit job ${job.id}`, error))
   }
   const saveJobEdit = function(crewId, time, endTime, jobInfo, jobId) {
     
