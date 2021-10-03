@@ -3,7 +3,7 @@ import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
 import MediaCard from '../MediaCard';
 import DateRangePicker from '../DateRangePicker';
 import Drawer from '../Drawer';
-import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
+import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Card, Typography } from '@mui/material';
 import { format, addDays } from 'date-fns';
 
 
@@ -125,7 +125,11 @@ import { format, addDays } from 'date-fns';
 
   return (
     <Box width={'100%'}>
-      <h1>Launch New Contract</h1>
+      <Card sx={{maxHeight: 800, maxWidth: 400, alignItems: 'center',  margin: 'auto', mb: 5, backgroundImage: "url(https://i.pinimg.com/originals/6c/a7/64/6ca764a1d75a5b4be3e84fe17a102208.gif)" }}>
+        <Typography variant="h4" color="white" >
+      Launch New Contract
+      </Typography>
+      </Card>
       <Stack component="form" spacing={2} sx={{margin: 'auto', maxWidth: 600}} >
         <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
           <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
