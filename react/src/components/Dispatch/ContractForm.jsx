@@ -125,7 +125,7 @@ import { format, addDays } from 'date-fns';
 
   return (
     <Box width={'100%'}>
-      <h1>New Contract</h1>
+      <h1>Launch New Contract</h1>
       <Stack component="form" spacing={2} sx={{margin: 'auto', maxWidth: 600}} >
         <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
           <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
@@ -197,7 +197,7 @@ import { format, addDays } from 'date-fns';
           onChange={event => setJobNotes(event.target.value)}
         />
         
-        <Button onClick={validate} variant="contained">Submit Contract</Button>
+        <Button onClick={validate} variant="contained">Launch</Button>
       </Stack>
     </Box>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, Stack, InputLabel, OutlinedInput, TextField, Alert, Snackbar } from '@mui/material';
+import { Box, Button, FormControl, Stack, InputLabel, OutlinedInput, TextField, Alert, Snackbar, Card, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 const PackageForm = (props) => {
@@ -60,7 +60,11 @@ const PackageForm = (props) => {
 
   return (
     <Box width={'100%'} >
-      <h1>Create New Package</h1>
+      <Card sx={{maxHeight: 800, maxWidth: 400, alignItems: 'center',  margin: 'auto', mb: 5 }}>
+        <Typography variant="h4">
+      Launch New Package
+      </Typography>
+      </Card>
       <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, error: false, message: ""})}>
         <Alert onClose={() => setStatus({success: false, error: false, message: ""})}
          severity={status.error ? 'error' : 'success'} sx={{ width: '100%' }}>
@@ -71,6 +75,8 @@ const PackageForm = (props) => {
       
       {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
       
+
+
       <FormControl>
         <InputLabel htmlFor="title">Title</InputLabel>
         <OutlinedInput
@@ -142,7 +148,9 @@ const PackageForm = (props) => {
           label="Package Image (file name)"
         />
         </FormControl>
-        <Button onClick={validate} variant="contained">Create New Package</Button>
+
+
+        <Button onClick={validate} variant="contained">Launch</Button>
       </Stack>
     </Box>
   );
