@@ -3,7 +3,7 @@ import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, st
 
 export default function JobCard(props) {
   console.log("props in jobcard", props)
-  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, markCompleted, compClass } = props;
+  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completed, markCompleted, compClass } = props;
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -33,9 +33,10 @@ export default function JobCard(props) {
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
+    {props.markCompleted && !completed &&
     <CardActions>
       <Button onClick={() => markCompleted(jobId)}>Job Completed</Button>
-    </CardActions>
+    </CardActions>}
   </Card>
 );
 }
