@@ -27,24 +27,24 @@ const CrewPage = (props) => {
             const days = getDayInfo(jobs, crews, contracts, packages, clients, crew.id);
             count++
             const key = count;
-            return (<Grid container item key={key} sx={{ alignItems: "center"}}>
+            return (<Grid container item key={key} sx={{ alignItems: "center", justifyContent: "center"}}>
                 <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 200, height: 200, mb: 4, ml: 20, mr: 5, mt: 5 }} />
                 <CrewCard days={days} />
             </Grid>)
         })
 
 
-        return(<Stack>
-
-                <Item sx={{maxHeight: 800, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
+        return(
+        <Stack>
+            <Item sx={{maxHeight: 800, maxWidth: 900, alignItems: 'center',  margin: 'auto'}}>
                 <Typography variant="h3">
-                🚀  Crews to Launch: {crews.length} 🚀 
+                    🚀  Crews to Launch: {crews.length} 🚀 
                 </Typography>
-                </Item>
+            </Item>
 
-        <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }}>
-            {cardsOfDaysForCrews}
-        </Grid>
+            <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }} justifyItems="center">
+                {cardsOfDaysForCrews}
+            </Grid>
         </Stack>)
     }
 
