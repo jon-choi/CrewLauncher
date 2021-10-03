@@ -30,13 +30,14 @@ const useCrewsPageDayState = function() {
         return (<div key={countListen}>
           {selectedDay === null &&
           <Card
-          sx={{display: 'flex', justifyContent: 'center', minHeight: 200}}
-          className={`day-${countListen}`}
+          className="--day"
+          sx={{display: 'flex', justifyContent: 'center' }}
+          id={`day-${countListen}`}
           >
             {day[1] ?
             <Item onClick={(event) => setSelectedDay(countListen)}>
-            <CardContent sx={{minWidth: 200 }} >
-              <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+            <CardContent className="--card" >
+              <Typography className="--crew-day"  color="text.primary" gutterBottom>
                 {day[0]}
               </Typography>
               {createBodyItems(day, countListen)}
@@ -44,8 +45,8 @@ const useCrewsPageDayState = function() {
             </Item>
             :
             <Item >
-            <CardContent sx={{minWidth: 200 }} >
-              <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+            <CardContent className="--card" >
+              <Typography className="--crew-day" color="text.primary" gutterBottom>
                 {day[0]}
               </Typography>
               {createBodyItems(day, countListen)}

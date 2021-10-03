@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import CrewCard from './CrewCard';
 import { getDayInfo } from '../../../helpers/AppHelpers'
 
+import './CrewsPageResources/crewsPage.scss'
+
 
 const CrewPage = (props) => {
 
@@ -27,7 +29,7 @@ const CrewPage = (props) => {
             const days = getDayInfo(jobs, crews, contracts, packages, clients, crew.id);
             count++
             const key = count;
-            return (<Grid container item key={key} sx={{ alignItems: "center", justifyContent: "center"}}>
+            return (<Grid className="-crew" container item key={key} >
                 <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 200, height: 200, mb: 4, ml: 20, mr: 5, mt: 5 }} />
                 <CrewCard days={days} />
             </Grid>)
@@ -42,7 +44,7 @@ const CrewPage = (props) => {
                 </Typography>
             </Item>
 
-            <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }} justifyItems="center">
+            <Grid className="crewsPage" container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }} >
                 {cardsOfDaysForCrews}
             </Grid>
         </Stack>)

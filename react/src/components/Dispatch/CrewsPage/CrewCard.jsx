@@ -23,7 +23,7 @@ const CrewCard = (props) => {
 
     const cards = createCards(days)
 
-    return ( <Card sx={{display: "flex", justifyContent: "center", alignItems: "center", minWidth: 1100}}>{cards}</Card>)
+    return ( <Card className="__card" sx={{display: "flex", justifyContent: "space-around"}}>{cards}</Card>)
   }
   return (
     <Card sx={{display: "flex", justifyContent: "center", alignItems: "flex-start"}}>

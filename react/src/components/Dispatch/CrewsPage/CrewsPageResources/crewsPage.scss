@@ -1,0 +1,42 @@
+
+
+.crewsPage {
+  justify-items: center;
+
+  & .-crew {
+    align-items: center;
+    justify-content: center;
+    margin-top: 5em;
+
+    & .__card {
+      min-width: 80em;
+      align-items: "center";
+      margin-top: auto;
+      margin-bottom: auto;
+      min-height: 15em;
+      
+      & .--day {
+        min-height: 100%;
+
+        & .--card {
+          min-width: 15em;
+        }
+
+        & .--crew-day {
+          font-size: 2em;
+          
+        }
+      }
+      & .--summary {
+        min-height: 15em;
+        justify-content: space-evenly;
+      }
+      & .--list {
+        font-size: 1em;
+        margin-right: 2em;
+        margin-left: 2em;
+        align-items: center;
+      }
+    }
+  }
+}

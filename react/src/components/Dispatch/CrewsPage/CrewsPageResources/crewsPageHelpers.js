@@ -15,23 +15,42 @@ const Item = styled(Paper)(({ theme }) => ({
 const createBodyItems = function([...day], value) {
   const date = day.splice(0,1)
   if (day[0]) {
-    return day.map(job => {
-      return (<div key={value}>
-      <Typography variant="h6" color="text.primary" gutterBottom >
-        Job Info: 
+    const timeArray = [];
+    const completedJobs = day.filter(item => {
+      const estimate = item.packageOfJob.man_hours_per_visit / item.crewOfJob.crew_size;
+      timeArray.push(estimate)
+      return item.job.completed;
+    })
+    const incompleteJobs = day.length - completedJobs.length;
 
+    const time = timeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
+
+    return (<Item key={value} >
+      <Grid container sx={{justifyContent: 'space-between'}}>
+      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+        Estimated Time:
       </Typography>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom >
-        {job.clientOfJob.name}
+      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+       {time} hrs
       </Typography>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom >
-        {job.contractOfJob.address}
+      </Grid >
+      <Grid container sx={{justifyContent: 'space-between'}}>
+      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+        Completed Jobs: 
       </Typography>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom >
-        {job.job.completed ? "Complete!" : "Not Complete"}
+      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+      {completedJobs.length}
       </Typography>
-    </div>)
-    });
+      </Grid >
+      <Grid container sx={{justifyContent: 'space-between'}}>
+      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+        incompleteJobs: 
+      </Typography>
+      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+      {incompleteJobs}
+      </Typography>
+      </Grid >
+    </Item>)
   }
   return(<>
     <Typography variant="h6" color="text.primary" gutterBottom>
@@ -44,23 +63,23 @@ const createSelectedDayCard = function([...day]) {
   const date = day.splice(0,1)
   const selectedDayCard = day.map(job => {
     return (<>
-      <Stack justifyContent="center">
-        <Item variant="outlined" sx={{mr: 2, ml: 2}}>{date}</Item>
-        <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.job.start_time}</Item>
-        <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.packageOfJob.title}</Item>
-        <Item variant="outlined" sx={{mr: 2, ml: 2}}>{job.clientOfJob.name}, {job.clientOfJob.phone}</Item>
+      <Stack justifyContent="center" className="--summary">
+        <Item className="--list" variant="outlined" >{date}</Item>
+        <Item className="--list" variant="outlined" >{job.job.start_time}</Item>
+        <Item className="--list" variant="outlined" >{job.packageOfJob.title}</Item>
+        <Item className="--list" variant="outlined" >{job.clientOfJob.name}, {job.clientOfJob.phone}</Item>
       </Stack>
     </>)
   }
     )
   return (<>
   <Stack direction="row">
-      <Card >
+      <Stack className="--summary"  >
         <Item variant="outlined">Job Date</Item>
         <Item variant="outlined">Approximate Launch:</Item>
         <Item variant="outlined">Contract Package:</Item>
         <Item variant="outlined">Client:</Item>
-      </Card>
+      </Stack>
       {selectedDayCard}
   </Stack>
   </>)
