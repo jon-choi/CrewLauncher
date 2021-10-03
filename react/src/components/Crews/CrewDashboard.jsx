@@ -5,7 +5,7 @@ import { Stack, Box, Grid, Fab } from '@mui/material';
 
 
 const CrewDashboard = function(props) {
-  const { selectedDay, setSelectedDay, newDayCards } = useDayInfo()
+  const { selectedDay, setSelectedDay, completeState, setCompleteState, newDayCards } = useDayInfo()
   const { days, markJobCompleted } = props;
   
   const id = useParams().id;
