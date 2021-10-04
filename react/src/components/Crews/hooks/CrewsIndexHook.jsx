@@ -45,10 +45,10 @@ const useDayInfo = function() {
             {date}
           </Typography>
           <Typography variant="h5" component="h5">
-          Jobs Today: {completeJob[date].jobs}
+          Jobs Today: {completeJob[date] && completeJob[date].jobs}
         </Typography>
         <Typography variant="h5" component="h6">
-          Incomplete: {completeJob[date].incomplete}
+          Incomplete: {completeJob[date] && completeJob[date].incomplete}
         </Typography>
         </Typography>
         </Card>
