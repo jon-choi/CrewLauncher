@@ -63,7 +63,7 @@ const Dispatch = function(props) {
             <ClientsPage clientsInfo={clientsInfo}/>
           </Route>
           <Route path={`${url}`} >
-            <Dashboard days={days}/>
+            <Dashboard days={days} crews={crews}/>
           </Route>
         </Switch>
       {/* <Quote /> */}

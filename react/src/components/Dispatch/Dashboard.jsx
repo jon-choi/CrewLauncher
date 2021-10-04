@@ -3,12 +3,14 @@
 import { Stack, Box, Grid, Fab } from '@mui/material';
 import { useEffect } from 'react';
 import useDashboardDayState from './hooks/DashboardHook'
+import { getCrewNames } from './dispatchDataHelper'
 
 
 const Dashboard = function(props) {
   const { selectedDay, setSelectedDay, createDayCards} = useDashboardDayState()
-  const { days } = props;
+  const { days, crews } = props;
   
+  const crewNames = (getCrewNames(crews))
 
   if (days) {
     const fab = (<Fab variant="extended"
@@ -25,7 +27,7 @@ const Dashboard = function(props) {
     // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
     
-    const dayCards = createDayCards(days, fab);
+    const dayCards = createDayCards(days, fab, crewNames);
 
 
     return (
