@@ -1,5 +1,5 @@
- 
-import { useState } from "react";
+import { format, isSameDay } from 'date-fns'
+import { useEffect, useState } from "react";
 
 import JobCard from '../../JobCard'
 
@@ -22,15 +22,18 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const useDashboardDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
+  const [completeJob, setJobComplete] = useState({id: {id: 0, complete: true}});
   
 
-  const mapDayToCard = function([...day], value) {
+  const mapDayToCard = function([...day], value, jobs) {
     const date = day.splice(0,1)
     if(day[0]) {
       const jobs = day.filter(jobOfDay => {
         const { job } = jobOfDay;
         return !job.completed
       })
+
+
       return (
       <Item className="font-color" sx={{minHeight: 185, maxWidth: 1000}} >
         <Typography csx={{mt: 3}} variant="h4" component="h4" onClick={(event) => setSelectedDay(value)}>
@@ -58,8 +61,9 @@ const useDashboardDayState = function() {
   }
 
   
-  const jobsForSelectedDay = function([...day], crewNames) {
+  const jobsForSelectedDay = function([...day], crewNames, jobs) {
     const date = day.splice(0,1)
+    
     if(day[0]) {
       const dayOfCrews = []
       for (const name in crewNames) {
@@ -124,6 +128,21 @@ const useDashboardDayState = function() {
 
   const createDayCards = function(days, fab, crewNames, jobs) {
     let count = 0;
+    const [ yesterday, today, tomorrow, fourthDay, lastDay ] = days;
+    const filterJobs = jobs.filter(job => {
+      const date = format(new Date(job.date),'EEEE, MMM dd yyyy')
+      if(date === yesterday[0] || date === today[0] || date === tomorrow[0] || date === fourthDay[0] || date === lastDay[0]) {
+        return true;
+      }
+      return false;
+    });
+    console.log(filterJobs)
+    // setState Right Here
+    // setJobComplete(prev => {
+    //   return {...prev}
+    // })
+    
+
     return days.map(day => {
       const countListen = count;
       const dayCard = (<div alignSelf="center" key={countListen}>{(selectedDay === countListen && days[countListen][1]) && fab}
@@ -132,7 +151,7 @@ const useDashboardDayState = function() {
         sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
         onClick={(event) => setSelectedDay(countListen)}
       >
-        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames) : mapDayToCard(days[countListen], countListen)}
+        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs) : mapDayToCard(days[countListen], countListen, jobs)}
       </Box>
       </div>);
       count++;
