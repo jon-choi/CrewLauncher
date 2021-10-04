@@ -29,16 +29,16 @@ const Dashboard = function(props) {
 
 
     return (
-      <Stack sx={{ mb: 2, mt: 2, width: '100%', justifyContent: 'center', ml: 58}} >
+      <Stack className='dispatch-dashboard-stack' >
         {dayCards}
       </Stack>
 
     )
   }
   return (
-    <Box width={'100%'}>
+    <Stack className='dispatch-dashboard-stack'  sx={{width: '100%'}} >
       {`${days}`}
-    </Box>
+    </Stack>
   );
 }
 

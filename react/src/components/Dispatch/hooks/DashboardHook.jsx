@@ -92,15 +92,14 @@ const useDashboardDayState = function() {
     let count = 0;
     return days.map(day => {
       const countListen = count;
-      const dayCard = (<div key={countListen}>{(selectedDay === countListen && days[countListen][1]) && fab}
+      const dayCard = (<Box className='outer-dispatch-daycard-box' key={countListen}>{(selectedDay === countListen && days[countListen][1]) && fab}
       <Box
-        className={`day-${countListen}`}
-        sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
+        className={`day-card day-${countListen}`}
         onClick={(event) => setSelectedDay(countListen)}
       >
         {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], countListen) : mapDayToCard(days[countListen], countListen)}
       </Box>
-      </div>);
+      </Box>);
       count++;
       return dayCard;
 
