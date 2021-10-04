@@ -81,11 +81,9 @@ function Row(props) {
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
-                    { props.name && <><TableCell>Address</TableCell>
-                    <TableCell>Phone Number</TableCell></> }
-                    <TableCell align="right">Address</TableCell>
-                    <TableCell align="right">Job Notes</TableCell>
+                  <TableRow>                   
+                    <TableCell align="left"><b>Address</b></TableCell>
+                    <TableCell align="right"><b>Notes</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -94,11 +92,7 @@ function Row(props) {
                       <TableCell component="th" scope="row">
                         {job.address}
                       </TableCell>
-                      <TableCell>{jobs.phone}</TableCell>
-                      <TableCell align="right">{jobs.package}</TableCell>
-                      <TableCell align="right">
-                        {job.jobNotes}
-                      </TableCell>
+                      <TableCell align="right">{job.jobNotes}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -140,18 +134,18 @@ export default function CollapsibleTable(props) {
   const { rows } = props;
 
   return (
-    <h1>
-    <TableContainer component={Paper}>
+    <div>
+    <TableContainer sx={{mt: 8}} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
-          <TableRow>
+          <TableRow className="page-header"> 
             <TableCell />
             <TableCell> 
-              <Typography>
+              <Typography className="font-color">
                 Launch Info
                 </Typography>
                 </TableCell>
-            <TableCell align="right">Time Estimate</TableCell>
+            <TableCell className="font-color" align="right"><b>Time Estimate</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -161,6 +155,6 @@ export default function CollapsibleTable(props) {
         </TableBody>
       </Table>
     </TableContainer>
-  </h1>
+  </div>
   );
 }
