@@ -32,12 +32,12 @@ const CrewDashboard = function(props) {
     <Button component={Link} to={`${id}/jobs`}>
           Jobs
           </Button>
-      <Card>
+      
       <Stack sx={{margin: 'auto', width: '100%'}} >
         {dayCards}        
       </Stack>
-      </Card>
-    </div>
+      </div>
+    
     )
   }
   return (

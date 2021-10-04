@@ -27,7 +27,9 @@ const useDayInfo = function() {
       
 
       return (
-        <Box>
+        
+          <Card className="page-header" sx={{ml: 5, mb: 2, mt: 6}}>
+            <Typography className="font-color">
           <Typography variant="h5" component="h5">
             {date}
           </Typography>
@@ -37,19 +39,24 @@ const useDayInfo = function() {
         <Typography variant="h5" component="h6">
           Incomplete: {incompleteJobs}
         </Typography>
-        </Box>
+        </Typography>
+        </Card>
+        
       )
     }
     return (
-      <Box>
+      
+        <Card className="page-header" sx={{ml: 5}}>
+          <Typography className="font-color">
         <Typography variant="h4" component="h4">
           {date}
         </Typography>
         <Typography variant="h5" component="h5">
-          Rocket Jobs all day 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+          No Jobs! 🚀
         </Typography>
-        
-      </Box>)
+        </Typography>
+        </Card>
+      )
   }
   
   const jobsForDay = function([...day], markJobCompleted) {
