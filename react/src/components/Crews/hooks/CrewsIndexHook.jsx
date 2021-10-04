@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import { getThemeProps } from "@mui/system";
+import { format } from 'date-fns';
 
 
 const useDayInfo = function() {
@@ -19,23 +20,32 @@ const useDayInfo = function() {
     });
   },[selectedDay])
 
-  const dayToCard = function([...day], incompleteJobs) {
-    const date = day.splice(0, 1);
-    if (day[0]) {
-    
-      
-      
 
+  const dayToCard = function([...day], jobs, crewId) {
+    // jobs is state.jobs
+    console.log(jobs)
+    console.log(crewId)
+    const date = day.splice(0, 1);
+
+    if (day[0]) {
+      const todayJobsForCrew = jobs.filter(j => {
+        console.log('1: ', format(new Date(j.date), 'EEEE, MMM dd yyyy'))
+        console.log('2: ', date[0])
+        return parseInt(j.crew_id) === parseInt(crewId) && format(new Date(j.date), 'EEEE, MMM dd yyyy') === date[0];
+      });
+      // todayJobsForCrew is an array of jobs for the crew. currently working, proceed from here
+      console.log(todayJobsForCrew)
+      const incompleteJobs = todayJobsForCrew.filter(j => !j.complete);
       return (
         <Box>
           <Typography variant="h5" component="h5">
             {date}
           </Typography>
           <Typography variant="h5" component="h5">
-          Jobs Today: {day.length}
+          Jobs Today: {todayJobsForCrew.length}
         </Typography>
         <Typography variant="h5" component="h6">
-          Incomplete: {incompleteJobs}
+          Incomplete: {incompleteJobs.length}
         </Typography>
         </Box>
       )
@@ -46,13 +56,13 @@ const useDayInfo = function() {
           {date}
         </Typography>
         <Typography variant="h5" component="h5">
-          Rocket Jobs all day 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+          No jobs booked today
         </Typography>
         
       </Box>)
   }
   
-  const jobsForDay = function([...day], markJobCompleted) {
+  const jobsForDay = function([...day], markJobCompleted, jobs, crewId) {
     const date = day.splice(0, 1);
 
     if (day[0]) {
@@ -92,9 +102,9 @@ const useDayInfo = function() {
       })
       return (<Box>{jobCard}</Box>)
     }
-    return dayToCard([date])
+    return dayToCard([date], jobs, crewId)
   }
-  const newDayCards = function(days, fab, markJobCompleted) {
+  const newDayCards = function(days, fab, jobs, crewId, markJobCompleted) {
     let count = -1;
     
     for (const day of days) {
@@ -107,7 +117,7 @@ const useDayInfo = function() {
       }
     }
     
-    const incompleteJobs = Object.values(completeState).reduce((prev, current) => prev += !current,0);
+
     
     
     return days.map(day => {
@@ -121,11 +131,11 @@ const useDayInfo = function() {
           sx={{ width: '90%', height: '90%', maxHeight: 200, minHeight: 90 }}
           onClick={(event) => setSelectedDay(counting)}
         >
-          {dayToCard(days[counting], incompleteJobs)}
+          {dayToCard(days[counting], jobs, crewId)}
         </Box>}
         {selectedDay === counting &&  
         <Stack>
-          {jobsForDay(days[counting], markJobCompleted)}
+          {jobsForDay(days[counting], markJobCompleted, jobs, crewId)}
         </Stack>}
       </div>);
       count++;

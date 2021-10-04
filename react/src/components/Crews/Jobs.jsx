@@ -3,13 +3,13 @@ import JobTable from './JobTable';
 import { useParams } from 'react-router-dom'
 import { isAfter, isBefore } from 'date-fns'
 // import { getContractsInfo } from '../Dispatch/dispatchDataHelper';
-
 import { getJobsByCrew } from './crewsDataHelper';
 
 
 const Jobs = (props) => {
   const params = useParams()
   const crewId = parseInt(params.id);
+  
   if (props.jobs[1]) {
     const jobs = getJobsByCrew(props.jobs, props.clients, props.packages, props.contracts, crewId);
     jobs.sort(function (a, b) {
@@ -35,9 +35,9 @@ const Jobs = (props) => {
     
     return (
       <>
-        <JobTable rows={rows}
+        <JobTable rows={rows} />
+          <h1>{jobs[0].completed}</h1>
           
-          />
       </>
   
     );

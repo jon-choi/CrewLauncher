@@ -45,7 +45,7 @@ const [selectedDay, setSelectedDay] = useState([{}]);
             </Route>
 
             <Route path="/crews/:id">
-              <CrewDashboard days={days} markJobCompleted={markJobCompleted} />
+              <CrewDashboard jobs={jobs} days={days} markJobCompleted={markJobCompleted} />
             </Route>
             </Switch>
         </div>
