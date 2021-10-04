@@ -15,11 +15,14 @@ $cardHeight: 15em;
       margin-bottom: auto;
       min-height: $cardHeight;
       
+      
       & .--day {
         min-height: 100%;
 
         & .--card {
           min-width: 15em;
+        
+
         }
 
         & .--crew-day {
@@ -29,6 +32,7 @@ $cardHeight: 15em;
         & .--summary {
           min-height: $cardHeight;
           justify-content: space-evenly;
+          
         }
         & .--list {
           font-size: 1em;
