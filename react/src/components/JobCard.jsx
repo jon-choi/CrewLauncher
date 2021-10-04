@@ -19,7 +19,7 @@ export default function JobCard(props) {
     padding: theme.spacing(1),
     textAlign: 'center'
   }));
-  const crewTimeEst = crewSize ? Math.round(timeEst / crewSize) : timeEst; 
+  const crewTimeEst = crewSize ? parseFloat(timeEst / crewSize).toFixed(2) : timeEst; 
   return (
   <Card className={compClass} sx={{display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>     
     <CardContent sx={{display: 'flex'}}>
@@ -28,7 +28,7 @@ export default function JobCard(props) {
           {packageTitle}
         </Typography>
         <Typography variant="h4">
-          {`Time Est: ${crewTimeEst}`}
+          {`Time Est: ${crewTimeEst} hrs`}
         </Typography>
       </div>
     </CardContent>
