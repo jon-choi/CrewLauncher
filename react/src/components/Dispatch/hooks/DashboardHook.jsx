@@ -62,7 +62,7 @@ const useDashboardDayState = function() {
   }
 
   
-  const jobsForSelectedDay = function([...day], crewNames, jobs, fab) {
+  const jobsForSelectedDay = function([...day], crewNames, jobs, fab, count) {
     const date = day.splice(0,1)
     
     if(day[0]) {
@@ -139,7 +139,7 @@ const useDashboardDayState = function() {
         sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
         onClick={(event) => setSelectedDay(countListen)}
       >
-        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs, fab) : mapDayToCard(days[countListen], countListen, jobs)}
+        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs, fab, countListen) : mapDayToCard(days[countListen], countListen, jobs)}
       </Box>
       </div>);
       count++;
