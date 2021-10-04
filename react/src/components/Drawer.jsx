@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 export default function NewDrawer(props) {
   // pass in anchor as props 'left', 'right', 'top', 'bottom'
   const anchor = props.anchor || 'right';
-  const { items, openButtonText, closeButtonText } = props;
+  const { items, openButtonText, closeButtonText, width } = props;
   const [drawerOpen, setDrawerOpen] = useState(false);
 
 
@@ -21,10 +21,19 @@ export default function NewDrawer(props) {
     }
     setDrawerOpen(open);
   };
+  let drawerWidth;
+
+  if (props.width) {
+    drawerWidth = props.width;
+  } else if (anchor === 'top' || anchor === 'bottom') {
+    drawerWidth = 'auto';
+  } else {
+    drawerWidth = 320;
+  }
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: drawerWidth }}
       role="presentation"
     >
       <Button onClick={toggleDrawer(anchor, false)} variant="contained">{closeButtonText}</Button>
