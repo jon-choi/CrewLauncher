@@ -64,7 +64,7 @@ const ContractsPage = (props) => {
     const linkToEdit = `/dispatch/contracts/${contract.id}`;
 
     return (<Grid item >
-      <MediaCard
+      <MediaCard 
     key={count}
     compClass="contract-card"
     link={linkToEdit}
