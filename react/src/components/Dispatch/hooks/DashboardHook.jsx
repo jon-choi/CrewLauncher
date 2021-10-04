@@ -92,7 +92,7 @@ const useDashboardDayState = function() {
     return mapDayToCard([date])
   }
 
-  const createDayCards = function(days, fab) {
+  const createDayCards = function(days, fab, jobs) {
     let count = 0;
     return days.map(day => {
       const countListen = count;

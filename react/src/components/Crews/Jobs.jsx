@@ -1,5 +1,6 @@
 import React from 'react';
 import JobTable from './JobTable';
+import { subDays, addDays, format } from 'date-fns';
 import { useParams } from 'react-router-dom'
 import { isAfter, isBefore } from 'date-fns'
 // import { getContractsInfo } from '../Dispatch/dispatchDataHelper';
@@ -18,6 +19,7 @@ const Jobs = (props) => {
     let count = 1
     let rows = []
     for (const row of jobs) {
+      if (isAfter(new Date(row.date), new Date())) {
       const date = row.date; 
       const timeEstimate = row.timeEstimate;
       const packageItem = row.package;
@@ -29,6 +31,7 @@ const Jobs = (props) => {
         rows:
         [row]});
       count++;
+      }
     };
 
 

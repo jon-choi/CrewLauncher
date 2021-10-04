@@ -5,7 +5,6 @@ import { getClientId, generateJobDates } from '../helpers/AppHelpers'
 
 
 const useAppData = function() {
-  const [completeState, setCompleteState] = useState({id: 0, complete: 0})
   const [state, setState] = useState({
     crews: [{foreman_name: null}],
     clients: [{name: null}],
@@ -34,6 +33,8 @@ const useAppData = function() {
           }
         })
     })
+
+
   }, []);
 
 
@@ -302,6 +303,6 @@ const useAppData = function() {
     });
   };
 
-  return { state, completeState, setCompleteState, createNewPackage, editJob, createNewClient, processContract, saveJobEdit, onSubmitQuote, updateQuoteState, markJobCompleted }
+  return { state, createNewPackage, editJob, createNewClient, processContract, saveJobEdit, onSubmitQuote, updateQuoteState, markJobCompleted }
 }
 export default useAppData;

@@ -8,7 +8,7 @@ import { getCrewNames } from './dispatchDataHelper'
 
 const Dashboard = function(props) {
   const { selectedDay, setSelectedDay, createDayCards} = useDashboardDayState()
-  const { days, crews } = props;
+  const { days, crews, jobs } = props;
   
   const crewNames = (getCrewNames(crews))
 
@@ -27,7 +27,7 @@ const Dashboard = function(props) {
     // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
     
-    const dayCards = createDayCards(days, fab, crewNames);
+    const dayCards = createDayCards(days, fab, crewNames, jobs);
 
 
     return (
