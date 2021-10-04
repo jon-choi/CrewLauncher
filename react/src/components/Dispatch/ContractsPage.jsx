@@ -17,8 +17,8 @@ const ContractsPage = (props) => {
   const contractCards = contractsInfo.map(contract => {
     const nextVisit = contract.jobDate ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None';
     count++;
-    const header =(<Item>
-      <Typography variant="h5">
+    const header =(<Item className="page-header">
+      <Typography className="font-color" variant="h5">
       🚀 {contract.clientName} 🚀{contract.clientEmail} 
       </Typography>
     </Item>);
