@@ -1,4 +1,4 @@
-import { format, isSameDay } from 'date-fns'
+
 import { useEffect, useState } from "react";
 
 import JobCard from '../../JobCard'
@@ -23,6 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const useDashboardDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [completeJob, setJobComplete] = useState({id: {id: 0, complete: true}});
+
   
 
   const mapDayToCard = function([...day], value, jobs) {
@@ -128,20 +129,8 @@ const useDashboardDayState = function() {
 
   const createDayCards = function(days, fab, crewNames, jobs) {
     let count = 0;
-    const [ yesterday, today, tomorrow, fourthDay, lastDay ] = days;
-    const filterJobs = jobs.filter(job => {
-      const date = format(new Date(job.date),'EEEE, MMM dd yyyy')
-      if(date === yesterday[0] || date === today[0] || date === tomorrow[0] || date === fourthDay[0] || date === lastDay[0]) {
-        return true;
-      }
-      return false;
-    });
-    console.log(filterJobs)
-    // setState Right Here
-    // setJobComplete(prev => {
-    //   return {...prev}
-    // })
     
+    console.log(completeJob)
 
     return days.map(day => {
       const countListen = count;
@@ -159,7 +148,7 @@ const useDashboardDayState = function() {
 
     })
   }
-  return { selectedDay, setSelectedDay, createDayCards}
+  return { selectedDay, setSelectedDay, createDayCards, setJobComplete}
 }
 
 export default useDashboardDayState;
