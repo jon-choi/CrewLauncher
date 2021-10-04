@@ -35,11 +35,8 @@ const Jobs = (props) => {
     
     return (
       <>
-        <JobTable rows={rows}
-          
-          />
+        <JobTable rows={rows} />
       </>
-  
     );
   }
 // const { contracts, clients, packages, jobs } = props.state;
