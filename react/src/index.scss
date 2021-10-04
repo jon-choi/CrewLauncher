@@ -1,4 +1,6 @@
 $fontFamily: "Yantramanav", "sans-serif";
+$cardHoverColor: #dbeaf3;
+$completedJobCard: rgba(214, 152, 152, 0.849);
 
 body {
   margin: 0;
@@ -39,7 +41,7 @@ body {
   }
 
   .completed-jobcard {
-    background-color: rgba(214, 152, 152, 0.849);
+    background-color: $completedJobCard;
   }
 
   .page-header {
@@ -102,6 +104,13 @@ body {
     min-height: 20vh;
 
     justify-content: center;
+  }
+
+  .package-card {
+    &:hover {
+      cursor: pointer;
+      background-color: $cardHoverColor;
+    }
   }
 }
 code {
