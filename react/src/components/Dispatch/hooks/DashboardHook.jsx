@@ -62,7 +62,7 @@ const useDashboardDayState = function() {
   }
 
   
-  const jobsForSelectedDay = function([...day], crewNames, jobs) {
+  const jobsForSelectedDay = function([...day], crewNames, jobs, fab) {
     const date = day.splice(0,1)
     
     if(day[0]) {
@@ -99,7 +99,7 @@ const useDashboardDayState = function() {
         return (
           <Card  sx={{justifyContent: "center"}}>
             <Typography className="page-header" color="#DBEAF3" variant="h6">{crewSize ? name : "Launch A Crew"}</Typography>
-            <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190}}>
+            <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190, minWidth: 204.9, justifyContent: "center"}}>
               <DashboardJobCard
               key={name}
               timeEst={manHours}
@@ -117,8 +117,9 @@ const useDashboardDayState = function() {
         )
       })
       const jobsForSelectedDay =
-        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1}}>
+        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1, flexWrap: "wrap"}}>
            {jobCard}
+           {fab}
         </Card>
       return jobsForSelectedDay
     }
@@ -132,13 +133,13 @@ const useDashboardDayState = function() {
 
     return days.map(day => {
       const countListen = count;
-      const dayCard = (<div alignSelf="center" key={countListen}>{(selectedDay === countListen && days[countListen][1]) && fab}
+      const dayCard = (<div alignSelf="center" key={countListen}>
       <Box
         className={`day-${countListen}`}
         sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
         onClick={(event) => setSelectedDay(countListen)}
       >
-        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs) : mapDayToCard(days[countListen], countListen, jobs)}
+        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs, fab) : mapDayToCard(days[countListen], countListen, jobs)}
       </Box>
       </div>);
       count++;

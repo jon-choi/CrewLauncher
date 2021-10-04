@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { format, isSameDay } from 'date-fns'
-import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, styled } from '@mui/material';
+import { Box, Card, Grid, Stack, Button, Typography, Fab, Paper, styled } from '@mui/material';
 
 export default function DashboardJobCard(props) {
   const { timeEst, jobs, incompleteJobs, jobsCount, setCompleteJobState, crewSize, compClass, selectedDay, date } = props;
@@ -12,24 +12,43 @@ export default function DashboardJobCard(props) {
   }));
   const crewTimeEst = crewSize ? Math.round(timeEst / crewSize) : timeEst; 
   return (
-  <Card className={compClass} sx={{display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>     
-    <CardContent sx={{display: 'flex'}}>
-        <Typography variant="h4" component="div">
-          {`Crew Size: ${crewSize}`}
-        </Typography>
-      </CardContent>
-        <Typography variant="h4">
-          {`Jobs: ${jobsCount}`}
-        </Typography>
+  <Card className={compClass} sx={{display: "flex", minWidth: 190, justifyContent:"space-evenly"}}>
+    <Stack direction="row" sx={{ mt: 2}}>    
+    <Stack sx={{display: 'flex', mr:2}}>
+    <Item >
+          {`Crew Size: `}
+        </Item>
+      
+        <Item >
+          {`Jobs: `}
+        </Item>
     
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        {`Incomplete: ${incompleteJobs}`}
-      </Typography>
-    <CardContent>
-      <Typography variant="body2">
-      {`Time Est: ${crewTimeEst}`}
-      </Typography>
-    </CardContent>
+      <Item>
+        {`Incomplete: `}
+      </Item>
+  
+      <Item >
+      {`Time Est: `}
+      </Item>
+    </Stack>
+    <Stack sx={{minWidth: 50}}>
+        <Item sx={{minWidth: 45}}>
+          {crewSize}
+        </Item>
+      
+        <Item >
+          {jobsCount}
+        </Item>
+    
+      <Item>
+        {incompleteJobs}
+      </Item>
+  
+      <Item >
+        {crewTimeEst}
+      </Item>
+    </Stack>
+    </Stack> 
   </Card>
 );
 }
