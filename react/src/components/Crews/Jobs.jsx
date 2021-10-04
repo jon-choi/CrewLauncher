@@ -36,10 +36,7 @@ const Jobs = (props) => {
     return (
       <>
         <JobTable rows={rows} />
-          <h1>{jobs[0].completed}</h1>
-          
       </>
-  
     );
   }
 // const { contracts, clients, packages, jobs } = props.state;

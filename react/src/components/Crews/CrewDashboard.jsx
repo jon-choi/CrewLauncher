@@ -1,7 +1,7 @@
 
 import { useParams, Link } from 'react-router-dom'
 import useDayInfo from './hooks/CrewsIndexHook';
-import { Stack, Box, Grid, Fab } from '@mui/material';
+import { Stack, Box, Grid, Fab, Button, Card } from '@mui/material';
 
 
 const CrewDashboard = function(props) {
@@ -28,17 +28,21 @@ const CrewDashboard = function(props) {
     const dayCards = newDayCards(days, fab, jobs, id, markJobCompleted);
 
     return (
+    <div>
+    <Button sx={{mt: 5}} component={Link} to={`${id}/jobs`}>
+          Go to Launch Info
+          </Button>
+      
       <Stack sx={{margin: 'auto', width: '100%'}} >
-        {dayCards}
-        <div><Link to={`${id}/jobs`}>Jobs</Link></div>
+        {dayCards}        
       </Stack>
-
+      </div>
+    
     )
   }
   return (
     <>
       {days}
-
     </>
   );
 }

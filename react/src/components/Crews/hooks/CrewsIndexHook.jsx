@@ -37,7 +37,9 @@ const useDayInfo = function() {
       console.log(todayJobsForCrew)
       const incompleteJobs = todayJobsForCrew.filter(j => !j.complete);
       return (
-        <Box>
+        
+          <Card className="page-header" sx={{mb: 2, mt: 2, ml: 5}}>
+            <Typography className="font-color">
           <Typography variant="h5" component="h5">
             {date}
           </Typography>
@@ -47,19 +49,24 @@ const useDayInfo = function() {
         <Typography variant="h5" component="h6">
           Incomplete: {incompleteJobs.length}
         </Typography>
-        </Box>
+        </Typography>
+        </Card>
+        
       )
     }
     return (
-      <Box>
+      
+        <Card className="page-header" sx={{ml: 5}}>
+          <Typography className="font-color">
         <Typography variant="h4" component="h4">
           {date}
         </Typography>
         <Typography variant="h5" component="h5">
           No jobs booked today
         </Typography>
-        
-      </Box>)
+        </Typography>
+        </Card>
+      )
   }
   
   const jobsForDay = function([...day], markJobCompleted, jobs, crewId) {
@@ -80,8 +87,8 @@ const useDayInfo = function() {
         const cardClassNames = classNames("crew-day", {'completed-jobcard': job.completed || completeState[job.id]});
         return (
           <Card>
-            <Box sx={{ width: '95%', maxWidth: 500, maxHeight: 300, display: 'flex-start' }}>
-              <JobCard
+            
+              <JobCard sx={{ width: '100%', maxWidth: 500, maxHeight: 300, display: 'flex'}}
               key={job.id}
               packageTitle={packageOfJob.title}
               timeEst={packageOfJob.man_hours_per_visit}
@@ -94,9 +101,8 @@ const useDayInfo = function() {
               completeState={completeState}
               jobId={job.id}
               onMarkCompleted={onMarkJobCompleted}
-
               />
-            </Box>
+            
           </Card>
         )
       })
@@ -124,7 +130,7 @@ const useDayInfo = function() {
       let counting = count;
       counting++;
       const dayCard = (
-      <div key={counting}>{selectedDay === counting && fab}
+      <div className='dayCard-container' sx={{alignSelf: 'center'}} key={counting}>{selectedDay === counting && fab}
         {selectedDay === null && 
         <Box
           className={`day-${counting}`}
