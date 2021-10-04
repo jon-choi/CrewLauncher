@@ -28,7 +28,7 @@ const useDayInfo = function() {
 
       return (
         
-          <Card className="page-header" sx={{mb: 2, mt: 6, ml: 5}}>
+          <Card className="page-header" sx={{mb: 2, mt: 2, ml: 5}}>
             <Typography className="font-color">
           <Typography variant="h5" component="h5">
             {date}
