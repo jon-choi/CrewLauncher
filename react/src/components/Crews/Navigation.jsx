@@ -21,7 +21,7 @@ const Navigation = (props) => {
 
   return (
     <div>
-      <Stack direction="row" sx={{justifyContent: 'space-between'}}>
+      <Stack direction="row" sx={{justifyContent: 'space-between', minWidth: '350px', maxWidth: '350px'}}>
         <Button component={Link} to={`/crews/${id}`} sx={{fontSize:100}}>
         🚀
         </Button>
