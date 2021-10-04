@@ -6,7 +6,7 @@ import useAppData from './hooks/AppData';
 
 
 const App = function() {
-  const { state, createNewPackage, processContract, saveJobEdit, onSubmitQuote, updateQuoteState, markJobCompleted } = useAppData()
+  const { state,completeState, setCompleteState, createNewPackage, processContract, saveJobEdit, onSubmitQuote, updateQuoteState, markJobCompleted } = useAppData()
 
   return (
     <Router minHeight='100%' >
@@ -14,10 +14,10 @@ const App = function() {
         <div className="App">
           <Switch >
             <Route path='/crews/:id' >
-              <Crews { ...state } onSubmitQuote={onSubmitQuote} markJobCompleted={markJobCompleted} />
+              <Crews { ...state } onSubmitQuote={onSubmitQuote} markJobCompleted={markJobCompleted}  completeState={completeState} setCompleteState={setCompleteState} />
             </Route>
             <Route path='/dispatch' >
-              <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} updateQuoteState={updateQuoteState}/> 
+              <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} updateQuoteState={updateQuoteState} completeState={completeState} setCompleteState={setCompleteState} /> 
             </Route> 
             <Route path='/'>
               <div><Link to='/dispatch'>Dispatch</Link></div>
