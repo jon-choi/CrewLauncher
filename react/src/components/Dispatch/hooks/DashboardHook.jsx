@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const useDashboardDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
-  const [completeJob, setCompleteJob] = useState({0: {date: "date", id: 0, complete: true}});
+  const [completeJob, setCompleteJob] = useState({"date": {complete: 0, jobs: 0}});
 
   
 
@@ -33,17 +33,7 @@ const useDashboardDayState = function() {
         const { job } = jobOfDay;
         return !job.completed
       })
-      let jobCount = 0;
-      let incompleteJobs = 0;
-      for (const item in completeJob) {
-        
-        if (completeJob[item].date === date[0]) {
-          jobCount++;
-          if (!completeJob[item].completed) {
-            incompleteJobs++;
-          }
-        }
-      }
+      
 
       return (
       <Item className="font-color" sx={{minHeight: 185, maxWidth: 1000}} >
@@ -51,10 +41,10 @@ const useDashboardDayState = function() {
           {date}
         </Typography>
         <Typography variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
-          Jobs Today: {jobCount}
+          Jobs Today: {day.length}
         </Typography>
         <Typography sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
-          Incomplete: {incompleteJobs}
+          Incomplete: {jobs.length}
         </Typography>
       </Item>
         )
