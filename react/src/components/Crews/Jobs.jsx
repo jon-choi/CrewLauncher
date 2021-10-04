@@ -35,7 +35,7 @@ const Jobs = (props) => {
     
     return (
       <>
-        <JobTable className="MuiTable-root" rows={rows} />
+        <JobTable className="table" rows={rows} />
       </>
     );
   }
