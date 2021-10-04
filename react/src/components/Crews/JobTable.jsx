@@ -135,7 +135,7 @@ export default function CollapsibleTable(props) {
 
   return (
     <div>
-    <TableContainer sx={{mt: 8}} component={Paper}>
+    <TableContainer className="MuiTable-root" sx={{mt: 8}} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className="page-header"> 
