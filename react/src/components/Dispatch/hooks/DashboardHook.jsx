@@ -62,7 +62,7 @@ const useDashboardDayState = function() {
   }
 
   
-  const jobsForSelectedDay = function([...day], crewNames, jobs, fab) {
+  const jobsForSelectedDay = function([...day], crewNames, jobs, fab, count) {
     const date = day.splice(0,1)
     
     if(day[0]) {
@@ -99,7 +99,7 @@ const useDashboardDayState = function() {
         return (
           <Card  sx={{justifyContent: "center"}}>
             <Typography className="page-header" color="#DBEAF3" variant="h6">{crewSize ? name : "Launch A Crew"}</Typography>
-            <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190, minWidth: 204.9, justifyContent: "center"}}>
+            <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190, minWidth: 225, justifyContent: "center"}}>
               <DashboardJobCard
               key={name}
               timeEst={manHours}
@@ -117,9 +117,8 @@ const useDashboardDayState = function() {
         )
       })
       const jobsForSelectedDay =
-        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1, flexWrap: "wrap"}}>
+        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1, flexWrap: "wrap", justifyContent: "center"}}>
            {jobCard}
-           {fab}
         </Card>
       return jobsForSelectedDay
     }
@@ -139,8 +138,9 @@ const useDashboardDayState = function() {
         sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
         onClick={(event) => setSelectedDay(countListen)}
       >
-        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs, fab) : mapDayToCard(days[countListen], countListen, jobs)}
+        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs, fab, countListen) : mapDayToCard(days[countListen], countListen, jobs)}
       </Box>
+      {(selectedDay === countListen && days[countListen][1]) && <div style={{position: "relative", width: 0, height: 0}} >{fab}</div>}
       </div>);
       count++;
       return dayCard;

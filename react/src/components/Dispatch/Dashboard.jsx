@@ -29,28 +29,32 @@ const Dashboard = function(props) {
       }
     }
   }
-  
+
   useEffect(() => {
     setCompleteJob(prev => {
       return {...reducedJobs}
     })
-  }, [selectedDay, jobs])
+  }, [selectedDay, jobs]);
+  
+
+  if (days) {
+    const fab = (<Fab variant="extended"
+      onClick={() => {
+        setSelectedDay(null)
+  
+        }} sx={{
+          position: 'absolute',
+          left: 905,
+          bottom: 8.5,
+          height: 80
+        }}>Finish</Fab>
+      );
+  
   
   
   const crewNames = (getCrewNames(crews))
 
-  if (days) {
-    const fab = (<Fab variant="extended"
-    onClick={() => {
-      setSelectedDay(null)
-
-      }} sx={{
-        position: 'sticky',
-        top: 0,
-        right: 0,
-        height: 80
-      }}>Finish</Fab>
-    );
+  
     
     // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
