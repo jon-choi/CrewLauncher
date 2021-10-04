@@ -1,7 +1,7 @@
- 
-import { useState } from "react";
 
-import JobCard from '../../JobCard'
+import { useEffect, useState } from "react";
+
+import DashboardJobCard from '../DashboardJobCard'
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -22,25 +22,29 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const useDashboardDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
+  const [completeJob, setCompleteJob] = useState({"date": {incomplete: 0, jobs: 0}});
+
   
 
-  const mapDayToCard = function([...day], value) {
+  const mapDayToCard = function([...day], value, jobs) {
     const date = day.splice(0,1)
     if(day[0]) {
       const jobs = day.filter(jobOfDay => {
         const { job } = jobOfDay;
         return !job.completed
       })
+      
+
       return (
       <Item className="font-color" sx={{minHeight: 185, maxWidth: 1000}} >
         <Typography csx={{mt: 3}} variant="h4" component="h4" onClick={(event) => setSelectedDay(value)}>
           {date}
         </Typography>
         <Typography variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
-          Jobs Today: {day.length}
+          Jobs Today: {completeJob[date].jobs}
         </Typography>
         <Typography sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
-          Incomplete: {jobs.length}
+          Incomplete: {completeJob[date].incomplete}
         </Typography>
       </Item>
         )
@@ -58,31 +62,63 @@ const useDashboardDayState = function() {
   }
 
   
-
-  const jobsForSelectedDay = function([...day], value) {
+  const jobsForSelectedDay = function([...day], crewNames, jobs) {
     const date = day.splice(0,1)
+    
     if(day[0]) {
-      const jobCard = day.map(jobOfDay => {
-        const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob } = jobOfDay;
-
-          return (
-          <Card sx={{justifyContent: "center"}}>
-            <Typography className="page-header" color="#DBEAF3" variant="h6">{crewOfJob ? crewOfJob.foreman_name : "Launch A Crew"}</Typography>
+      const dayOfCrews = []
+      for (const name in crewNames) {
+        let manHours = 0;
+        let jobsCount = 0;
+        let incompleteJobs = 0;
+        const crewSize = crewNames[name].crewSize
+        for (const jobInfo of day) {
+          if (jobInfo.crewOfJob && name === jobInfo.crewOfJob.foreman_name) {
+            jobs++;
+            manHours += jobInfo.packageOfJob.man_hours_per_visit;
+            (!jobInfo.job.complete && incompleteJobs++);
+          }
+          if (name === "noCrew") {
+            jobs++;
+            manHours += jobInfo.packageOfJob.man_hours_per_visit;
+            (!jobInfo.job.complete && incompleteJobs++);
+          }
+        }
+        dayOfCrews.push({
+          ...dayOfCrews[name],
+          crewSize,
+          incompleteJobs,
+          manHours,
+          name,
+          jobsCount
+        })
+      }
+      console.log("object Array", dayOfCrews)
+      const jobCard = dayOfCrews.map(crewName => {
+        
+        const { crewSize, incompleteJobs, manHours, jobsCount, name } = crewName;
+        console.log("foreman", crewName)
+        return (
+          <Card  sx={{justifyContent: "center"}}>
+            <Typography className="page-header" color="#DBEAF3" variant="h6">{crewSize ? name : "Launch A Crew"}</Typography>
             <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190}}>
-              <JobCard
-              key={job.id}
-              packageTitle={packageOfJob.title}
-              timeEst={packageOfJob.man_hours_per_visit}
-              crewSize={crewOfJob && crewOfJob.crew_size}
-              clientName={clientOfJob.name}
-              address={contractOfJob.address}
-              jobNotes={contractOfJob.job_notes}
+              <DashboardJobCard
+              key={name}
+              timeEst={manHours}
+              crewSize={crewSize}
+              incompleteJobs={incompleteJobs}
+              jobs={jobs}
               compClass="dashboard-day"
+              date={date[0]}
+              jobsCount={jobsCount}
+              setCompleteJobState={completeJob}
+              selectedDay={selectedDay}
               />
             </Box>
           </Card>
         )
       })
+      console.log(jobCard)
       const jobsForSelectedDay =
         <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1}}>
            {jobCard}
@@ -92,24 +128,28 @@ const useDashboardDayState = function() {
     return mapDayToCard([date])
   }
 
-  const createDayCards = function(days, fab) {
+
+  const createDayCards = function(days, fab, crewNames, jobs) {
     let count = 0;
+    
+
     return days.map(day => {
       const countListen = count;
-      const dayCard = (<Box className='outer-dispatch-daycard-box' key={countListen}>{(selectedDay === countListen && days[countListen][1]) && fab}
+      const dayCard = (<div alignSelf="center" key={countListen}>{(selectedDay === countListen && days[countListen][1]) && fab}
       <Box
-        className={`day-card day-${countListen}`}
+        className={`day-${countListen}`}
+        sx={{ width: '100%', height: '100%', maxHeight: 300, minHeight: 190 }}
         onClick={(event) => setSelectedDay(countListen)}
       >
-        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], countListen) : mapDayToCard(days[countListen], countListen)}
+        {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs) : mapDayToCard(days[countListen], countListen, jobs)}
       </Box>
-      </Box>);
+      </div>);
       count++;
       return dayCard;
 
     })
   }
-  return { selectedDay, setSelectedDay, createDayCards}
+  return { selectedDay, setSelectedDay, createDayCards, setCompleteJob}
 }
 
 export default useDashboardDayState;

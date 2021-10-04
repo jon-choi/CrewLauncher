@@ -104,9 +104,9 @@ const getEstTime = function(manhours, crew) {
 }
 
 const getCrewNames = function(crews) {
-  let crewNames = {};
+  let crewNames = {noCrew: {crewSize: 0}};
   for (const crew of crews) {
-    crewNames = {...crewNames, [crew.foreman_name]: null}
+    crewNames = {...crewNames, [crew.foreman_name]: {crewSize:crew.crew_size}}
   }
   return crewNames;
 }
