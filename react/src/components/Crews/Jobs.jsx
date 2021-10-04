@@ -1,15 +1,16 @@
 import React from 'react';
 import JobTable from './JobTable';
+import { subDays, addDays, format } from 'date-fns';
 import { useParams } from 'react-router-dom'
 import { isAfter, isBefore } from 'date-fns'
 // import { getContractsInfo } from '../Dispatch/dispatchDataHelper';
-
 import { getJobsByCrew } from './crewsDataHelper';
 
 
 const Jobs = (props) => {
   const params = useParams()
   const crewId = parseInt(params.id);
+  
   if (props.jobs[1]) {
     const jobs = getJobsByCrew(props.jobs, props.clients, props.packages, props.contracts, crewId);
     jobs.sort(function (a, b) {
@@ -18,6 +19,7 @@ const Jobs = (props) => {
     let count = 1
     let rows = []
     for (const row of jobs) {
+      if (isAfter(new Date(row.date), new Date())) {
       const date = row.date; 
       const timeEstimate = row.timeEstimate;
       const packageItem = row.package;
@@ -29,6 +31,7 @@ const Jobs = (props) => {
         rows:
         [row]});
       count++;
+      }
     };
 
 

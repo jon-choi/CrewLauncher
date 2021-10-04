@@ -1,5 +1,5 @@
 
-
+import { format, isSameDay } from 'date-fns'
 import { Stack, Box, Grid, Fab } from '@mui/material';
 import { useEffect } from 'react';
 import useDashboardDayState from './hooks/DashboardHook'
@@ -7,8 +7,35 @@ import { getCrewNames } from './dispatchDataHelper'
 
 
 const Dashboard = function(props) {
-  const { selectedDay, setSelectedDay, createDayCards} = useDashboardDayState()
-  const { days, crews } = props;
+  const { selectedDay, setSelectedDay, setCompleteJob, createDayCards} = useDashboardDayState()
+  const { days, crews, jobs } = props;
+
+  const [ yesterday, today, tomorrow, fourthDay, lastDay ] = days;
+
+  let reducedJobs = {
+    [yesterday[0]]: {jobs: 0,incomplete: 0},
+    [today[0]]: {jobs: 0,incomplete: 0},
+    [tomorrow[0]]: {jobs: 0,incomplete: 0},
+    [fourthDay[0]]: {jobs: 0,incomplete: 0},
+    [lastDay[0]]: {jobs: 0,incomplete: 0}
+  };
+  for (const job of jobs) {
+    const date = format(new Date(job.date),'EEEE, MMM dd yyyy')
+    if ((date === yesterday[0] || date === today[0] )|| (date === tomorrow[0] || date === fourthDay[0]) || date === lastDay[0]) {
+     
+      reducedJobs[date].jobs += 1;
+      if (!job.completed) {
+        reducedJobs[date].incomplete += 1;
+      }
+    }
+  }
+  
+  useEffect(() => {
+    setCompleteJob(prev => {
+      return {...reducedJobs}
+    })
+  }, [selectedDay, jobs])
+  
   
   const crewNames = (getCrewNames(crews))
 
@@ -27,7 +54,7 @@ const Dashboard = function(props) {
     // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
     
-    const dayCards = createDayCards(days, fab, crewNames);
+    const dayCards = createDayCards(days, fab, crewNames, jobs);
 
 
     return (
