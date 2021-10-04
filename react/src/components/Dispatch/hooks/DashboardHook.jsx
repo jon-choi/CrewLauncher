@@ -99,7 +99,7 @@ const useDashboardDayState = function() {
         return (
           <Card  sx={{justifyContent: "center"}}>
             <Typography className="page-header" color="#DBEAF3" variant="h6">{crewSize ? name : "Launch A Crew"}</Typography>
-            <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190, minWidth: 204.9, justifyContent: "center"}}>
+            <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190, minWidth: 225, justifyContent: "center"}}>
               <DashboardJobCard
               key={name}
               timeEst={manHours}
@@ -117,9 +117,8 @@ const useDashboardDayState = function() {
         )
       })
       const jobsForSelectedDay =
-        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1, flexWrap: "wrap"}}>
+        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1, flexWrap: "wrap", justifyContent: "center"}}>
            {jobCard}
-           {fab}
         </Card>
       return jobsForSelectedDay
     }
@@ -141,6 +140,7 @@ const useDashboardDayState = function() {
       >
         {selectedDay !== null && countListen === selectedDay ? jobsForSelectedDay(days[countListen], crewNames, jobs, fab, countListen) : mapDayToCard(days[countListen], countListen, jobs)}
       </Box>
+      {(selectedDay === countListen && days[countListen][1]) && <div style={{position: "relative", width: 0, height: 0}} >{fab}</div>}
       </div>);
       count++;
       return dayCard;
