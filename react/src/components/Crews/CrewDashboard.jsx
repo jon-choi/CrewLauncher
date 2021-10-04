@@ -61,7 +61,7 @@ const CrewDashboard = function(props) {
     const dayCards = newDayCards(days, fab, jobs, crewId, markJobCompleted);
 
     return (
-    <div>
+    <div width='100%'>
     <Button sx={{mt: 5}} component={Link} to={`${crewId}/jobs`}>
           Go to Launch Info
           </Button>

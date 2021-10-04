@@ -34,7 +34,7 @@ const [selectedDay, setSelectedDay] = useState([{}]);
     
 
     return (
-      <div>
+      <div width='100%'>
     
         <Navigation packages={props.packages} onSubmitQuote={onSubmitQuote}/>
           <Switch >

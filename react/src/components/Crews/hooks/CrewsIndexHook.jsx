@@ -144,7 +144,7 @@ const useDayInfo = function() {
           {dayToCard(days[counting], jobs, crewId)}
         </Box>}
         {selectedDay === counting &&  
-        <Stack>
+        <Stack width='100%'>
           {jobsForDay(days[counting], markJobCompleted, jobs, crewId)}
         </Stack>}
       </div>);
