@@ -13,7 +13,7 @@ const getClientId = (client, clientList) => {
 const getDayInfo = function(jobs, crews, contracts, packages, clients, crewId = 0) {
   const days = [ // shows 5 days
     [format(subDays(new Date(), 1),'EEEE, MMM dd yyyy')],
-    [format(new Date(),'EEEE, MMM dd')],
+    [format(new Date(),'EEEE, MMM dd yyyy')],
     [format(addDays(new Date(), 1),'EEEE, MMM dd yyyy')],
     [format(addDays(new Date(), 2),'EEEE, MMM dd yyyy')],
     [format(addDays(new Date(), 3),'EEEE, MMM dd yyyy')]
