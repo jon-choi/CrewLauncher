@@ -25,28 +25,28 @@ const createBodyItems = function([...day], value) {
 
     const time = timeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
 
-    return (<Item key={value} >
+    return (<Item className="page-header" key={value} >
       <Grid container sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
         Estimated Time:
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
        {time} hrs
       </Typography>
       </Grid >
       <Grid container sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
         Completed Jobs: 
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
       {completedJobs.length}
       </Typography>
       </Grid >
       <Grid container sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
         Incomplete Jobs: 
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
       {incompleteJobs}
       </Typography>
       </Grid >
