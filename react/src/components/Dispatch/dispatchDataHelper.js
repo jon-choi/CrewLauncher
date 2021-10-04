@@ -107,7 +107,6 @@ const getCrewNames = function(crews) {
   let crewNames = {noCrew: {crewSize: 0}};
   for (const crew of crews) {
     crewNames = {...crewNames, [crew.foreman_name]: {crewSize:crew.crew_size}}
-    console.log(crew.crew_size)
   }
   return crewNames;
 }

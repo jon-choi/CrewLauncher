@@ -13,18 +13,18 @@ const Dashboard = function(props) {
   const [ yesterday, today, tomorrow, fourthDay, lastDay ] = days;
 
   let reducedJobs = {
-    [yesterday[0]]: {jobs: 0,complete: 0},
-    [today[0]]: {jobs: 0,complete: 0},
-    [tomorrow[0]]: {jobs: 0,complete: 0},
-    [fourthDay[0]]: {jobs: 0,complete: 0},
-    [lastDay[0]]: {jobs: 0,complete: 0}
+    [yesterday[0]]: {jobs: 0,incomplete: 0},
+    [today[0]]: {jobs: 0,incomplete: 0},
+    [tomorrow[0]]: {jobs: 0,incomplete: 0},
+    [fourthDay[0]]: {jobs: 0,incomplete: 0},
+    [lastDay[0]]: {jobs: 0,incomplete: 0}
   };
   for (const job of jobs) {
     const date = format(new Date(job.date),'EEEE, MMM dd yyyy')
     if (date === yesterday[0] || date === today[0] || date === tomorrow[0] || date === fourthDay[0] || date === lastDay[0]) {
       reducedJobs[date].jobs += 1;
       if (!job.completed) {
-        reducedJobs[date].complete += 1;
+        reducedJobs[date].incomplete += 1;
       }
     }
   }
