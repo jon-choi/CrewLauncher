@@ -55,11 +55,13 @@ const ContractsPage = (props) => {
         </Box>
       </Box>
       }
+      <Item className="page-header">
       <Item>Address: {contract.address}</Item>
       <Item>Start Date: {startDate}</Item>
       <Item>Notes: {contract.job_notes}</Item>
       <Item><b>Contract length:</b> {contract.packageLength}</Item>
       <Item>Next Visit: {nextVisit}<Typography variant="h6">🚀</Typography></Item>
+      </Item>
       </Stack>);
     const linkToEdit = `/dispatch/contracts/${contract.id}`;
 
