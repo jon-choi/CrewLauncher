@@ -112,6 +112,31 @@ body {
       background-color: $cardHoverColor;
     }
   }
+  
+  .rocket {
+    font-size: 150px;
+    // &.blastOff {
+    //   animation: rocketlauncher;
+    //   animation-duration: 2s;
+      
+    // }
+    &:active {
+      animation-name: rocketlauncher;
+      animation-duration: 6s;
+      
+    }
+    
+  }
+
+  @keyframes rocketlauncher {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translate(1500px, -1500px);
+    }
+  }
+
 }
 code {
   font-family: $fontFamily;
