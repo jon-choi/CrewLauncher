@@ -43,12 +43,10 @@ export default function JobCard(props) {
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
-    {/* {(!completed || completeState[jobId]) && <Typography>Completed!</Typography>} */}
-    { jobComplete && <Typography>Completed! {jobComplete.completed}</Typography>}
-    {/* {props.onMarkCompleted && (!completeState[jobId] && !completed) && */}
-    {}
+    {jobComplete && <Typography>Completed! {jobComplete.completed}</Typography>}
+    
     <CardActions>
-      <Button onClick={() => {onMarkCompleted(jobId); setRerender(!rerender)}}>Mark Completed</Button>
+    {!jobComplete && <Button onClick={() => {onMarkCompleted(jobId); setRerender(!rerender)}}>Mark Completed</Button>}
     </CardActions>
   </Card>
 );
