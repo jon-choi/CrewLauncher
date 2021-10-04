@@ -115,16 +115,11 @@ body {
   
   .rocket {
     font-size: 150px;
-    // &.blastOff {
-    //   animation: rocketlauncher;
-    //   animation-duration: 2s;
-      
-    // }
-    &:active {
-      animation-name: rocketlauncher;
-      animation-duration: 6s;
-      
+    &.blastOff {
+      animation: rocketlauncher;
+      animation-duration: 2s;
     }
+    // }
     
   }
 

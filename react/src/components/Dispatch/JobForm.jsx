@@ -43,8 +43,9 @@ const JobForm = (props) => {
         .then(() => {
           setRocketClass(true);
           setTimeout(() => {
+            
             setRocketClass(false);
-          }, 1500);
+          }, 1950);
         })
       }else if (!selectedCrew) {
         errorMessage.push('Select A Crew To Launch!');
