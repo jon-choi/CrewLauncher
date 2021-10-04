@@ -117,6 +117,7 @@ import { format, addDays } from 'date-fns';
             image={p.package_image}
             header={p.title} 
             body={packageBody}
+            compClass={'package-card'}
           />
         </div>
       </Stack>

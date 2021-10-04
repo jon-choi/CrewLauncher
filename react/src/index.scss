@@ -1,4 +1,6 @@
 $fontFamily: "Yantramanav", "sans-serif";
+$cardHoverColor: #dbeaf3;
+$completedJobCard: rgba(214, 152, 152, 0.849);
 
 body {
   margin: 0;
@@ -39,7 +41,7 @@ body {
   }
 
   .completed-jobcard {
-    background-color: rgba(214, 152, 152, 0.849);
+    background-color: $completedJobCard;
   }
 
   .page-header {
@@ -103,6 +105,37 @@ body {
 
     justify-content: center;
   }
+
+  .package-card {
+    &:hover {
+      cursor: pointer;
+      background-color: $cardHoverColor;
+    }
+  }
+  
+  .rocket {
+    font-size: 130px;
+    &.blastOff {
+      animation: rocketlauncher;
+      animation-duration: 2s;
+    }
+    
+  }
+
+  @keyframes rocketlauncher {
+    0% {
+      transform: translateX(0%);
+    }
+    50% {
+      transform: translate(810px, -810px);
+      display: none;
+    }
+    100% {
+      transform: translate(810px, -810px);
+      display: none;
+    }
+  }
+
 }
 code {
   font-family: $fontFamily;

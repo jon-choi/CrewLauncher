@@ -28,7 +28,7 @@ export default function JobCard(props) {
           {packageTitle}
         </Typography>
         <Typography variant="h4">
-          {`Time Est: ${crewTimeEst} hrs`}
+          {`Approx: ${crewTimeEst} hrs`}
         </Typography>
       </div>
     </CardContent>
