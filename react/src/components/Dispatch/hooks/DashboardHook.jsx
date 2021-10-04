@@ -41,10 +41,10 @@ const useDashboardDayState = function() {
           {date}
         </Typography>
         <Typography variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
-          Jobs Today: {completeJob[date].jobs}
+        Jobs Today: {completeJob[date] && completeJob[date].jobs}
         </Typography>
         <Typography sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
-          Incomplete: {completeJob[date].incomplete}
+          Incomplete: {completeJob[date] && completeJob[date].incomplete}
         </Typography>
       </Item>
         )

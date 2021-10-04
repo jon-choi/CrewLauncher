@@ -33,7 +33,7 @@ const Dashboard = function(props) {
     setCompleteJob(prev => {
       return {...reducedJobs}
     })
-  }, [selectedDay])
+  }, [selectedDay, jobs])
   
   
   const crewNames = (getCrewNames(crews))
