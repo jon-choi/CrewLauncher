@@ -7,7 +7,7 @@ import { getCrewNames } from './dispatchDataHelper'
 
 
 const Dashboard = function(props) {
-  const { selectedDay, setSelectedDay, setJobComplete, createDayCards} = useDashboardDayState()
+  const { selectedDay, setSelectedDay, setCompleteJob, createDayCards} = useDashboardDayState()
   const { days, crews, jobs } = props;
 
   const [ yesterday, today, tomorrow, fourthDay, lastDay ] = days;
@@ -18,13 +18,13 @@ const Dashboard = function(props) {
     }
     return false;
   });
-  const reducedJobs = filterJobs.reduce((prev, current) => ({...prev, [current.id]: {id: [current.id][0], completed: [current.completed][0]}}), {})
+  const reducedJobs = filterJobs.reduce((prev, current) => ({...prev, [current.id]: {date: [format(new Date(current.date),'EEEE, MMM dd yyyy')][0], id: [current.id][0], completed: [current.completed][0]}}), {})
   
   useEffect(() => {
-    setJobComplete(prev => {
+    setCompleteJob(prev => {
       return {...prev, ...reducedJobs}
     })
-  }, [])
+  }, [jobs])
   
   
   const crewNames = (getCrewNames(crews))

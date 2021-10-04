@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const useDashboardDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
-  const [completeJob, setJobComplete] = useState({id: {id: 0, complete: true}});
+  const [completeJob, setCompleteJob] = useState({0: {date: "date", id: 0, complete: true}});
 
   
 
@@ -33,7 +33,17 @@ const useDashboardDayState = function() {
         const { job } = jobOfDay;
         return !job.completed
       })
-
+      let jobCount = 0;
+      let incompleteJobs = 0;
+      for (const item in completeJob) {
+        
+        if (completeJob[item].date === date[0]) {
+          jobCount++;
+          if (!completeJob[item].completed) {
+            incompleteJobs++;
+          }
+        }
+      }
 
       return (
       <Item className="font-color" sx={{minHeight: 185, maxWidth: 1000}} >
@@ -41,10 +51,10 @@ const useDashboardDayState = function() {
           {date}
         </Typography>
         <Typography variant="h5" component="h5" onClick={(event) => setSelectedDay(value)}>
-          Jobs Today: {day.length}
+          Jobs Today: {jobCount}
         </Typography>
         <Typography sx={{mb: 5}} variant="h5" component="h6" onClick={(event) => setSelectedDay(value)}>
-          Incomplete: {jobs.length}
+          Incomplete: {incompleteJobs}
         </Typography>
       </Item>
         )
@@ -71,15 +81,12 @@ const useDashboardDayState = function() {
         let manHours = 0;
         let jobs = 0;
         let incompleteJobs = 0;
+        const crewSize = crewNames[name].crewSize
         for (const jobInfo of day) {
           if (jobInfo.crewOfJob && name === jobInfo.crewOfJob.foreman_name) {
             jobs++;
             manHours += jobInfo.packageOfJob.man_hours_per_visit;
             (!jobInfo.job.complete && incompleteJobs++);
-            dayOfCrews[jobInfo.crewOfJob.foreman_name] = {
-              ...dayOfCrews[name],
-              crewSize: jobInfo.crewOfJob.crew_size
-            }
           }
           if (name === "noCrew") {
             jobs++;
@@ -89,6 +96,7 @@ const useDashboardDayState = function() {
 
           dayOfCrews[name] = {
             ...dayOfCrews[name],
+            crewSize,
             incompleteJobs,
             manHours,
             name,
@@ -100,10 +108,10 @@ const useDashboardDayState = function() {
       const jobCard = dayOfCrews.map(crewName => {
         
         const { crewSize, incompleteJobs, manHours, jobs, name } = crewName;
-        console.log(crewName)
+        console.log("foreman", crewName)
         return (
           <Card  sx={{justifyContent: "center"}}>
-            <Typography className="page-header" color="#DBEAF3" variant="h6">{crewSize ? name: "Launch A Crew"}</Typography>
+            <Typography className="page-header" color="#DBEAF3" variant="h6">{crewSize ? name : "Launch A Crew"}</Typography>
             <Box  sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190}}>
               <JobCard
               key={name}
@@ -130,7 +138,8 @@ const useDashboardDayState = function() {
   const createDayCards = function(days, fab, crewNames, jobs) {
     let count = 0;
     
-    console.log(completeJob)
+
+    console.log("state", completeJob)
 
     return days.map(day => {
       const countListen = count;
@@ -148,7 +157,7 @@ const useDashboardDayState = function() {
 
     })
   }
-  return { selectedDay, setSelectedDay, createDayCards, setJobComplete}
+  return { selectedDay, setSelectedDay, createDayCards, setCompleteJob}
 }
 
 export default useDashboardDayState;
