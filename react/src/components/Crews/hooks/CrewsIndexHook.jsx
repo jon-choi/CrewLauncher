@@ -12,6 +12,8 @@ import { format } from 'date-fns';
 const useDayInfo = function() {
   const [ selectedDay, setSelectedDay ] = useState(null);
   const [ completeState, setCompleteState ] = useState({'0':true})
+  const [rerender, setRerender] = useState(true);
+  const [completeJob, setCompleteJob] = useState({"date": {incomplete: 0, jobs: 0}});
 
   let completedInfo = {};
   useEffect(() => {
@@ -23,19 +25,18 @@ const useDayInfo = function() {
 
   const dayToCard = function([...day], jobs, crewId) {
     // jobs is state.jobs
-    console.log(jobs)
-    console.log(crewId)
-    const date = day.splice(0, 1);
-
+    const date = day.splice(0, 1)[0];
+    // console.log('date: ', date)
+    // console.log('completeJob: ', completeJob)
+    // console.log('completeJob[date]: ', completeJob[date])
     if (day[0]) {
       const todayJobsForCrew = jobs.filter(j => {
-        console.log('1: ', format(new Date(j.date), 'EEEE, MMM dd yyyy'))
-        console.log('2: ', date[0])
-        return parseInt(j.crew_id) === parseInt(crewId) && format(new Date(j.date), 'EEEE, MMM dd yyyy') === date[0];
+        return parseInt(j.crew_id) === parseInt(crewId) && format(new Date(j.date), 'EEEE, MMM dd yyyy') === date;
       });
-      // todayJobsForCrew is an array of jobs for the crew. currently working, proceed from here
-      console.log(todayJobsForCrew)
-      const incompleteJobs = todayJobsForCrew.filter(j => !j.complete);
+
+      // console.log('today jobs for crew', todayJobsForCrew)
+      // const incompleteJobs = todayJobsForCrew.filter(j => !j.complete);
+
       return (
         
           <Card className="page-header" sx={{mb: 2, mt: 2, ml: 5}}>
@@ -44,10 +45,10 @@ const useDayInfo = function() {
             {date}
           </Typography>
           <Typography variant="h5" component="h5">
-          Jobs Today: {todayJobsForCrew.length}
+          Jobs Today: {completeJob[date].jobs}
         </Typography>
         <Typography variant="h5" component="h6">
-          Incomplete: {incompleteJobs.length}
+          Incomplete: {completeJob[date].incomplete}
         </Typography>
         </Typography>
         </Card>
@@ -102,6 +103,8 @@ const useDayInfo = function() {
               jobId={job.id}
               onMarkCompleted={onMarkJobCompleted}
               jobs={jobs}
+              rerender={rerender}
+              setRerender={setRerender}
               />
             
           </Card>
@@ -113,7 +116,7 @@ const useDayInfo = function() {
   }
   const newDayCards = function(days, fab, jobs, crewId, markJobCompleted) {
     let count = -1;
-    
+    console.log('completeJob', completeJob)
     for (const day of days) {
       const dayItem = [...day]
       dayItem.splice(0, 1);
@@ -149,6 +152,6 @@ const useDayInfo = function() {
       return dayCard;
     })
   }
-  return { selectedDay, setSelectedDay, completeState, setCompleteState, newDayCards }
+  return { selectedDay, setSelectedDay, completeState, setCompleteState, newDayCards, completeJob, setCompleteJob }
 }
 export default useDayInfo;

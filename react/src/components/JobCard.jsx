@@ -3,14 +3,15 @@ import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, st
 
 export default function JobCard(props) {
   const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completeState, completed, onMarkCompleted, crewSize, compClass, jobs } = props;
-  const [rerender, setRerender] = useState(true);
+  const { rerender, setRerender } = props;
   const [jobComplete, setJobComplete] = useState(jobs.filter(j => j.id === jobId)[0].complete)
   
   useEffect(() => {
-    
-    const thisJob = jobs.filter(j => j.id === jobId);
+    console.log('completed Jobs in jobcard', jobs.filter(j => j.completed))
+    const thisJob = jobs.filter(j => j.id === jobId)[0];
+    console.log('this job: ', thisJob)
     setJobComplete(thisJob);
-  }, [rerender, jobs, jobId]);
+  }, [jobs, jobId, rerender]);
 
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -43,12 +44,12 @@ export default function JobCard(props) {
       </Typography>
     </CardContent>
     {/* {(!completed || completeState[jobId]) && <Typography>Completed!</Typography>} */}
-    { jobComplete && <Typography>Completed!</Typography>}
+    { jobComplete && <Typography>Completed! {jobComplete.completed}</Typography>}
     {/* {props.onMarkCompleted && (!completeState[jobId] && !completed) && */}
-    { !jobComplete && 
+    {}
     <CardActions>
       <Button onClick={() => {onMarkCompleted(jobId); setRerender(!rerender)}}>Mark Completed</Button>
-    </CardActions>}
+    </CardActions>
   </Card>
 );
 }
