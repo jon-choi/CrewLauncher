@@ -1,9 +1,18 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, styled } from '@mui/material';
 
 export default function JobCard(props) {
-  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completeState, completed, onMarkCompleted, crewSize, compClass } = props;
+  const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completeState, completed, onMarkCompleted, crewSize, compClass, jobs } = props;
+  const [rerender, setRerender] = useState(true);
+  const [jobComplete, setJobComplete] = useState(jobs.filter(j => j.id === jobId)[0].complete)
   
+  useEffect(() => {
+    
+    const thisJob = jobs.filter(j => j.id === jobId);
+    setJobComplete(thisJob);
+  }, [rerender, jobs, jobId]);
+
+
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -33,10 +42,12 @@ export default function JobCard(props) {
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
-    {(!completed || completeState[jobId]) && <Typography>Completed!</Typography>}
-    {props.onMarkCompleted && (!completeState[jobId] && !completed) &&
+    {/* {(!completed || completeState[jobId]) && <Typography>Completed!</Typography>} */}
+    { jobComplete && <Typography>Completed!</Typography>}
+    {/* {props.onMarkCompleted && (!completeState[jobId] && !completed) && */}
+    { !jobComplete && 
     <CardActions>
-      <Button onClick={() => onMarkCompleted(jobId)}>Job Completed</Button>
+      <Button onClick={() => {onMarkCompleted(jobId); setRerender(!rerender)}}>Mark Completed</Button>
     </CardActions>}
   </Card>
 );

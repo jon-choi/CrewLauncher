@@ -101,6 +101,7 @@ const useDayInfo = function() {
               completeState={completeState}
               jobId={job.id}
               onMarkCompleted={onMarkJobCompleted}
+              jobs={jobs}
               />
             
           </Card>
