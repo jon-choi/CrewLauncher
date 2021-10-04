@@ -87,9 +87,9 @@ const useDayInfo = function() {
         }
         const cardClassNames = classNames("crew-day", {'completed-jobcard': job.completed || completeState[job.id]});
         return (
-          <Card>
+          <Card sx={{ minWidth: 200, justifyContent: 'center'}}>
             
-              <JobCard sx={{ width: '100%', maxWidth: 500, maxHeight: 300, display: 'flex'}}
+              <JobCard sx={{ width: '100%', maxHeight: 300, display: 'flex'}}
               key={job.id}
               packageTitle={packageOfJob.title}
               timeEst={packageOfJob.man_hours_per_visit}

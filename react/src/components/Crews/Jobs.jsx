@@ -38,7 +38,7 @@ const Jobs = (props) => {
     
     return (
       <>
-        <JobTable rows={rows} />
+        <JobTable className="table" rows={rows} />
       </>
     );
   }
