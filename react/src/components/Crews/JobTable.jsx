@@ -85,7 +85,7 @@ function Row(props) {
                     { props.name && <><TableCell>Address</TableCell>
                     <TableCell>Phone Number</TableCell></> }
                     <TableCell align="right">Address</TableCell>
-                    <TableCell align="right">Job Notes</TableCell>
+                    <TableCell align="right">Notes</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -96,9 +96,7 @@ function Row(props) {
                       </TableCell>
                       <TableCell>{jobs.phone}</TableCell>
                       <TableCell align="right">{jobs.package}</TableCell>
-                      <TableCell align="right">
-                        {job.jobNotes}
-                      </TableCell>
+                      <TableCell align="right">{job.jobNotes}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -141,17 +139,17 @@ export default function CollapsibleTable(props) {
 
   return (
     <h1>
-    <TableContainer component={Paper}>
+    <TableContainer sx={{mt: 10}} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
-          <TableRow>
+          <TableRow className="page-header"> 
             <TableCell />
             <TableCell> 
-              <Typography>
+              <Typography className="font-color">
                 Launch Info
                 </Typography>
                 </TableCell>
-            <TableCell align="right">Time Estimate</TableCell>
+            <TableCell className="font-color" align="right"><b>Time Estimate</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
