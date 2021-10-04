@@ -73,26 +73,26 @@ function Row(props) {
         <TableCell align="right">{(timeEstimate < 1) ? '<1' : timeEstimate} Hours</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell className="card-bg" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
+            <Box className="font-color" sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
                 {jobs.clientName ?  jobs.clientName : packageItem/*props.date*/ } 
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>                   
-                    <TableCell align="left"><b>Address</b></TableCell>
-                    <TableCell align="right"><b>Notes</b></TableCell>
+                    <TableCell className="font-color" align="left"><b>Address</b></TableCell>
+                    <TableCell className="font-color" align="right"><b>Notes</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {jobs.map((job) => (
                     <TableRow key={job.address}>
-                      <TableCell component="th" scope="row">
+                      <TableCell className="font-color" component="th" scope="row">
                         {job.address}
                       </TableCell>
-                      <TableCell align="right">{job.jobNotes}</TableCell>
+                      <TableCell className="font-color" align="right">{job.jobNotes}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
