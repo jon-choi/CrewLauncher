@@ -39,7 +39,7 @@ const useDayInfo = function() {
 
       return (
         
-          <Card className="page-header" sx={{mb: 2, mt: 2, ml: 5}}>
+          <Card className="page-header" sx={{mb: 2, mt: 2}}>
             <Typography className="font-color">
           <Typography variant="h5" component="h5">
             {date}
@@ -57,7 +57,7 @@ const useDayInfo = function() {
     }
     return (
       
-        <Card className="page-header" sx={{ml: 5}}>
+        <Card className="page-header" >
           <Typography className="font-color">
         <Typography variant="h4" component="h4">
           {date}
@@ -138,7 +138,7 @@ const useDayInfo = function() {
         {selectedDay === null && 
         <Box
           className={`day-${counting}`}
-          sx={{ width: '90%', height: '90%', maxHeight: 200, minHeight: 90 }}
+          sx={{ width: '100%', height: '90%', maxHeight: 200, minHeight: 90 }}
           onClick={(event) => setSelectedDay(counting)}
         >
           {dayToCard(days[counting], jobs, crewId)}
