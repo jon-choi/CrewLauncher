@@ -30,7 +30,7 @@ const CrewDashboard = function(props) {
     return (
     <div>
     <Button sx={{mt: 5}} component={Link} to={`${id}/jobs`}>
-          Jobs To Launch
+          Go to Launch Info
           </Button>
       
       <Stack sx={{margin: 'auto', width: '100%'}} >
