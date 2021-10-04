@@ -37,12 +37,12 @@ const ClientCard = (props) => {
   }
   return (<Grid container width='100%' direction='row' minWidth='100%' rows={1}>
         <Grid item>
-        <Card sx={{ width: 300, height: 180, mb: 1, ml: 2, mr: 2, mt: 1 }}>
+        <Card className="card-bg" sx={{ width: 300, height: 180, mb: 1, ml: 2, mr: 2, mt: 1 }}>
         <Avatar alt="clientName" src={client.avatar} sx={{ maxWidth: 400, maxHeight: 100, mb: 1, ml: 2, mr: 2, mt: 1 }} />
-        <Typography sx={{ fontSize: 14, ml: 3 }} color="text.secondary" gutterBottom>
+        <Typography className="font-color" sx={{ fontSize: 14, ml: 3 }} color="text.secondary" gutterBottom>
           {`${client.client.name} - ${client.client.phone || 'N/A'} - ${client.client.email}`}
         </Typography>
-        <Typography>
+        <Typography className="font-color" >
           {client.contracts.length > 0 && `Active contracts: ${contracts.length}`}
         </Typography>
         <CardActions>
@@ -53,7 +53,9 @@ const ClientCard = (props) => {
       </Grid>
       <Grid item sx={{display: "flex", alignItems: "center"}} > 
       <Grid container spacing={2} direction="row" sx={{  height: 170 }}>
+        
         {contracts}
+        
         </Grid>
       </Grid>
     </Grid>

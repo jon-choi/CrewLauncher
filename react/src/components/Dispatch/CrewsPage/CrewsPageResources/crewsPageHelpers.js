@@ -44,7 +44,7 @@ const createBodyItems = function([...day], value) {
       </Grid >
       <Grid container sx={{justifyContent: 'space-between'}}>
       <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
-        incompleteJobs: 
+        Incomplete Jobs: 
       </Typography>
       <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom >
       {incompleteJobs}

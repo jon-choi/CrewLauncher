@@ -17,8 +17,8 @@ const ContractsPage = (props) => {
   const contractCards = contractsInfo.map(contract => {
     const nextVisit = contract.jobDate ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None';
     count++;
-    const header =(<Item>
-      <Typography variant="h5">
+    const header =(<Item className="page-header">
+      <Typography className="font-color" variant="h5">
       🚀 {contract.clientName} 🚀{contract.clientEmail} 
       </Typography>
     </Item>);
@@ -55,16 +55,18 @@ const ContractsPage = (props) => {
         </Box>
       </Box>
       }
+      <Item className="page-header">
       <Item>Address: {contract.address}</Item>
       <Item>Start Date: {startDate}</Item>
       <Item>Notes: {contract.job_notes}</Item>
       <Item><b>Contract length:</b> {contract.packageLength}</Item>
       <Item>Next Visit: {nextVisit}<Typography variant="h6">🚀</Typography></Item>
+      </Item>
       </Stack>);
     const linkToEdit = `/dispatch/contracts/${contract.id}`;
 
     return (<Grid item >
-      <MediaCard
+      <MediaCard 
     key={count}
     compClass="contract-card"
     link={linkToEdit}
