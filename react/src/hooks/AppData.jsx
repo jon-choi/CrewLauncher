@@ -292,6 +292,7 @@ const useAppData = function() {
       completed: true
     })
     .then(response => {
+      job.completed = true;
       const updatedJobs = state.jobs.filter(j => j.id !== jobId);
       console.log(`Job ${jobId} marked completed! Updating state now!`);
       setState(prev => ({...prev, jobs: [...updatedJobs, job]}));

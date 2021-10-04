@@ -6,11 +6,14 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import { getThemeProps } from "@mui/system";
+import { format } from 'date-fns';
 
 
 const useDayInfo = function() {
   const [ selectedDay, setSelectedDay ] = useState(null);
   const [ completeState, setCompleteState ] = useState({'0':true})
+  const [rerender, setRerender] = useState(true);
+  const [completeJob, setCompleteJob] = useState({"date": {incomplete: 0, jobs: 0}});
 
   let completedInfo = {};
   useEffect(() => {
@@ -19,12 +22,20 @@ const useDayInfo = function() {
     });
   },[selectedDay])
 
-  const dayToCard = function([...day], incompleteJobs) {
-    const date = day.splice(0, 1);
+
+  const dayToCard = function([...day], jobs, crewId) {
+    // jobs is state.jobs
+    const date = day.splice(0, 1)[0];
+    // console.log('date: ', date)
+    // console.log('completeJob: ', completeJob)
+    // console.log('completeJob[date]: ', completeJob[date])
     if (day[0]) {
-    
-      
-      
+      const todayJobsForCrew = jobs.filter(j => {
+        return parseInt(j.crew_id) === parseInt(crewId) && format(new Date(j.date), 'EEEE, MMM dd yyyy') === date;
+      });
+
+      // console.log('today jobs for crew', todayJobsForCrew)
+      // const incompleteJobs = todayJobsForCrew.filter(j => !j.complete);
 
       return (
         
@@ -34,10 +45,10 @@ const useDayInfo = function() {
             {date}
           </Typography>
           <Typography variant="h5" component="h5">
-          Jobs Today: {day.length}
+          Jobs Today: {completeJob[date].jobs}
         </Typography>
         <Typography variant="h5" component="h6">
-          Incomplete: {incompleteJobs}
+          Incomplete: {completeJob[date].incomplete}
         </Typography>
         </Typography>
         </Card>
@@ -52,14 +63,14 @@ const useDayInfo = function() {
           {date}
         </Typography>
         <Typography variant="h5" component="h5">
-          No Jobs! 🚀
+          No jobs booked today
         </Typography>
         </Typography>
         </Card>
       )
   }
   
-  const jobsForDay = function([...day], markJobCompleted) {
+  const jobsForDay = function([...day], markJobCompleted, jobs, crewId) {
     const date = day.splice(0, 1);
 
     if (day[0]) {
@@ -91,6 +102,9 @@ const useDayInfo = function() {
               completeState={completeState}
               jobId={job.id}
               onMarkCompleted={onMarkJobCompleted}
+              jobs={jobs}
+              rerender={rerender}
+              setRerender={setRerender}
               />
             
           </Card>
@@ -98,11 +112,11 @@ const useDayInfo = function() {
       })
       return (<Box>{jobCard}</Box>)
     }
-    return dayToCard([date])
+    return dayToCard([date], jobs, crewId)
   }
-  const newDayCards = function(days, fab, markJobCompleted) {
+  const newDayCards = function(days, fab, jobs, crewId, markJobCompleted) {
     let count = -1;
-    
+    console.log('completeJob', completeJob)
     for (const day of days) {
       const dayItem = [...day]
       dayItem.splice(0, 1);
@@ -113,7 +127,7 @@ const useDayInfo = function() {
       }
     }
     
-    const incompleteJobs = Object.values(completeState).reduce((prev, current) => prev += !current,0);
+
     
     
     return days.map(day => {
@@ -127,17 +141,17 @@ const useDayInfo = function() {
           sx={{ width: '90%', height: '90%', maxHeight: 200, minHeight: 90 }}
           onClick={(event) => setSelectedDay(counting)}
         >
-          {dayToCard(days[counting], incompleteJobs)}
+          {dayToCard(days[counting], jobs, crewId)}
         </Box>}
         {selectedDay === counting &&  
         <Stack>
-          {jobsForDay(days[counting], markJobCompleted)}
+          {jobsForDay(days[counting], markJobCompleted, jobs, crewId)}
         </Stack>}
       </div>);
       count++;
       return dayCard;
     })
   }
-  return { selectedDay, setSelectedDay, completeState, setCompleteState, newDayCards }
+  return { selectedDay, setSelectedDay, completeState, setCompleteState, newDayCards, completeJob, setCompleteJob }
 }
 export default useDayInfo;
