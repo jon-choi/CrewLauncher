@@ -93,11 +93,9 @@ const useDashboardDayState = function() {
           jobsCount
         })
       }
-      console.log("object Array", dayOfCrews)
       const jobCard = dayOfCrews.map(crewName => {
         
         const { crewSize, incompleteJobs, manHours, jobsCount, name } = crewName;
-        console.log("foreman", crewName)
         return (
           <Card  sx={{justifyContent: "center"}}>
             <Typography className="page-header" color="#DBEAF3" variant="h6">{crewSize ? name : "Launch A Crew"}</Typography>
@@ -118,7 +116,6 @@ const useDashboardDayState = function() {
           </Card>
         )
       })
-      console.log(jobCard)
       const jobsForSelectedDay =
         <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1}}>
            {jobCard}

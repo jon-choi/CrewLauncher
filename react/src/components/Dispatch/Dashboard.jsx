@@ -21,19 +21,20 @@ const Dashboard = function(props) {
   };
   for (const job of jobs) {
     const date = format(new Date(job.date),'EEEE, MMM dd yyyy')
-    if (date === yesterday[0] || date === today[0] || date === tomorrow[0] || date === fourthDay[0] || date === lastDay[0]) {
+    if ((date === yesterday[0] || date === today[0] )|| (date === tomorrow[0] || date === fourthDay[0]) || date === lastDay[0]) {
+     
       reducedJobs[date].jobs += 1;
       if (!job.completed) {
         reducedJobs[date].incomplete += 1;
       }
     }
   }
-
+  
   useEffect(() => {
     setCompleteJob(prev => {
       return {...reducedJobs}
     })
-  }, [jobs])
+  }, [selectedDay, jobs])
   
   
   const crewNames = (getCrewNames(crews))
