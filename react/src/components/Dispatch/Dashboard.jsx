@@ -31,16 +31,16 @@ const Dashboard = function(props) {
 
 
     return (
-      <Stack className='dispatch-dashboard-stack' >
+      <Stack sx={{ mb: 2, mt: 2, width: '100%', justifyContent: 'center', ml: 58}} >
         {dayCards}
       </Stack>
 
     )
   }
   return (
-    <Stack className='dispatch-dashboard-stack'  sx={{width: '100%'}} >
+    <Box width={'100%'}>
       {`${days}`}
-    </Stack>
+    </Box>
   );
 }
 

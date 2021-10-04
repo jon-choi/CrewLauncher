@@ -114,7 +114,7 @@ const useDayInfo = function() {
       let counting = count;
       counting++;
       const dayCard = (
-      <div className='dayCard-container' sx={{alignSelf: 'center'}} key={counting}>{selectedDay === counting && fab}
+      <div key={counting}>{selectedDay === counting && fab}
         {selectedDay === null && 
         <Box
           className={`day-${counting}`}

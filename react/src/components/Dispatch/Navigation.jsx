@@ -65,10 +65,10 @@ const Navigation = (props) => {
 
           <Divider />
           <Toolbar>
-            <Button onClick={()=>{setNavOpen(false); setQuotesOpen(true);}}>{`Incoming Quotes`}</Button><Badge color='primary' showZero badgeContent={props.quotes.length} />
+              <Button onClick={()=>{setNavOpen(false); setQuotesOpen(true);}}>{`Incoming Quotes`}</Button><Badge color='primary' showZero badgeContent={props.quotes.length} />
           </Toolbar>
           <Toolbar>
-            <Button onClick={()=>{setNavOpen(false); setEmptyJobsOpen(true);}}>{`Unassigned Jobs`}</Button><Badge color='primary' showZero badgeContent={unassignedJobState.length} />
+              <Button onClick={()=>{setNavOpen(false); setEmptyJobsOpen(true);}}>{`Unassigned Jobs`}</Button><Badge color='primary' showZero badgeContent={unassignedJobState.length} />
           </Toolbar>
           <Divider />
       <Toolbar>

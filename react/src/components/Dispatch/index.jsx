@@ -31,7 +31,7 @@ const Dispatch = function(props) {
   const days = getDayInfo(jobs, crews, contracts, packages, clients)
 
   return (
-    <Box className='dispatch-index-container'>
+    <Box sx={{display: 'flex'}}>
       <Navigation  jobs={jobs} contracts={contracts} quotes={quotes} updateQuoteState={updateQuoteState} />
         <Box width={'100%'} mt={10}>
         <Switch >
