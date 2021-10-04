@@ -14,7 +14,7 @@ import TimePicker from '../Timepicker';
 const JobForm = (props) => {
   const params = useParams();
   const browserHistory = useHistory();
-  console.log('params in jobform', params)
+  
   const { onEdit, crews, packages, contracts, jobs } = props
   const thisJob = params.id ? jobs.filter(j => j.id === params.id) : null;
   const [selectedCrew, setSelectedCrew] = useState(thisJob ? thisJob.crewId : 0)
