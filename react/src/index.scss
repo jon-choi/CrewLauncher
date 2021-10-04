@@ -114,12 +114,11 @@ body {
   }
   
   .rocket {
-    font-size: 150px;
+    font-size: 130px;
     &.blastOff {
       animation: rocketlauncher;
       animation-duration: 2s;
     }
-    // }
     
   }
 
