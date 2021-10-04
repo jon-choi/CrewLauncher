@@ -127,8 +127,13 @@ body {
     0% {
       transform: translateX(0%);
     }
+    50% {
+      transform: translate(810px, -810px);
+      display: none;
+    }
     100% {
-      transform: translate(1500px, -1500px);
+      transform: translate(810px, -810px);
+      display: none;
     }
   }
 
