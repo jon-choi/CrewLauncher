@@ -18,7 +18,9 @@ const App = function() {
               <Crews { ...state } onSubmitQuote={onSubmitQuote} markJobCompleted={markJobCompleted} />
             </Route>
             <Route path='/dispatch' >
-              <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} updateQuoteState={updateQuoteState} /> 
+              <div className='dispatch-container'>
+                <Dispatch { ...state } onEdit={saveJobEdit} createPackage={createNewPackage} createContract={processContract} updateQuoteState={updateQuoteState} /> 
+              </div>
             </Route> 
             <Route path='/'>
               <Stack>

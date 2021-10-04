@@ -62,6 +62,12 @@ body {
     // justify-content: center;
   }
 
+  .dispatch-container {
+    display: 'flex';
+    align-items: 'center';
+    justify-content: 'center';
+  }
+
   .dispatch-index-container {
     display: 'flex'; 
     width: '100%';

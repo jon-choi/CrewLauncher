@@ -16,8 +16,8 @@ const Jobs = (props) => {
     jobs.sort(function (a, b) {
       return a.sortDate - b.sortDate;
     });
-    let count = 1
-    let rows = []
+    let count = 1;
+    let rows = [];
     for (const row of jobs) {
       if (isAfter(new Date(row.date), new Date())) {
       const date = row.date; 

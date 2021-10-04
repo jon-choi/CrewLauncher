@@ -70,7 +70,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {date}
         </TableCell>
-        <TableCell align="right">{timeEstimate} Hours</TableCell>
+        <TableCell align="right">{(timeEstimate < 1) ? '<1' : timeEstimate} Hours</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -135,7 +135,7 @@ export default function CollapsibleTable(props) {
 
   return (
     <div>
-    <TableContainer sx={{mt: 8}} component={Paper}>
+    <TableContainer sx={{mt: 8, minWidth: '100%'}} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className="page-header"> 
