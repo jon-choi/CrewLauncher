@@ -68,7 +68,7 @@ const useDayInfo = function() {
         const onMarkJobCompleted = function(jobId) {
           markJobCompleted(jobId)
           .then(res => {
-            console.log(res)
+            console.log("mark complete res:",res)
             return setCompleteState(prev => {
               return {...prev, [jobId]: true}
             })

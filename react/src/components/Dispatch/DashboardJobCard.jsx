@@ -4,7 +4,6 @@ import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, st
 
 export default function DashboardJobCard(props) {
   const { timeEst, jobs, incompleteJobs, jobsCount, setCompleteJobState, crewSize, compClass, selectedDay, date } = props;
-
   
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,

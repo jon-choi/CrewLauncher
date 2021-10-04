@@ -8,7 +8,6 @@ const ContractsPage = (props) => {
   const contractsInfo = props.contractsInfo.sort(function (a, b) {
     return b.id - a.id;
   });
-  console.log("sorted?", contractsInfo)
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
