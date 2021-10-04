@@ -28,7 +28,7 @@ const useDayInfo = function() {
 
       return (
         
-          <Card className="page-header" sx={{ml: 5, mb: 2, mt: 6}}>
+          <Card className="page-header" sx={{mb: 2, mt: 6, ml: 5}}>
             <Typography className="font-color">
           <Typography variant="h5" component="h5">
             {date}
@@ -77,8 +77,8 @@ const useDayInfo = function() {
         const cardClassNames = classNames("crew-day", {'completed-jobcard': job.completed || completeState[job.id]});
         return (
           <Card>
-            <Box sx={{ width: '95%', maxWidth: 500, maxHeight: 300, display: 'flex-start' }}>
-              <JobCard
+            
+              <JobCard sx={{ width: '100%', maxWidth: 500, maxHeight: 300, display: 'flex'}}
               key={job.id}
               packageTitle={packageOfJob.title}
               timeEst={packageOfJob.man_hours_per_visit}
@@ -91,9 +91,8 @@ const useDayInfo = function() {
               completeState={completeState}
               jobId={job.id}
               onMarkCompleted={onMarkJobCompleted}
-
               />
-            </Box>
+            
           </Card>
         )
       })
