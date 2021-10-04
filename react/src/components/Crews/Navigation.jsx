@@ -21,12 +21,12 @@ const Navigation = (props) => {
 
   return (
     <div>
-      <Stack direction="row" sx={{justifyContent: "space-around"}}>
+      <Stack direction="row" sx={{justifyContent: 'space-between'}}>
         <Button component={Link} to={`/crews/${id}`} sx={{fontSize:100}}>
         🚀
         </Button>
       
-        <Item sx={{alignSelf: "center"}} >
+        <Item>
           <Drawer closeButtonText={'Close'} openButtonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
         </Item>
       </Stack>
