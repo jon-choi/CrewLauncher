@@ -5,7 +5,6 @@ import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import Backdrop from '@mui/material/Backdrop';
 import Avatar from '@mui/material/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
 import StarRateIcon from '@mui/icons-material/StarRate';
 
 export default function BasicSpeedDial(props) {
