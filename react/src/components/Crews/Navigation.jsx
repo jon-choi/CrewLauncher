@@ -27,7 +27,7 @@ const Navigation = (props) => {
         </Button>
       
         <Item>
-          <Drawer closeButtonText={'Close'} openButtonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
+          <Drawer closeButtonText={'Close'} openButtonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} width={'192vw'} />} />
         </Item>
       </Stack>
     </div>

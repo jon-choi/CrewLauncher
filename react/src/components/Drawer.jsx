@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 export default function NewDrawer(props) {
   // pass in anchor as props 'left', 'right', 'top', 'bottom'
   const anchor = props.anchor || 'right';
-  const { items, openButtonText, closeButtonText, width } = props;
+  const { items, openButtonText, closeButtonText } = props;
   const [drawerOpen, setDrawerOpen] = useState(false);
 
 
