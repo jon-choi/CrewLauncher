@@ -50,6 +50,7 @@ const useAppData = function() {
     const socket = io('/');
     socket.connect()
     socket.emit('quote', quoteDetails);
+    return new Promise((resolve,reject) => resolve('Quote submitted successfully!'));
   };
 
   const editJob = function(job) {
