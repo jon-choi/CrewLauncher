@@ -21,10 +21,19 @@ export default function NewDrawer(props) {
     }
     setDrawerOpen(open);
   };
+  let drawerWidth;
+
+  if (props.width) {
+    drawerWidth = props.width;
+  } else if (anchor === 'top' || anchor === 'bottom') {
+    drawerWidth = 'auto';
+  } else {
+    drawerWidth = 320;
+  }
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: drawerWidth }}
       role="presentation"
     >
       <Button onClick={toggleDrawer(anchor, false)} variant="contained">{closeButtonText}</Button>

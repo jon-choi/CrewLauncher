@@ -1,6 +1,6 @@
 import MediaCard from "../MediaCard";
-import { format, isBefore, isAfter, addDays, differenceInDays } from 'date-fns'
-import { Stack, Box, Typography, Grid, CircularProgress } from '@mui/material';
+import { format, isBefore, isAfter, addDays, differenceInDays, isToday } from 'date-fns'
+import { Stack, Box, Typography, Grid, CircularProgress, listItemSecondaryActionClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
@@ -25,7 +25,7 @@ const ContractsPage = (props) => {
     console.log('contract start date before crashing: ', contract.start_date)
     const startDate = contract.start_date ? format(new Date(contract.start_date), 'EEE MMM d yyyy') : 'Unknown';
     const endDate = new Date(addDays(new Date(startDate), parseInt(contract.packageLength)));
-    const completedContract = isAfter(new Date(), endDate);
+    const completedContract = isAfter(new Date(), endDate) || isToday(endDate);
     const currentContract = isAfter(new Date(), new Date(startDate)) && isBefore(new Date(), endDate);
     const daysLeftInContract = differenceInDays(endDate, new Date());
     const contractProgress = completedContract ? 100 : Math.round((contract.packageLength - daysLeftInContract) / contract.packageLength * 100);

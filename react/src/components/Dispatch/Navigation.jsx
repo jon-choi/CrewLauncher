@@ -61,7 +61,7 @@ const Navigation = (props) => {
       sx={{display: { xs: 'block', sm: 'block' },
       '& .MuiDrawer-paper': { boxSizing: 'border-box', backgroundImage: "url(https://acegif.com/wp-content/gif/outerspace-6.gif)"},
     }}>
-          <Button><h1 className='App-header' onClick={()=> setNavOpen(!navOpen)}>Crew Lau🚀ncher</h1></Button>
+          <Button><h1 className='App-header' onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
 
           <Divider />
           <Toolbar>
@@ -84,9 +84,6 @@ const Navigation = (props) => {
               <MenuItem component={NavLink} to={`${url}/contracts/new`} activeStyle={activeLink}>🚀 New Contract</MenuItem>
               <MenuItem component={NavLink} to={`${url}/packages/new`} activeStyle={activeLink}>🚀 New Package</MenuItem>
             </MenuList>          
-          <Divider />
-          <MenuItem component={Link} to={`${url}/contracts/1`}>Edit Contract 1</MenuItem>
-          <MenuItem component={Link} to={`${url}/jobs/1`}>Edit Job 1</MenuItem>
         </MenuList>
       </Toolbar>
       <Divider />
