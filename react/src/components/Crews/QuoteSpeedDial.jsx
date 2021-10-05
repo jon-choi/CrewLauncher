@@ -6,6 +6,7 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import Backdrop from '@mui/material/Backdrop';
 import Avatar from '@mui/material/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
+import StarRateIcon from '@mui/icons-material/StarRate';
 
 export default function BasicSpeedDial(props) {
   const { onChange, packages, selectedPackage } = props;
@@ -13,12 +14,6 @@ export default function BasicSpeedDial(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const styleTooltip = makeStyles({
-    tooltip: {
-      minWidth: "100em",
-      backgroundColor: "white"
-    },
-  });
 
   return (
     <Box sx={{ top: 0, right:0, position: "absolute", width: 320, height: 736, transform: 'translateZ(0px)', flexGrow: 1 }}>
@@ -37,9 +32,8 @@ export default function BasicSpeedDial(props) {
         {packages.map((packageItem) => (
           <SpeedDialAction
             key={packageItem.id}
-            icon={<Avatar alt={'🚀 '} src={'🚀 '}/>}
+            icon={<StarRateIcon />}
             tooltipTitle={`${packageItem.title}\nSize Range ${packageItem.size_range_string}`}
-            TooltipClasses={styleTooltip}
             onClick={() => onChange(packageItem)}
             sx={{mb:5, zIndex:1000000, justifyContent: "right"}}
             tooltipOpen
