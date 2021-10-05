@@ -85,7 +85,7 @@ const Quote = (props) => {
         </h1>
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
 
-        <FormControl required>
+        <FormControl sx={{zIndex: -10}} required>
           <InputLabel htmlFor="clientName">Client Name</InputLabel>
           <OutlinedInput 
             id="clientName"
@@ -95,7 +95,7 @@ const Quote = (props) => {
           />
         </FormControl>
         
-        <FormControl required>
+        <FormControl sx={{zIndex: -10}} required>
           <InputLabel htmlFor="clientEmail">Client Email</InputLabel>
           <OutlinedInput
             id="clientEmail"
@@ -105,7 +105,7 @@ const Quote = (props) => {
           />
         </FormControl>
         
-        <FormControl required>
+        <FormControl sx={{zIndex: -10}} required>
           <InputLabel htmlFor="address">Address</InputLabel>
           <OutlinedInput
             id="address"
@@ -116,7 +116,7 @@ const Quote = (props) => {
         </FormControl>          
 
         <FormControl>
-          <InputLabel htmlFor="clientPhone">Phone Number</InputLabel>
+          <InputLabel sx={{zIndex: -10}} htmlFor="clientPhone">Phone Number</InputLabel>
           <OutlinedInput
             id="clientPhone"
             value={clientPhone}
@@ -137,7 +137,7 @@ const Quote = (props) => {
           </>
         }
         
-        <Button onClick={validate} variant="contained">Quote!</Button>
+        <Button onClick={validate} variant="contained" sx={{zIndex: -10}}>Quote!</Button>
       </Stack>
     </>
   );

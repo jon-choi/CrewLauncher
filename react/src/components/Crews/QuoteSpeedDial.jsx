@@ -1,29 +1,56 @@
+import * as React from 'react';
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
+import Backdrop from '@mui/material/Backdrop';
 import Avatar from '@mui/material/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
 
 export default function BasicSpeedDial(props) {
   const { onChange, packages, selectedPackage } = props;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const styleTooltip = makeStyles({
+    tooltip: {
+      minWidth: "100em",
+      backgroundColor: "white"
+    },
+  });
 
   return (
-    <Box sx={{ height: 30, transform: 'translateZ(0px)', flexGrow: 1 }}>
+    <Box sx={{ top: 0, right:0, position: "absolute", width: 320, height: 736, transform: 'translateZ(0px)', flexGrow: 1 }}>
+      
       {packages && <SpeedDial
         ariaLabel="SpeedDial basic example"
-        sx={{ position: 'absolute', right: 10, bottom: 0}}
+        sx={{ position: 'absolute', right: 10, top: 0}}
         icon={selectedPackage ? <Avatar alt={selectedPackage.title} src={selectedPackage.image} /> : <SpeedDialIcon />}
-        direction='left'
+        direction='down'
+        onClose={handleClose}
+        onOpen={handleOpen}
+        open={open}
+
       >
+        
         {packages.map((packageItem) => (
           <SpeedDialAction
             key={packageItem.id}
-            icon={<Avatar alt={packageItem.title} src={packageItem.image}/>}
-            tooltipTitle={`${packageItem.title}\nSize Range ${packageItem.size_range_string}\n$${packageItem.flat_rate}\nEvery: ${packageItem.visit_interval_days}-days`}
+            icon={<Avatar alt={'🚀 '} src={'🚀 '}/>}
+            tooltipTitle={`${packageItem.title}\nSize Range ${packageItem.size_range_string}`}
+            TooltipClasses={styleTooltip}
             onClick={() => onChange(packageItem)}
+            sx={{mb:5, zIndex:1000000, justifyContent: "right"}}
+            tooltipOpen
+            onClick={handleClose}
           />
         ))}
+        <Backdrop open={open} >
+        </Backdrop>
       </SpeedDial>}
+      
     </Box>
   );
 }
+
