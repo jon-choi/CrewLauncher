@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 
 import CrewCard from './CrewCard';
 import { getDayInfo } from '../../../helpers/AppHelpers'
+import useCrewsPageDayState from './CrewsPageResources/CrewsPageHook'
 
 import './CrewsPageResources/crewsPage.scss'
 
@@ -21,17 +22,22 @@ const CrewPage = (props) => {
     }));
 
     const { jobs, crews, contracts, packages, clients } = props.state;
+    const { setSelectedDay, selectedDay } = useCrewsPageDayState();
 
     if (jobs[1]) {
         let count = 0;
+        const onClose = function() {
+            setSelectedDay(null)
+        }
+
         const cardsOfDaysForCrews = crews.map(crew => {
 
             const days = getDayInfo(jobs, crews, contracts, packages, clients, crew.id);
             count++
             const key = count;
-            return (<Card className="-crew" key={key} sx={{display: 'flex', ml: 11, height: 350, backgroundImage: 'url(https://acegif.com/wp-content/gif/outerspace-58.gif)'}}>
-                <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 150, height: 150, mb: 4, ml: 5, mt: '80px' }} />
-                <CrewCard days={days} />
+            return (<Card className="-crew" key={key} >
+                <Avatar className="__avatar" alt={crew.foreman_name} src={crew.avatar} />
+                <CrewCard days={days} onClose={onClose} />
             </Card>)
         })
 

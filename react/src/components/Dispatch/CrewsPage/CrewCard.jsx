@@ -16,14 +16,14 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const CrewCard = (props) => {
-  const { days } = props;
+  const { days, onClose } = props;
   const { selectedDay, createCards } = useCrewsPageDayState()
  
   if (days) {
 
-    const cards = createCards(days)
+    const cards = createCards(days, onClose)
 
-    return ( <Card className="__card" sx={{display: "flex", justifyContent: "space-around"}}>{cards}</Card>)
+    return ( <Card className="__card" sx={{display: "flex", justifyContent: "space-around"}} >{cards}</Card>)
   }
   return (
     <Card sx={{ display: "flex", justifyContent: "center", alignItems: "flex-start"}}>

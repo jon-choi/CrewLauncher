@@ -7,6 +7,18 @@ $cardHeight: 15em;
     // align-items: center;
     justify-content: center;
     margin-top: 5em;
+    display: flex;
+    margin-left: 11em;
+    height: 21.5em;
+    background-image: url(https://acegif.com/wp-content/gif/outerspace-58.gif);
+
+    & .__avatar {
+      width: 7.5em;
+      height: 7.5em;
+      margin-bottom: 2em;
+      margin-left: 2em;
+      margin-top: 4em;
+    }
     
 
     & .__card {

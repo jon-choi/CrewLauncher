@@ -20,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const useCrewsPageDayState = function() {
   const [selectedDay, setSelectedDay] = useState(null);
   
-  const createCards = function(days) {
+  const createCards = function(days, onClose) {
 
     let count = -1;
 
@@ -34,7 +34,7 @@ const useCrewsPageDayState = function() {
           sx={{display: 'flex', justifyContent: 'center' }}
           id={`day-${countListen}`}
           >
-            {day[1] ?
+            {(selectedDay === null && day[1])?
             <Item onClick={(event) => setSelectedDay(countListen)}>
             <CardContent className="--card" >
               <Typography className="--crew-day"  color="text.primary" gutterBottom>
@@ -54,6 +54,7 @@ const useCrewsPageDayState = function() {
             </Item>}
           </Card>}
           {selectedDay === countListen && createSelectedDayCard(days[selectedDay])}
+          {selectedDay === countListen && <Button onClick={(event) => setSelectedDay(null)} variant="contained" >Close</Button>}
           </div>
         )
       })

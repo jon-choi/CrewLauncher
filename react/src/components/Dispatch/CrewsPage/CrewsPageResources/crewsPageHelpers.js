@@ -63,6 +63,7 @@ const createBodyItems = function([...day], value) {
 
 const createSelectedDayCard = function([...day]) {
   const date = day.splice(0,1)
+  console.log(day)
   const selectedDayCard = day.map(job => {
     return (<>
       <Stack justifyContent="center" className="--summary">
@@ -70,6 +71,7 @@ const createSelectedDayCard = function([...day]) {
         <Item className="--list" variant="outlined" >{job.job.start_time}</Item>
         <Item className="--list" variant="outlined" >{job.packageOfJob.title}</Item>
         <Item className="--list" variant="outlined" >{job.clientOfJob.name}, {job.clientOfJob.phone}</Item>
+        <Item className="--list" variant="outlined" >{job.contractOfJob.address}</Item>
       </Stack>
     </>)
   }
@@ -81,6 +83,7 @@ const createSelectedDayCard = function([...day]) {
         <Item variant="outlined">Approximate Launch:</Item>
         <Item variant="outlined">Contract Package:</Item>
         <Item variant="outlined">Client:</Item>
+        <Item variant="outlined">Address:</Item>
       </Stack>
       {selectedDayCard}
   </Stack>
