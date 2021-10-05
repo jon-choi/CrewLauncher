@@ -53,8 +53,6 @@ export default function JobCard(props) {
     
     <CardActions>
 
-    {!jobComplete && <Button onClick={() => >Mark Completed</Button>}
-
     {jobComplete && !jobComplete.completed && <Button onClick={() => {onMarkCompleted(jobId).then((res) => {setRerender(!rerender)})}}>Mark Completed</Button>}
 
     </CardActions>

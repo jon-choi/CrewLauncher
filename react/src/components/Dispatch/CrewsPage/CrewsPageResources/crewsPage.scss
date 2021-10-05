@@ -36,8 +36,8 @@ $cardHeight: 14em;
         height: 2.5em;
         margin-bottom: 1.5em;
       }
-      & .--background {
-        width: 95em
+      & .--day-selected {
+        width: 95em;
       }
       
       & .--day {
@@ -57,21 +57,29 @@ $cardHeight: 14em;
           
         }
       }
-
+      & .--selected { 
+        min-height: $cardHeight;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+      }
+      & .--list {
+        font-size: 1em;
+      }
 
       & .--selected-summary {
         min-height: $cardHeight;
         justify-content: space-evenly;
+        min-width: 15em;
+        max-width: 35em;
+        flex-wrap: wrap;
 
         & .--list {
           margin-left: 2em;
           align-items: center;
         }
-        
+       
       }
-      & .--list {
-        font-size: 1.2em;
-      }
+      
       
     }
   }

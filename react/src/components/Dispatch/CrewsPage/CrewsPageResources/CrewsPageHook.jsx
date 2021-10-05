@@ -55,10 +55,11 @@ const useCrewsPageDayState = function() {
               </CardContent>
               </Item>}
             </Card>}
-            {selectedDay === countListen && 
-              <Button className="--close-button"  onClick={(event) => setSelectedDay(null)} variant="contained" >Close</Button>
-            }
-            {selectedDay === countListen && createSelectedDayCard(days[selectedDay])}
+            {selectedDay === countListen &&
+              <div className="--day-selected">
+                <Button className="--close-button"  onClick={(event) => setSelectedDay(null)} variant="contained" >Close</Button>
+                {createSelectedDayCard(days[selectedDay])}
+              </div>}
             
             </div>
           )
