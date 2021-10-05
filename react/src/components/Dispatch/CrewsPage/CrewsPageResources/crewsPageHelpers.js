@@ -26,30 +26,30 @@ const createBodyItems = function([...day], value) {
     const time = timeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
 
     return (<Item className="page-header" key={value} >
-      <Grid container sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
+      <Card sx={{justifyContent: 'space-between'}}>
+      <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom >
         Estimated Time:
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
        {time} hrs
       </Typography>
-      </Grid >
-      <Grid container sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
+      </Card >
+      <Card sx={{justifyContent: 'space-between'}}>
+      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
         Completed Jobs: 
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
       {completedJobs.length}
       </Typography>
-      </Grid >
-      <Grid container sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
+      </Card >
+      <Card sx={{justifyContent: 'space-between'}}>
+      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
         Incomplete Jobs: 
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="#dbeaf3" gutterBottom >
+      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
       {incompleteJobs}
       </Typography>
-      </Grid >
+      </Card >
     </Item>)
   }
   return(<>

@@ -4,15 +4,16 @@ $cardHeight: 15em;
   justify-items: center;
 
   & .-crew {
-    align-items: center;
+    // align-items: center;
     justify-content: center;
     margin-top: 5em;
+    
 
     & .__card {
-      min-width: 80em;
+      min-width: 75em;
       align-items: "center";
-      margin-top: auto;
-      margin-bottom: auto;
+      margin-top: 8px;
+      margin-bottom: 8px;
       min-height: $cardHeight;
       
       
@@ -26,7 +27,7 @@ $cardHeight: 15em;
         }
 
         & .--crew-day {
-          font-size: 2em;
+          font-size: 1.8em;
           
         }
         & .--summary {
@@ -42,6 +43,13 @@ $cardHeight: 15em;
         }
       }
       
+    }
+  }
+  @media (min-width: 850px) {
+    .__card {
+      margin: 120px 50px 50px 50px;
+      width: 50vw;
+      float: right;
     }
   }
 }
