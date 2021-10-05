@@ -36,7 +36,7 @@ const Navigation = (props) => {
 
   const pressCtrlSpace = function(event) {
     console.log("click")
-    if (event.ctrlKey && event.key === 32) {
+    if (event.ctrlKey && event.key) {
       setNavOpen(!navOpen)
     }
   }
@@ -57,6 +57,7 @@ const Navigation = (props) => {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
+              autofocus
             >
               <MenuIcon />
             </IconButton>
