@@ -27,36 +27,43 @@ const useCrewsPageDayState = function() {
       const dayCardMap = days.map(day => {
         count++;
         const countListen = count;
-        return (<div key={countListen}>
-          {selectedDay === null &&
-          <Card
-          className="--day"
-          sx={{display: 'flex', justifyContent: 'center' }}
-          id={`day-${countListen}`}
-          >
-            {(selectedDay === null && day[1])?
-            <Item onClick={(event) => setSelectedDay(countListen)}>
-            <CardContent className="--card" >
-              <Typography className="--crew-day"  color="text.primary" gutterBottom>
-                {day[0]}
-              </Typography>
-              {createBodyItems(day, countListen)}
-            </CardContent>
-            </Item>
-            :
-            <Item >
-            <CardContent className="--card" >
-              <Typography className="--crew-day" color="text.primary" gutterBottom>
-                {day[0]}
-              </Typography>
-              {createBodyItems(day, countListen)}
-            </CardContent>
-            </Item>}
-          </Card>}
-          {selectedDay === countListen && createSelectedDayCard(days[selectedDay])}
-          {selectedDay === countListen && <Button onClick={(event) => setSelectedDay(null)} variant="contained" >Close</Button>}
-          </div>
-        )
+        if (selectedDay === null || selectedDay === countListen) {
+
+          return (<div key={countListen} className="--background">
+            {selectedDay === null &&
+            <Card
+            className="--day"
+            sx={{display: 'flex', justifyContent: 'center' }}
+            id={`day-${countListen}`}
+            >
+              {(selectedDay === null && day[1])?
+              <Item onClick={(event) => setSelectedDay(countListen)}>
+              <CardContent className="--card" >
+                <Typography className="--crew-day"  color="text.primary" gutterBottom>
+                  {day[0]}
+                </Typography>
+                {createBodyItems(day, countListen)}
+              </CardContent>
+              </Item>
+              :
+              <Item >
+              <CardContent className="--card" >
+                <Typography className="--crew-day" color="text.primary" gutterBottom>
+                  {day[0]}
+                </Typography>
+                {createBodyItems(day, countListen)}
+              </CardContent>
+              </Item>}
+            </Card>}
+            {selectedDay === countListen && 
+              <Button className="--close-button"  onClick={(event) => setSelectedDay(null)} variant="contained" >Close</Button>
+            }
+            {selectedDay === countListen && createSelectedDayCard(days[selectedDay])}
+            
+            </div>
+          )
+        }
+        return <div className="--hidden"></div>
       })
       return dayCardMap
   }
