@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom'
 import Drawer from '../Drawer'
 import Quote from './Quote'
@@ -9,10 +9,11 @@ import Paper from '@mui/material/Paper';
 import './Navigation.scss'
 
 const Navigation = (props) => {
-
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const id = useParams().id;
 
   const { packages, onSubmitQuote } = props;
+  
   const Item = styled(Paper)(({ theme }) => ({
       ...theme.typography.body2,
       padding: theme.spacing(1),
@@ -35,3 +36,4 @@ const Navigation = (props) => {
 };
 
 export default Navigation;
+

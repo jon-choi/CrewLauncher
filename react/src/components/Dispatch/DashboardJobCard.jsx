@@ -12,9 +12,10 @@ export default function DashboardJobCard(props) {
   }));
   const crewTimeEst = crewSize ? Math.round(timeEst / crewSize) : timeEst; 
   return (
-  <Card className={compClass} sx={{display: "flex", minWidth: 190, justifyContent:"space-evenly"}}>
-    <Stack direction="row" sx={{ mt: 2}}>    
+  <Card className={compClass} sx={{display: "flex", minWidth: 190, justifyContent:"space-evenly", backgroundImage: "url(https://acegif.com/wp-content/gif/outerspace-58.gif)"}}>
+    <Stack direction="row" sx={{ mt: 1.3}}>    
     <Stack sx={{display: 'flex', mr:2}}>
+      
     <Item >
           {`Crew Size: `}
         </Item>
@@ -30,8 +31,10 @@ export default function DashboardJobCard(props) {
       <Item >
       {`Time Est: `}
       </Item>
+      
     </Stack>
     <Stack sx={{minWidth: 50}}>
+      
         <Item sx={{minWidth: 45}}>
           {crewSize}
         </Item>
@@ -47,6 +50,7 @@ export default function DashboardJobCard(props) {
       <Item >
         {crewTimeEst}
       </Item>
+      
     </Stack>
     </Stack> 
   </Card>
