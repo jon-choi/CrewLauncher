@@ -31,6 +31,10 @@ const start = function(httpServer) {
     connected++;
     sendStatus();
 
+    socket.on('connect', () => {
+      console.log('connect: ', socket.id);
+    });
+
     socket.on('disconnect', () => {
       console.log("disconnect: ", socket.id);
       connected--;
