@@ -29,10 +29,10 @@ const CrewPage = (props) => {
             const days = getDayInfo(jobs, crews, contracts, packages, clients, crew.id);
             count++
             const key = count;
-            return (<Grid className="-crew" container item key={key} >
-                <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 200, height: 200, mb: 4, ml: 20, mr: 5, mt: 5 }} />
+            return (<Card className="-crew" key={key} sx={{display: 'flex', ml: 11, height: 350, backgroundImage: 'url(https://acegif.com/wp-content/gif/outerspace-58.gif)'}}>
+                <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 150, height: 150, mb: 4, ml: 5, mt: '80px' }} />
                 <CrewCard days={days} />
-            </Grid>)
+            </Card>)
         })
 
 
