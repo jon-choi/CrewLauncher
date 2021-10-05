@@ -76,7 +76,7 @@ const Quote = (props) => {
 
   return (
     <>
-      <Stack component="form" spacing={2} sx={{margin: 'auto', width: '90%'}} >
+      <Stack component="form" spacing={2} sx={{ margin: "auto", width: '100%'}} >
         <h1>
           <QuoteSpeedDial direction="left" onChange={setSelectedPackage} packages={packages} selectedPackage={selectedPackage} />
         </h1>
