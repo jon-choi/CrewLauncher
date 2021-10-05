@@ -74,23 +74,24 @@ const useDashboardDayState = function() {
         const crewSize = crewNames[name].crewSize
         for (const jobInfo of day) {
           if (jobInfo.crewOfJob && name === jobInfo.crewOfJob.foreman_name) {
-            jobs++;
+            jobsCount++;
             manHours += jobInfo.packageOfJob.man_hours_per_visit;
-            (!jobInfo.job.complete && incompleteJobs++);
+            (!jobInfo.job.completed && incompleteJobs++);
           }
           if (name === "noCrew") {
-            jobs++;
+            jobsCount++;
             manHours += jobInfo.packageOfJob.man_hours_per_visit;
-            (!jobInfo.job.complete && incompleteJobs++);
+
+            (!jobInfo.job.completed && incompleteJobs++);
           }
         }
         dayOfCrews.push({
           ...dayOfCrews[name],
           crewSize,
-          incompleteJobs: completeJob[date[0]].incomplete,
+          incompleteJobs: incompleteJobs,
           manHours,
           name,
-          jobsCount: completeJob[date[0]].jobs
+          jobsCount: jobsCount
         })
       }
       const jobCard = dayOfCrews.map(crewName => {
