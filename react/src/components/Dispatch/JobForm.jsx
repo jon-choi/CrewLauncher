@@ -7,22 +7,24 @@ import { Stack, Box, Button, Typography, Alert, Snackbar } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-
+import classNames from 'classnames';
 import SpeedDial from '../SpeedDial';
 import TimePicker from '../Timepicker';
 
 const JobForm = (props) => {
   const params = useParams();
   const browserHistory = useHistory();
-  console.log('params in jobform', params)
+  
   const { onEdit, crews, packages, contracts, jobs } = props
   const thisJob = params.id ? jobs.filter(j => j.id === params.id) : null;
   const [selectedCrew, setSelectedCrew] = useState(thisJob ? thisJob.crewId : 0)
   const [time, setTime] = useState(new Date())
   const [status, setStatus] = useState({error: false, success: false, message:""});
   const [error, setError] = useState([]);
+  const [rocketClass, setRocketClass] = useState(false);
 
-  
+  const rocketClasses = classNames('rocket', {blastOff: rocketClass});
+
   const errorMessage = [];
   const job = getInfoForJobForm(jobs, contracts, packages, parseInt(params.id));
 
@@ -38,6 +40,13 @@ const JobForm = (props) => {
     const validate = function(time, selectedCrew) {
       if (isAfter(new Date(time), setHours(new Date(time), 6)) && isBefore(new Date(time), setHours(new Date(time), 18)) && selectedCrew) {
         return save(time, selectedCrew)
+        .then(() => {
+          setRocketClass(true);
+          setTimeout(() => {
+            
+            setRocketClass(false);
+          }, 1950);
+        })
       }else if (!selectedCrew) {
         errorMessage.push('Select A Crew To Launch!');
       } else {
@@ -53,13 +62,14 @@ const JobForm = (props) => {
       const endTimeString = addHours(time, estTime)
       const endTime = format(endTimeString, 'kk')
       const startTime = format(time, 'kk')
-      onEdit(selectedCrew, startTime, endTime, job, parseInt(params.id))
+      return onEdit(selectedCrew, startTime, endTime, job, parseInt(params.id))
       .then((response) => {
         setStatus({error: false, success: true, message: "Crew Launched successfully!"})
+        const nextJob = jobs.filter(job => {
+          return (job.id === (parseInt(params.id) + 1))
+        })[0];
         setTimeout(() => {
-          const nextJob = jobs.filter(job => {
-            return (job.id === (parseInt(params.id) + 1))
-          })[0];
+         
           setTime(setHours(new Date(time), 6))
           setSelectedCrew(null)
           if (nextJob && nextJob.crew_id === undefined)  {
@@ -94,22 +104,22 @@ const JobForm = (props) => {
           <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{justifyContent: 'center'}}>
 
             <Grid item xs={3}>
-              <Item sx={{ fontSize: 21}}> Date: {date} </Item>
+              <Item sx={{ fontSize: 24}}> Date: {date} </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item sx={{ fontSize: 21}}>  Package: {job.packageTitle}  </Item>
+              <Item sx={{ fontSize: 24}}>  Package: {job.packageTitle}  </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item sx={{ fontSize: 21}}>  Address: {job.contractAddress}  </Item>
+              <Item sx={{ fontSize: 24}}>  Address: {job.contractAddress}  </Item>
             </Grid>
             <Grid item xs={11}>
-              <Item sx={{ fontSize: 21}}>  Job Notes: {job.contractJobNotes}  </Item>
+              <Item sx={{ fontSize: 24}}>  Job Notes: {job.contractJobNotes}  </Item>
             </Grid>
             <Grid item xs={5.5}>
-              <Item sx={{ fontSize: 21}}>  Estimated Time Before Crew Assigned :  {job.packageManHours} Hours   </Item>
+              <Item sx={{ fontSize: 24}}>  Estimated Launch Time Before Crew Assigned :  {job.packageManHours} Hours   </Item>
             </Grid>
             <Grid item xs={5.5}>
-              {estTime > 1 ? <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned : 🚀{estTime} Hours🚀 </Item> : estTime <= 1 && <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned : 🚀 {estTime} Hour 🚀</Item>}
+              {estTime > 1 ? <Item sx={{ fontSize: 24}}> Estimated Launch Time After Crew Assigned : 🚀{estTime} Hours🚀 </Item> : estTime <= 1 && <Item sx={{ fontSize: 24}}> Estimated Time After Crew Assigned : 🚀 {estTime} Hour 🚀</Item>}
             </Grid>
         
           </Grid>
@@ -121,7 +131,7 @@ const JobForm = (props) => {
         <Item sx={{ maxHeight: 400, maxWidth: 200, alignItems: 'center', alignContent: 'center', margin: 'auto'}}>
             <TimePicker startDate={time} onChange={setTime}/>
             <div>
-            <Typography sx={{ fontSize: 200}}>🚀</Typography>
+            <Typography className={rocketClasses} >🚀</Typography>
             <SpeedDial crews={crews} onChange={setSelectedCrew} selectedCrew={selectedCrew}/>
             </div>
         </Item>

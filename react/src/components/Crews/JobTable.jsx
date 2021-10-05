@@ -68,37 +68,45 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {date}
+          <b>{date}</b>
         </TableCell>
-        <TableCell align="right">{timeEstimate} Hours</TableCell>
+        <TableCell align="right"><b>{(timeEstimate < 1) ? '<1' : timeEstimate} Hours</b></TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell className="card-bg" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
+            <Box className="font-color" sx={{ margin: 1 }}>
+              <Typography variant="h5" gutterBottom component="div">
                 {jobs.clientName ?  jobs.clientName : packageItem/*props.date*/ } 
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
-                    { props.name && <><TableCell>Address</TableCell>
-                    <TableCell>Phone Number</TableCell></> }
-                    <TableCell align="right">Address</TableCell>
-                    <TableCell align="right">Job Notes</TableCell>
+                  <TableRow>                   
+                    <TableCell className="font-color" align="left">
+                      <Typography variant="h6">
+                      Address
+                      </Typography>
+                      </TableCell>
+                    <TableCell className="font-color" align="right">
+                      <Typography variant="h6">
+                      Notes
+                      </Typography>
+                      </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {jobs.map((job) => (
                     <TableRow key={job.address}>
-                      <TableCell component="th" scope="row">
+                      <TableCell className="font-color" component="th" scope="row">
+                        <Typography variant="h6">
                         {job.address}
+                        </Typography>
                       </TableCell>
-                      <TableCell>{jobs.phone}</TableCell>
-                      <TableCell align="right">{jobs.package}</TableCell>
-                      <TableCell align="right">
+                      <TableCell className="font-color" align="right">
+                        <Typography variant="h6">
                         {job.jobNotes}
-                      </TableCell>
+                        </Typography>
+                        </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -140,18 +148,22 @@ export default function CollapsibleTable(props) {
   const { rows } = props;
 
   return (
-    <h1>
-    <TableContainer component={Paper}>
+    <div >
+    <TableContainer sx={{mt: 8, justifyContent: 'center', alignSelf: 'center'}} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
-          <TableRow>
+          <TableRow className="page-header"> 
             <TableCell />
             <TableCell> 
-              <Typography>
+              <Typography className="font-color" variant="h6">
                 Launch Info
                 </Typography>
                 </TableCell>
-            <TableCell align="right">Time Estimate</TableCell>
+            <TableCell >
+              <Typography className="font-color" align="right" variant="h6">
+              Time Estimate
+              </Typography>
+              </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -161,6 +173,6 @@ export default function CollapsibleTable(props) {
         </TableBody>
       </Table>
     </TableContainer>
-  </h1>
+  </div>
   );
 }

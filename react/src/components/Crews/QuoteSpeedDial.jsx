@@ -11,7 +11,7 @@ export default function BasicSpeedDial(props) {
     <Box sx={{ height: 30, transform: 'translateZ(0px)', flexGrow: 1 }}>
       {packages && <SpeedDial
         ariaLabel="SpeedDial basic example"
-        sx={{ position: 'absolute', right: 10}}
+        sx={{ position: 'absolute', right: 10, bottom: 0}}
         icon={selectedPackage ? <Avatar alt={selectedPackage.title} src={selectedPackage.image} /> : <SpeedDialIcon />}
         direction='left'
       >

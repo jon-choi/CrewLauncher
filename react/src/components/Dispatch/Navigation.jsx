@@ -34,17 +34,30 @@ const Navigation = (props) => {
 
   const { url } = useRouteMatch();
 
+  const pressCtrlSpace = function(event) {
+    console.log("click")
+    if (event.ctrlKey && event.key) {
+      setNavOpen(!navOpen)
+    }
+  }
+
+
   return (
     <>
       <AppBar position="fixed">
           <Toolbar>
             <IconButton
               onClick={()=>setNavOpen(!navOpen)}
+              onKeyDown={(event) => {
+                event.persist()
+                pressCtrlSpace(event)
+              }}
               size="large"
               edge="start"
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
+              autofocus
             >
               <MenuIcon />
             </IconButton>
@@ -61,34 +74,29 @@ const Navigation = (props) => {
       sx={{display: { xs: 'block', sm: 'block' },
       '& .MuiDrawer-paper': { boxSizing: 'border-box', backgroundImage: "url(https://acegif.com/wp-content/gif/outerspace-6.gif)"},
     }}>
-          <Button><h1 className='App-header' onClick={()=> setNavOpen(!navOpen)}>Crew Lau🚀ncher</h1></Button>
+          <Button><h1 className='App-header' onClick={()=> setNavOpen(!navOpen)}>Crew🚀Launcher</h1></Button>
 
           <Divider />
           <Toolbar>
-              <Button onClick={()=>{setNavOpen(false); setQuotesOpen(true);}}>{`Incoming Quotes`}</Button><Badge color='primary' showZero badgeContent={props.quotes.length} />
+            <Button onClick={()=>{setNavOpen(false); setQuotesOpen(true);}}>{`Incoming Quotes`}</Button><Badge color='primary' showZero badgeContent={props.quotes.length} />
           </Toolbar>
           <Toolbar>
-              <Button onClick={()=>{setNavOpen(false); setEmptyJobsOpen(true);}}>{`Unassigned Jobs`}</Button><Badge color='primary' showZero badgeContent={unassignedJobState.length} />
+            <Button onClick={()=>{setNavOpen(false); setEmptyJobsOpen(true);}}>{`Unassigned Jobs`}</Button><Badge color='primary' showZero badgeContent={unassignedJobState.length} />
           </Toolbar>
           <Divider />
       <Toolbar>
-        <MenuList>
-          <MenuItem exact component={NavLink} to='/dispatch' activeStyle={activeLink}> 🚀 Dashboard 🚀</MenuItem>
-          <MenuItem component={NavLink} to={`${url}/crews`} activeStyle={activeLink}>🚀 Crews</MenuItem>
-          <MenuItem exact component={NavLink} to={`${url}/clients`} activeStyle={activeLink}>🚀 Clients</MenuItem>
-          <MenuItem exact component={NavLink} to={`${url}/contracts`} activeStyle={activeLink}>🚀 Contracts</MenuItem>
+        <MenuList sx={{mt: 4, ml: 5}} className="font-color">
+          <MenuItem sx={{mt:2}} exact component={NavLink} to='/dispatch' activeStyle={activeLink}> 🚀 Dashboard 🚀</MenuItem>
+          <MenuItem sx={{mt:2}} component={NavLink} to={`${url}/crews`} activeStyle={activeLink}>🚀 Crews</MenuItem>
+          <MenuItem sx={{mt:2}} exact component={NavLink} to={`${url}/clients`} activeStyle={activeLink}>🚀 Clients</MenuItem>
+          <MenuItem sx={{mt:2, mb: 40}} exact component={NavLink} to={`${url}/contracts`} activeStyle={activeLink}>🚀 Contracts</MenuItem>
           <Divider />
-          Create Forms
-          <Toolbar>
+          <b>Create Forms</b>
             <MenuList>
               <Divider />
-              <MenuItem component={NavLink} to={`${url}/contracts/new`} activeStyle={activeLink}>🚀 New Contract</MenuItem>
-              <MenuItem component={NavLink} to={`${url}/packages/new`} activeStyle={activeLink}>🚀 New Package</MenuItem>
-            </MenuList>
-          </Toolbar>
-          <Divider />
-          <MenuItem component={Link} to={`${url}/contracts/1`}>Edit Contract 1</MenuItem>
-          <MenuItem component={Link} to={`${url}/jobs/1`}>Edit Job 1</MenuItem>
+              <MenuItem sx={{mt:2}} component={NavLink} to={`${url}/contracts/new`} activeStyle={activeLink}>🚀 New Contract</MenuItem>
+              <MenuItem sx={{mt:2}} component={NavLink} to={`${url}/packages/new`} activeStyle={activeLink}>🚀 New Package</MenuItem>
+            </MenuList>          
         </MenuList>
       </Toolbar>
       <Divider />

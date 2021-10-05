@@ -4,7 +4,11 @@ $fontFamily: 'Yantramanav', 'sans-serif';
   text-align: center;
   background-color: #cdd1d4;
   min-height: 100vh;
+  width: 100%;
   background-image: url("https://www.transparenttextures.com/patterns/tapestry.png");
+  display: flex;
+  justify-content: center;
+  
 }
 
 .App-logo {
@@ -14,7 +18,6 @@ $fontFamily: 'Yantramanav', 'sans-serif';
 }
 
 .App-header {
-
 
   display: flex;
   flex-direction: column;

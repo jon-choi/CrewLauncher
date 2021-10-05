@@ -5,7 +5,6 @@ import { getClientId, generateJobDates } from '../helpers/AppHelpers'
 
 
 const useAppData = function() {
-
   const [state, setState] = useState({
     crews: [{foreman_name: null}],
     clients: [{name: null}],
@@ -34,6 +33,8 @@ const useAppData = function() {
           }
         })
     })
+
+
   }, []);
 
 
@@ -49,6 +50,7 @@ const useAppData = function() {
     const socket = io('/');
     socket.connect()
     socket.emit('quote', quoteDetails);
+    return new Promise((resolve,reject) => resolve('Quote submitted successfully!'));
   };
 
   const editJob = function(job) {
@@ -291,6 +293,7 @@ const useAppData = function() {
       completed: true
     })
     .then(response => {
+      job.completed = true;
       const updatedJobs = state.jobs.filter(j => j.id !== jobId);
       console.log(`Job ${jobId} marked completed! Updating state now!`);
       setState(prev => ({...prev, jobs: [...updatedJobs, job]}));

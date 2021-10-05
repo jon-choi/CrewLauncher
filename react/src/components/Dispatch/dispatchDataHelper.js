@@ -100,9 +100,17 @@ const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
 }
 
 const getEstTime = function(manhours, crew) {
-  return (manhours / crew.crew_size)
+  return (parseFloat(parseInt(manhours) / parseInt(crew.crew_size)).toFixed(2));
+}
+
+const getCrewNames = function(crews) {
+  let crewNames = {noCrew: {crewSize: 0}};
+  for (const crew of crews) {
+    crewNames = {...crewNames, [crew.foreman_name]: {crewSize:crew.crew_size}}
+  }
+  return crewNames;
 }
 
 
 
-export { getInfoForJobForm, getEstTime, getContractsInfo, getClientsInfo };
+export { getInfoForJobForm, getEstTime, getContractsInfo, getClientsInfo, getCrewNames };

@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 
 import CrewCard from './CrewCard';
 import { getDayInfo } from '../../../helpers/AppHelpers'
+import useCrewsPageDayState from './CrewsPageResources/CrewsPageHook'
 
 import './CrewsPageResources/crewsPage.scss'
 
@@ -21,18 +22,23 @@ const CrewPage = (props) => {
     }));
 
     const { jobs, crews, contracts, packages, clients } = props.state;
+    const { setSelectedDay, selectedDay } = useCrewsPageDayState();
 
     if (jobs[1]) {
         let count = 0;
+        const onClose = function() {
+            setSelectedDay(null)
+        }
+
         const cardsOfDaysForCrews = crews.map(crew => {
 
             const days = getDayInfo(jobs, crews, contracts, packages, clients, crew.id);
             count++
             const key = count;
-            return (<Grid className="-crew" container item key={key} >
-                <Avatar alt={crew.foreman_name} src={crew.avatar} sx={{ width: 200, height: 200, mb: 4, ml: 20, mr: 5, mt: 5 }} />
-                <CrewCard days={days} />
-            </Grid>)
+            return (<Card className="-crew" key={key} >
+                <Avatar className="__avatar" alt={crew.foreman_name} src={crew.avatar} />
+                <CrewCard days={days} onClose={onClose} />
+            </Card>)
         })
 
 

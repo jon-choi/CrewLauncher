@@ -1,6 +1,6 @@
 import MediaCard from "../MediaCard";
-import { format, isBefore, isAfter, addDays, differenceInDays } from 'date-fns'
-import { Stack, Box, Typography, Grid, CircularProgress } from '@mui/material';
+import { format, isBefore, isAfter, addDays, differenceInDays, isToday } from 'date-fns'
+import { Stack, Box, Typography, Grid, CircularProgress, listItemSecondaryActionClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
@@ -8,7 +8,6 @@ const ContractsPage = (props) => {
   const contractsInfo = props.contractsInfo.sort(function (a, b) {
     return b.id - a.id;
   });
-  console.log("sorted?", contractsInfo)
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -16,20 +15,20 @@ const ContractsPage = (props) => {
   }));
   let count = -1;
   const contractCards = contractsInfo.map(contract => {
-    const nextVisit = contract.jobDate ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None';
+    console.log('contract in contractsPage: ', contract)
     count++;
-    const header =(<Item>
-      <Typography variant="h5">
+    const header =(<Item className="page-header">
+      <Typography className="font-color" variant="h5">
       🚀 {contract.clientName} 🚀{contract.clientEmail} 
       </Typography>
     </Item>);
-    console.log('contract start date before crashing: ', contract.start_date)
     const startDate = contract.start_date ? format(new Date(contract.start_date), 'EEE MMM d yyyy') : 'Unknown';
     const endDate = new Date(addDays(new Date(startDate), parseInt(contract.packageLength)));
-    const completedContract = isAfter(new Date(), endDate);
+    const completedContract = isAfter(new Date(), endDate) || isToday(endDate);
     const currentContract = isAfter(new Date(), new Date(startDate)) && isBefore(new Date(), endDate);
     const daysLeftInContract = differenceInDays(endDate, new Date());
     const contractProgress = completedContract ? 100 : Math.round((contract.packageLength - daysLeftInContract) / contract.packageLength * 100);
+    const nextVisit = contract.jobDate && (!isAfter(new Date(), new Date(endDate)) || isToday(endDate)) ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None';
 
     const body = (
     <Stack >
@@ -56,16 +55,18 @@ const ContractsPage = (props) => {
         </Box>
       </Box>
       }
-      <Item>Address: {contract.address}</Item>
-      <Item>Start Date: {startDate}</Item>
-      <Item>Notes: {contract.job_notes}</Item>
-      <Item><b>Contract length:</b> {contract.packageLength}</Item>
-      <Item>Next Visit: {nextVisit}<Typography variant="h6">🚀</Typography></Item>
+      <Item className="page-header">
+      <Item sx={{fontSize: 17}}>Address: {contract.address}</Item>
+      <Item sx={{fontSize: 17}}>Start Date: {startDate}</Item>
+      <Item sx={{fontSize: 17}}>Notes: {contract.job_notes}</Item>
+      <Item sx={{fontSize: 17}}><b>Contract length:</b> {contract.packageLength}</Item>
+      <Item sx={{fontSize: 17}}>Next Visit: {nextVisit}<Typography variant="h6">🚀</Typography></Item>
+      </Item>
       </Stack>);
     const linkToEdit = `/dispatch/contracts/${contract.id}`;
 
     return (<Grid item >
-      <MediaCard
+      <MediaCard 
     key={count}
     compClass="contract-card"
     link={linkToEdit}
