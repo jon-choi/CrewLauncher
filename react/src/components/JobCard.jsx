@@ -5,7 +5,7 @@ export default function JobCard(props) {
   const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completeState, completed, onMarkCompleted, crewSize, compClass, jobs } = props;
   const { rerender, setRerender } = props;
   const [jobComplete, setJobComplete] = useState(jobs.filter(j => j.id === jobId)[0].complete)
-  
+  console.log("jobComplete:", jobComplete)
   useEffect(() => {
     console.log('completed Jobs in jobcard', jobs.filter(j => j.completed))
     const thisJob = jobs.filter(j => j.id === jobId)[0];
@@ -43,10 +43,10 @@ export default function JobCard(props) {
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
-    {jobComplete && <Typography>Completed! {jobComplete.completed}</Typography>}
+    {jobComplete && jobComplete.completed && <Typography>Completed! {jobComplete.completed}</Typography>}
     
     <CardActions>
-    {!jobComplete && <Button onClick={() => {onMarkCompleted(jobId); setRerender(!rerender)}}>Mark Completed</Button>}
+    {jobComplete && !jobComplete.completed && <Button onClick={() => {onMarkCompleted(jobId); setRerender(!rerender)}}>Mark Completed</Button>}
     </CardActions>
   </Card>
 );
