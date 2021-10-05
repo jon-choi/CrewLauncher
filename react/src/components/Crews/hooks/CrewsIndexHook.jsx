@@ -39,15 +39,15 @@ const useDayInfo = function() {
 
       return (
         
-          <Card className="page-header" sx={{mb: 2, mt: 2}}>
+          <Card className="page-header" sx={{mb: 2, mt: 0}}>
             <Typography className="font-color">
-          <Typography variant="h5" component="h5">
+          <Typography variant="h4" component="h4">
             {date}
           </Typography>
           <Typography variant="h5" component="h5">
           Jobs Today: {completeJob[date] && completeJob[date].jobs}
         </Typography>
-        <Typography variant="h5" component="h6">
+        <Typography variant="h5" component="h5">
           Incomplete: {completeJob[date] && completeJob[date].incomplete}
         </Typography>
         </Typography>
@@ -57,7 +57,7 @@ const useDayInfo = function() {
     }
     return (
       
-        <Card className="page-header" >
+        <Card className="page-header">
           <Typography className="font-color">
         <Typography variant="h4" component="h4">
           {date}
