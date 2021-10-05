@@ -16,38 +16,38 @@ export default function DashboardJobCard(props) {
     <Stack direction="row" sx={{ mt: 1.3}}>    
     <Stack sx={{display: 'flex', mr:2}}>
       
-    <Item sx={{fontSize: 16}}>
+    <Item sx={{fontSize: 17}}>
           {`Crew Size: `}
         </Item>
       
-        <Item sx={{fontSize: 16}}>
+        <Item sx={{fontSize: 17}}>
           {`Jobs: `}
         </Item>
     
-      <Item sx={{fontSize: 16}}>
+      <Item sx={{fontSize: 17}}>
         {`Incomplete: `}
       </Item>
   
-      <Item sx={{fontSize: 16}}>
+      <Item sx={{fontSize: 17}}>
       {`Time Est: `}
       </Item>
       
     </Stack>
     <Stack sx={{minWidth: 50}}>
       
-        <Item sx={{minWidth: 45}} sx={{fontSize: 16}}>
+        <Item sx={{minWidth: 45}} sx={{fontSize: 17}}>
           {crewSize}
         </Item>
       
-        <Item sx={{fontSize: 16}}>
+        <Item sx={{fontSize: 17}}>
           {jobsCount}
         </Item>
     
-      <Item sx={{fontSize: 16}}>
+      <Item sx={{fontSize: 17}}>
         {incompleteJobs}
       </Item>
   
-      <Item sx={{fontSize: 16}}>
+      <Item sx={{fontSize: 17}}>
         {crewTimeEst}hrs
       </Item>
       

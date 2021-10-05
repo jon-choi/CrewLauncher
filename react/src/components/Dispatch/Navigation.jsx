@@ -85,17 +85,17 @@ const Navigation = (props) => {
           </Toolbar>
           <Divider />
       <Toolbar>
-        <MenuList className="font-color">
-          <MenuItem exact component={NavLink} to='/dispatch' activeStyle={activeLink}> 🚀 Dashboard 🚀</MenuItem>
-          <MenuItem component={NavLink} to={`${url}/crews`} activeStyle={activeLink}>🚀 Crews</MenuItem>
-          <MenuItem exact component={NavLink} to={`${url}/clients`} activeStyle={activeLink}>🚀 Clients</MenuItem>
-          <MenuItem exact component={NavLink} to={`${url}/contracts`} activeStyle={activeLink}>🚀 Contracts</MenuItem>
+        <MenuList sx={{mt: 4, ml: 5}} className="font-color">
+          <MenuItem sx={{mt:2}} exact component={NavLink} to='/dispatch' activeStyle={activeLink}> 🚀 Dashboard 🚀</MenuItem>
+          <MenuItem sx={{mt:2}} component={NavLink} to={`${url}/crews`} activeStyle={activeLink}>🚀 Crews</MenuItem>
+          <MenuItem sx={{mt:2}} exact component={NavLink} to={`${url}/clients`} activeStyle={activeLink}>🚀 Clients</MenuItem>
+          <MenuItem sx={{mt:2, mb: 40}} exact component={NavLink} to={`${url}/contracts`} activeStyle={activeLink}>🚀 Contracts</MenuItem>
           <Divider />
           <b>Create Forms</b>
             <MenuList>
               <Divider />
-              <MenuItem component={NavLink} to={`${url}/contracts/new`} activeStyle={activeLink}>🚀 New Contract</MenuItem>
-              <MenuItem component={NavLink} to={`${url}/packages/new`} activeStyle={activeLink}>🚀 New Package</MenuItem>
+              <MenuItem sx={{mt:2}} component={NavLink} to={`${url}/contracts/new`} activeStyle={activeLink}>🚀 New Contract</MenuItem>
+              <MenuItem sx={{mt:2}} component={NavLink} to={`${url}/packages/new`} activeStyle={activeLink}>🚀 New Package</MenuItem>
             </MenuList>          
         </MenuList>
       </Toolbar>
