@@ -5,6 +5,7 @@ import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, B
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import { getEstTime } from '../../dispatchDataHelper'
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -17,10 +18,11 @@ const createBodyItems = function([...day], value) {
   if (day[0]) {
     const timeArray = [];
     const completedJobs = day.filter(item => {
-      const estimate = item.packageOfJob.man_hours_per_visit / item.crewOfJob.crew_size;
+      const estimate = parseFloat(item.packageOfJob.man_hours_per_visit, item.crewOfJob.crew_size).toFixed(2);
       timeArray.push(estimate)
       return item.job.completed;
     })
+    
     const incompleteJobs = day.length - completedJobs.length;
 
     const time = timeArray.reduce((previousValue, currentValue) => previousValue + currentValue)

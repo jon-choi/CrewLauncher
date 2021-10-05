@@ -104,22 +104,22 @@ const JobForm = (props) => {
           <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{justifyContent: 'center'}}>
 
             <Grid item xs={3}>
-              <Item sx={{ fontSize: 21}}> Date: {date} </Item>
+              <Item sx={{ fontSize: 24}}> Date: {date} </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item sx={{ fontSize: 21}}>  Package: {job.packageTitle}  </Item>
+              <Item sx={{ fontSize: 24}}>  Package: {job.packageTitle}  </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item sx={{ fontSize: 21}}>  Address: {job.contractAddress}  </Item>
+              <Item sx={{ fontSize: 24}}>  Address: {job.contractAddress}  </Item>
             </Grid>
             <Grid item xs={11}>
-              <Item sx={{ fontSize: 21}}>  Job Notes: {job.contractJobNotes}  </Item>
+              <Item sx={{ fontSize: 24}}>  Job Notes: {job.contractJobNotes}  </Item>
             </Grid>
             <Grid item xs={5.5}>
-              <Item sx={{ fontSize: 21}}>  Estimated Time Before Crew Assigned :  {job.packageManHours} Hours   </Item>
+              <Item sx={{ fontSize: 24}}>  Estimated Launch Time Before Crew Assigned :  {job.packageManHours} Hours   </Item>
             </Grid>
             <Grid item xs={5.5}>
-              {estTime > 1 ? <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned : 🚀{estTime} Hours🚀 </Item> : estTime <= 1 && <Item sx={{ fontSize: 21}}> Estimated Time After Crew Assigned : 🚀 {estTime} Hour 🚀</Item>}
+              {estTime > 1 ? <Item sx={{ fontSize: 24}}> Estimated Launch Time After Crew Assigned : 🚀{estTime} Hours🚀 </Item> : estTime <= 1 && <Item sx={{ fontSize: 24}}> Estimated Time After Crew Assigned : 🚀 {estTime} Hour 🚀</Item>}
             </Grid>
         
           </Grid>
