@@ -62,11 +62,10 @@ const CrewDashboard = function(props) {
 
     return (
     <div width='100%'>
-    <Button sx={{mt: 5}} component={Link} to={`${crewId}/jobs`}>
+    <Button className="page-header" sx={{mt: 5.5, border: '0.5px solid black', color: '#dbeaf3'}} component={Link} to={`${crewId}/jobs`}>
           Go to Launch Info
           </Button>
-      
-      <Stack sx={{margin: 'auto', width: '100%'}} >
+      <Stack sx={{margin: 'auto', width: '100%', mt: 2}} >
         {dayCards}        
       </Stack>
       </div>
