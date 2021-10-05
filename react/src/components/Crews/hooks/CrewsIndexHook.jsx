@@ -87,7 +87,7 @@ const useDayInfo = function() {
         }
         const cardClassNames = classNames("crew-day", {'completed-jobcard': job.completed || completeState[job.id]});
         return (
-          <Card sx={{ minWidth: 200, justifyContent: 'center'}}>
+          <Card className="page-header" sx={{ minWidth: 200, justifyContent: 'center'}}>
             
               <JobCard sx={{ width: '100%', maxHeight: 300, display: 'flex'}}
               key={job.id}
@@ -110,7 +110,7 @@ const useDayInfo = function() {
           </Card>
         )
       })
-      return (<Box>{jobCard}</Box>)
+      return (<Card>{jobCard}</Card>)
     }
     return dayToCard([date], jobs, crewId)
   }
