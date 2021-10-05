@@ -1,13 +1,6 @@
 import { useState } from 'react';
 import DateRangePicker from '../DateRangePicker';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Stack';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
+import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
 import QuoteSpeedDial from './QuoteSpeedDial'
 import { format, addDays } from 'date-fns';
 
@@ -15,6 +8,7 @@ import { format, addDays } from 'date-fns';
 const Quote = (props) => {
   const { packages } = props;
   const submit = props.onSubmitQuote;
+  const [status, setStatus] = useState({success: false, message: ""})
   const [error, setError] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [clientName, setClientName] = useState("");
@@ -39,7 +33,10 @@ const Quote = (props) => {
         clientPhone,
         selectedPackage
       }
-      return submit(quote);
+      return submit(quote)
+      .then((response) => {
+        setStatus({success: true, error: false, message: response});
+      })
     }
     if (!selectedPackage) {
       errorMessage.push('Package');
@@ -76,7 +73,13 @@ const Quote = (props) => {
 
   return (
     <>
-      <Stack component="form" spacing={2} sx={{ margin: "auto", width: '100%'}} >
+      <Stack component="form" spacing={2} sx={{margin: 'auto', width: '90%'}} >
+      <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, message: ""})}>
+          <Alert onClose={() => setStatus({success: false, message: ""})}
+          severity={'success'} sx={{ width: '100%' }}>
+            {status.message}
+          </Alert>
+        </Snackbar>
         <h1>
           <QuoteSpeedDial direction="left" onChange={setSelectedPackage} packages={packages} selectedPackage={selectedPackage} />
         </h1>
