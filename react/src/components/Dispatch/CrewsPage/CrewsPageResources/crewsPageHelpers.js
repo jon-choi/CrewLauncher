@@ -25,7 +25,7 @@ const createBodyItems = function([...day], value) {
     
     const incompleteJobs = day.length - completedJobs.length;
 
-    const time = timeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
+    const time = timeArray.reduce((previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue))
 
     return (<Item className="page-header" key={value} >
       <Card sx={{justifyContent: 'space-between'}}>
