@@ -135,7 +135,7 @@ export default function CollapsibleTable(props) {
 
   return (
     <div >
-    <TableContainer sx={{mt: 8, minWidth: '350px', maxWidth: '350px'}} component={Paper}>
+    <TableContainer sx={{mt: 8, minWidth: '100%', maxWidth: '100%'}} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className="page-header"> 
