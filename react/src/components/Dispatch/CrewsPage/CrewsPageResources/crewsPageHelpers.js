@@ -29,26 +29,26 @@ const createBodyItems = function([...day], value) {
 
     return (<Item className="page-header" key={value} >
       <Card sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom >
+      <Typography className="--days-summary" color="text.primary" gutterBottom >
         Estimated Time:
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
+      <Typography className="--days-summary" color="#text.primary" gutterBottom >
        {time} hrs
       </Typography>
       </Card >
       <Card sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
+      <Typography className="--days-summary" color="#text.primary" gutterBottom >
         Completed Jobs: 
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
+      <Typography className="--days-summary" color="#text.primary" gutterBottom >
       {completedJobs.length}
       </Typography>
       </Card >
       <Card sx={{justifyContent: 'space-between'}}>
-      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
+      <Typography className="--days-summary" color="#text.primary" gutterBottom >
         Incomplete Jobs: 
       </Typography>
-      <Typography sx={{ fontSize: 16 }} color="#text.primary" gutterBottom >
+      <Typography className="--days-summary" color="#text.primary" gutterBottom >
       {incompleteJobs}
       </Typography>
       </Card >
@@ -63,24 +63,27 @@ const createBodyItems = function([...day], value) {
 
 const createSelectedDayCard = function([...day]) {
   const date = day.splice(0,1)
+  console.log(day)
   const selectedDayCard = day.map(job => {
     return (<>
-      <Stack justifyContent="center" className="--summary">
+      <Stack className="--selected-summary">
         <Item className="--list" variant="outlined" >{date}</Item>
         <Item className="--list" variant="outlined" >{job.job.start_time}</Item>
         <Item className="--list" variant="outlined" >{job.packageOfJob.title}</Item>
         <Item className="--list" variant="outlined" >{job.clientOfJob.name}, {job.clientOfJob.phone}</Item>
+        <Item className="--list" variant="outlined" >{job.contractOfJob.address}</Item>
       </Stack>
     </>)
   }
     )
   return (<>
-  <Stack direction="row">
-      <Stack className="--summary"  >
-        <Item variant="outlined">Job Date</Item>
-        <Item variant="outlined">Approximate Launch:</Item>
-        <Item variant="outlined">Contract Package:</Item>
-        <Item variant="outlined">Client:</Item>
+  <Stack direction="row" className="--stack">
+      <Stack className="--selected" >
+        <Item className="--list" variant="outlined">Job Date</Item>
+        <Item className="--list" variant="outlined">Approximate Launch:</Item>
+        <Item className="--list" variant="outlined">Contract Package:</Item>
+        <Item className="--list" variant="outlined">Client:</Item>
+        <Item className="--list" variant="outlined">Address:</Item>
       </Stack>
       {selectedDayCard}
   </Stack>
