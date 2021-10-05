@@ -20,13 +20,13 @@ const Navigation = (props) => {
   }));
 
   return (
-    <Grid container>
-      <Stack direction="row" sx={{justifyContent: 'space-between', minWidth: 350}}>
-        <Button component={Link} to={`/crews/${id}`} sx={{fontSize:100}}>
+    <Grid container className="crew-nav">
+      <Stack direction="row" sx={{justifyContent: 'space-between'}}>
+        <Button className="rocket" component={Link} to={`/crews/${id}`}>
         🚀
         </Button>
       
-        <Item>
+        <Item className="quote-button">
           <Drawer closeButtonText={'Close'} openButtonText={'Quote'} compClass={'quote-drawer'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} />} />
         </Item>
       </Stack>
