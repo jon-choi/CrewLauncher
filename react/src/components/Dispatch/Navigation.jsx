@@ -34,12 +34,24 @@ const Navigation = (props) => {
 
   const { url } = useRouteMatch();
 
+  const pressCtrlSpace = function(event) {
+    console.log("click")
+    if (event.ctrlKey && event.key === 32) {
+      setNavOpen(!navOpen)
+    }
+  }
+
+
   return (
     <>
       <AppBar position="fixed">
           <Toolbar>
             <IconButton
               onClick={()=>setNavOpen(!navOpen)}
+              onKeyDown={(event) => {
+                event.persist()
+                pressCtrlSpace(event)
+              }}
               size="large"
               edge="start"
               color="inherit"
