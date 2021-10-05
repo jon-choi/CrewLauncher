@@ -100,7 +100,7 @@ const getInfoForJobForm = function(jobs, contracts, packages, jobId) {
 }
 
 const getEstTime = function(manhours, crew) {
-  return (manhours / crew.crew_size)
+  return (parseFloat(parseInt(manhours) / parseInt(crew.crew_size)).toFixed(2));
 }
 
 const getCrewNames = function(crews) {

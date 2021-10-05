@@ -3,10 +3,10 @@ import { useParams, Link } from 'react-router-dom'
 import Drawer from '../Drawer'
 import Quote from './Quote'
 import Card from '@mui/material/Card';
-import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography, Avatar } from '@mui/material';
+import { Stack, Grid, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography, Avatar } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import './Navigation.scss'
 
 const Navigation = (props) => {
 
@@ -20,17 +20,17 @@ const Navigation = (props) => {
   }));
 
   return (
-    <div>
-      <Stack direction="row" sx={{justifyContent: 'space-between', minWidth: '350px', maxWidth: '350px'}}>
-        <Button component={Link} to={`/crews/${id}`} sx={{fontSize:100}}>
+    <Grid container className="crew-nav">
+      <Stack direction="row" sx={{justifyContent: 'space-between'}}>
+        <Button className="rocket" component={Link} to={`/crews/${id}`}>
         🚀
         </Button>
       
-        <Item>
+        <Item className="quote-button">
           <Drawer closeButtonText={'Close'} openButtonText={'Quote'} items={<Quote packages={packages} onSubmitQuote={onSubmitQuote} width={'192vw'} />} />
         </Item>
       </Stack>
-    </div>
+    </Grid>
   );
 };
 
