@@ -10,7 +10,13 @@ export default function JobCard(props) {
     console.log('completed Jobs in jobcard', jobs.filter(j => j.completed))
     const thisJob = jobs.filter(j => j.id === jobId)[0];
     console.log('this job: ', thisJob)
-    setJobComplete(thisJob);
+    setJobComplete(thisJob.complete);
+
+    const doRerender = setTimeout(()=> {
+      setRerender(!rerender)
+      console.log( "render")
+    }, 3000)
+    return clearTimeout(doRerender)
   }, [jobs, jobId, rerender]);
 
 
@@ -46,7 +52,7 @@ export default function JobCard(props) {
     {jobComplete && <Typography>Completed! {jobComplete.completed}</Typography>}
     
     <CardActions>
-    {!jobComplete && <Button onClick={() => {onMarkCompleted(jobId); setRerender(!rerender)}}>Mark Completed</Button>}
+    {!jobComplete && <Button onClick={() => {onMarkCompleted(jobId).then((res) => {setRerender(!rerender)})}}>Mark Completed</Button>}
     </CardActions>
   </Card>
 );

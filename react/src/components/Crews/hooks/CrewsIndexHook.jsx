@@ -77,7 +77,7 @@ const useDayInfo = function() {
       const jobCard = day.map(jobOfDay => {
         const { job, contractOfJob, crewOfJob, packageOfJob, clientOfJob} = jobOfDay;
         const onMarkJobCompleted = function(jobId) {
-          markJobCompleted(jobId)
+          return markJobCompleted(jobId)
           .then(res => {
             console.log("mark complete res:",res)
             return setCompleteState(prev => {

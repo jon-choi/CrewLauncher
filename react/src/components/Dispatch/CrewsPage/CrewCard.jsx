@@ -26,10 +26,10 @@ const CrewCard = (props) => {
     return ( <Card className="__card" sx={{display: "flex", justifyContent: "space-around"}}>{cards}</Card>)
   }
   return (
-    <Card sx={{display: "flex", justifyContent: "center", alignItems: "flex-start"}}>
+    <Card sx={{ display: "flex", justifyContent: "center", alignItems: "flex-start"}}>
     {/* <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" sx={{ width: 100, height: 100, mb: 4, ml: 20, mt: 10 }} />
     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" sx={{ width: 100, height: 100, mb: 4, ml: 20, mt: 10 }} /> */}
-      <Card sx={{display: 'flex', justifyContent: 'center', minHeight: 175}}>
+      <Card sx={{ display: 'flex', justifyContent: 'center', minHeight: 175}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Yesterday
