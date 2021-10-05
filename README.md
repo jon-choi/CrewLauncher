@@ -1,6 +1,6 @@
-## Crew Launcher 🚀
+# Crew Launcher [🚀](https://cdn.dribbble.com/users/720114/screenshots/3361407/rocket_3.gif)
 
-A boilerplate project for anyone interested in making a project that uses React and Express.
+Crew Launcher is a brand new, cutting-edge application that allows users to seamlessly manage their businesses with the ability to quote and book new jobs on-site.
 
 This repository is a bootleg of @NimaBoscarino's [React Rails Boilerplate](https://github.com/NimaBoscarino/react-rails-boilerplate). It uses the same React app, but replaces the Rails server with an Express server.
 
