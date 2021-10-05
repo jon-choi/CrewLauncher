@@ -1,6 +1,6 @@
 
 import { format, isSameDay } from 'date-fns'
-import { Stack, Box, Grid, Fab } from '@mui/material';
+import { Stack, Box, Grid, Button } from '@mui/material';
 import { useEffect } from 'react';
 import useDashboardDayState from './hooks/DashboardHook'
 import { getCrewNames } from './dispatchDataHelper'
@@ -38,16 +38,15 @@ const Dashboard = function(props) {
   
 
   if (days) {
-    const fab = (<Fab variant="extended"
+    const fab = (<Button variant="contained"
       onClick={() => {
         setSelectedDay(null)
   
         }} sx={{
           position: 'absolute',
           left: 905,
-          bottom: 8.5,
-          height: 80
-        }}>Finish</Fab>
+          bottom: 8.5
+        }}>Finish</Button>
       );
   
   

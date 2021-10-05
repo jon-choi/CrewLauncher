@@ -99,7 +99,7 @@ const useDashboardDayState = function() {
         return (
           <Card className="page-header" sx={{justifyContent: "center"}}>
             <Typography className="page-header" color="#DBEAF3" variant="h6">{crewSize ? name : "Launch A Crew"}</Typography>
-            <Box   sx={{ width: '95%', maxWidth: 280, maxHeight: 200, display: 'flex', minHeight: 190, minWidth: 225, justifyContent: "center"}}>
+            <Box   sx={{ mt: 1,width: '95%', maxWidth: 280, maxHeight: 220, display: 'flex', minHeight: 250, minWidth: 225, justifyContent: "center"}}>
               <DashboardJobCard 
               key={name}
               timeEst={manHours}
@@ -117,7 +117,7 @@ const useDashboardDayState = function() {
         )
       })
       const jobsForSelectedDay =
-        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 200, display: 'flex', minHeight: 190, mb: 1, flexWrap: "wrap", justifyContent: "center"}}>
+        <Card sx={{width: '100%', maxWidth: 1000, maxHeight: 230, display: 'flex', minHeight: 190, mb: 1, flexWrap: "wrap", justifyContent: "center"}}>
            {jobCard}
         </Card>
       return jobsForSelectedDay
