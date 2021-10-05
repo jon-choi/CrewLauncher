@@ -48,7 +48,7 @@ export default function DashboardJobCard(props) {
       </Item>
   
       <Item >
-        {crewTimeEst}
+        {crewTimeEst}hrs
       </Item>
       
     </Stack>
