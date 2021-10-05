@@ -31,21 +31,21 @@ export default function JobCard(props) {
     <CardContent sx={{display: 'flex'}}>
       <div sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} >
         <Typography variant="h4" component="div">
-          {packageTitle}
+          {address}
         </Typography>
-        <Typography variant="h4">
+        <Typography variant="h5" color="text.secondary">
           {`Approx: ${crewTimeEst} hrs`}
         </Typography>
       </div>
     </CardContent>
     <CardContent>
-      <Typography  sx={' font-size: 5000; mt: 1.5; '} color="text.secondary">
+      <Typography  variant="h5" sx={' font-size: 5000; mt: 1; '} color="text.primary">
         {clientName}
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        {address}
+        {packageTitle}
       </Typography>
-      <Typography variant="body2">
+      <Typography variant="body1">
         {`Notes: ${jobNotes}`}
       </Typography>
     </CardContent>
