@@ -87,10 +87,10 @@ const useDashboardDayState = function() {
         dayOfCrews.push({
           ...dayOfCrews[name],
           crewSize,
-          incompleteJobs,
+          incompleteJobs: completeJob[date[0]].incomplete,
           manHours,
           name,
-          jobsCount
+          jobsCount: completeJob[date[0]].jobs
         })
       }
       const jobCard = dayOfCrews.map(crewName => {
