@@ -142,15 +142,6 @@ const PackageForm = (props) => {
           label="Visit Interval (days)"
         />
         </FormControl>
-        <FormControl>
-        <InputLabel htmlFor="packageImage">Package Image (file name)</InputLabel>
-        <OutlinedInput
-          id="packageImage"
-          value={packageImage}
-          onChange={event => setPackageImage(event.target.value)}
-          label="Package Image (file name)"
-        />
-        </FormControl>
 
 
         <Button onClick={validate} variant="contained">Launch</Button>

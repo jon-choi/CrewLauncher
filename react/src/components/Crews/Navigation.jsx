@@ -23,7 +23,7 @@ const Navigation = (props) => {
   return (
     <Grid container className="crew-nav">
       <Stack direction="row" sx={{justifyContent: 'space-between'}}>
-        <Button className="rocket" component={Link} to={`/crews/${id}`}>
+        <Button sx={{transitionDuration: '2s'}} className="rocket" component={Link} to={`/crews/${id}`}>
         🚀
         </Button>
       
