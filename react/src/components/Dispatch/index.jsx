@@ -10,7 +10,6 @@ import CrewsPage from './CrewsPage/CrewsPage';
 import { getContractsInfo, getClientsInfo } from './dispatchDataHelper';
 import { getDayInfo } from '../../helpers/AppHelpers';
 import { Box } from '@mui/material';
-import { useState } from 'react';
 
 const Dispatch = function(props) {
   const { onEdit, createPackage, createContract, updateQuoteState } = props;
@@ -66,7 +65,6 @@ const Dispatch = function(props) {
             <Dashboard jobs={jobs} days={days} crews={crews}/>
           </Route>
         </Switch>
-      {/* <Quote /> */}
       </Box>
     </Box>
     );

@@ -17,25 +17,6 @@ import { getJobsByCrew } from './crewsDataHelper';
 import {format} from 'date-fns'
 
 
-// function createData(rows) {
-
-  
-
-//   return {
-//     date,
-//     timeEstimate,
-//     history: [
-//       {
-//         client: 'Frank Reynolds',
-//         address: '555 Rocket Man Boulevard',
-//         phone: '(555) 867-5309',
-//         package: 'Rocket Man Package',
-//         jobNotes: 'Watch out for rockets',
-//       },
-//     ],
-//   };
-// }🚀🚀 Oct. 7 / 2021 🚀🚀
-
 function Row(props) {
   
 
@@ -44,16 +25,6 @@ function Row(props) {
   const [open, setOpen] = React.useState(false);
   
   const date = format(new Date(props.date), 'EEE dd MMM, yyyy')
-// job = {
-//         id: jobOfCrew.id,
-//         clientName: clientOfJobs.name,
-//         clientPhone: clientOfJobs.phone,
-//         package: packageOfJobs.title,
-//         address: contractOfJob.address,
-//         jobNotes: contractOfJob.job_notes,
-//         timeEstimate,
-//         date
-//     };
   
   return (
     <React.Fragment>
@@ -118,30 +89,6 @@ function Row(props) {
     </React.Fragment>
   );
 }
-
-// Row.propTypes = {
-//   row: PropTypes.shape({
-//     timeEstimate: PropTypes.string.isRequired,
-//     history: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         client: PropTypes.string.isRequired,
-//         address: PropTypes.string.isRequired,
-//         phone: PropTypes.string.isRequired,
-//         package: PropTypes.string.isRequired,
-//         jobNotes: PropTypes.string.isRequired
-//       }),
-//     ).isRequired,
-//     date: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
-
-// const rows = [
-//   createData('Job #1', '1hr'),
-//   createData('Job #2', '45 mins'),
-//   createData('Job #3', '30 mins'),
-//   createData('Job #4', '2.5 hrs'),
-//   createData('Job #5', '90 mins'),
-// ];
 
 export default function CollapsibleTable(props) {
 

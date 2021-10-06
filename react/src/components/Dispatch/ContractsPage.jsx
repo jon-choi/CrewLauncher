@@ -5,15 +5,19 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
 const ContractsPage = (props) => {
+
   const contractsInfo = props.contractsInfo.sort(function (a, b) {
     return b.id - a.id;
   });
+
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center'
   }));
+
   let count = -1;
+  // should be moved to helper function
   const contractCards = contractsInfo.map(contract => {
     console.log('contract in contractsPage: ', contract)
     count++;

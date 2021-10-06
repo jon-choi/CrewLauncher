@@ -1,17 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Paper, Grid, CardContent, CardActions, Typography, Avatar, Stack, Button, Box } from '@mui/material';
+import { Card, Grid, CardActions, Typography, Avatar, Button, Box } from '@mui/material';
 import MediaCard from '../MediaCard';
-import { styled } from '@mui/material/styles';
 import { format, addDays } from 'date-fns';
 
 const ClientCard = (props) => {
-
-  const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center'
-}));
 
   const client = props.client;
   let contracts;

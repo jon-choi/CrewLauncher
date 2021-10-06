@@ -15,7 +15,6 @@ import { format, addDays } from 'date-fns';
     const browserHistory = useHistory();
 
     const { packages, onSubmit } = props;
-    // const [editMode, setEditMode] = useState(id ? true : false)
     const [status, setStatus] = useState({success: false, error: false, message: ""});
     const [error, setError] = useState([]);
     const [selectedPackage, setSelectedPackage] = useState(null);
@@ -94,7 +93,7 @@ import { format, addDays } from 'date-fns';
       const [start] = dates;
       setStartDate(new Date(start));
       if (selectedPackage) {
-        setEndDate(addDays(new Date(start), selectedPackage.contract_length_days));
+        setEndDate(addDays(new Date(start), selectedPackage.contract_length_days - 1));
       } else {
         setEndDate(new Date(start));
       }
