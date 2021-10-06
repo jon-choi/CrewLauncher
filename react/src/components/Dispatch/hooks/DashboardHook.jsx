@@ -75,12 +75,12 @@ const useDashboardDayState = function() {
         for (const jobInfo of day) {
           if (jobInfo.crewOfJob && name === jobInfo.crewOfJob.foreman_name) {
             jobsCount++;
-            manHours += jobInfo.packageOfJob.man_hours_per_visit;
+            manHours += parseInt(jobInfo.packageOfJob.man_hours_per_visit);
             (!jobInfo.job.completed && incompleteJobs++);
           }
-          if (name === "noCrew") {
+          if (name === "noCrew" && !jobInfo.crewOfJob) {
             jobsCount++;
-            manHours += jobInfo.packageOfJob.man_hours_per_visit;
+            manHours += parseInt(jobInfo.packageOfJob.man_hours_per_visit);
 
             (!jobInfo.job.completed && incompleteJobs++);
           }
