@@ -65,15 +65,14 @@ const JobForm = (props) => {
       return onEdit(selectedCrew, startTime, endTime, job, parseInt(params.id))
       .then((response) => {
         setStatus({error: false, success: true, message: "Crew Launched successfully!"})
-        const nextJob = jobs.filter(job => {
-          return (job.id === (parseInt(params.id) + 1))
-        })[0];
         setTimeout(() => {
-         
+          const nextJob = jobs.filter(job => {
+            return (!job.crew_id && job.id !== parseInt(params.id))
+          })[0];
           setTime(setHours(new Date(time), 6))
           setSelectedCrew(null)
-          if (nextJob && nextJob.crew_id === undefined)  {
-            return browserHistory.push(`/dispatch/jobs/${parseInt(params.id) + 1}`)
+          if (nextJob)  {
+            return browserHistory.push(`/dispatch/jobs/${nextJob.id}`)
           }
           return browserHistory.push('/dispatch')
         }, 2000);
