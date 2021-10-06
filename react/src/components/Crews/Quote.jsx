@@ -3,6 +3,7 @@ import DateRangePicker from '../DateRangePicker';
 import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
 import QuoteSpeedDial from './QuoteSpeedDial'
 import { format, addDays } from 'date-fns';
+import classNames from 'classnames'
 
 
 const Quote = (props) => {
@@ -17,6 +18,7 @@ const Quote = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [address, setAddress] = useState("");
+  const [open, setOpen] = useState(false);
 
   const validate = () => {
     const errorMessage = [];
@@ -65,15 +67,22 @@ const Quote = (props) => {
       const [start, end] = dates;
       setStartDate(start);
       if (selectedPackage) {
-        setEndDate(addDays(start, selectedPackage.contract_length_days));
+        setEndDate(addDays(start, selectedPackage.contract_length_days -1));
       } else {
         setEndDate(start);
       }
   };
 
+  const zChange = classNames('form', {
+    behind: open
+  })
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
-      <Stack component="form" spacing={2} sx={{margin: 'auto', width: '90%'}} >
+      <Stack className={zChange} component="form" spacing={2} sx={{margin: 'auto', width: '90%'}} >
       <Snackbar open={status.success || status.error} autoHideDuration={6000} onClose={() => setStatus({success: false, message: ""})}>
           <Alert onClose={() => setStatus({success: false, message: ""})}
           severity={'success'} sx={{ width: '100%' }}>
@@ -81,12 +90,12 @@ const Quote = (props) => {
           </Alert>
         </Snackbar>
         <h1>
-          <QuoteSpeedDial direction="left" onChange={setSelectedPackage} packages={packages} selectedPackage={selectedPackage} />
+          <QuoteSpeedDial zChange={zChange} handleClose={handleClose} handleOpen={handleOpen} open={open} direction="left" onChange={setSelectedPackage} packages={packages} selectedPackage={selectedPackage} />
         </h1>
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
 
-        <FormControl sx={{zIndex: -10}} required>
-          <InputLabel htmlFor="clientName">Client Name</InputLabel>
+        <FormControl className={zChange} required>
+          <InputLabel className={zChange} htmlFor="clientName">Client Name</InputLabel>
           <OutlinedInput 
             id="clientName"
             value={clientName}
@@ -95,7 +104,7 @@ const Quote = (props) => {
           />
         </FormControl>
         
-        <FormControl sx={{zIndex: -10}} required>
+        <FormControl  className={zChange} required>
           <InputLabel htmlFor="clientEmail">Client Email</InputLabel>
           <OutlinedInput
             id="clientEmail"
@@ -105,7 +114,7 @@ const Quote = (props) => {
           />
         </FormControl>
         
-        <FormControl sx={{zIndex: -10}} required>
+        <FormControl className={zChange} required>
           <InputLabel htmlFor="address">Address</InputLabel>
           <OutlinedInput
             id="address"
@@ -116,7 +125,7 @@ const Quote = (props) => {
         </FormControl>          
 
         <FormControl>
-          <InputLabel sx={{zIndex: -10}} htmlFor="clientPhone">Phone Number</InputLabel>
+          <InputLabel className={zChange} htmlFor="clientPhone">Phone Number</InputLabel>
           <OutlinedInput
             id="clientPhone"
             value={clientPhone}
@@ -127,17 +136,17 @@ const Quote = (props) => {
         
         {selectedPackage &&
           <>
-            <TextField required disabled label={'Package'} value={(selectedPackage && selectedPackage.title) || 'Please Select a Package'} />
+            <TextField  className={zChange} required disabled label={'Package'} value={(selectedPackage && selectedPackage.title) || 'Please Select a Package'} />
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
-            <Box sx={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'center'}}>
+            <Box className={zChange} sx={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'center'}}>
               <TextField disabled label={'Contract Start'} value={format(startDate, 'dd-MM-yyyy')} />
               <TextField disabled label={'Contract End'} value={format(endDate, 'dd-MM-yyyy')} />
             </Box>
           </>
         }
         
-        <Button onClick={validate} variant="contained" sx={{zIndex: -10}}>Quote!</Button>
+        <Button className={zChange} onClick={validate} variant="contained" >Quote!</Button>
       </Stack>
     </>
   );

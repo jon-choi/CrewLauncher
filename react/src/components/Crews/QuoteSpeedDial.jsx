@@ -5,19 +5,19 @@ import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import Backdrop from '@mui/material/Backdrop';
 import Avatar from '@mui/material/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
 import StarRateIcon from '@mui/icons-material/StarRate';
+import classNames from 'classnames'
 
 export default function BasicSpeedDial(props) {
-  const { onChange, packages, selectedPackage } = props;
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { open, zChange, onChange, handleClose, handleOpen, packages, selectedPackage } = props;
 
+  const boxChange = classNames("box", {
+    change: !open
+  })
 
   return (
-    <Box sx={{ top: 0, right:0, position: "absolute", width: 320, height: 736, transform: 'translateZ(0px)', flexGrow: 1 }}>
-      
+    <Box className={boxChange} sx={{ top: 0, right:0, position: "absolute", height: 736, transform: 'translateZ(0px)', flexGrow: 1 }}>
+     
       {packages && <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'absolute', right: 10, top: 0}}
@@ -29,21 +29,22 @@ export default function BasicSpeedDial(props) {
 
       >
         
+        
         {packages.map((packageItem) => (
           <SpeedDialAction
             key={packageItem.id}
             icon={<StarRateIcon />}
             tooltipTitle={`${packageItem.title}\nSize Range ${packageItem.size_range_string}`}
-            onClick={() => onChange(packageItem)}
-            sx={{mb:5, zIndex:1000000, justifyContent: "right"}}
+            onClick={() => {
+              onChange(packageItem);
+              handleClose()
+            }}
+            sx={{mb:5, justifyContent: "right"}}
             tooltipOpen
-            onClick={handleClose}
           />
         ))}
-        <Backdrop open={open} >
-        </Backdrop>
-      </SpeedDial>}
       
+      </SpeedDial>}
     </Box>
   );
 }
