@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import DateRangePicker from '../DateRangePicker';
-import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar } from '@mui/material';
+import { Stack, Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography } from '@mui/material';
 import QuoteSpeedDial from './QuoteSpeedDial'
 import { format, addDays } from 'date-fns';
 import classNames from 'classnames'
@@ -89,9 +89,14 @@ const Quote = (props) => {
             {status.message}
           </Alert>
         </Snackbar>
+
         <h1>
           <QuoteSpeedDial zChange={zChange} handleClose={handleClose} handleOpen={handleOpen} open={open} direction="left" onChange={setSelectedPackage} packages={packages} selectedPackage={selectedPackage} />
+          <Typography sx={{position: "absolute", top: 60, right: 0}}>
+            Select A Package
+          </Typography>
         </h1>
+       
         {error.length > 0 && <Alert severity="error">{`${error.join(', ')} cannot be blank.`}</Alert>}
 
         <FormControl className={zChange} required>
@@ -136,7 +141,7 @@ const Quote = (props) => {
         
         {selectedPackage &&
           <>
-            <TextField  className={zChange} required disabled label={'Package'} value={(selectedPackage && selectedPackage.title) || 'Please Select a Package'} />
+            <TextField className={zChange} required disabled label={'Package'} value={(selectedPackage && selectedPackage.title) || 'Please Select a Package'} />
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={changeDate} />
 
             <Box className={zChange} sx={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'center'}}>

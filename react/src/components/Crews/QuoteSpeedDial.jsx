@@ -20,7 +20,7 @@ export default function BasicSpeedDial(props) {
      
       {packages && <SpeedDial
         ariaLabel="SpeedDial basic example"
-        sx={{ position: 'absolute', right: 10, top: 0}}
+        sx={{ position: 'absolute', right: 30, top: 5}}
         icon={<StarRateIcon sx={{color:"gold"}} />}
         direction='down'
         onClose={handleClose}
