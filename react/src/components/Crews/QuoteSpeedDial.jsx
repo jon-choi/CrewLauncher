@@ -39,7 +39,7 @@ export default function BasicSpeedDial(props) {
               onChange(packageItem);
               handleClose()
             }}
-            sx={{mb:5, justifyContent: "right"}}
+            sx={{mb:5, justifyContent: "right", color: "whitesmoke"}}
             tooltipOpen
           />
         ))}
