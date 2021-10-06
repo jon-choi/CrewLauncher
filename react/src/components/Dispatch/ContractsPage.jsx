@@ -35,7 +35,7 @@ const ContractsPage = (props) => {
 
     const body = (
     <Stack >
-      {contractProgress && 
+
 
       <Box sx={{position: 'relative', display: 'inline'}}>
         <CircularProgress size={'4.5em'} variant="determinate" value={contractProgress} />
@@ -57,7 +57,7 @@ const ContractsPage = (props) => {
           </Typography>
         </Box>
       </Box>
-      }
+      
       <Item className="page-header">
       <Item sx={{fontSize: 17}}>Address: {contract.address}</Item>
       <Item sx={{fontSize: 17}}>Start Date: {startDate}</Item>
