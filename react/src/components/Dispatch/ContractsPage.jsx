@@ -50,7 +50,7 @@ const ContractsPage = (props) => {
           }}
         >
           <Typography fontSize="2em" variant="caption" component="div" color="text.secondary">
-            {completedContract ? '🚀' : `${contractProgress}%`}
+            {completedContract || contractProgress === 100 ? '🚀' : `${contractProgress}%`}
           </Typography>
         </Box>
       </Box>
