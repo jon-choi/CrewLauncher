@@ -21,7 +21,7 @@ export default function BasicSpeedDial(props) {
       {packages && <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'absolute', right: 10, top: 0}}
-        icon={selectedPackage ? <Avatar alt={selectedPackage.title} src={selectedPackage.image} /> : <SpeedDialIcon />}
+        icon={<StarRateIcon sx={{color:"gold"}} />}
         direction='down'
         onClose={handleClose}
         onOpen={handleOpen}
@@ -33,13 +33,13 @@ export default function BasicSpeedDial(props) {
         {packages.map((packageItem) => (
           <SpeedDialAction
             key={packageItem.id}
-            icon={<StarRateIcon />}
+            icon={<StarRateIcon sx={{color:"gold"}} />}
             tooltipTitle={`${packageItem.title}\nSize Range ${packageItem.size_range_string}`}
             onClick={() => {
               onChange(packageItem);
               handleClose()
             }}
-            sx={{mb:5, justifyContent: "right", color: "whitesmoke"}}
+            sx={{mb:5, justifyContent: "right", color: "blue"}}
             tooltipOpen
           />
         ))}

@@ -124,8 +124,8 @@ const Quote = (props) => {
           />
         </FormControl>          
 
-        <FormControl>
-          <InputLabel className={zChange} htmlFor="clientPhone">Phone Number</InputLabel>
+        <FormControl className={zChange}>
+          <InputLabel htmlFor="clientPhone">Phone Number</InputLabel>
           <OutlinedInput
             id="clientPhone"
             value={clientPhone}
