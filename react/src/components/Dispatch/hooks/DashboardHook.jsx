@@ -78,7 +78,7 @@ const useDashboardDayState = function() {
             manHours += jobInfo.packageOfJob.man_hours_per_visit;
             (!jobInfo.job.completed && incompleteJobs++);
           }
-          if (name === "noCrew") {
+          if (name === "noCrew" && !jobInfo.crewOfJob) {
             jobsCount++;
             manHours += jobInfo.packageOfJob.man_hours_per_visit;
 
