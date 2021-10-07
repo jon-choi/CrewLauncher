@@ -1,6 +1,6 @@
 
-import { format, isSameDay } from 'date-fns'
-import { Stack, Box, Grid, Button } from '@mui/material';
+import { format } from 'date-fns'
+import { Stack, Button } from '@mui/material';
 import { useEffect } from 'react';
 import useDashboardDayState from './hooks/DashboardHook'
 import { getCrewNames } from './dispatchDataHelper'
@@ -12,6 +12,7 @@ const Dashboard = function(props) {
 
   const [ yesterday, today, tomorrow, fourthDay, lastDay ] = days;
 
+  // should be moved to helper function
   let reducedJobs = {
     [yesterday[0]]: {jobs: 0,incomplete: 0},
     [today[0]]: {jobs: 0,incomplete: 0},
@@ -52,20 +53,13 @@ const Dashboard = function(props) {
   
   
   const crewNames = (getCrewNames(crews))
-
-  
-    
     // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
-
-    
     const dayCards = createDayCards(days, fab, crewNames, jobs);
-
 
     return (
       <Stack className='dispatch-dashboard-stack' >
         {dayCards}
       </Stack>
-
     )
   }
   return (

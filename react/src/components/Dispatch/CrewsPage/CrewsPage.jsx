@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import { Stack,  Box, FormControl, InputLabel, OutlinedInput, TextField, Alert, Button, Snackbar, Typography, Avatar } from '@mui/material';
+import { Stack, Grid, Paper, Typography, Avatar } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 
 
 import CrewCard from './CrewCard';
@@ -22,7 +20,7 @@ const CrewPage = (props) => {
     }));
 
     const { jobs, crews, contracts, packages, clients } = props.state;
-    const { setSelectedDay, selectedDay } = useCrewsPageDayState();
+    const { setSelectedDay } = useCrewsPageDayState();
 
     if (jobs[1]) {
         let count = 0;
@@ -59,12 +57,6 @@ const CrewPage = (props) => {
     return (
 
         <>
-            {/* <Card sx={{mb: 10}}>
-                <Typography variant="h3" sx={{mb: 5}}>
-                🚀  Crews to Launch: 🚀 
-                </Typography>
-            </Card> */}
-            
             <Grid container rowSpacing={4} columnSpacing={{ xs: 10, sm: 10, md: 10 }}>
                 <Grid item container>
                     <Avatar alt={props.foreman_name} src={props.avatar} sx={{ width: 100, height: 100, mb: 4, ml: 20, mr: 5, mt: 5 }} />

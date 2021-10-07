@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { Route, Switch, useRouteMatch, useParams } from 'react-router-dom';
 import Navigation from './Navigation';
-import Day from './Day';
 import Jobs from './Jobs';
-import Quote from './Quote';
 import CrewDashboard from './CrewDashboard';
 import { getJobsByCrew, getJobsByCrewByDay } from './crewsDataHelper';
 import { getDayInfo } from '../../helpers/AppHelpers';
@@ -13,9 +11,7 @@ import { getContractsInfo, getClientsInfo } from '../Dispatch/dispatchDataHelper
 
 const Crews = function(props) {
   const { onSubmitQuote } = props;
-  const { url } = useRouteMatch;
   const params = useParams();
-  // const jobsByCrewByDay = getJobsByCrewByDay(jobs, crews);
  
 
 const { jobs, crews, contracts, packages, clients, markJobCompleted } = props;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Card, CardActions, CardContent, Button, Typography, Fab, Paper, styled } from '@mui/material';
+import { Card, CardActions, CardContent, Button, Typography } from '@mui/material';
 
 export default function JobCard(props) {
   const { packageTitle, timeEst, clientName, address, jobNotes, jobId, completeState, completed, onMarkCompleted, crewSize, compClass, jobs } = props;
@@ -19,12 +19,6 @@ export default function JobCard(props) {
     return clearTimeout(doRerender)
   }, [jobs, jobId, rerender]);
 
-
-  const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center'
-  }));
   const crewTimeEst = crewSize ? parseFloat(timeEst / crewSize).toFixed(2) : timeEst; 
   return (
   <Card className={compClass} sx={{display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>     

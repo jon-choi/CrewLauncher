@@ -20,7 +20,7 @@ const Jobs = (props) => {
     let rows = [];
     for (const row of jobs) {
       if (isAfter(new Date(row.date), new Date())) {
-      const date = row.date; 
+      const date = row.date;
       const timeEstimate = row.timeEstimate;
       const packageItem = row.package;
       rows.push({
@@ -42,12 +42,6 @@ const Jobs = (props) => {
       </>
     );
   }
-// const { contracts, clients, packages, jobs } = props.state;
-// [{client: 'Frank Reynolds',
-//         address: '555 Rocket Man Boulevard',
-//         phone: '(555) 867-5309',
-//         package: 'Rocket Man Package',
-//         jobNotes: 'Watch out for rockets']}
 
   return null
   

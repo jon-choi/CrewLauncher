@@ -17,7 +17,6 @@ export default function BasicSpeedDial(props) {
 
   return (
     <Box className={boxChange} sx={{ top: 0, right:0, position: "absolute", height: 736, transform: 'translateZ(0px)', flexGrow: 1 }}>
-     
       {packages && <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'absolute', right: 30, top: 5}}
@@ -26,10 +25,7 @@ export default function BasicSpeedDial(props) {
         onClose={handleClose}
         onOpen={handleOpen}
         open={open}
-
       >
-        
-        
         {packages.map((packageItem) => (
           <SpeedDialAction
             key={packageItem.id}
@@ -43,7 +39,6 @@ export default function BasicSpeedDial(props) {
             tooltipOpen
           />
         ))}
-      
       </SpeedDial>}
     </Box>
   );

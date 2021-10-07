@@ -3,7 +3,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const TimePicker = (props) => {
   const { startDate, onChange } = props;
-  // const [startDate, setStartDate] = useState(new Date());
   
   return (
     <DatePicker

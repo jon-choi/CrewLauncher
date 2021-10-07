@@ -1,7 +1,7 @@
 
 import { useParams, Link } from 'react-router-dom'
 import useDayInfo from './hooks/CrewsIndexHook';
-import { Stack, Box, Grid, Fab, Button, Card } from '@mui/material';
+import { Stack, Fab, Button } from '@mui/material';
 import { useEffect } from 'react';
 import { format } from 'date-fns';
 
@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 const CrewDashboard = function(props) {
   
   const crewId = useParams().id;
-  const { selectedDay, setSelectedDay, completeState, setCompleteState, newDayCards, completeJob, setCompleteJob } = useDayInfo()
+  const { selectedDay, setSelectedDay, newDayCards, setCompleteJob } = useDayInfo()
   const { days, markJobCompleted, jobs } = props;
   
   const [ yesterday, today, tomorrow, fourthDay, lastDay ] = days;
@@ -37,11 +37,6 @@ const CrewDashboard = function(props) {
     })
   }, [jobs, selectedDay])
 
-  // useEffect(() => {
-  //   const completedJobs = jobs.filter(j => j.completed);
-  //   console.log('completedJobs: ', completedJobs)
-  // },[jobs]);
-
   if (days) {
     const fab = (<Fab variant="extended"
     onClick={() => {
@@ -53,9 +48,6 @@ const CrewDashboard = function(props) {
         left: 850,
       }}>Close</Fab>
     );
-
-    
-    // const [yesterday, today, tomorrow, fourthDay, lastDay] = days;
 
     
     const dayCards = newDayCards(days, fab, jobs, crewId, markJobCompleted);
