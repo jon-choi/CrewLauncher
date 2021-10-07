@@ -27,12 +27,15 @@ const ContractsPage = (props) => {
     const completedContract = isAfter(new Date(), endDate) || isToday(endDate);
     const currentContract = isAfter(new Date(), new Date(startDate)) && isBefore(new Date(), endDate);
     const daysLeftInContract = differenceInDays(endDate, new Date());
-    const contractProgress = completedContract ? 100 : Math.round((contract.packageLength - daysLeftInContract) / contract.packageLength * 100);
+    let contractProgress = completedContract ? 100 : Math.round((contract.packageLength - daysLeftInContract) / contract.packageLength * 100);
+    if (!currentContract && !completedContract) {
+      contractProgress = 0;
+    }
     const nextVisit = contract.jobDate && (!isAfter(new Date(), new Date(endDate)) || isToday(endDate)) ? format(new Date(contract.jobDate), 'EEE MMM d yyyy') : 'None';
 
     const body = (
     <Stack >
-      {(currentContract || completedContract) && contractProgress && 
+
 
       <Box sx={{position: 'relative', display: 'inline'}}>
         <CircularProgress size={'4.5em'} variant="determinate" value={contractProgress} />
@@ -50,11 +53,11 @@ const ContractsPage = (props) => {
           }}
         >
           <Typography fontSize="2em" variant="caption" component="div" color="text.secondary">
-            {completedContract ? '🚀' : `${contractProgress}%`}
+            {completedContract || contractProgress === 100 ? '🚀' : `${contractProgress}%`}
           </Typography>
         </Box>
       </Box>
-      }
+      
       <Item className="page-header">
       <Item sx={{fontSize: 17}}>Address: {contract.address}</Item>
       <Item sx={{fontSize: 17}}>Start Date: {startDate}</Item>

@@ -19,3 +19,27 @@
     
   }
 }
+.MuiSpeedDialAction-staticTooltipLabel {
+  width: 12em;
+  color: whitesmoke !important;
+  background-image: url("https://acegif.com/wp-content/gif/outerspace-58.gif");
+  opacity: 1;
+  z-index: auto;
+  height: 5em;
+}
+.MuiSpeedDialAction-fab {
+  background-color: rgb(42, 42, 136) !important;
+}
+
+.form {
+  &.behind {
+    z-index: -10;
+  }
+}
+
+.box {
+  width: 320;
+  &.change {
+    width: 2em
+  }
+}
