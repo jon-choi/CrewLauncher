@@ -1,4 +1,4 @@
-# Crew Launcher [🚀](https://github.com/jon-choi/CrewLauncher/blob/master/Documents/Crew%20Launcher%20logo%202.png?raw=true)
+## [Crew Launcher](https://github.com/jon-choi/CrewLauncher/blob/master/Documents/Crew%20Launcher%20logo%202.png?raw=true)
 
 Crew Launcher is a brand new, cutting-edge application that allows users to seamlessly manage their businesses with the ability to quote and book new jobs on-site.
 
