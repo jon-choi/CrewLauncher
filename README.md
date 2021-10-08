@@ -45,4 +45,4 @@ Now that everything has been setup, simply run `npm start` inside the react dire
 ## Screenshots of Final Product
 
       Overview of dispatcher side creating a package
-![dispatcher view](https://github.com/jon-choi/CrewLauncher/blob/master/Documents/CL-demo-1.gif?raw=true)
+![]()
