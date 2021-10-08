@@ -8,13 +8,22 @@ Setup is quite simple! All you have to do in run `npm install` in both the react
 
 ## Database Setup
 
-Create an .env file inside the express directory with the following credentials:
+Go into `psql` on your VM and create your database:
 
 ```sh
-  DB_HOST=localhost
-  DB_USER=lab
-  DB_PASS=lab
-  DB_NAME=final
+  psql -U vagrant -d template1
+
+  CREATE ROLE 'example_name' WITH LOGIN password 'example_password'
+  CREATE DATABASE 'db_name' OWNER 'example_name'
+  ```
+
+Create an .env file inside the express directory and create your own credentials:
+
+```sh
+  DB_HOST=
+  DB_USER=
+  DB_PASS=
+  DB_NAME=
   DB_PORT=5432
   ```
 We used Knex to build our PostgreSQL database. Simply run these commands when building your migrations and seeds respectively:
