@@ -43,3 +43,6 @@ We used Knex to build our PostgreSQL database. Simply run these commands when bu
 Now that everything has been setup, simply run `npm start` inside the react directory, and `npm run go` inside the express directory. Now you're ready to blast off!
 
 ## Screenshots of Final Product
+
+      Overview of dispatcher side creating a package
+![dispatcher view](https://github.com/jon-choi/CrewLauncher/blob/master/Documents/CL-demo-1.gif?raw=true)
