@@ -44,5 +44,11 @@ Now that everything has been setup, simply run `npm start` inside the react dire
 
 ## Screenshots of Final Product
 
-      Overview of dispatcher side creating a package
-![]()
+      Dashboard
+![Dashboard](https://github.com/jon-choi/CrewLauncher/blob/master/Documents/Dashboard.png?raw=true)
+
+      Package Form
+![PackageForm](https://github.com/jon-choi/CrewLauncher/blob/master/Documents/Package%20Form.png?raw=true)
+
+      Crew Launch
+![CrewLaunch](https://github.com/jon-choi/CrewLauncher/blob/master/Documents/Launch%20Crew%20Demo.gif?raw=true)
